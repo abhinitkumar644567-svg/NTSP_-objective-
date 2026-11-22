@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHEMISTRY 12th (2023) - 70 Objective Test with Timer</title>
+    <style>
+        /* बेहतरीन कलर ग्रेडिंग और कॉम्पैक्ट डिजाइन */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            margin: 0;
+            padding: 15px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            backdrop-filter: blur(5px);
+        }
+        h1 {
+            text-align: center;
+            font-size: 26px;
+            margin-top: 0;
+            padding-bottom: 10px;
+            border-bottom: 3px dashed #6c5ce7;
+            background: linear-gradient(45deg, #6c5ce7, #a29bfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+        }
+        .info-bar {
+            text-align: center;
+            font-size: 15px;
+            color: #fff;
+            background: linear-gradient(to right, #6c5ce7, #a29bfe);
+            margin-bottom: 20px;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 6px;
+            box-shadow: 0 4px 6px rgba(108, 92, 231, 0.3);
+        }
+
+        /* --- टाइमर का डिज़ाइन --- */
+        .timer-box {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+            color: #333;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(255, 154, 158, 0.4);
+            z-index: 1000;
+            letter-spacing: 1px;
+            border: 2px solid #fff;
+        }
+
+        @media (max-width: 600px) {
+            .timer-box {
+                top: 10px;
+                right: 50%;
+                transform: translateX(50%);
+                font-size: 16px;
+                padding: 8px 16px;
+            }
+            .container { margin-top: 50px; }
+        }
+
+        .q-box {
+            margin-bottom: 15px;
+            padding: 15px;
+            border-left: 5px solid #6c5ce7;
+            border-radius: 8px;
+            background: #ffffff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+            transition: transform 0.2s ease;
+        }
+        .q-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        .q-text {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2d3436;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        .opt-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            font-size: 15px;
+            background-color: #f8f9fa;
+            border: 1px solid #dfe6e9;
+            color: #2d3436;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .opt-btn:hover:not(:disabled) {
+            background-color: #f1f2f6;
+            border-color: #a29bfe;
+            transform: translateX(3px);
+        }
+        .opt-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.9;
+        }
+        .correct {
+            background: linear-gradient(135deg, #00b09b, #96c93d) !important;
+            border-color: #00b09b !important;
+            color: #fff !important;
+            font-weight: bold;
+        }
+        .incorrect {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b) !important;
+            border-color: #ff416c !important;
+            color: #fff !important;
+            font-weight: bold;
+        }
+        .feedback {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 14px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+<!-- टाइमर का बॉक्स -->
+<div id="timer" class="timer-box">⏱️ 01:00:00</div>
+
+<div class="container">
+    <h1>CHEMISTRY (रसायन विज्ञान) - XII, 2023 (A)</h1>
+    <div class="info-bar">कुल प्रश्न: 70 | समय: 1 घंटा | भाषा: किताबी | सही विकल्प चुनें</div>
+    <div id="quiz-container"></div>
+</div>
+
+<script>
+    // --- 1 घंटे का टाइमर कोड ---
+    let timeInSeconds = 3600; // 1 घंटा
+    const timerElement = document.getElementById('timer');
+
+    const countdown = setInterval(() => {
+        if (timeInSeconds <= 0) {
+            clearInterval(countdown);
+            timerElement.innerHTML = "⏳ समय समाप्त!";
+            timerElement.style.background = "linear-gradient(135deg, #333, #000)";
+            timerElement.style.color = "#fff";
+            
+            // समय खत्म होने पर सभी बटन डिसेबल हो जाएंगे
+            const allButtons = document.querySelectorAll('.opt-btn');
+            allButtons.forEach(btn => btn.disabled = true);
+            alert("आपका समय समाप्त हो गया है! अब आप और उत्तर नहीं दे सकते।");
+            return;
+        }
+
+        timeInSeconds--;
+        
+        let hours = Math.floor(timeInSeconds / 3600);
+        let minutes = Math.floor((timeInSeconds % 3600) / 60);
+        let seconds = timeInSeconds % 60;
+
+        hours = hours < 10 ? "0" + hours : hours;
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        timerElement.innerHTML = `⏱️ ${hours}:${minutes}:${seconds}`;
+    }, 1000); 
+
+    // --- 70 प्रश्न बिल्कुल किताबी भाषा में ---
+    const questions = [
+        { q: "1. निम्नलिखित संक्रमण तत्त्व के आयनों में कौन अनुचुम्बकीय है?", options: ["(A) Ag⁺", "(B) Cu²⁺", "(C) Zn²⁺", "(D) Au⁺"], ans: 1 },
+        { q: "2. निम्नलिखित में से किसे मुद्रा धातु कहा जाता है?", options: ["(A) Fe, Co और Ni", "(B) Cu, Ag और Au", "(C) Cu, Zn और Ag", "(D) Au और Pt"], ans: 1 },
+        { q: "3. समन्वय यौगिकों के लिए सबसे पहला महत्त्वपूर्ण सिद्धान्त किसने दिया?", options: ["(A) स्लेटर", "(B) पॉलिंग", "(C) वर्नर", "(D) लेविस"], ans: 2 },
+        { q: "4. निम्नलिखित में से कौन एक द्विक् लवण का उदाहरण है?", options: ["(A) ब्लीचिंग पाउडर", "(B) K₄[Fe(CN)₆]", "(C) हाइपो", "(D) पोटाश एलम"], ans: 3 },
+        { q: "5. निम्नलिखित में से कौन बाईडेंटेट लिगेंड है?", options: ["(A) E.D.T.A.", "(B) इथिलीन डाईऐमीन", "(C) ऐसीटेट आयन", "(D) पिरीडीन"], ans: 1 },
+        { q: "6. [Pt(C₂H₄)Cl₃]⁻ में Pt की ऑक्सीकरण संख्या है :", options: ["(A) + 1", "(B) + 2", "(C) + 3", "(D) + 4"], ans: 1 },
+        { q: "7. निम्नलिखित में से कौन विनाइल हैलाइड है?", options: ["(A) CH₂=CH-CHBrCH₃", "(B) CH₂=CH-CH₂Cl", "(C) CH₂=C(CH₃)CH₂Cl", "(D) CH₂=CH-Br"], ans: 3 },
+        { q: "8. एंजाइम होते हैं :", options: ["(A) कार्बोहाइड्रेट", "(B) लिपिड", "(C) प्रोटीन", "(D) इनमें से कोई नहीं"], ans: 2 },
+        { q: "9. निम्नलिखित में से कौन ईथर है?", options: ["(A) R-C=O(-R)", "(B) R-C=O(-OH)", "(C) R-C=O(-R)", "(D) R-O-R"], ans: 3 },
+        { q: "10. बेंजीन डाइएजोनियम क्लोराइड के जलीय विलयन को गर्म करने से निम्नलिखित में से कौन प्राप्त होता है?", options: ["(A) बेंजीन", "(B) बेंजाइल ऐल्कोहॉल", "(C) फिनॉल", "(D) क्लोरोबेंजीन"], ans: 2 },
+        { q: "11. जब फार्मिक अम्ल को सांद्र H₂SO₄ के साथ गर्म किया जाता है, तो निम्नलिखित में से कौन प्राप्त होता है?", options: ["(A) CO₂", "(B) CH₃HSO₄", "(C) ऑक्जेलिक अम्ल", "(D) CO"], ans: 3 },
+        { q: "12. CH₃-CH(OH)-COOH का IUPAC नाम है :", options: ["(A) लैक्टिक अम्ल", "(B) 2-हाइड्रोक्सी प्रोपेनोइक अम्ल", "(C) प्रोपेनोइक अम्ल", "(D) इनमें से कोई नहीं"], ans: 1 },
+        { q: "13. निम्नलिखित में से कौन टॉलेन का अभिकर्मक है?", options: ["(A) [Ag(NH₃)₂]⁺ आयन", "(B) Cu(OH)₂", "(C) Ag₂O", "(D) CuO"], ans: 0 },
+        { q: "14. निम्नलिखित में से कौन कैनिजारो अभिक्रिया देता है?", options: ["(A) CH₃CHO", "(B) HCHO", "(C) HCOOH", "(D) CH₃COCH₃"], ans: 1 },
+        { q: "15. निम्नलिखित में से कौन कार्बोहाइड्रेट प्रकृति में प्रचुर मात्रा में पाया जाता है?", options: ["(A) ग्लूकोस", "(B) फ्रक्टोस", "(C) स्टार्च", "(D) सेलुलोज"], ans: 3 },
+        { q: "16. निम्नलिखित में से कौन डाइसैकेराइड दूध में उपस्थित रहता है?", options: ["(A) सुक्रोज", "(B) लैक्टोस", "(C) माल्टोस", "(D) इनमें से कोई नहीं"], ans: 1 },
+        { q: "17. विटामिन A का रासायनिक नाम निम्नलिखित में से कौन है?", options: ["(A) थायमीन", "(B) रेटिनॉल", "(C) ऐस्कार्बिक अम्ल", "(D) निकोटिनामाइड"], ans: 1 },
+        { q: "18. निम्नलिखित में से कौन विटामिन जल में घुलनशील है?", options: ["(A) A और B", "(B) C और D", "(C) B और C", "(D) A और D"], ans: 2 },
+        { q: "19. निम्नलिखित में किससे इंसुलिन स्रावित होता है?", options: ["(A) थायरायड", "(B) अग्न्याशय", "(C) अधिवृक्क", "(D) इनमें से कोई नहीं"], ans: 1 },
+        { q: "20. विटामिन E की कमी से निम्नलिखित में से कौन रोग होता है?", options: ["(A) बेरी-बेरी", "(B) स्कर्वी", "(C) जनन क्षमता की कमी", "(D) इनमें से कोई नहीं"], ans: 2 },
+        { q: "21. प्राकृतिक रबर निम्नलिखित में से किसका बहुलक है?", options: ["(A) एथिलीन का", "(B) बेंजीन का", "(C) आइसोप्रीन का", "(D) इनमें से कोई नहीं"], ans: 2 },
+        { q: "22. CH₃-CH(CH₃)-CH₂-Cl का IUPAC नाम है :", options: ["(A) टर्शियरी ब्यूटिल क्लोराइड", "(B) सेकेण्डरी ब्यूटिल क्लोराइड", "(C) 2-क्लोरो-2-मेथिल प्रोपेन", "(D) 1-क्लोरो-2-मेथिल प्रोपेन"], ans: 3 },
+        { q: "23. ऐल्किल हैलाइड का उपयोग निम्नलिखित में से किसके निर्माण में होता है?", options: ["(A) ऐल्केन", "(B) ऐल्कीन", "(C) ऐल्कोहॉल", "(D) इनमें से सभी"], ans: 3 },
+        { q: "24. निम्नलिखित में से किस यौगिक का शून्य द्वि-आघूर्ण है?", options: ["(A) CH₃Cl", "(B) CHCl₃", "(C) CCl₄", "(D) CH₂Cl₂"], ans: 2 },
+        { q: "25. जिंक और जल के साथ क्लोरोफार्म के अवकरण से प्राप्त होता है :", options: ["(A) ऐसीटिलीन", "(B) एथिलीन", "(C) एथेन", "(D) मेथेन"], ans: 3 },
+        { q: "26. निम्नलिखित में से कौन आयोडोफार्म परीक्षण नहीं देगा?", options: ["(A) आइसोप्रोपिल एल्कोहल", "(B) एथेनॉल", "(C) एथेनल", "(D) बेंजिल एल्कोहॉल"], ans: 3 },
+        { q: "27. ब्यूटेन-2-ऑल है एक :", options: ["(A) प्राइमरी एल्कोहल", "(B) सेकेण्डरी एल्कोहल", "(C) टर्शियरी एल्कोहल", "(D) डाईहाइड्रिक एल्कोहल"], ans: 1 },
+        { q: "28. निम्नलिखित में से कौन जल में घुलनशील है?", options: ["(A) CH₃OH", "(B) CHCl₃", "(C) CCl₄", "(D) CS₂"], ans: 0 },
+        { q: "29. क्रिस्टलीय तंत्र की कुल संख्या होती है :", options: ["(A) 7", "(B) 8", "(C) 6", "(D) 4"], ans: 0 },
+        { q: "30. निम्नलिखित में से कौन सहसंयोजक ठोस है?", options: ["(A) लोहा", "(B) हीरा", "(C) सोडियम क्लोराइड", "(D) ताँबा"], ans: 1 },
+        { q: "31. किसी धातु की षट्भुजीय सीमित पैकिंग संरचना में समन्वय संख्या होती है :", options: ["(A) 5", "(B) 4", "(C) 8", "(D) 12"], ans: 3 },
+        { q: "32. निम्नलिखित में से कौन आदर्श घोल नहीं है?", options: ["(A) बेंजीन + टॉलुईन", "(B) मिथाइल एल्कोहॉल + ईथाइल एल्कोहॉल", "(C) क्लोरोफार्म + ऐसीटोन", "(D) कार्बन टेट्राक्लोराइड + सिलिकन टेट्राक्लोराइड"], ans: 2 },
+        { q: "33. निम्नलिखित में से कौन अर्द्धपारगम्य झिल्ली से निकल पाते हैं?", options: ["(A) विलायक के अणु", "(B) विलेय के अणु", "(C) जटिल आयन", "(D) सरल आयन"], ans: 0 },
+        { q: "34. यदि 18g ग्लूकोस को 1000g घोलक में घुलाया जाता है, तो उस घोल को कहते हैं :", options: ["(A) 1 मोलर", "(B) 0.1 मोलल", "(C) 0.1 मोलर", "(D) 0.5 मोलल"], ans: 1 },
+        { q: "35. निम्नलिखित में से किसका क्वथनांक सबसे अधिक होगा?", options: ["(A) जल में 1% ग्लूकोस", "(B) जल में 1% सुक्रोज", "(C) जल में 1% NaCl", "(D) जल में 1% यूरिया"], ans: 2 },
+        { q: "36. निम्नलिखित में से किसके ऑक्सीकरण से ऐसीटोन प्राप्त होता है?", options: ["(A) CH₃CHO", "(B) C₂H₅OH", "(C) CH₃CHOHCH₃", "(D) CH₃OH"], ans: 2 },
+        { q: "37. सेकेण्डरी ऐमीन का क्रियाशील मूलक है :", options: ["(A) -NH-", "(B) -NH₂", "(C) NH₃", "(D) NH₄⁺"], ans: 0 },
+        { q: "38. CH₃-CH(NH₂)-CH₃ का IUPAC नाम है :", options: ["(A) प्रोपिल ऐमीन", "(B) आइसोप्रोपिल ऐमीन", "(C) प्रोपेन-2-ऐमीन", "(D) प्रोपेन-1-ऐमीन"], ans: 2 },
+        { q: "39. प्राइमरी ऐमीन की अभिक्रिया ग्रिगनार्ड अभिकर्मक से कराने पर निम्नलिखित में से कौन बनता है?", options: ["(A) एक एल्केन", "(B) एक उच्चतर ऐमीन", "(C) एक सेकेण्डरी ऐमीन", "(D) इनमें से कोई नहीं"], ans: 0 },
+        { q: "40. निम्नलिखित में सबसे प्रबल क्षारीय कौन है?", options: ["(A) C₆H₅NH₂", "(B) (CH₃)₂NH", "(C) (CH₃)₃N", "(D) NH₃"], ans: 1 },
+        { q: "41. निम्नलिखित में कौन हिंसबर्ग अभिकर्मक है?", options: ["(A) बेंजीन सल्फोनिक अम्ल", "(B) बेंजीन सल्फोनामाइड", "(C) p-टॉल्यूइन सल्फोनिल क्लोराइड", "(D) इनमें से कोई नहीं"], ans: 2 },
+        { q: "42. जब ऐसीटामाइड की अभिक्रिया Br₂/KOH से कराई जाती है, तो निम्नलिखित में कौन बनता है?", options: ["(A) ऐसीटोन", "(B) मेथिल ऐमीन", "(C) ऐसीटल्डिहाइड", "(D) अमोनिया"], ans: 1 },
+        { q: "43. NaCl के जलीय घोल के वैद्युत अपघटन से कैथोड पर निम्नलिखित में से कौन मुक्त होता है?", options: ["(A) क्लोरीन", "(B) सोडियम", "(C) सोडियम अमलगम", "(D) हाइड्रोजन"], ans: 3 },
+        { q: "44. निम्नलिखित में कौन विलयन में विद्युत् का संचालन करते हैं?", options: ["(A) वैद्युत अपघट्य", "(B) वैद्युत अनपघट्य", "(C) H₂O अणु", "(D) ताँबे के तार"], ans: 0 },
+        { q: "45. A, B, C और D धातुओं के मानक इलेक्ट्रोड विभव क्रमशः -3.05 V, -1.66 V, -0.40 V और +0.8 V वोल्ट है। इनमें किस धातु की अवकरण क्षमता सबसे अधिक होगी?", options: ["(A) A", "(B) B", "(C) C", "(D) D"], ans: 0 },
+        { q: "46. किसी चालकत्व सेल का सेल-स्थिरांक होता है :", options: ["(A) l/A", "(B) A/l", "(C) l × A", "(D) A"], ans: 0 },
+        { q: "47. रासायनिक अभिक्रिया 2A + B → C के दर को निम्नलिखित में से किसके द्वारा निरूपित किया जा सकता है?", options: ["(A) -1/2 d[A]/dt", "(B) -d[B]/dt", "(C) +d[C]/dt", "(D) इनमें से सभी"], ans: 3 },
+        { q: "48. एक रासायनिक अभिक्रिया के वेग समीकरण को निम्नलिखित रूप से निरूपित किया जाता है : वेग = K[A][B]²; यदि A के सांद्रण को स्थिर रखकर B का सांद्रण तिगुना कर दिया जाए, तो वेग :", options: ["(A) दुगुना हो जाता है", "(B) तिगुना हो जाता है", "(C) चौगुना हो जाता है", "(D) नौ गुना हो जाता है"], ans: 3 },
+        { q: "49. किसी रासायनिक अभिक्रिया का वेग स्थिरांक निम्नलिखित में से किस पर निर्भर करता है?", options: ["(A) ताप", "(B) मात्रा", "(C) भार", "(D) समय"], ans: 0 },
+        { q: "50. लोहे का मुख्य आक्साइड अयस्क है :", options: ["(A) सिडेराइट", "(B) हेमेटाइट", "(C) पायराइट", "(D) बॉक्साइट"], ans: 1 },
+        { q: "51. निम्नलिखित में से किसमें ऑक्सीजन की ऑक्सीकरण अवस्था +2 है?", options: ["(A) F₂O", "(B) Cl₂O", "(C) Na₂O₂", "(D) Na₂O"], ans: 0 },
+        { q: "52. निम्नलिखित में से कौन रेडियोएक्टिव उत्कृष्ट गैस है?", options: ["(A) He", "(B) Ne", "(C) Xe", "(D) Rn"], ans: 3 },
+        { q: "53. निम्नलिखित में से किस उत्कृष्ट गैस के द्वारा सबसे ज्यादा यौगिक बनाया गया है?", options: ["(A) He", "(B) Ne", "(C) Ar", "(D) Xe"], ans: 3 },
+        { q: "54. निम्नलिखित में से कौन ध्रुवीय यौगिक है?", options: ["(A) SO₂", "(B) SO₃", "(C) BF₃", "(D) CO₂"], ans: 0 },
+        { q: "55. निम्नलिखित में से कौन प्रथम संक्रमण श्रेणी का सदस्य है?", options: ["(A) Ni", "(B) Ac", "(C) Cd", "(D) Au"], ans: 0 },
+        { q: "56. Cu²⁺ (Z = 29) का इलेक्ट्रॉनिक विन्यास है :", options: ["(A) [Ar] 3d⁸ 4s¹", "(B) [Ar] 3d⁹ 4s²", "(C) [Ar] 3d⁹", "(D) [Ar] 3d⁸ 4s² 4p¹"], ans: 2 },
+        { q: "57. निम्नलिखित में से किसमें ईस्टर बन्ध है?", options: ["(A) टेरीलीन", "(B) नायलॉन", "(C) टेफ्लॉन", "(D) बेकेलाइट"], ans: 0 },
+        { q: "58. निम्नलिखित में से कौन ताप दृढ़ प्लास्टिक है?", options: ["(A) नायलॉन 6", "(B) नायलॉन 6, 6", "(C) बेकेलाइट", "(D) पी.वी.सी."], ans: 2 },
+        { q: "59. निम्नलिखित में से कौन पॉलिएमाइड है?", options: ["(A) टेफ्लॉन", "(B) नायलॉन 6, 6", "(C) टेरीलीन", "(D) बेकेलाइट"], ans: 1 },
+        { q: "60. निम्नलिखित में से किसका उपयोग एंटासिड के रूप में होता है?", options: ["(A) मैग्नीशियम हाइड्रॉक्साइड", "(B) फिनासिटीन", "(C) पेनिसिलीन", "(D) सल्फाानिलामाइड"], ans: 0 },
+        { q: "61. सैकरीन है एक :", options: ["(A) ऐलिफैटिक हाइड्रोकार्बन", "(B) मीठा अभिकर्ता", "(C) पॉलीन्यूक्लियर यौगिक", "(D) चीनी"], ans: 1 },
+        { q: "62. निम्नलिखित में से किसका उपयोग साबुन के रूप में होता है?", options: ["(A) C₁₇H₃₅COONa", "(B) (C₁₇H₃₅COO)₂Ca", "(C) C₁₇H₃₅COOH", "(D) C₁₅H₃₁COOH"], ans: 0 },
+        { q: "63. निम्नलिखित में से कौन प्रतिऑक्सीकारक है?", options: ["(A) लेसीथिन", "(B) सिट्रिक अम्ल", "(C) विटामिन E", "(D) इनमें से सभी"], ans: 3 },
+        { q: "64. प्रथम कोटि की अभिक्रिया के लिए अर्द्ध आयु :", options: ["(A) वेग स्थिरांक पर निर्भर नहीं करता है", "(B) प्रारंभिक सांद्रण पर निर्भर नहीं करता है", "(C) प्रारंभिक सांद्रण पर निर्भर करता है", "(D) इनमें से सभी"], ans: 1 },
+        { q: "65. हेबर की विधि से अमोनिया के निर्माण में निम्नलिखित में से कौन उत्प्रेरक का प्रयोग होता है?", options: ["(A) लोहे का महीन पाउडर", "(B) मोलिब्डेनम का महीन पाउडर", "(C) निकेल का महीन पाउडर", "(D) प्लैटिनम का महीन पाउडर"], ans: 0 },
+        { q: "66. निम्नलिखित में से किस विधि के द्वारा कोलॉइडी विलयन का शोधन किया जाता है?", options: ["(A) पेप्टीकरण", "(B) स्कंदन", "(C) अपोहन", "(D) फ्लोकुलेशन"], ans: 2 },
+        { q: "67. 298 K पर एक ग्राम चारकोल के द्वारा निम्नलिखित में से किस गैस का सबसे अधिक आयतन अधिशोषित होगा?", options: ["(A) H₂", "(B) CH₄", "(C) CO₂", "(D) NH₃"], ans: 3 },
+        { q: "68. पाइरोलुसाइट निम्नलिखित में से किसका अयस्क है?", options: ["(A) मैग्नीशियम", "(B) मैंगनीज", "(C) जिंक", "(D) लोहा"], ans: 1 },
+        { q: "69. धातु के आक्साइड को कार्बन या कार्बन मोनोक्साइड के द्वारा धातु में अवकृत करने की क्रिया कहलाती है :", options: ["(A) प्रगलन", "(B) भर्जन", "(C) निस्तापन", "(D) निक्षालन"], ans: 0 },
+        { q: "70. निम्नलिखित में से किस धातु के निष्कर्षण के लिए सायनाइड विधि का उपयोग होता है?", options: ["(A) Cr", "(B) Ag", "(C) Cu", "(D) Zn"], ans: 1 }
+    ];
+
+    const quizContainer = document.getElementById('quiz-container');
+
+    questions.forEach((qObj, index) => {
+        const qBox = document.createElement('div');
+        qBox.className = 'q-box';
+        
+        const qText = document.createElement('div');
+        qText.className = 'q-text';
+        qText.innerHTML = qObj.q;
+        qBox.appendChild(qText);
+        
+        const feedbackBox = document.createElement('div');
+        feedbackBox.className = 'feedback';
+        
+        const btnGroup = document.createElement('div');
+        
+        qObj.options.forEach((opt, optIndex) => {
+            const btn = document.createElement('button');
+            btn.className = 'opt-btn';
+            btn.innerHTML = opt;
+            
+            btn.onclick = () => {
+                const allBtns = btnGroup.querySelectorAll('.opt-btn');
+                allBtns.forEach(b => b.disabled = true);
+                
+                if (optIndex === qObj.ans) {
+                    btn.classList.add('correct');
+                    feedbackBox.innerHTML = "✅ बिल्कुल सही!";
+                    feedbackBox.style.color = "#145a32";
+                    feedbackBox.style.background = "#d4efdf";
+                    feedbackBox.style.border = "1px solid #2ecc71";
+                } else {
+                    btn.classList.add('incorrect');
+                    allBtns[qObj.ans].classList.add('correct');
+                    // Extract answer prefix safely
+                    const correctText = qObj.options[qObj.ans].substring(0,3);
+                    feedbackBox.innerHTML = "❌ गलत उत्तर! सही: " + correctText + ")";
+                    feedbackBox.style.color = "#93291e";
+                    feedbackBox.style.background = "#fdebd0";
+                    feedbackBox.style.border = "1px solid #e74c3c";
+                }
+                feedbackBox.style.display = 'block';
+            };
+            btnGroup.appendChild(btn);
+        });
+        
+        qBox.appendChild(btnGroup);
+        qBox.appendChild(feedbackBox);
+        quizContainer.appendChild(qBox);
+    });
+</script>
+
+</body>
+</html>

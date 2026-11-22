@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENGLISH 12th (2026) - 100 Objective Test</title>
+    <style>
+        /* आकाशी (Sky Blue) और लाल (Red) कलर ग्रेडिंग - No Pure White */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #b3e5fc 0%, #ffcdd2 100%);
+            margin: 0;
+            padding: 15px;
+            min-height: 100vh;
+            color: #1a0000;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #e1f5fe;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(183, 28, 28, 0.2);
+            border: 2px solid #ef5350;
+        }
+        h1 {
+            text-align: center;
+            font-size: 26px;
+            margin-top: 0;
+            padding-bottom: 15px;
+            border-bottom: 3px dashed #d32f2f;
+            color: #b71c1c;
+            font-weight: 900;
+        }
+        .info-bar {
+            text-align: center;
+            font-size: 16px;
+            color: #fff;
+            background: linear-gradient(to right, #0288d1, #d32f2f);
+            margin-bottom: 25px;
+            font-weight: bold;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(211, 47, 47, 0.3);
+        }
+        /* --- टाइमर का डिज़ाइन --- */
+        .timer-box {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #d32f2f, #b71c1c);
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(183, 28, 28, 0.5);
+            z-index: 1000;
+            letter-spacing: 1px;
+            border: 2px solid #ffcdd2;
+        }
+        @media (max-width: 600px) {
+            .timer-box {
+                top: 10px;
+                right: 50%;
+                transform: translateX(50%);
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+            .container { margin-top: 50px; }
+        }
+        .q-box {
+            margin-bottom: 20px;
+            padding: 18px;
+            border-left: 5px solid #d32f2f;
+            border-radius: 8px;
+            background: #b3e5fc;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+        .q-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(211, 47, 47, 0.2);
+        }
+        .q-text {
+            font-size: 17px;
+            font-weight: bold;
+            color: #01579b;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        .opt-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 12px 18px;
+            margin-bottom: 8px;
+            font-size: 16px;
+            background-color: #e1f5fe;
+            border: 1px solid #0288d1;
+            color: #000;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+        .opt-btn:hover:not(:disabled) {
+            background-color: #81d4fa;
+            border-color: #d32f2f;
+            transform: translateX(4px);
+        }
+        .opt-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.95;
+        }
+        .correct {
+            background: linear-gradient(to right, #0288d1, #03a9f4) !important;
+            border-color: #01579b !important;
+            color: #fff !important;
+            font-weight: bold;
+        }
+        .incorrect {
+            background: linear-gradient(to right, #d32f2f, #f44336) !important;
+            border-color: #b71c1c !important;
+            color: #fff !important;
+            font-weight: bold;
+        }
+        .feedback {
+            display: none;
+            margin-top: 12px;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="timer" class="timer-box">⏱️ 01:00:00</div>
+
+<div class="container">
+    <h1>ENGLISH (अंग्रेजी) - XII (100 Marks) - 2026 (A)</h1>
+    <div class="info-bar">Total Questions: 100 | Time: 1 Hour | Choose the correct option</div>
+    <div id="quiz-container"></div>
+</div>
+
+<script>
+    // 1 Hour Timer
+    let timeInSeconds = 3600; 
+    const timerElement = document.getElementById('timer');
+
+    const countdown = setInterval(() => {
+        if (timeInSeconds <= 0) {
+            clearInterval(countdown);
+            timerElement.innerHTML = "⏳ Time Up!";
+            timerElement.style.background = "linear-gradient(135deg, #b71c1c, #d32f2f)";
+            document.querySelectorAll('.opt-btn').forEach(btn => btn.disabled = true);
+            alert("Time is up! You can no longer answer.");
+            return;
+        }
+        timeInSeconds--;
+        let h = Math.floor(timeInSeconds / 3600), m = Math.floor((timeInSeconds % 3600) / 60), s = timeInSeconds % 60;
+        timerElement.innerHTML = `⏱️ ${h<10?'0'+h:h}:${m<10?'0'+m:m}:${s<10?'0'+s:s}`;
+    }, 1000); 
+
+    // Compressed Array of 100 Questions (From 2026 A English Images)
+    const q=[
+{q:"1. Sunaina loves ........ to music.<br>(Choose the correct option)",o:["(A) listening","(B) listens","(C) to listen","(D) listen"],a:0},
+{q:"2. There ........ an armchair in my bedroom.<br>(Choose the correct option)",o:["(A) any","(B) are","(C) is","(D) some"],a:2},
+{q:"3. The boys ........ very tired today because they were at a party last night.",o:["(A) is","(B) were","(C) was","(D) are"],a:3},
+{q:"4. Rohini said, \"I have a stomach-ache.\"<br>(Choose the correct option)",o:["(A) Rohini says that she have a stomachache.","(B) Rohini said that she had got a stomach-ache.","(C) Rohini said that she has a stomach-ache.","(D) Rohini said that she got a stomach-ache."],a:1},
+{q:"5. The meeting ........ at half-past eight.<br>(Choose the correct option)",o:["(A) starts","(B) starting","(C) start","(D) will be started"],a:0},
+{q:"6. Choose the correct meaning of 'Docile' :",o:["(A) very bad","(B) Obedient","(C) Respect","(D) Disfigure"],a:1},
+{q:"7. He requested me to keep the door open.<br>(Choose the correct option)",o:["(A) He said to me, \"Please keep the door open.\"","(B) He says, \"Keep the door open.\"","(C) He will say, \"Keep the door open.\"","(D) He said, \"Never keep the door open.\""],a:0},
+{q:"8. Choose the correctly spelt word :",o:["(A) Jandice","(B) Jandece","(C) Jaundice","(D) Jaundece"],a:2},
+{q:"9. India will win the world cup. That is certain.<br>(Choose the correct option)",o:["(A) It is certain that India will win the world cup.","(B) India will certainly win the world cup.","(C) Certainly, India will win the world cup.","(D) India will win the world cup certainly."],a:0},
+{q:"10. Choose the correct sentence :",o:["(A) The boys runs fast in the race","(B) The boys run fast in the race","(C) The boy run fast in the race","(D) The boy running fast in the race"],a:1},
+{q:"11. I got late for the flight ...... there was so much traffic on the road.",o:["(A) because","(B) until","(C) more","(D) after"],a:0},
+{q:"12. We located the key ........ the lock.<br>(Choose the correct option)",o:["(A) during","(B) since","(C) unless","(D) for"],a:3},
+{q:"13. Choose a one-word substitution-'Ceremony of crowning a king':",o:["(A) Contagious","(B) Coronation","(C) Dexterous","(D) Denizen"],a:1},
+{q:"14. Choose the correct meaning of — \"Blow one's own trumpet\" :",o:["(A) Entirely","(B) Ready to obey order","(C) To praise oneself","(D) With all belongings"],a:2},
+{q:"15. The two friends had a ....... talk after a long time.",o:["(A) hold good","(B) heart to heart","(C) in no time","(D) in the air"],a:1},
+{q:"16. Choose the correct antonym of 'Humility' :",o:["(A) Dignity","(B) Anger","(C) Cruelty","(D) Pride"],a:3},
+{q:"17. Choose the correct synonym of 'Relish' :",o:["(A) Realize","(B) Enjoy","(C) Taste","(D) Reveal"],a:1},
+{q:"18. Choose the correct antonym of 'Scorn' :",o:["(A) Joy","(B) Admiration","(C) Contempt","(D) Pity"],a:1},
+{q:"19. She needs some new clothes, ...... ?",o:["(A) need she","(B) needn't she","(C) does she","(D) doesn't she"],a:3},
+{q:"20. The synonym of 'Marvellous' is :",o:["(A) Wonderful","(B) Simple","(C) Ordinary","(D) Attractive"],a:0},
+{q:"21. The antonym of 'Fixed' is :",o:["(A) Established","(B) Confirmed","(C) Undecided","(D) Immobile"],a:2},
+{q:"22. The synonym of 'Hoard' is :",o:["(A) Destroy","(B) Hide","(C) Store","(D) Divide"],a:2},
+{q:"23. The antonym of 'Moisture' is :",o:["(A) Wetness","(B) Dryness","(C) Dampness","(D) Roughness"],a:1},
+{q:"24. Sumit asked her if she was ill.<br>(Choose the correct direct narration)",o:["(A) Sumit asked her, \"You are ill.\"","(B) Sumit told her, \"Was she ill.\"","(C) Sumit said to her, \"Are you ill?\"","(D) Sumit said to her, \"Is she ill?\""],a:2},
+{q:"25. ...... have that dress specially made?",o:["(A) Has you","(B) Could you","(C) Should you","(D) Did you have"],a:3},
+{q:"26. Learning ........ is not easy.<br>(Choose the correct option)",o:["(A) for Sanskrit","(B) Sanskrit","(C) the Sanskrit","(D) of Sanskrit"],a:1},
+{q:"27. I saw two crows ........ poking their heads at the flowerpot.",o:["(A) play","(B) played","(C) playing","(D) playfully"],a:2},
+{q:"28. Please have ........ more rice, you haven't taken much.",o:["(A) some","(B) any","(C) no","(D) several"],a:0},
+{q:"29. Work ........ to score good marks.",o:["(A) so hard","(B) hard","(C) much hard","(D) hardly"],a:1},
+{q:"30. Someone was knocking ........ the door.",o:["(A) by","(B) to","(C) since","(D) at"],a:3},
+{q:"31. It is impossible to do this.<br>(Choose the correct option)",o:["(A) This is impossible to be done","(B) To do this by it is impossible","(C) It is impossible to have done this","(D) It can't be done"],a:0},
+{q:"32. \"Call the witness\", said the judge.<br>(Choose the correct indirect speech)",o:["(A) The judge commanded to call the witness","(B) The judge commanded them to call the witness","(C) The judge commanded that the witness be called","(D) The judge commanded the witness to be called"],a:2},
+{q:"33. The doctor advised him to rest for ...... days.",o:["(A) few","(B) a few","(C) a little","(D) little"],a:1},
+{q:"34. A thorough search of the aircraft was carried ..... in the airport.",o:["(A) out","(B) on","(C) off","(D) along"],a:0},
+{q:"35. As she became tired, error began to creep ...... her work.",o:["(A) with","(B) off","(C) into","(D) up"],a:2},
+{q:"36. Choose a one-word substitution for-\"The absence of government in a country\" :",o:["(A) Ascetic","(B) Amnesia","(C) Aphasia","(D) Anarchy"],a:3},
+{q:"37. Choose the correct meaning of—\"To keep one's temper\":",o:["(A) To become hungry","(B) To be aloof","(C) To remain calm","(D) To preserve one's energy"],a:2},
+{q:"38. Choose the correct meaning of—\"To cry wolf\":",o:["(A) To listen eagerly","(B) To turn pale","(C) To be hungry","(D) To give a false alarm"],a:3},
+{q:"39. They decided to ........ his number in the yellow pages.",o:["(A) look into","(B) look up","(C) look at","(D) look onto"],a:1},
+{q:"40. After a prolonged suffering he 'passed away'.<br>(Choose the correct option of the underlined phrase)",o:["(A) went away","(B) expired","(C) left","(D) yielded"],a:1},
+{q:"41. We have no alternative plan to ........ on.",o:["(A) fall back","(B) fall for","(C) fall out","(D) fall off"],a:0},
+{q:"42. She came <u>across</u> some papers she was looking for.",o:["(A) saw from a distance","(B) touched","(C) found unexpectedly","(D) read quickly"],a:2},
+{q:"43. You need to buy ........ refrigerator.",o:["(A) a","(B) the","(C) an","(D) no article"],a:0},
+{q:"44. We saw a ........ of lions at the sanctuary.",o:["(A) herd","(B) flock","(C) pride","(D) bunch"],a:2},
+{q:"45. Choose the odd one out :",o:["(A) Wheat","(B) Paddy","(C) Barley","(D) Mustard"],a:3},
+{q:"46. I like the books ........ have interesting stories.",o:["(A) who","(B) that","(C) whom","(D) what"],a:1},
+{q:"47. I have no ........ to you going for a movie.",o:["(A) object","(B) objecting","(C) objection","(D) objective"],a:2},
+{q:"48. You ........ cross the road when the traffic light is red.",o:["(A) have to","(B) must","(C) mustn't","(D) had to"],a:2},
+{q:"49. Ankita ........ come yet; the whole class is waiting for her.",o:["(A) hadn't","(B) haven't","(C) hasn't","(D) didn't"],a:2},
+{q:"50. Let us organise a get-together party.<br>(Choose the correct passive voice)",o:["(A) We should be organising a get-together party","(B) Get-together party must be surely organised","(C) A get-together party should be organised","(D) A get-together party would be organised by us"],a:2},
+{q:"51. Milan is ........ Italian city :",o:["(A) a","(B) the","(C) an","(D) no article"],a:2},
+{q:"52. Rolls-Royce cars are :",o:["(A) cheap","(B) expensive","(C) blue","(D) tall"],a:1},
+{q:"53. ........ languages does Aryan speak?",o:["(A) How","(B) How many","(C) How much","(D) Where"],a:1},
+{q:"54. That's my book. Can I have ........ back please?",o:["(A) it","(B) them","(C) you","(D) my"],a:0},
+{q:"55. Choose the correct synonym of 'Jealous' :",o:["(A) Remorse","(B) Envious","(C) Regretful","(D) Unhappy"],a:1},
+{q:"56. The ........ duty of every citizen is to respect the country.",o:["(A) each and every","(B) first and foremost","(C) over and above","(D) unless and until"],a:1},
+{q:"57. Make sure you ........ at least two hours before your flight.",o:["(A) check off","(B) check up","(C) check out","(D) check in"],a:3},
+{q:"58. Sheetal ran fast. She wanted to win the race.<br>(Choose the correct combination)",o:["(A) Sheetal running fast for winning the race","(B) Sheetal is running fast to win the race","(C) Running fast is Sheetal for winning the race","(D) Sheetal ran fast to win the race"],a:3},
+{q:"59. He broke the lock ........ a hammer.",o:["(A) without hall","(B) with the help of","(C) with a vengeance","(D) with an eye to"],a:1},
+{q:"60. Abriti has decided ........ more.",o:["(A) to earned","(B) will earn","(C) to earning","(D) to earn"],a:3},
+{q:"61. For all the ills in India, the writer blames :",o:["(A) the Indians","(B) the British rule","(C) illiteracy","(D) superstitions"],a:1},
+{q:"62. Benjy owned a :",o:["(A) Hyundai Car","(B) Contessa Car","(C) Honda Car","(D) Ford Van"],a:3},
+{q:"63. Seibei's parents knew that Seibei often went out to buy :",o:["(A) vegetables","(B) gourds","(C) fruits","(D) snacks"],a:1},
+{q:"64. Advertisers contribute to the ........ of the newspaper.",o:["(A) material","(B) news","(C) revenue","(D) gossip"],a:2},
+{q:"65. ........ was more important than any other invention.",o:["(A) Machinery","(B) Vehicles","(C) Fire","(D) Agriculture"],a:3},
+{q:"66. ........ was Nanukaka's favourite dress.",o:["(A) Silk Coat","(B) Pathani Coat","(C) Kashmiri Coat","(D) Jodhpuri Coat"],a:2},
+{q:"67. ........ was influenced by Mahatma Gandhi.",o:["(A) Martin Luther King, Jr.","(B) Shiga Naoya","(C) Dorothy L. Sayers","(D) Pearl S. Buck"],a:0},
+{q:"68. Every newspaper lives in a precarious :",o:["(A) battle","(B) imbalance","(C) balance","(D) struggle"],a:2},
+{q:"69. Indian English came into existence in ........ century.",o:["(A) 18th","(B) 20th","(C) 19th","(D) 21st"],a:2},
+{q:"70. Seibei took to ........ after giving up collecting gourds.",o:["(A) playing games","(B) painting pictures","(C) watching movies","(D) reading books"],a:1},
+{q:"71. \"Nothing can equal the seeds sown by our ancestors\" is from :",o:["(A) A Child is Born","(B) Indian Civilization and Culture","(C) Bharat is My Home","(D) I Have a Dream"],a:1},
+{q:"72. ........ is known as the Nightingale of India.",o:["(A) Mamta Kalia","(B) Eunice De Souza","(C) Kamala Das","(D) Sarojini Naidu"],a:3},
+{q:"73. \"But believe that I shall make speedier journeys\" is taken from :",o:["(A) To Autumn","(B) Macavity : The Mystery Cat","(C) Fire-Hymn","(D) Sweetest Love I Do Not Goe"],a:3},
+{q:"74. Lomov is a man conscious of :",o:["(A) social class","(B) caste","(C) religion","(D) race"],a:0},
+{q:"75. The ........ has become dumb to see the leafless trees.",o:["(A) hen","(B) sparrow","(C) nightingale","(D) peacock"],a:2},
+{q:"76. The press enjoys the ........ of the public.",o:["(A) boldness","(B) idleness","(C) helplessness","(D) secrecy"],a:2},
+{q:"77. \"His footprints are not found in any file of ........ yard.\"",o:["(A) Ireland","(B) Scotland","(C) Iceland","(D) Netherland"],a:1},
+{q:"78. Different varieties of English will together form a :",o:["(A) Standard Spoken English","(B) Grammar Rules Forum","(C) World Pronunciation Rules","(D) English Grammar"],a:0},
+{q:"79. ........ does not have the largest number of native speakers.",o:["(A) Chinese","(B) English","(C) Japanese","(D) Hindi"],a:1},
+{q:"80. Who were the rulers of ancient Egypt?",o:["(A) Pharoahs","(B) Porus","(C) Goods","(D) Alfred"],a:0},
+{q:"81. Indian peasants are poorer than their ....... counterparts.",o:["(A) Sri Lankan","(B) Pakistani","(C) Chinese","(D) Russian"],a:2},
+{q:"82. John Donne feels that ....... is very hopeless.",o:["(A) animal","(B) plants","(C) bird","(D) man"],a:3},
+{q:"83. ........ says that he is having a heart failure.",o:["(A) Choobookov","(B) Lomov","(C) Natalia","(D) Leap"],a:1},
+{q:"84. In traditional birth infant and mother mortality is :",o:["(A) lesser","(B) negligible","(C) greater","(D) recognizable"],a:2},
+{q:"85. What figure of speech has been used in \"My Grandmother's House\"?",o:["(A) Simile","(B) Personification","(C) Metaphor","(D) Alliteration"],a:0},
+{q:"86. ........ is the prime instrument of nation building.",o:["(A) Education","(B) Agriculture","(C) Trade","(D) Industry"],a:0},
+{q:"87. \"I Have a Dream\" is part of a :",o:["(A) drama","(B) poem","(C) novel","(D) speech"],a:3},
+{q:"88. \"We saw embers losing their cruel redness\" is taken from :",o:["(A) Song of Myself","(B) The Soldier","(C) Fire-Hymn","(D) Snake"],a:2},
+{q:"89. The poet is ........ the snake.",o:["(A) in awe of","(B) ashamed of","(C) afraid of","(D) disgusted by"],a:0},
+{q:"90. \"Tower of silence\" is related to ........ religions.",o:["(A) Hindu","(B) Parsi","(C) Sikh","(D) Christian"],a:1},
+{q:"91. ........ is sweltering with the heat of injustice and oppression.",o:["(A) New York","(B) Texas","(C) Chicago","(D) Mississippi"],a:3},
+{q:"92. Every human death by starvation is preceded by a long period of :",o:["(A) sorrow","(B) anxiety","(C) happiness","(D) ignorance"],a:1},
+{q:"93. The Norman Conquest made England into little more than a colony of :",o:["(A) Italy","(B) France","(C) Germany","(D) Russia"],a:1},
+{q:"94. Langland is a well known writer of ........ English literature.",o:["(A) Old","(B) Modern","(C) Middle","(D) Post-modern"],a:2},
+{q:"95. The Anglo-Saxons invaded England in the ........ century.",o:["(A) fifth","(B) sixth","(C) seventh","(D) eighth"],a:0},
+{q:"96. In the poem Snake, Lawrence denounces the artificialities of ........ life.",o:["(A) ancient","(B) medieval","(C) modern","(D) industrial"],a:2},
+{q:"97. Nanukaka has a unique quality of telling",o:["(A) truths","(B) stories","(C) incidents","(D) lies"],a:3},
+{q:"98. ........ discrimination was disapproved by Martin Luther King, Jr.",o:["(A) Sex","(B) Caste","(C) Religious","(D) Racial"],a:3},
+{q:"99. Natalia and ........ are quarrelling for the Ox-Meadows.",o:["(A) Romov","(B) Lomov","(C) Choobookov","(D) Tomov"],a:1},
+{q:"100. English is a :",o:["(A) hindrance in progress","(B) disgrace to the world","(C) blessing in disguise","(D) window to the world"],a:3}
+    ];
+
+    const quizContainer = document.getElementById('quiz-container');
+
+    q.forEach((qObj) => {
+        const qBox = document.createElement('div');
+        qBox.className = 'q-box';
+        
+        const qText = document.createElement('div');
+        qText.className = 'q-text';
+        qText.innerHTML = qObj.q;
+        qBox.appendChild(qText);
+        
+        const feedbackBox = document.createElement('div');
+        feedbackBox.className = 'feedback';
+        
+        const btnGroup = document.createElement('div');
+        
+        qObj.o.forEach((opt, optIndex) => {
+            const btn = document.createElement('button');
+            btn.className = 'opt-btn';
+            btn.innerHTML = opt;
+            
+            btn.onclick = () => {
+                const allBtns = btnGroup.querySelectorAll('.opt-btn');
+                allBtns.forEach(b => b.disabled = true);
+                
+                if (optIndex === qObj.a) {
+                    btn.classList.add('correct');
+                    feedbackBox.innerHTML = "✅ Correct Answer!";
+                    feedbackBox.style.color = "#01579b";
+                    feedbackBox.style.background = "#e1f5fe";
+                    feedbackBox.style.border = "1px solid #0288d1";
+                } else {
+                    btn.classList.add('incorrect');
+                    allBtns[qObj.a].classList.add('correct');
+                    
+                    const correctText = qObj.o[qObj.a].substring(0,3);
+                    feedbackBox.innerHTML = "❌ Wrong Answer! Correct: " + correctText + ")";
+                    feedbackBox.style.color = "#b71c1c";
+                    feedbackBox.style.background = "#ffcdd2";
+                    feedbackBox.style.border = "1px solid #d32f2f";
+                }
+                feedbackBox.style.display = 'block';
+            };
+            btnGroup.appendChild(btn);
+        });
+        
+        qBox.appendChild(btnGroup);
+        qBox.appendChild(feedbackBox);
+        quizContainer.appendChild(qBox);
+    });
+</script>
+
+</body>
+</html>

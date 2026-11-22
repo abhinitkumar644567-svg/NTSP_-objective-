@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mathematics XII 2022 (A) – Test Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+<script>window.MathJax={tex:{inlineMath:[['$','$']]}};</script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<style>
+:root{--m:#6b1733;--m2:#8e2a4a;--gold:#c9a24a;--paper:#fffdf8;--ink:#1d1d24;--mu:#6b6b76;--line:#e8dfd3;--g:#16a34a;--gb:#e9f9ef;--r:#dc2626;--rb:#fdecec;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Noto Sans Devanagari',system-ui,sans-serif;color:var(--ink);background:#2a1620;padding-top:env(safe-area-inset-top,0px)}
+.top{position:sticky;top:0;z-index:20;background:linear-gradient(90deg,var(--m),var(--m2));color:#fff;box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.ti{max-width:1100px;margin:auto;padding:8px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.brand{font-weight:700;font-size:15px}.brand small{display:block;font-weight:400;opacity:.85;font-size:11px}
+.st{display:flex;gap:6px;font-size:12px}.st div{background:rgba(255,255,255,.14);padding:4px 9px;border-radius:7px}
+.tm{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);padding:4px 14px;border-radius:99px;font-size:21px;font-weight:700;font-variant-numeric:tabular-nums}
+.tm.w{background:#d4a017;color:#2b1b00}.tm.d{background:var(--r);animation:b 1s steps(2,start) infinite}
+@keyframes b{to{visibility:hidden}}
+.btn{border:0;border-radius:8px;padding:9px 16px;font-weight:700;cursor:pointer;font-family:inherit;font-size:14px}
+.gold{background:var(--gold);color:#2b1b00}.alt{background:#e7e0d6}.main{background:var(--m);color:#fff}.btn:disabled{opacity:.5}
+.pg{height:4px;background:rgba(255,255,255,.2)}.pg div{height:100%;width:0;background:var(--gold);transition:width .3s}
+.paper{max-width:1100px;margin:16px auto 50px;background:var(--paper);border-radius:10px;overflow:hidden}
+.head{background:var(--m);color:#fff;text-align:center;padding:14px 10px;border-bottom:4px double var(--gold)}
+.head h1{margin:0;font-size:21px;font-family:Georgia,serif}.head p{margin:5px 0 0;font-size:13px;opacity:.9}
+.ins{padding:12px 18px;border-bottom:1px solid var(--line);font-size:13px;color:var(--mu);line-height:1.7}.ins b{color:var(--m)}
+.qw{padding:16px;column-count:2;column-gap:20px}
+.q{break-inside:avoid;background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:0 0 14px;transition:.25s}
+.q.c{background:var(--gb);border-color:#86efac}.q.x{background:var(--rb);border-color:#fca5a5}
+.qt{font-size:16px;line-height:1.75}.no{font-weight:700;color:var(--m);margin-right:4px}
+.os{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}
+.o{display:flex;gap:7px;align-items:center;border:1px solid #d9d0c4;border-radius:8px;padding:8px 9px;background:#fff;cursor:pointer;font-size:15px;overflow-x:auto}
+.o:hover{border-color:var(--m2);background:#fdf6f8}
+.l{flex:none;width:23px;height:23px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;background:#f1ebe2;color:var(--m)}
+.o.k{cursor:default}.o.k:hover{background:#fff;border-color:#d9d0c4}
+.o.ok{background:var(--g);border-color:#15803d;color:#fff}.o.ok .l{background:#fff;color:#15803d}
+.o.bad{background:var(--r);border-color:#b91c1c;color:#fff}.o.bad .l{background:#fff;color:#b91c1c}
+.o.dim{opacity:.6}
+.al{min-height:22px;margin-top:9px;font-size:14px}
+.bd{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;margin-right:6px;color:#fff}
+.bd.ok{background:#15803d}.bd.bad{background:#b91c1c}.bd.no{background:#64748b}.at{color:#15803d;font-weight:600}
+.ft{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:16px 18px;border-top:1px solid var(--line);background:#fbf7f0;padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+.ov{position:fixed;inset:0;background:rgba(15,8,12,.7);display:none;align-items:center;justify-content:center;z-index:50;padding:16px}.ov.s{display:flex}
+.rs{background:var(--paper);border-radius:14px;max-width:440px;width:100%;padding:24px;text-align:center;border-top:6px solid var(--gold)}
+.rs h2{margin:0;color:var(--m)}.sc{font-size:44px;font-weight:700;color:var(--m);margin:6px 0}.sc small{font-size:18px;color:var(--mu)}
+.gr{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}.gr div{background:#f6f1e9;border-radius:8px;padding:9px 4px;font-size:12px;color:var(--mu)}.gr b{display:block;font-size:20px;color:var(--ink)}
+.ms{font-size:14px;color:var(--mu);margin-bottom:14px}.rw{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+@media(max-width:820px){.qw{column-count:1;padding:12px}.os{grid-template-columns:1fr}.paper{margin:10px 6px 40px}.qt{font-size:15px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="ti">
+<div class="brand">NEW TOPPER STUDY POINT<small>bajitpur chaksturi</small></div>
+<div class="st"><div>सही <b id="sc">0</b></div><div>गलत <b id="sw">0</b></div><div>बाकी <b id="sl">0</b></div></div>
+<div class="tm" id="tm">60:00</div>
+<button class="btn gold" id="sb">सबमिट करें</button>
+</div><div class="pg"><div id="pb"></div></div></header>
+
+<main class="paper">
+<div class="head"><h1>NTPS-2022</></div>
+<div class="ins"><b>NTPS:</b> 📚 "किताबों से दोस्ती कर लो, कामयाबी खुद तुम्हारे कदम चूमेगी!" 🎯🔥।</div>
+<div class="qw" id="qw"></div>
+<div class="ft"><button class="btn alt" onclick="location.reload()">नया टेस्ट</button><button class="btn main" id="sb2">टेस्ट समाप्त करें</button></div>
+</main>
+
+<div class="ov" id="ov"><div class="rs"><h2>आपका परिणाम</h2><div class="sc" id="rs"></div>
+<div class="gr"><div>सही<b id="rc">0</b></div><div>गलत<b id="rw">0</b></div><div>छोड़े<b id="rk">0</b></div></div>
+<div class="ms" id="rm"></div>
+<div class="rw"><button class="btn alt" onclick="ov.classList.remove('s')">समीक्षा करें</button><button class="btn main" onclick="location.reload()">नया टेस्ट</button></div></div></div>
+
+<script>
+/* प्रारूप: प्रश्न§A§B§C§D§सही index (0=A) — प्रश्न क्रम = पुस्तक क्रम 1–100 */
+const RAW=String.raw`$\int_{-\pi}^{\pi}\tan x\,dx=$§$0$§$1$§$2$§$-1$§0
+$\int_{-\pi/4}^{\pi/4}\sin^3x\,dx=$§$0$§$1$§$2$§$\frac{3}{\sqrt2}$§0
+$\int\frac{dx}{e^x+e^{-x}}=$§$\tan^{-1}(e^x)+k$§$\tan^{-1}(e^{-x})+k$§$\log|e^x+e^{-x}|+k$§$x+k$§0
+$\int(4e^{3x}+1)\,dx=$§$4e^{3x}+k$§$\frac43e^{3x}+x+k$§$12e^{3x}+x+k$§$12e^{3x}+k$§1
+$3\int\sqrt x\,dx=$§$2x^{3/2}+k$§$4x^3+k$§$3x^{3/2}+k$§$6x^{3/2}+k$§0
+$\int\frac{dx}{\sqrt{1-x^2}}=$§$\tan^{-1}x+k$§$\sin^{-1}x+k$§$\cos^{-1}x+k$§$\sec^{-1}x+k$§1
+$2\int\frac{1}{1+4x^2}dx=$§$\tan^{-1}x+k$§$\log|1+4x^2|+k$§$\tan^{-1}2x+k$§$\sin^{-1}2x+k$§2
+$\int\left(\frac{\cos^2x+\sin^2x}{\csc x}\right)dx=$§$k+\csc x$§$k-\sin x$§$k+\sin x$§$k-\cos x$§3
+$3\int dx=$§$3x+k$§$3+k$§$\frac13+k$§$1+k$§0
+$\frac{d}{dx}(a^x)=$§$a^x$§$\frac{a^x}{\log a}$§$a^x\log a$§$x\log a$§2
+$X=\begin{bmatrix}0&1\\1&0\end{bmatrix}\Rightarrow X^8=$§$\begin{bmatrix}0&1\\1&0\end{bmatrix}$§$\begin{bmatrix}0&1\\0&1\end{bmatrix}$§$\begin{bmatrix}0&8\\8&0\end{bmatrix}$§$\begin{bmatrix}1&0\\0&1\end{bmatrix}$§3
+$x\in R,\ \tan^{-1}x+\cot^{-1}x=$§$\pi$§$\frac\pi2$§$\frac{2\pi}3$§$\frac{3\pi}4$§1
+$\csc^{-1}2$ का मुख्य मान है :§$\frac{-\pi}6$§$\frac\pi3$§$\frac\pi6$§कोई नहीं§2
+$a\circ b=a^3+b^3$ प्रकार से परिभाषित $N$ में एक द्विआधारी संक्रिया '$\circ$' में निम्नलिखित में कौन सत्य है ?§संक्रिया साहचर्य और क्रम विनिमेय है§संक्रिया क्रम विनिमेय है किन्तु साहचर्य नहीं है§संक्रिया साहचर्य है किन्तु क्रम विनिमेय नहीं है§इनमें से कोई नहीं§1
+समुच्चय $A=\{a,b,c\}$ में कुल कितने भिन्न संबंध परिभाषित किए जा सकते हैं ?§$2^9$§$2^3$§$9$§कोई नहीं§0
+$\int_1^4\sqrt x\,dx=$§$\frac{14}3$§$\frac{11}3$§$\frac{19}3$§$\frac{22}3$§0
+यदि तल $ax+by+cz+d=0$ रेखा $\frac{x-2}{3}=\frac{y-3}{4}=\frac{z-5}{6}$ के समांतर हो तो :§$2a+3b+5c=0$§$3a+4b+5c=0$§$3a+4b+6c=0$§इनमें से कोई नहीं§2
+यदि रेखा $\frac{x-2}{a}=\frac{y-3}{b}=\frac{z-4}{c}$ रेखा $\frac x4=\frac y2=\frac z3$ के समांतर हो तो :§$4a+2b+3c=0$§$4a=2b=3c$§$\frac a4=\frac b2=\frac c3$§इनमें से कोई नहीं§2
+$(2\vec i+3\vec k)\cdot[(\vec i+\vec j+4\vec k)\times(3\vec i+\vec j+7\vec k)]=$§$0$§$112$§$126$§$192$§0
+$\tan^{-1}\frac17+\tan^{-1}\frac1{13}=$§$\tan^{-1}\frac19$§$\tan^{-1}\frac29$§$\tan^{-1}\frac{20}{91}$§$\tan^{-1}\frac2{91}$§1
+सदिश $\vec i+\vec j$ की दिशा में इकाई सदिश है :§$\frac{\vec i+\vec j}{\sqrt2}$§$2\vec i+3\vec j$§$\vec i-\vec j+\vec k$§$2\vec i-3\vec j$§0
+अवकल समीकरण $\frac{dy}{dx}+y=1,\ y\ne1$ का हल है :§$y=1+Ae^{-x}$§$y=Ae^x$§$y=Ae^{2x}+1$§$y=1+Ae^{3x}$§0
+अवकल समीकरण $\frac{dy}{dx}+2y=\cos x$ का समाकलन गुणक है :§$e^{2x}$§$e^{-2x}$§$e^{\cos x}$§इनमें से कोई नहीं§0
+$5\vec j\times4\vec i=$§$20$§$-20$§$20\vec k$§$-20\vec k$§3
+मूल बिंदु से तल $2x-3y+4z=6$ की दूरी है :§$\frac6{\sqrt{35}}$§$\frac6{\sqrt{37}}$§$\frac6{\sqrt{29}}$§$\frac6{\sqrt{31}}$§2
+तलों $2x+y-2z=5$ तथा $3x-6y-2z=7$ के बीच का कोण है :§$\frac\pi2$§$\frac\pi4$§$\cos^{-1}\frac4{21}$§$\cos^{-1}\frac{16}{21}$§2
+$2,-1,-2$ दिक् अनुपात वाले रेखा की दिक् कोज्याएँ हैं :§$\frac23,-\frac13,-\frac23$§$\frac2{\sqrt{14}},\frac{-1}{\sqrt{14}},\frac{-2}{\sqrt{14}}$§$\frac25,\frac{-1}5,\frac{-2}5$§इनमें से कोई नहीं§0
+$(\vec i-2\vec j+5\vec k)\cdot(-2\vec i+4\vec j+2\vec k)=$§$0$§$2$§$-4$§$6$§0
+$\int xe^{2x}dx=$§$(2x-1)\frac{e^{2x}}4+k$§$(x-1)\frac{e^{2x}}4+k$§$\frac{xe^{2x}}4+k$§$\frac{(x+2)e^{2x}}4+k$§0
+$(2\vec i-3\vec j+5\vec k)\cdot(2\vec i+2\vec j+2\vec k)=$§$8$§$2$§$4$§$20$§0
+$2\tan^{-1}\frac12=$§$\tan^{-1}\frac34$§$\tan^{-1}\frac43$§$\tan^{-1}\frac7{12}$§$\tan^{-1}\frac{12}7$§1
+दो घटनाएँ $A$ और $B$ स्वतंत्र हैं यदि :§$P(A\cup B)=P(A)\cdot P(B)$§$P(A\cup B)=\frac{P(A)}{P(B)}$§$P(A\cap B)=P(A)\cdot P(B)$§$P(A\cap B)=\frac{P(A)}{P(B)}$§2
+यदि $P(A)=\frac12,\ P(B)=0$ तो $P(A/B)=$§$0$§$\frac12$§अपरिभाषित§इनमें से कोई नहीं§2
+$\begin{bmatrix}7&6\\0&-1\end{bmatrix}\begin{bmatrix}1&0\\0&1\end{bmatrix}=$§$\begin{bmatrix}8&6\\0&0\end{bmatrix}$§$\begin{bmatrix}7&0\\0&-1\end{bmatrix}$§$\begin{bmatrix}7&6\\0&-1\end{bmatrix}$§$\begin{bmatrix}1&0\\0&1\end{bmatrix}$§2
+यदि घटनाएँ $A$ और $B$ स्वतंत्र हों तथा $P(A)=\frac12,\ P(A\cup B)=\frac35$ तथा $P(B)=p$ तो $p$ का मान है :§$5$§$\frac15$§$\frac1{13}$§कोई नहीं§1
+$\begin{bmatrix}1\\0\end{bmatrix}\begin{bmatrix}5&6\end{bmatrix}=$§$[5\ \ 6]$§$\begin{bmatrix}5\\6\end{bmatrix}$§$\begin{bmatrix}0&0\\5&6\end{bmatrix}$§$\begin{bmatrix}5&6\\0&0\end{bmatrix}$§3
+$[x\ \ y]=[2x-1\ \ 7]\Rightarrow$§$x=3,\ y=7$§$x=1,\ y=7$§$x=0,\ y=7$§$x=3,\ y=4$§1
+यदि एक वर्ग आव्यूह $A$ इस प्रकार है कि $3A^3+2A^2+5A+I=0$ तो $A^{-1}$ बराबर है :§$3A^2+2A+5I$§$-3A^2-2A-5I$§$-3A^2+2A-5I$§इनमें से कोई नहीं§1
+$\int_0^1x(1-x)^{10}dx=$§$\frac1{132}$§$\frac5{132}$§$\frac7{132}$§$\frac{45}{244}$§0
+यदि $x=\frac15$ तो $\cos(\cos^{-1}x+2\sin^{-1}x)$ का मान है :§$\frac15$§$-\frac15$§$\frac{\sqrt{24}}5$§इनमें से कोई नहीं§1
+$\int\frac{dx}x=$§$\log|x|+k$§$x\log|x|+k$§$e^x+k$§$x+k$§0
+$\int\sin x\,dx=$§$k+\cos x$§$k-\cos x$§$-\tan x+k$§$\tan x-k$§1
+$\int\cos6\theta\,d\theta=$§$k+\sin6\theta$§$k-\sin6\theta$§$k-6\sin6\theta$§$k+\frac16\sin6\theta$§3
+$\int\tan2x\,dx=$§$\frac12\log|\tan2x|+k$§$\frac12\log|\sec2x|+k$§$2\log|\sec2x|+k$§$\log|\sec x|+k$§1
+$\int_0^1x^2dx=$§$\frac13$§$0$§$1$§$-\frac13$§0
+$\int_0^{\pi/2}\sin x\,dx=$§$0$§$1$§$-1$§$2$§1
+$\int_a^be^xdx=$§$\frac ba$§$e^{b-a}$§$e^b-e^a$§$e^b+e^a$§2
+$\int_a^bdx=$§$b-a$§$b+a$§$\frac ba$§$ab$§0
+$\int_0^1x\,dx=$§$0$§$\frac12$§$1$§$\frac14$§1
+$\int\frac{x^2-1}{x-1}dx=$§$x+k$§$\frac{x^2}2+x+k$§$\frac{x^3}3-\frac{x^2}2+k$§$\frac{x^2}2+2x+k$§1
+निम्नलिखित में कौन सममित आव्यूह है ?§$\begin{bmatrix}-1&2&-2\\-2&1&2\\2&2&1\end{bmatrix}$§$\begin{bmatrix}1&0&2\\0&1&0\\2&0&5\end{bmatrix}$§$\begin{bmatrix}1&2\\3&6\end{bmatrix}$§इनमें से कोई नहीं§1
+यदि दो घटनाएँ $A$ और $B$ इस प्रकार हो कि $P(A)\ne0$ तथा $P(B/A)=1$ तो :§$A\subset B$§$B\subset A$§$B=\phi$§$A=\phi$§0
+$\sin^{-1}\frac35+\sin^{-1}\frac{12}{13}=$§$\sin^{-1}\frac{36}{65}$§$\sin^{-1}\frac{63}{65}$§$\frac\pi2$§$\frac\pi6$§1
+$\int_{-\pi/2}^{\pi/2}\sin^2x\,dx=$§$0$§$1$§$\frac\pi2$§$\pi$§2
+एक सिक्के को 10 बार उछाला जाता है। ठीक छ: चित आने की प्रायिकता है :§$^{10}C_6\left(\frac12\right)^6$§$^{10}C_6\left(\frac12\right)^7$§$^{10}C_6\left(\frac12\right)^8$§$^{10}C_6\left(\frac12\right)^{10}$§3
+$x$ अक्ष की दिक् कोज्याओं का योग है :§$1$§$2$§$3$§$4$§0
+समतल $2x+y-z=5$ द्वारा $x,y$ तथा $z$-अक्ष पर काटे गए अंत:खंड क्रमश: हैं :§$\frac25,\frac15,\frac{-1}5$§$\frac52,5,-5$§$\frac52,5,5$§$2,1,-1$§1
+व्यवरोधों $x+y\le5,\ x\ge0,\ y\ge0$ के अंतर्गत $z=2x-3y$ का न्यूनतम मान है :§$0$§$10$§$-15$§$20$§2
+बिंदु $(2,-3,-1)$ से तल $2x-3y+6z+7=0$ की दूरी है :§$2$§$3$§$6$§$7$§0
+अवकल समीकरण $\left(\frac{d^2y}{dx^2}\right)^3+2\left(\frac{dy}{dx}\right)^3+9y=\sin x$ की कोटि है :§$3$§$4$§$2$§इनमें से कोई नहीं§2
+यदि किसी सीधी रेखा की दिक् कोज्याएँ $\frac3{\sqrt{77}},\frac{-2}{\sqrt{77}},x$ है, तो $x$ का मान है :§$\frac6{\sqrt{77}}$§$\frac8{\sqrt{77}}$§$\frac9{\sqrt{77}}$§$\frac1{\sqrt{77}}$§1
+$(\vec i+\vec j+\vec k)\cdot(\vec i-\vec j+\vec k)\times(\vec i+2\vec j-\vec k)=$§$0$§$2$§$4$§$6$§2
+तल $3x+4y+5z-6=0$ पर अभिलंब के दिक् अनुपात है :§$3,4,5$§$-3,4,5$§$3,-4,5$§$2,3,-4$§0
+निम्नलिखित में कौन तल, तल $x=0$ के समांतर है ?§$x=-5$§$y=0$§$z=-5$§इनमें से कोई नहीं§0
+तल $2x-3y+4z=7$ के समांतर एक तल का समीकरण है :§$2x-3y-4z=7$§$2x-3y+4z=11$§$2x+4y-3z=11$§इनमें से कोई नहीं§1
+तल $4x+3y-z+1=0$ पर लम्ब तल का समीकरण है :§$x-5y-11z+7=0$§$x-y-z=2$§$3x-11y+9z=1$§इनमें से कोई नहीं§0
+$\begin{vmatrix}2&5&7\\6&-8&-2\\3&5&8\end{vmatrix}=$§$0$§$1$§$-13$§$23$§0
+$\begin{vmatrix}4&1&3\\0&2&-2\\5&7&-2\end{vmatrix}=$§$0$§$1$§$-1$§$19$§0
+$3\begin{bmatrix}5&6\\7&8\end{bmatrix}=$§$\begin{bmatrix}15&18\\7&8\end{bmatrix}$§$\begin{bmatrix}5&6\\21&24\end{bmatrix}$§$\begin{bmatrix}15&18\\21&24\end{bmatrix}$§$\begin{bmatrix}15&6\\21&8\end{bmatrix}$§2
+$2\begin{bmatrix}1&2\\3&4\end{bmatrix}=$§$\begin{bmatrix}2&2\\3&4\end{bmatrix}$§$\begin{bmatrix}1&4\\6&4\end{bmatrix}$§$\begin{bmatrix}2&2\\6&4\end{bmatrix}$§$\begin{bmatrix}2&4\\6&8\end{bmatrix}$§3
+$\frac d{dx}(e^{13x})=$§$e^{13x}$§$\frac1{13}e^{13x}$§$13e^{13x}$§$-13e^{13x}$§2
+$\frac d{dx}\left(\sin\frac x5\right)=$§$\cos\frac x5$§$-\frac15\cos\frac x5$§$\frac15\cos\frac x5$§$-\frac15\sin\frac x5$§2
+$\frac d{dx}(\cos2x)=$§$-\sin2x$§$2\sin2x$§$-2\sin2x$§$-\frac12\sin2x$§2
+$\frac d{dx}\left(\tan\frac x3\right)=$§$\sec^2\frac x3$§$\frac13\sec^2\frac x3$§$3\sec^2\frac x3$§$3\cot\frac x3$§1
+$\frac d{dx}\left(\frac d{dx}\frac{x^4}4\right)=$§$4x^3$§$\frac{x^3}4$§$x^3$§$16x^3$§2
+$\frac d{dx}(\log x^4)=$§$\frac4x$§$\frac1{x^4}$§$\frac1{4x}$§$\frac3{4x}$§0
+$\frac d{d\theta}(\sin^2\theta)=$§$\sin^2\theta$§$\cos^2\theta$§$\sin2\theta$§$-\sin2\theta$§2
+$\frac d{d\theta}(\cos^3\theta)=$§$-3\sin^2\theta$§$3\sin^3\theta\cos\theta$§$-3\cos^2\theta\sin\theta$§$3\cos^2\theta\sin\theta$§2
+$\frac d{dx}(\tan^2x)=$§$\sec^2x$§$2\tan x$§$-2\tan x\sec^2x$§$2\tan x\sec^2x$§3
+$\int x^{3/2}dx=$§$\frac23x^{3/2}+k$§$\frac25x^{5/2}+k$§$\frac23x^{5/2}+k$§$\frac52x^{5/2}+k$§1
+अवकल समीकरण $x\,dy+y\,dx=0$ का हल है :§$x=y+c$§$xy=c$§$x+y=c$§$x=y^2+c$§1
+$\int\frac{dx}{x^2-1}=$§$\sin^{-1}x+k$§$\frac12\log\left|\frac{x-1}{x+1}\right|+k$§$\frac12\log\left|\frac{x+1}{x-1}\right|+k$§$\sqrt{1-x^2}+k$§1
+$\int\frac{dx}{x^2+4}=$§$\frac12\sin^{-1}\frac x2+k$§$\frac12\cos^{-1}\frac x2+k$§$\frac12\tan^{-1}\frac x2+k$§$\tan^{-1}x+k$§2
+$2\vec i\cdot3\vec j=$§$6\vec k$§$6$§$0$§$1$§2
+$3\vec j\cdot2\vec k=$§$6$§$1$§$6\vec i$§$0$§3
+$(3\vec i+4\vec j-5\vec k)\cdot\vec i=$§$7$§$3$§$2$§$0$§1
+$(\vec i+\vec j+\vec k)\cdot(2\vec i+3\vec j)=$§$5$§$6$§$1$§$11$§0
+$|2\vec i+\vec j+2\vec k|=$§$3$§$5$§$2$§$1$§0
+$\int_0^1\frac{\tan^{-1}x}{1+x^2}dx=$§$\frac{\pi^2}8$§$\frac{\pi^2}{12}$§$\frac{\pi^2}{16}$§$\frac{\pi^2}{32}$§3
+यदि $\vec a=\vec i+2\vec j$ तथा $\vec b=2\vec i+\vec j$ तो $|\vec a+\vec b|$ का मान है :§$\sqrt2$§$2\sqrt2$§$3\sqrt2$§$4\sqrt3$§2
+$\begin{bmatrix}2&5\\8&10\end{bmatrix}\begin{bmatrix}5\\50\end{bmatrix}=$§$[260\ \ 540]$§$\begin{bmatrix}260\\540\end{bmatrix}$§$\begin{bmatrix}10&25\\400&500\end{bmatrix}$§$\begin{bmatrix}35\\900\end{bmatrix}$§1
+$\begin{vmatrix}2&-3&5\\6&0&4\\1&5&-7\end{vmatrix}=$§$12$§$24$§$28$§$-28$§3
+यदि $A=\begin{bmatrix}2&3\\1&4\end{bmatrix}$ तो $\text{adjoint }A=$§$\begin{bmatrix}4&-3\\-1&2\end{bmatrix}$§$\begin{bmatrix}-2&3\\1&-4\end{bmatrix}$§$\begin{bmatrix}2&3\\-1&-4\end{bmatrix}$§$\begin{bmatrix}4&3\\1&-2\end{bmatrix}$§0
+यदि $x=a\cos\theta,\ y=a\sin\theta$ तो $\frac{dy}{dx}$ बराबर है :§$\tan\theta$§$-\cot\theta$§$-\tan\theta$§$\sec^2\theta$§1
+यदि $x=at^2,\ y=2at$ तो $\frac{dy}{dx}$ बराबर है :§$t$§$\frac1t$§$t^2$§इनमें से कोई नहीं§1
+$\frac{d^2}{dx^2}[x^2+3x+2]=$§$4$§$4x$§$2x+3$§$2$§3
+$\frac d{dx}[\cos^{-1}(\sin x)]=$§$-1$§$\frac x{\sqrt{1-x^2}}$§$\frac{\sin x}{\sqrt{1-x^2}}$§$\frac\pi2-x$§0
+निम्नलिखित में कौन उद्देश्यी फलन है ?§$z=5x+7y$§$x>0$§$y>0$§इनमें से कोई नहीं§0
+व्यवरोधों $x+y\le7,\ x\ge0,\ y\ge0$ के अंतर्गत $11x+2y$ का न्यूनतम मान है :§$77$§$14$§$0$§$-14$§2
+व्यवरोधों $3x+5y\le30,\ x\ge0,\ y\ge0$ के अंतर्गत $x+y$ का अधिकतम मान है :§$16$§$10$§$6$§इनमें से कोई नहीं§1`;
+
+const Q=RAW.split('\n').map(l=>{const p=l.split('§');return{q:p[0],o:p.slice(1,5),a:+p[5]}});
+const $=id=>document.getElementById(id),L='ABCD',T=3600;
+let left=T,tid,fin=false;const ans=Q.map(()=>null);
+
+function init(){
+  const w=$('qw');
+  Q.forEach((it,i)=>{
+    const d=document.createElement('div');d.className='q';d.id='q'+i;
+    d.innerHTML=`<div class="qt"><span class="no">${i+1}.</span>${it.q}</div><div class="os">${it.o.map((t,j)=>`<div class="o" data-i="${i}" data-j="${j}"><span class="l">${L[j]}</span><span>${t}</span></div>`).join('')}</div><div class="al"></div>`;
+    w.appendChild(d);
+  });
+  w.onclick=e=>{const o=e.target.closest('.o');if(o)pick(+o.dataset.i,+o.dataset.j)};
+  $('sb').onclick=$('sb2').onclick=()=>{if(!fin&&confirm('क्या आप टेस्ट सबमिट करना चाहते हैं?'))finish()};
+  stats();tick();tid=setInterval(tick,1000);
+}
+function tick(){
+  $('tm').textContent=String(Math.floor(left/60)).padStart(2,'0')+':'+String(left%60).padStart(2,'0');
+  $('tm').classList.toggle('w',left<=300&&left>60);$('tm').classList.toggle('d',left<=60);
+  if(left<=0){finish(true);return}left--;
+}
+function pick(i,j){if(fin||ans[i]!==null)return;ans[i]=j;paint(i);stats()}
+function paint(i){
+  const b=$('q'+i),a=ans[i],c=Q[i].a,done=a!==null||fin;
+  b.classList.remove('c','x');
+  b.querySelectorAll('.o').forEach((el,j)=>{
+    el.className='o'+(done?' k':'');
+    if(done&&j===c)el.classList.add('ok');
+    if(a===j&&j!==c)el.classList.add('bad');
+    if(done&&a!==null&&j!==c&&j!==a)el.classList.add('dim');
+  });
+  const al=b.querySelector('.al');
+  if(a===null)al.innerHTML=fin?`<span class="bd no">उत्तर नहीं दिया</span><span class="at">सही उत्तर: (${L[c]})</span>`:'';
+  else if(a===c){b.classList.add('c');al.innerHTML=`<span class="bd ok">✔ सही</span><span class="at">उत्तर: (${L[c]})</span>`}
+  else{b.classList.add('x');al.innerHTML=`<span class="bd bad">✖ गलत</span><span class="at">सही उत्तर: (${L[c]})</span>`}
+}
+function stats(){
+  let c=0,t=0;ans.forEach((a,i)=>{if(a!==null){t++;if(a===Q[i].a)c++}});
+  $('sc').textContent=c;$('sw').textContent=t-c;$('sl').textContent=Q.length-t;
+  $('pb').style.width=t/Q.length*100+'%';return{c,t};
+}
+function finish(auto){
+  if(fin)return;fin=true;clearInterval(tid);Q.forEach((_,i)=>paint(i));
+  $('sb').disabled=$('sb2').disabled=true;
+  const{c,t}=stats(),p=Math.round(c/Q.length*100),u=T-Math.max(left,0);
+  $('rs').innerHTML=`${c}<small>/${Q.length}</small>`;$('rc').textContent=c;$('rw').textContent=t-c;$('rk').textContent=Q.length-t;
+  $('rm').textContent=(auto?'समय समाप्त! ':'')+`समय: ${Math.floor(u/60)} मिनट ${u%60} सेकंड · ${p}% · `+(p>=75?'उत्कृष्ट प्रदर्शन!':p>=50?'अच्छा प्रयास!':'गलत प्रश्नों की समीक्षा करें।');
+  $('ov').classList.add('s')
+}
+  init();
+  </script>
+  </body>
+  </html>

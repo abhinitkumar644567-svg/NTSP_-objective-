@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>फिजिक्स 12th - 70 आसान (Decoded) प्रश्नों की टेस्ट सीरीज</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 15px;
+        }
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #0056b3;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 15px;
+            font-size: 26px;
+        }
+        .info-bar {
+            text-align: center;
+            font-size: 16px;
+            color: #fff;
+            background: #007bff;
+            margin-bottom: 25px;
+            font-weight: bold;
+            padding: 12px;
+            border-radius: 8px;
+        }
+        .question-box {
+            margin-bottom: 25px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            background-color: #f8fbff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .question-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1a202c;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        .options-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .option-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 12px 18px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            background-color: #fff;
+            border: 2px solid #cbd5e0;
+            color: #2d3748;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .option-btn:hover:not(:disabled) {
+            background-color: #ebf4ff;
+            border-color: #63b3ed;
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+        }
+        .correct {
+            background-color: #c6f6d5 !important;
+            border-color: #48bb78 !important;
+            color: #22543d !important;
+            font-weight: bold;
+        }
+        .incorrect {
+            background-color: #fed7d7 !important;
+            border-color: #f56565 !important;
+            color: #742a2a !important;
+        }
+        .feedback {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        .feedback-correct {
+            background-color: #c6f6d5;
+            color: #22543d;
+            border: 1px solid #9ae6b4;
+        }
+        .feedback-wrong {
+            background-color: #feebc8;
+            color: #7b341e;
+            border: 1px solid #fbd38d;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>फिजिक्स बोर्ड परीक्षा - डिकोडेड आसान टेस्ट सीरीज</h1>
+    <div class="info-bar">कुल प्रश्न: 70 | किताबी भाषा को आसान इंसानी भाषा में बदला गया है</div>
+    <div id="quiz-container"></div>
+</div>
+
+<script>
+    // 70 डिकोडेड (आसान भाषा में बदले हुए) भौतिकी प्रश्न
+    const questions = [
+        { q: "1. AC करंट वाले सर्किट में बिजली की असली खपत (Power loss) किस हिस्से में होती है?", options: ["(A) प्रतिरोध (Resistor) में", "(B) संधारित्र (Capacitor) में", "(C) प्रेरक (Inductor) में", "(D) इन सभी में"], ans: 0 },
+        { q: "2. अगर AC करंट का फार्मूला I = 0.6 sin(100πt) है, तो उसकी फ्रीक्वेंसी (आवृत्ति) कितनी होगी?", options: ["(A) 50 Hz", "(B) 100 Hz", "(C) 25 Hz", "(D) 60 Hz"], ans: 0 },
+        { q: "3. इलेक्ट्रोप्लेटिंग (विद्युत लेपन) या किसी चीज पर धातु की परत चढ़ाने के लिए कौन-सा करंट इस्तेमाल होता है?", options: ["(A) AC", "(B) DC", "(C) दोनों", "(D) कोई नहीं"], ans: 1 },
+        { q: "4. किसी वस्तु का असली से बड़ा और सीधा (आभासी) प्रतिबिंब बनाने के लिए कौन-सा दर्पण काम आता है?", options: ["(A) उत्तल दर्पण", "(B) समतल दर्पण", "(C) अवतल दर्पण", "(D) कोई नहीं"], ans: 2 },
+        { q: "5. अगर दो लेंसों (पावर P₁ और P₂) को एक-दूसरे से सटाकर रखा जाए, तो उनकी कुल पावर कैसे निकालते हैं?", options: ["(A) P₁ × P₂", "(B) P₁ / P₂", "(C) P₁ + P₂", "(D) P₁ - P₂"], ans: 2 },
+        { q: "6. किस रंग के प्रकाश की वेवलेंथ (तरंगदैर्ध्य) सबसे कम (छोटी) होती है?", options: ["(A) लाल", "(B) पीला", "(C) हरा", "(D) बैंगनी (Violet)"], ans: 3 },
+        { q: "7. आसमान में इंद्रधनुष (Rainbow) बनने के पीछे प्रकाश का कौन-सा खेल होता है?", options: ["(A) प्रकीर्णन", "(B) वर्ण-विक्षेपण (Dispersion)", "(C) विवर्तन", "(D) व्यतिकरण"], ans: 1 },
+        { q: "8. एक लंबे तार पर फैले हुए चार्ज (रेखीय आवेश घनत्व) को नापने का मात्रक क्या है?", options: ["(A) कूलॉम/मीटर", "(B) कूलॉम/मीटर²", "(C) कूलॉम/मीटर³", "(D) सिर्फ कूलॉम"], ans: 0 },
+        { q: "9. इलेक्ट्रिक फील्ड (विद्युत क्षेत्र) की तीव्रता का विमीय सूत्र (Dimensional Formula) क्या होता है?", options: ["(A) [MLT⁻²A⁻¹]", "(B) [MLT⁻³A⁻¹]", "(C) [ML²T⁻³A⁻¹]", "(D) [MLT⁻²A]"], ans: 1 },
+        { q: "10. -8 कूलॉम के चार्ज में लगभग कितने ज्यादा इलेक्ट्रॉन जमा होते हैं?", options: ["(A) 5 × 10¹⁹", "(B) 2.5 × 10¹⁹", "(C) 1.6 × 10¹⁹", "(D) 10¹⁹"], ans: 0 },
+        { q: "11. द्विध्रुव आघूर्ण (Dipole moment) निकालने का सही फार्मूला क्या है?", options: ["(A) q × 2a", "(B) q / 2a", "(C) q + 2a", "(D) q - 2a"], ans: 0 },
+        { q: "12. किसी लोहे या धातु के खोखले चार्ज्ड गोले के ठीक अंदर इलेक्ट्रिक फील्ड कितना होता है?", options: ["(A) बहुत ज्यादा", "(B) शून्य (Zero)", "(C) सतह के बराबर", "(D) अनंत"], ans: 1 },
+        { q: "13. गॉस के नियम से, अगर एक बंद डिब्बे के अंदर एक द्विध्रुव (Dipole) रखा हो, तो उससे निकलने वाला कुल फ्लक्स कितना होगा?", options: ["(A) शून्य (0)", "(B) q/ε₀", "(C) 2q/ε₀", "(D) अनंत"], ans: 0 },
+        { q: "14. किसी द्विध्रुव (Dipole) के ठीक बीचों-बीच (निरक्षीय रेखा पर) वोल्टेज (विभव) कितना होता है?", options: ["(A) शून्य (Zero)", "(B) अनंत", "(C) अधिकतम", "(D) न्यूनतम"], ans: 0 },
+        { q: "15. लॉजिक गेट की दुनिया में कौन-सा गेट 'इनवर्टर' (उल्टा करने वाला) कहलाता है?", options: ["(A) AND", "(B) OR", "(C) NOT", "(D) NAND"], ans: 2 },
+        { q: "16. जर्मेनियम या सिलिकॉन (अर्द्धचालक) के बीच का एनर्जी गैप लगभग कितना होता है?", options: ["(A) 1 eV", "(B) 10 eV", "(C) 100 eV", "(D) 0 eV"], ans: 0 },
+        { q: "17. '27' नंबर को कंप्यूटर की भाषा (बाइनरी) में कैसे लिखेंगे?", options: ["(A) 11011", "(B) 10011", "(C) 10101", "(D) 11100"], ans: 0 },
+        { q: "18. 'फुल वेव रेक्टिफायर' में अगर 50Hz करंट डाला जाए, तो आउटपुट करंट की फ्रीक्वेंसी क्या होगी?", options: ["(A) 50 Hz", "(B) 100 Hz", "(C) 25 Hz", "(D) 0 Hz"], ans: 1 },
+        { q: "19. AC वोल्टेज को कम या ज्यादा करने के लिए किस मशीन का इस्तेमाल होता है?", options: ["(A) मोटर", "(B) जनरेटर", "(C) ट्रांसफार्मर", "(D) गैल्वेनोमीटर"], ans: 2 },
+        { q: "20. टीवी और फोन के सिग्नल भेजने वाले सैटेलाइट पृथ्वी से लगभग कितनी ऊंचाई पर उड़ते हैं?", options: ["(A) 36,000 km", "(B) 10,000 km", "(C) 400 km", "(D) 1,000 km"], ans: 0 },
+        { q: "21. संचार में मॉडुलेशन (Modulation) करने का असली मकसद क्या है?", options: ["(A) सिग्नल को कमजोर करना", "(B) सिग्नल को लंबी दूरी तक भेजना", "(C) आवाज बदलना", "(D) करंट को रोकना"], ans: 1 },
+        { q: "22. प्रेरण कुंडली (Induction coil) का मुख्य काम क्या पैदा करना है?", options: ["(A) बहुत हाई वोल्टेज", "(B) बहुत ज्यादा करंट", "(C) हाई पावर", "(D) लो वोल्टेज"], ans: 0 },
+        { q: "23. चुम्बकीय क्षेत्र (B) के अंदर मौजूद ऊर्जा घनत्व (Energy Density) का फार्मूला क्या है?", options: ["(A) B²/μ₀", "(B) B²/2μ₀", "(C) 2B²/μ₀", "(D) B/μ₀"], ans: 1 },
+        { q: "24. हॉट वायर एमीटर (तप्त तार एमीटर) AC करंट का कौन-सा मान नापता है?", options: ["(A) सबसे ऊँचा मान (Peak)", "(B) औसत मान (Average)", "(C) rms मान (Root Mean Square)", "(D) शून्य"], ans: 2 },
+        { q: "25. किसी एरिया (dS) से निकलने वाले चुम्बकीय फ्लक्स का सही रूप क्या है?", options: ["(A) B·dS (डॉट प्रोडक्ट)", "(B) B×dS (क्रॉस प्रोडक्ट)", "(C) B/dS", "(D) dS/B"], ans: 0 },
+        { q: "26. परिपथ में रुकावट पैदा करने वाली 'प्रतिबाधा (Impedance)' का मात्रक क्या होता है?", options: ["(A) एम्पियर", "(B) वोल्ट", "(C) ओम", "(D) वाट"], ans: 2 },
+        { q: "27. अगर एक तार में AC करंट बह रहा है, तो उसके एक पूरे चक्कर (Full cycle) का औसत मान क्या होगा?", options: ["(A) शून्य (0)", "(B) अधिकतम", "(C) rms के बराबर", "(D) 1"], ans: 0 },
+        { q: "28. अगर करंट और वोल्टेज के बीच का एंगल φ हो, तो पावर फैक्टर (शक्ति गुणांक) कैसे निकालते हैं?", options: ["(A) sin φ", "(B) cos φ", "(C) tan φ", "(D) cot φ"], ans: 1 },
+        { q: "29. एक इलेक्ट्रॉन को 5 वोल्ट की बैटरी से दौड़ाने पर उसे कितनी एनर्जी मिलेगी?", options: ["(A) 5 जूल", "(B) 5 इलेक्ट्रॉन-वोल्ट (eV)", "(C) 1 eV", "(D) 0"], ans: 1 },
+        { q: "30. इलेक्ट्रिक फील्ड (E) और वोल्टेज (V) के बीच क्या रिश्ता होता है?", options: ["(A) E = -dV/dx", "(B) E = dV/dx", "(C) E = V/x²", "(D) E = V × x"], ans: 0 },
+        { q: "31. दो चार्ज के बीच लगने वाले बल (Force) का नियम किसने दिया था?", options: ["(A) न्यूटन ने", "(B) फैराडे ने", "(C) कूलॉम ने", "(D) एम्पियर ने"], ans: 2 },
+        { q: "32. 'पिको-फैराड' (pF) किस चीज को नापने की इकाई है?", options: ["(A) करंट", "(B) वोल्टेज", "(C) धारिता (Capacitance)", "(D) प्रतिरोध"], ans: 2 },
+        { q: "33. किसी कैपेसिटर (संधारित्र) की क्षमता किस बात पर निर्भर नहीं करती?", options: ["(A) प्लेटों के साइज पर", "(B) प्लेटों के बीच की दूरी पर", "(C) प्लेटों के चार्ज पर", "(D) बीच में रखे पदार्थ पर"], ans: 2 },
+        { q: "34. एक गोल धातु के कंडक्टर की धारिता 1μF है, तो उसका रेडियस (त्रिज्या) लगभग कितना होगा?", options: ["(A) 9 km", "(B) 1 km", "(C) 100 m", "(D) 90 km"], ans: 0 },
+        { q: "35. किसी भी धातु (Metal) का डाइलेक्ट्रिक कांस्टेंट (परावैद्युतांक) कितना होता है?", options: ["(A) 1", "(B) 0", "(C) अनंत (Infinity)", "(D) -1"], ans: 2 },
+        { q: "36. अगर C₁ और C₂ कैपेसिटर सीरीज (श्रेणीक्रम) में जुड़े हों, तो कुल क्षमता कैसे निकलेगी?", options: ["(A) C₁ + C₂", "(B) (C₁×C₂) / (C₁+C₂)", "(C) C₁ - C₂", "(D) C₁ / C₂"], ans: 1 },
+        { q: "37. 40W और 60W के दो बल्ब 220V पर काम करते हैं, किसके अंदर का तार ज्यादा मोटा (कम रेजिस्टेंस वाला) होगा?", options: ["(A) 60W का", "(B) 40W का", "(C) दोनों बराबर", "(D) पता नहीं"], ans: 0 },
+        { q: "38. किसी तार का रेजिस्टेंस नापने के लिए सबसे बढ़िया और सटीक उपकरण कौन-सा है?", options: ["(A) वोल्टमीटर", "(B) एमीटर", "(C) व्हीटस्टोन ब्रिज", "(D) गैल्वेनोमीटर"], ans: 2 },
+        { q: "39. अगर किसी तार की लंबाई खींचकर दोगुनी कर दें, तो उसका रेजिस्टेंस कितना हो जाएगा?", options: ["(A) 2 गुना", "(B) 4 गुना", "(C) आधा", "(D) कोई बदलाव नहीं"], ans: 1 },
+        { q: "40. विभवमापी (Potentiometer) का तार किस खास धातु का बना होता है?", options: ["(A) तांबा", "(B) एल्युमिनियम", "(C) मैंगनीन या कॉन्स्टेंटन", "(D) लोहा"], ans: 2 },
+        { q: "41. किरचॉफ का पहला नियम (जंक्शन रूल) किस चीज के न खतम होने (संरक्षण) पर काम करता है?", options: ["(A) ऊर्जा", "(B) आवेश (Charge)", "(C) संवेग", "(D) मास"], ans: 1 },
+        { q: "42. चुम्बकीय क्षेत्र (Magnetic field) को नापने का सबसे आम मात्रक क्या है?", options: ["(A) टेस्ला", "(B) वेबर", "(C) हेनरी", "(D) फैराड"], ans: 0 },
+        { q: "43. फोटो-सेल (Photo cell) किस सिद्धांत पर काम करता है?", options: ["(A) प्रकाश-विद्युत प्रभाव", "(B) चुम्बकीय प्रेरण", "(C) गुरुत्वाकर्षण", "(D) ऊष्मीय प्रभाव"], ans: 0 },
+        { q: "44. कैथोड किरणें (Cathode rays) असल में क्या होती हैं?", options: ["(A) प्रोटॉनों का झुंड", "(B) इलेक्ट्रॉनों की तेज धार", "(C) न्यूट्रॉन", "(D) एक्स-रे"], ans: 1 },
+        { q: "45. किसी रेडियोएक्टिव चीज की 'हाफ-लाइफ' (अर्ध-आयु) का फार्मूला क्या है?", options: ["(A) 0.693 / λ", "(B) λ / 0.693", "(C) λ × 0.693", "(D) 0.693"], ans: 0 },
+        { q: "46. क्षय गुणांक (Decay constant λ) की यूनिट (इकाई) क्या होती है?", options: ["(A) मीटर", "(B) हर्ट्ज़ या प्रति सेकंड (s⁻¹)", "(C) सेकंड", "(D) किलो"], ans: 1 },
+        { q: "47. थोरियम (Th-230) के एक परमाणु (Atomic No. 90) में कितने न्यूट्रॉन होते हैं?", options: ["(A) 90", "(B) 230", "(C) 140 (230-90)", "(D) 320"], ans: 2 },
+        { q: "48. p-n जंक्शन डायोड का सबसे ज्यादा इस्तेमाल किस काम के लिए होता है?", options: ["(A) एम्पलीफायर में", "(B) ऑसिलेटर में", "(C) रेक्टिफायर (AC को DC बनाने) में", "(D) ट्रांसफार्मर में"], ans: 2 },
+        { q: "49. जो मशीन करंट या वोल्टेज को बढ़ा देती है (प्रवर्धक), उसे क्या कहते हैं?", options: ["(A) रेक्टिफायर", "(B) एम्पलीफायर", "(C) डायोड", "(D) स्विच"], ans: 1 },
+        { q: "50. एक तार के पास एक चुंबक रखा है। तार में करंट कब पैदा होगा?", options: ["(A) जब दोनों रुके हों", "(B) जब चुंबक और तार दोनों एक ही स्पीड से चलें", "(C) जब दोनों के बीच दूरी बदल रही हो (गति हो)", "(D) कभी नहीं"], ans: 2 },
+        { q: "51. मूविंग कॉइल गैल्वेनोमीटर में करंट (I) और उसके घूमने के एंगल (θ) का क्या रिश्ता है?", options: ["(A) I ∝ θ", "(B) I ∝ θ²", "(C) I ∝ sinθ", "(D) I ∝ cosθ"], ans: 0 },
+        { q: "52. गैल्वेनोमीटर को वोल्टमीटर बनाने के लिए उसमें क्या जोड़ना पड़ता है?", options: ["(A) सीरीज में हाई रेजिस्टेंस", "(B) पैरेलल में लो रेजिस्टेंस", "(C) सीरीज में लो रेजिस्टेंस", "(D) पैरेलल में हाई रेजिस्टेंस"], ans: 0 },
+        { q: "53. गैल्वेनोमीटर को एमीटर बनाने के लिए क्या करते हैं?", options: ["(A) पैरेलल में एक छोटा सा तार (शंट) जोड़ते हैं", "(B) सीरीज में बड़ा रेजिस्टेंस", "(C) कुछ नहीं करते", "(D) बैटरी निकाल देते हैं"], ans: 0 },
+        { q: "54. मैग्नेटिक मोमेंट (चुम्बकीय आघूर्ण) की यूनिट (मात्रक) क्या होती है?", options: ["(A) A-m²", "(B) A-m", "(C) A/m", "(D) V-m"], ans: 0 },
+        { q: "55. अनुचुम्बकीय (Paramagnetic) पदार्थों की चुंबकशीलता (μr) कैसी होती है?", options: ["(A) 1 से बहुत ज्यादा", "(B) 1 से थोड़ी सी ज्यादा", "(C) 1 से कम", "(D) शून्य"], ans: 1 },
+        { q: "56. पृथ्वी के चुम्बकीय ध्रुव (Poles) पर नमन कोण (Dip angle) कितना होता है?", options: ["(A) 0°", "(B) 90°", "(C) 45°", "(D) 180°"], ans: 1 },
+        { q: "57. विषुवत रेखा (Equator) पर नमन कोण (Angle of dip) कितना होता है?", options: ["(A) 90°", "(B) 0°", "(C) 45°", "(D) 60°"], ans: 1 },
+        { q: "58. चुम्बकीय फ्लक्स (Magnetic Flux) का S.I. मात्रक क्या है?", options: ["(A) वेबर (Wb)", "(B) टेस्ला", "(C) हेनरी", "(D) फैराड"], ans: 0 },
+        { q: "59. लेंज का नियम (Lenz's Law) किस चीज के बचाव (संरक्षण) की बात करता है?", options: ["(A) चार्ज की", "(B) मास की", "(C) ऊर्जा (Energy) की", "(D) करंट की"], ans: 2 },
+        { q: "60. प्रेरकत्व (Inductance) को किसमें नापते हैं?", options: ["(A) ओम में", "(B) हेनरी (H) में", "(C) फैराड में", "(D) टेस्ला में"], ans: 1 },
+        { q: "61. (μ₀ε₀)⁻¹/² का मान किसके बराबर होता है?", options: ["(A) प्रकाश की स्पीड (3 × 10⁸ m/s)", "(B) ध्वनि की स्पीड", "(C) 0", "(D) अनंत"], ans: 0 },
+        { q: "62. विद्युत-चुम्बकीय तरंगों (Electromagnetic waves) की चालने की स्टाइल (प्रकृति) कैसी होती है?", options: ["(A) अनुदैर्ध्य (Longitudinal)", "(B) अनुप्रस्थ (Transverse)", "(C) दोनों", "(D) कोई नहीं"], ans: 1 },
+        { q: "63. इनमें से कौन-सी तरंग विद्युत-चुम्बकीय (EM Wave) नहीं है?", options: ["(A) एक्स-रे", "(B) लाइट", "(C) साउंड (ध्वनि तरंगें)", "(D) रेडियो वेव"], ans: 2 },
+        { q: "64. निर्वात में प्रकाश की चाल c है। कांच (μ = 1.5) में प्रकाश की चाल क्या होगी?", options: ["(A) 2c/3", "(B) 3c/2", "(C) c", "(D) c/2"], ans: 0 },
+        { q: "65. उत्तल लेंस (Convex lens) को पानी में डुबाने पर उसकी पावर का क्या होता है?", options: ["(A) बढ़ जाती है", "(B) घट जाती है", "(C) अवतल बन जाता है", "(D) कोई फर्क नहीं पड़ता"], ans: 1 },
+        { q: "66. पास का न दिखने वाले (Hypermetropia) व्यक्ति को कौन-सा चश्मा लगता है?", options: ["(A) अवतल (Concave)", "(B) उत्तल (Convex)", "(C) सिलिंड्रिकल", "(D) बाइफोकल"], ans: 1 },
+        { q: "67. जब लाइट एक माध्यम से दूसरे में जाती है, तो उसकी कौन-सी चीज़ नहीं बदलती?", options: ["(A) स्पीड", "(B) वेवलेंथ", "(C) फ्रीक्वेंसी (आवृत्ति)", "(D) दिशा"], ans: 2 },
+        { q: "68. प्रकाश का किनारों से मुड़ जाना या फैलना क्या कहलाता है?", options: ["(A) विवर्तन (Diffraction)", "(B) व्यतिकरण", "(C) अपवर्तन", "(D) परावर्तन"], ans: 0 },
+        { q: "69. यंग के डबल स्लिट प्रयोग में अगर छेदों (slits) के बीच की दूरी बढ़ा दें, तो पट्टी (Fringe) की चौड़ाई क्या होगी?", options: ["(A) बढ़ेगी", "(B) घटेगी", "(C) समान रहेगी", "(D) गायब हो जाएगी"], ans: 1 },
+        { q: "70. प्रकाश के ध्रुवण (Polarization) से जुड़ा ब्रूस्टर का नियम (Brewster's Law) का फार्मूला क्या है?", options: ["(A) μ = sin i_p", "(B) μ = cos i_p", "(C) μ = tan i_p", "(D) μ = cot i_p"], ans: 2 }
+    ];
+
+    const quizContainer = document.getElementById('quiz-container');
+
+    questions.forEach((qObj, qIndex) => {
+        const qBox = document.createElement('div');
+        qBox.className = 'question-box';
+        
+        const qText = document.createElement('div');
+        qText.className = 'question-text';
+        qText.innerHTML = qObj.q;
+        qBox.appendChild(qText);
+        
+        const optionsList = document.createElement('ul');
+        optionsList.className = 'options-list';
+        
+        const feedbackBox = document.createElement('div');
+        feedbackBox.className = 'feedback';
+        
+        qObj.options.forEach((opt, optIndex) => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerHTML = opt;
+            
+            btn.onclick = () => {
+                const allBtns = optionsList.querySelectorAll('.option-btn');
+                allBtns.forEach(b => b.disabled = true);
+                
+                if (optIndex === qObj.ans) {
+                    btn.classList.add('correct');
+                    feedbackBox.innerHTML = "✅ बिल्कुल सही जवाब!";
+                    feedbackBox.className = 'feedback feedback-correct';
+                } else {
+                    btn.classList.add('incorrect');
+                    allBtns[qObj.ans].classList.add('correct');
+                    feedbackBox.innerHTML = "❌ गलत जवाब। सही उत्तर: " + qObj.options[qObj.ans] + " है।";
+                    feedbackBox.className = 'feedback feedback-wrong';
+                }
+                feedbackBox.style.display = 'block';
+            };
+            
+            const li = document.createElement('li');
+            li.appendChild(btn);
+            optionsList.appendChild(li);
+        });
+        
+        qBox.appendChild(optionsList);
+        qBox.appendChild(feedbackBox);
+        quizContainer.appendChild(qBox);
+    });
+</script>
+
+</body>
+</html>

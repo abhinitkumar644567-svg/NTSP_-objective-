@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHYSICS 12th (2021) - 70 Objective Test</title>
+    <style>
+        /* शाही नीला (Royal Blue) और आकाशी (Sky Blue) का प्रीमियम कॉम्बिनेशन - No White Background */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0d47a1 0%, #42a5f5 100%);
+            margin: 0;
+            padding: 15px;
+            min-height: 100vh;
+            color: #002171;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #e3f2fd; /* Light Sky Blue */
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(13, 71, 161, 0.4);
+            border: 2px solid #1976d2;
+        }
+        h1 {
+            text-align: center;
+            font-size: 26px;
+            margin-top: 0;
+            padding-bottom: 15px;
+            border-bottom: 3px dashed #1565c0;
+            color: #0d47a1;
+            font-weight: 900;
+        }
+        .info-bar {
+            text-align: center;
+            font-size: 16px;
+            color: #e3f2fd;
+            background: linear-gradient(to right, #0d47a1, #1976d2);
+            margin-bottom: 25px;
+            font-weight: bold;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(13, 71, 161, 0.3);
+        }
+        /* --- टाइमर का डिज़ाइन --- */
+        .timer-box {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #0d47a1, #1565c0);
+            color: #bbdefb;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(13, 71, 161, 0.5);
+            z-index: 1000;
+            letter-spacing: 1px;
+            border: 2px solid #90caf9;
+        }
+        @media (max-width: 600px) {
+            .timer-box {
+                top: 10px;
+                right: 50%;
+                transform: translateX(50%);
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+            .container { margin-top: 50px; }
+        }
+        .q-box {
+            margin-bottom: 20px;
+            padding: 18px;
+            border-left: 5px solid #1565c0;
+            border-radius: 8px;
+            background: #bbdefb; /* Deeper Sky Blue */
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+            transition: transform 0.2s ease;
+        }
+        .q-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(13, 71, 161, 0.3);
+        }
+        .q-text {
+            font-size: 17px;
+            font-weight: bold;
+            color: #0d47a1;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        .opt-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 12px 18px;
+            margin-bottom: 8px;
+            font-size: 16px;
+            background-color: #e1f5fe;
+            border: 1px solid #42a5f5;
+            color: #0d47a1;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            font-weight: bold;
+        }
+        .opt-btn:hover:not(:disabled) {
+            background-color: #90caf9;
+            border-color: #0d47a1;
+            color: #000;
+            transform: translateX(4px);
+        }
+        .opt-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.95;
+        }
+        .correct {
+            background: linear-gradient(to right, #2e7d32, #43a047) !important;
+            border-color: #1b5e20 !important;
+            color: #e8f5e9 !important;
+            font-weight: bold;
+        }
+        .incorrect {
+            background: linear-gradient(to right, #c62828, #e53935) !important;
+            border-color: #b71c1c !important;
+            color: #ffebee !important;
+            font-weight: bold;
+        }
+        .feedback {
+            display: none;
+            margin-top: 12px;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="timer" class="timer-box">⏱️ 01:00:00</div>
+
+<div class="container">
+    <h1>PHYSICS (भौतिकी) - XII, 2021 (A)</h1>
+    <div class="info-bar">कुल प्रश्न: 70 | समय: 1 घंटा | सही विकल्प चुनें</div>
+    <div id="quiz-container"></div>
+</div>
+
+<script>
+    // 1 Hour Timer
+    let timeInSeconds = 3600; 
+    const timerElement = document.getElementById('timer');
+
+    const countdown = setInterval(() => {
+        if (timeInSeconds <= 0) {
+            clearInterval(countdown);
+            timerElement.innerHTML = "⏳ Time Up!";
+            timerElement.style.background = "linear-gradient(135deg, #b71c1c, #d32f2f)";
+            document.querySelectorAll('.opt-btn').forEach(btn => btn.disabled = true);
+            alert("आपका समय समाप्त हो गया है! अब आप और उत्तर नहीं दे सकते।");
+            return;
+        }
+        timeInSeconds--;
+        let h = Math.floor(timeInSeconds / 3600), m = Math.floor((timeInSeconds % 3600) / 60), s = timeInSeconds % 60;
+        timerElement.innerHTML = `⏱️ ${h<10?'0'+h:h}:${m<10?'0'+m:m}:${s<10?'0'+s:s}`;
+    }, 1000); 
+
+    // Compressed Array of 70 Questions (From Physics 2021 A Images)
+    const q=[
+{q:"1. प्रतिरोधों के समांतर क्रम में निम्नलिखित में कौन राशि समान रहती है?",o:["(A) विभवांतर","(B) धारा","(C) विभवांतर और धारा दोनों","(D) इनमें से कोई नहीं"],a:0},
+{q:"2. एक हेनरी बराबर होता है—",o:["(A) 10³ mH","(B) 10⁶ mH","(C) 10⁻³ mH","(D) 10⁻⁶ mH"],a:1},
+{q:"3. रेडियोएक्टिव तत्त्व के लिए निम्नलिखित में कौन सही है?",o:["(A) Tₐ = &lambda; / 0.6931","(B) Tₐ = 1 / &lambda;","(C) Tₐ = (0.6931)&lambda;","(D) Tₐ = 1 / &lambda;²"],a:1},
+{q:"4. निम्नलिखित में कौन सही है?",o:["(A) (1100)₂ = (12)₁₀","(B) (1001)₂ = (12)₁₀","(C) (1111)₂ = (12)₁₀","(D) (1011)₂ = (12)₁₀"],a:1},
+{q:"5. मूल गेट के लिए निम्नलिखित में कौन सही है?",o:["(A) AND, OR, NOT","(B) AND, OR","(C) NAND, NOR","(D) OR, NOT"],a:0},
+{q:"6. निम्नलिखित में कौन आवेशित नहीं है?",o:["(A) फोटॉन","(B) &alpha;-कण","(C) &beta;-कण","(D) इलेक्ट्रॉन"],a:0},
+{q:"7. कार्बन प्रतिरोध का रंग-कोड में पीला रंग का मान होता है—",o:["(A) 1","(B) 2","(C) 3","(D) 4"],a:3},
+{q:"8. औसत रंग (पीला रंग) के अपवर्तनांक के लिए निम्नलिखित में कौन सही है?",o:["(A) &mu; = (&mu;ᵣ + &mu;ᵥ) / 2","(B) &mu; = (&mu;ᵣ - &mu;ᵥ) / 2","(C) &mu; = &radic;(&mu;ᵣ&mu;ᵥ)","(D) &mu; = &mu;ᵥ / &mu;ᵣ"],a:0},
+{q:"9. समांतर सतह वाली kanch की पट्टी की शक्ति होती है—",o:["(A) अनंत","(B) शून्य","(C) 100 cm","(D) 10 cm"],a:1},
+{q:"10. कोणीय वर्ण-विक्षेपण बराबर होता है—",o:["(A) (&mu;ᵥ - &mu;ᵣ) A","(B) (&mu;ᵥ - &mu;ᵣ) / A","(C) (&mu;ᵥ + &mu;ᵣ) A","(D) (&mu;ᵥ + &mu;ᵣ) / A"],a:0},
+{q:"11. खगोलीय दूरदर्शी के लिए निम्नलिखित में कौन सही है?",o:["(A) fₒ = fₑ","(B) fₒ > fₑ","(C) fₒ < fₑ","(D) fₒ << fₑ"],a:1},
+{q:"12. हवा में &epsilon;ᵣ का मान होता है—",o:["(A) शून्य","(B) अनंत","(C) 1","(D) 9 × 10⁹"],a:2},
+{q:"13. विद्युत्-क्षेत्र में एक आवेशित कण पर लगने वाले बल का मान होता है—",o:["(A) qE","(B) q / E","(C) E / q","(D) &radic;qE"],a:0},
+{q:"14. चित्र में A और B के बीच समतुल्य धारिता है—",o:["(A) C","(B) C / 2","(C) 2C","(D) C / 6"],a:1},
+{q:"15. t समय तक धारा I के प्रवाह के कारण R प्रतिरोध के चालक में उत्पन्न ऊष्मा होती है—",o:["(A) I.R.t","(B) I².R.t","(C) I².R².t","(D) I².R².t"],a:1},
+{q:"16. 5 tesla (टेसला) का चुंबकीय क्षेत्र बराबर होता है—",o:["(A) 5 × weber / (meter)²","(B) 5 × 10⁵ weber / (meter)²","(C) 5 × 10² weber / (meter)³","(D) 5 × 10² weber / (meter)²"],a:0},
+{q:"17. प्रत्यावर्ती धारा का r.m.s. मान (Iᵣₘₛ) एवं प्रत्यावर्ती धारा का शिखर मान (I₀) के बीच सम्बन्ध होता है—",o:["(A) Iᵣₘₛ = 0.505I₀","(B) Iᵣₘₛ = 0.606 I₀","(C) Iᵣₘₛ = 0.707 I₀","(D) Iᵣₘₛ = 0.808 I₀"],a:2},
+{q:"18. कोणीय आवृत्ति &omega; वाले प्रत्यावर्ती धारा परिपथ में L प्रेरकत्व वाले प्रेरक द्वारा उत्पन्न प्रेरणिक प्रतिघात का मान होता है—",o:["(A) &omega; / L","(B) &omega;.L","(C) 1 / (&omega;.L)","(D) L / &omega;"],a:1},
+{q:"19. शक्ति गुणांक के लिए निम्नलिखित में कौन सम्बन्ध सही है?",o:["(A) शक्ति गुणांक = यथार्थ माध्य शक्ति × आभासी माध्य शक्ति","(B) शक्ति गुणांक = (आभासी माध्य शक्ति) / (यथार्थ माध्य शक्ति)","(C) शक्ति गुणांक = (यथार्थ माध्य शक्ति) / (आभासी माध्य शक्ति)","(D) शक्ति गुणांक = 1/2 [यथार्थ माध्य शक्ति × आभासी माध्य शक्ति]"],a:2},
+{q:"20. कार्बन प्रतिरोध के हरे रंग के कोड का मान है—",o:["(A) 3","(B) 4","(C) 5","(D) 6"],a:2},
+{q:"21. चुम्बकीय क्षेत्र B में V वेग से गतिशील आवेश (q) पर लगने वाले बल का व्यंजक है—",o:["(A) F&arrow; = q(V&arrow; × B&arrow;)","(B) F&arrow; = q(B&arrow; × V&arrow;)","(C) F&arrow; = (B&arrow; × V&arrow;) / q","(D) F&arrow; = (V&arrow; × B&arrow;) / q"],a:0},
+{q:"22. पदार्थ की प्रतिरोधकता के लिए निम्नलिखित में कौन सही है?",o:["(A) &rho; = R.A / L","(B) &rho; = L / (R.A)","(C) &rho; = R.L / A","(D) &rho; = R.L.A"],a:0},
+{q:"23. विभव-प्रवणता बराबर होती है—",o:["(A) dx / dV","(B) dx . dV","(C) -dV / dx","(D) इनमें से कोई नहीं"],a:2},
+{q:"24. विद्युत् फ्लक्स का S.I. मात्रक है—",o:["(A) ओम-मीटर","(B) एम्पीयर-मीटर²","(C) वोल्ट-मीटर","(D) (वोल्ट)(मीटर)⁻¹"],a:2},
+{q:"25. सम्बन्ध Q=ne में निम्नलिखित में कौन n का मान संभव नहीं है?",o:["(A) 4","(B) 8","(C) 4.2","(D) 100"],a:2},
+{q:"26. एक समांतर पट्टिका संधारित्र की धारिता के लिए निम्नलिखित में कौन सही है?",o:["(A) &epsilon;₀A / d","(B) &epsilon;₀d / A","(C) d / &epsilon;₀A","(D) A / &epsilon;₀d"],a:0},
+{q:"27. विद्युत्-परिपथ की शक्ति होती है—",o:["(A) V . R","(B) V² . R","(C) V² / R","(D) V² . R . I"],a:2},
+{q:"28. धारितीय प्रतिघात होता है—",o:["(A) &omega; / C","(B) C / &omega;","(C) &omega;.C","(D) 1 / (&omega;C)"],a:3},
+{q:"29. Z Xᵃ का &alpha;-क्षय निम्नलिखित में कौन निरूपित करता है?",o:["(A) Z Xᵃ &rarr; Z-2 Yᵃ⁻⁴ + ₂He⁴","(B) Z Xᵃ &rarr; Z-2 Yᵃ⁻⁴ + ₂He⁴","(C) Z Xᵃ &rarr; Z+4 Yᵃ⁺⁴ + ₂He⁴","(D) Z Xᵃ &rarr; Z+2 Yᵃ⁺⁴ + ₂He⁴"],a:0},
+{q:"30. निम्नलिखित में कौन मौलिक कण नहीं है?",o:["(A) न्यूट्रॉन","(B) प्रोटॉन","(C) &alpha;-कण","(D) इलेक्ट्रॉन"],a:2},
+{q:"31. TV प्रसारण के लिए निम्नलिखित में कौन आवृत्ति-परास है?",o:["(A) 30-300 Hz","(B) 30-300 kHz","(C) 30-300 MHz","(D) 30-300 GHz"],a:2},
+{q:"32. क्षीणता को मापने के लिए निम्नलिखित में कौन मात्रक सही है?",o:["(A) डेसीबेल","(B) ओम","(C) एम्पीयर","(D) वोल्ट"],a:0},
+{q:"33. एक p-प्रकार अर्द्ध-चालक होता है—",o:["(A) धनात्मकित","(B) ऋणावेशित","(C) अनावेशित","(D) परम शून्य ताप पर अनावेशित लेकिन उच्च तापमानों पर आवेशित"],a:2},
+{q:"34. हाइड्रोजन परमाणु में इलेक्ट्रॉन की न्यूनतम कक्षीय कोणीय संवेग होता है—",o:["(A) h","(B) h / 2","(C) h / (2&pi;)","(D) h / &pi;"],a:2},
+{q:"35. दाता अपद्रव्य परमाणु की संयोजकता होती है—",o:["(A) 3","(B) 4","(C) 5","(D) 6"],a:2},
+{q:"36. प्रकाश-वर्ष किस भौतिक राशि का मात्रक है?",o:["(A) दूरी","(B) समय","(C) ऊर्जा","(D) प्रकाश की तीव्रता"],a:0},
+{q:"37. एक सरल सूक्ष्मदर्शी से बना हुआ प्रतिबिंब होता है—",o:["(A) काल्पनिक और सीधा","(B) काल्पनिक और उल्टा","(C) वास्तविक और सीधा","(D) वास्तविक और उल्टा"],a:0},
+{q:"38. उत्तल लेंस द्वारा निम्नलिखित में कौन-सा दृष्टि दोष दूर किया जाता है?",o:["(A) निकट-दृष्टिता","(B) दूर-दृष्टिता","(C) जरा-दुरदर्शिता","(D) अबिंदुकता"],a:1},
+{q:"39. वर्ण-विक्षेपण क्षमता के लिए निम्नलिखित में कौन सम्बन्ध सही है?",o:["(A) w = (&mu;ᵥ - &mu;ᵣ) / (&mu;ᵧ - 1)","(B) w = (&mu; - &mu;ᵣ) / (&mu;ᵧ - 1)","(C) w = &mu;ᵥ - &mu;ᵣ","(D) w = &mu;ᵧ - 1"],a:0},
+{q:"40. निर्वात में प्रकाश का वेग c है। काँच (&mu; = 3/2) में इसका मान होगा—",o:["(A) 3c / 2","(B) 2c / 3","(C) 4c / 3","(D) c / 2"],a:1},
+{q:"41. सामान्य समायोजन के लिए खगोलीय दूरदर्शक की लंबाई होती है—",o:["(A) fₒ - fₑ","(B) fₒ × fₑ","(C) fₒ / fₑ","(D) fₒ + fₑ"],a:3},
+{q:"42. एक स्वस्थ व्यक्ति की आँख के लेंस की फोकस दूरी लगभग होती है—",o:["(A) 1 mm","(B) 2 cm","(C) 25 cm","(D) 1 m"],a:1},
+{q:"43. निम्नलिखित में किस भौतिक राशि का पुनर्वीतरण प्रकाश का व्यतिकरण होता है?",o:["(A) आवृत्ति","(B) तीव्रता","(C) तरंगदैर्ध्य","(D) चाल"],a:1},
+{q:"44. फोटॉन का विराम-द्रव्यमान होता है—",o:["(A) शून्य","(B) अनंत","(C) 9.1 × 10⁻³¹ kg","(D) 1.6 × 10⁻²⁷ kg"],a:0},
+{q:"45. बोर का आवृत्ति शर्त होता है—",o:["(A) E₁ - E₂ = hv","(B) E₂ - E₁ = hv","(C) E₁ - E₂ = 3hv","(D) D) E₁ - E₂ = (3/2)hv"],a:0},
+{q:"46. सौर ऊर्जा का स्रोत होता है—",o:["(A) नाभिकीय विखण्डन","(B) रासायनिक अभिक्रिया","(C) मूल कणों का विलोपन","(D) नाभिकीय संलयन"],a:3},
+{q:"47. विद्युत् का सबसे अच्छा चालक निम्नलिखित में कौन है?",o:["(A) चाँदी","(B) ताँबा","(C) सोना","(D) जस्ता"],a:0},
+{q:"48. NOR-द्वार का बुलियन व्यंजक होता है—",o:["(A) A + B = Y","(B) A . B = Y","(C) A . B = Y","(D) A + B = Y"],a:3},
+{q:"49. द्वि-आधारी संख्या (1001)₂ की दशमिक संख्या होती है—",o:["(A) (12)₁₀","(B) (18)₁₀","(C) (9)₁₀","(D) (25)₁₀"],a:2},
+{q:"50. किसी माध्यम की आपेक्षिक परावैद्युतता (&epsilon;ᵣ) होती है—",o:["(A) &epsilon; / &epsilon;₀","(B) &epsilon; × &epsilon;₀","(C) &epsilon; + &epsilon;₀","(D) &epsilon; - &epsilon;₀"],a:0},
+{q:"51. एक बिंदु आवेश q से r दूरी पर विद्युत्-विभव का मान होता है—",o:["(A) 1 / (4&pi;&epsilon;₀) . q/r","(B) 1 / (4&pi;&epsilon;₀) . q/r²","(C) q . r / (4&pi;&epsilon;₀)","(D) 1 / (4&pi;&epsilon;₀) . q²/r"],a:0},
+{q:"52. आवेश का पृष्ठ-घनत्व बराबर होता है—",o:["(A) कुल आवेश × कुल क्षेत्रफल","(B) कुल आवेश / कुल क्षेत्रफल","(C) कुल आवेश / कुल आयतन","(D) कुल आयतन / कुल आवेश"],a:1},
+{q:"53. पानी का परावैद्युत स्थिरांक होता है—",o:["(A) 80","(B) 60","(C) 81","(D) 42.5"],a:2},
+{q:"54. R त्रिज्या की पृथ्वी की विद्युत्-धारिता होती है—",o:["(A) 4&pi;&epsilon;₀ R","(B) 4&pi;&epsilon;₀ R","(C) 4&pi;&epsilon;₀ / R","(D) R / (4&pi;&epsilon;₀)"],a:1},
+{q:"55. एक ऐम्पियर बराबर होता है—",o:["(A) 1 कूलॉम / 1 सेकण्ड","(B) 1 कूलॉम × 1 सेकण्ड","(C) 1 ओम / 1 वोल्ट","(D) 1 वोल्ट × 1 ओम"],a:0},
+{q:"56. विद्युत् वाहक बल की इकाई है—",o:["(A) न्यूटन","(B) जूल","(C) वोल्ट","(D) न्यूटन प्रति एम्पीयर"],a:2},
+{q:"57. वोल्टमीटर मापता है—",o:["(A) प्रतिरोध","(B) विभवांतर","(C) धारा","(D) इनमें से कोई नहीं"],a:1},
+{q:"58. 1 kWh का मान होता है—",o:["(A) 9 × 10⁹ Nm²c⁻²","(B) 9 × 10⁹ Nm²c⁻²","(C) 9 × 10¹² Nm²c⁻²","(D) 3.6 × 10⁶ J"],a:3},
+{q:"59. निम्नलिखित में कौन सम्बन्ध सही है?",o:["(A) E&arrow; = F&arrow; / q","(B) E&arrow; = qF&arrow;","(C) E&arrow; = q / F&arrow;","(D) E&arrow; = 1 / (4&pi;&epsilon;₀) . q / F&arrow;"],a:0},
+{q:"60. विद्युत्-विभव बराबर होता है—",o:["(A) W / Q","(B) W . Q","(C) wq","(D) &radic;wq"],a:0},
+{q:"61. विद्युतीय द्विध्रुव-आघूर्ण का S.I. मात्रक होता है—",o:["(A) cm","(B) cm²","(C) cm⁻¹","(D) cm⁻²"],a:0},
+{q:"62. एक फैरड (F) बराबर होता है—",o:["(A) 1 C V","(B) 1 C V⁻¹","(C) 1 C V⁻²","(D) 1 C V²"],a:1},
+{q:"63. आवेशित चालक की स्थितिज ऊर्जा होती है—",o:["(A) CV²","(B) 1/2 CV²","(C) 1/3 CV²","(D) 1/4 CV²"],a:1},
+{q:"64. ट्रांसफॉर्मर के लिए निम्नलिखित में कौन सही है?",o:["(A) यह A.C. को D.C. में बदलता है","(B) यह D.C. को A.C. में बदलता है","(C) यह D.C. वोल्टता को बढ़ाता या घटाता है","(D) यह A.C. वोल्टता को बढ़ाता या घटाता है"],a:3},
+{q:"65. चुम्बकीय ध्रुव प्रबल्य का S.I. मात्रक है—",o:["(A) N","(B) N / A.m","(C) A.m","(D) A.m / N"],a:2},
+{q:"66. पृथ्वी के चुम्बकीय ध्रुव पर नमन कोण का मान होता है—",o:["(A) 0°","(B) 90°","(C) 45°","(D) 180°"],a:1},
+{q:"67. निर्वात की चुम्बकीय प्रवृत्ति का मान होता है—",o:["(A) 0.5 के बराबर","(B) अनंत","(C) 1 के बराबर","(D) शून्य"],a:3},
+{q:"68. चुम्बکशीलता (&mu;) के लिए निम्नलिखित में कौन सम्बन्ध सही है?",o:["(A) &mu; = H / B","(B) &mu; = B / H","(C) &mu; = B.H","(D) &mu;=(B+H)"],a:1},
+{q:"69. चुम्बकीय याम्योत्तर में पार्थिव चुम्बकीय क्षेत्र B, नमन कोण &delta;, B का क्षैतिज घटक Bₕ और B का उदय घटक Bᵥ हो तो निम्नलिखित में कौन सही है?",o:["(A) Bₕ = B cos &delta;","(B) Bᵥ = B cos &delta;","(C) Bₕ = B sin &delta;","(D) Bᵥ = B sin &delta;"],a:0},
+{q:"70. विद्युत्-चुम्बकीय तरंग के संचरण की दिशा होती है—",o:["(A) E&arrow; के समांतर","(B) B&arrow; समांतर","(C) (E&arrow; × B&arrow;) के समांतर","(D) (E&arrow; × B&arrow;) के लंबवत"],a:2}
+    ];
+
+    const quizContainer = document.getElementById('quiz-container');
+
+    q.forEach((qObj) => {
+        const qBox = document.createElement('div');
+        qBox.className = 'q-box';
+        
+        const qText = document.createElement('div');
+        qText.className = 'q-text';
+        qText.innerHTML = qObj.q;
+        qBox.appendChild(qText);
+        
+        const feedbackBox = document.createElement('div');
+        feedbackBox.className = 'feedback';
+        
+        const btnGroup = document.createElement('div');
+        
+        qObj.o.forEach((opt, optIndex) => {
+            const btn = document.createElement('button');
+            btn.className = 'opt-btn';
+            btn.innerHTML = opt;
+            
+            btn.onclick = () => {
+                const allBtns = btnGroup.querySelectorAll('.opt-btn');
+                allBtns.forEach(b => b.disabled = true);
+                
+                if (optIndex === qObj.a) {
+                    btn.classList.add('correct');
+                    feedbackBox.innerHTML = "✅ बिल्कुल सही उत्तर!";
+                    feedbackBox.style.color = "#1b5e20";
+                    feedbackBox.style.background = "#e8f5e9";
+                    feedbackBox.style.border = "1px solid #43a047";
+                } else {
+                    btn.classList.add('incorrect');
+                    allBtns[qObj.a].classList.add('correct');
+                    
+                    const correctText = qObj.o[qObj.a].substring(0,3);
+                    feedbackBox.innerHTML = "❌ गलत उत्तर! सही विकल्प: " + correctText + ")";
+                    feedbackBox.style.color = "#b71c1c";
+                    feedbackBox.style.background = "#ffebee";
+                    feedbackBox.style.border = "1px solid #e53935";
+                }
+                feedbackBox.style.display = 'block';
+            };
+            btnGroup.appendChild(btn);
+        });
+        
+        qBox.appendChild(btnGroup);
+        qBox.appendChild(feedbackBox);
+        quizContainer.appendChild(qBox);
+    });
+</script>
+
+</body>
+</html>

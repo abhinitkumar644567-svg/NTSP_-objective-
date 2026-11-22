@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NTSP 12th Physics </title>
+    <style>
+        :root {
+            /* Light Theme */
+            --bg-color: #f4f7f6;
+            --text-color: #2c3e50;
+            --card-bg: #ffffff;
+            --primary: #3498db;
+            --secondary: #2ecc71;
+            --danger: #e74c3c;
+            --nav-bg: #2c3e50;
+            --nav-text: #ffffff;
+            --border: #e0e0e0;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+        [data-theme="dark"] {
+            /* Dark Theme */
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --card-bg: #1e1e1e;
+            --primary: #4dabf7;
+            --secondary: #69db7c;
+            --danger: #ff6b6b;
+            --nav-bg: #000000;
+            --nav-text: #ffffff;
+            --border: #333333;
+            --shadow: rgba(0, 0, 0, 0.5);
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; transition: background-color 0.3s, color 0.3s; }
+        body { background-color: var(--bg-color); color: var(--text-color); overflow-x: hidden; }
+        
+        /* Navigation */
+        nav { background-color: var(--nav-bg); color: var(--nav-text); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px var(--shadow); }
+        .logo { font-size: 1.2rem; font-weight: bold; }
+        .nav-buttons button { background: none; border: none; color: white; cursor: pointer; margin-left: 15px; font-size: 1rem; }
+        .theme-btn { background: var(--primary); padding: 5px 10px; border-radius: 5px; font-weight: bold; border: none; cursor: pointer; color: white; }
+
+        /* App Container */
+        .container { max-width: 1000px; margin: 20px auto; padding: 0 15px; }
+        .hidden { display: none !important; }
+
+        /* Dashboard (Chapter Grid) */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; margin-top: 20px; }
+        .card { background-color: var(--card-bg); padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px var(--shadow); border: 1px solid var(--border); cursor: pointer; transition: transform 0.2s; }
+        .card:active { transform: scale(0.98); }
+        .card h3 { font-size: 1.1rem; margin-bottom: 10px; color: var(--primary); }
+        .progress-bar { width: 100%; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; margin-top: 10px; }
+        .progress-fill { height: 100%; background: var(--secondary); width: 0%; }
+
+        /* Filters & Controls */
+        .controls { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; background: var(--card-bg); padding: 15px; border-radius: 10px; box-shadow: 0 2px 5px var(--shadow); }
+        input[type="text"], select, button.btn { padding: 10px; border: 1px solid var(--border); border-radius: 5px; background: var(--bg-color); color: var(--text-color); outline: none; }
+        button.btn { background: var(--primary); color: white; border: none; cursor: pointer; font-weight: bold; }
+        button.btn-sec { background: var(--nav-bg); }
+
+        /* Question List */
+        .q-box { background: var(--card-bg); margin-bottom: 15px; padding: 20px; border-radius: 10px; border: 1px solid var(--border); box-shadow: 0 2px 4px var(--shadow); }
+        .q-header { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--primary); margin-bottom: 10px; font-weight: bold; }
+        .q-text { font-size: 1.1rem; margin-bottom: 15px; font-weight: 600; line-height: 1.4; }
+        .options { list-style: none; margin-bottom: 15px; }
+        .options li { padding: 8px 10px; background: var(--bg-color); margin-bottom: 5px; border-radius: 5px; border: 1px solid var(--border); }
+        .ans-box { display: none; padding: 10px; background: rgba(46, 204, 113, 0.1); border-left: 4px solid var(--secondary); margin-top: 10px; border-radius: 4px; }
+        .badge { background: #f39c12; color: #ffffff; padding: 3px 8px; border-radius: 12px; font-size: 0.7rem; }
+
+        /* Test Interface */
+        .test-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding: 15px; background: var(--card-bg); border-radius: 10px; }
+        .timer { font-size: 1.2rem; font-weight: bold; color: var(--danger); }
+        .test-option { padding: 12px; border: 2px solid var(--border); border-radius: 8px; margin-bottom: 10px; cursor: pointer; background: var(--bg-color); }
+        .test-option.selected { border-color: var(--primary); background: rgba(139, 208, 255, 0.9215686274509803); }
+        .test-option.correct-reveal { border-color: var(--secondary); background: rgba(46, 204, 113, 0.2); }
+        .test-option.wrong-reveal { border-color: var(--danger); background: rgba(231, 76, 60, 0.2); }
+        .test-nav { display: flex; justify-content: space-between; margin-top: 20px; }
+
+        /* Results */
+        .result-card { text-align: center; background: var(--card-bg); padding: 30px; border-radius: 10px; }
+        .score-circle { width: 120px; height: 120px; border-radius: 50%; border: 8px solid var(--primary); display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: bold; margin: 0 auto 20px; }
+    </style>  
+</head>
+<body>
+    <nav>
+        <div class="logo"></div>
+        <div class="nav-buttons">
+            <button onclick="showSection('qbank_view'); renderAllQuestions();">📂</button>
+            <button class="theme-btn" onclick="toggleTheme()">🌙</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- 1. DASHBOARD -->
+        <main id="dashboard">
+            <h2>अध्याय सूची</h2>
+            <div class="controls" style="margin-top: 15px;">
+                <button class="btn" onclick="startFullMockTest()">📝 Mock Test (50 Q)</button>
+            </div>
+            <div class="grid" id="chapterGrid"></div>
+        </main>
+
+        <!-- 2. QUESTION BANK VIEW -->
+        <main id="qbank_view" class="hidden">
+            <div class="controls">
+                <input type="text" id="searchInput" placeholder="प्रश्न खोजें..." onkeyup="filterQuestions()">
+                <select id="typeFilter" onchange="filterQuestions()">
+                    <option value="All">सभी प्रकार</option>
+                    <option value="PYQ">केवल PYQ</option>
+                    <option value="Modified PYQ">Modified PYQ</option>
+                    <option value="NCERT">NCERT / महत्वपूर्ण</option>
+                </select>
+                <button class="btn" onclick="toggleAllAnswers()">👁</button>
+            </div>
+            <h3 id="qbank_title" style="margin-bottom: 15px;">All Questions</h3>
+            <div id="qList"></div>
+        </main>
+
+        <!-- 3. TEST INTERFACE -->
+        <main id="test_view" class="hidden">
+            <div class="test-header">
+                <div>प्रश्न: <span id="t_current">1</span> / <span id="t_total">35</span></div>
+                <div class="timer" id="timer_display">10:00</div>
+            </div>
+            <div class="q-box">
+                <div class="q-header"><span id="t_type" class="badge">PYQ</span></div>
+                <div class="q-text" id="t_question">Question Text Here?</div>
+                <div id="t_options"></div>
+            </div>
+            <div class="test-nav">
+                <button class="btn btn-sec" onclick="prevTestQuestion()">Previous</button>
+                <button class="btn" id="t_submit_btn" onclick="nextTestQuestion()">Next</button>
+            </div>
+        </main>
+
+        <!-- 4. RESULT INTERFACE -->
+        <main id="result_view" class="hidden">
+            <div class="result-card">
+                <h2>टेस्ट परिणाम</h2>
+                <div class="score-circle" id="r_score">0%</div>
+                <p>कुल प्रश्न: <span id="r_total">0</span></p>
+                <p>सही उत्तर: <span id="r_correct" style="color:var(--secondary); font-weight:bold;">0</span></p>
+                <p>गलत/छूटे: <span id="r_wrong" style="color:var(--danger); font-weight:bold;">0</span></p>
+                <br>
+                <button class="btn" onclick="showSection('dashboard')">Home पर जाएँ</button>
+            </div>
+        </main>
+    </div>
+<!-- प्रीमियम 'बैक' बटन का कोड (इसे <body> के ठीक नीचे पेस्ट करें) -->
+<style>
+    .premium-back-btn {
+        position: fixed;
+        top: 10px;
+        left: 30px;
+        background: linear-gradient(135deg, #ffffff 0%, #8abaffd5 100%); 
+        color: #000000;
+        text-decoration: none;
+        padding: 3px 8px;
+        border-radius: 20px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        box-shadow: 0 5px 15px rgba(111, 166, 255, 0.8274509803921568);
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border: 2px solid rgba(100, 240, 255, 0.7803921568627451);
+        backdrop-filter: blur(5px);
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    
+    /* बटन पर टच करने पर पीछे की तरफ खिसकने का इफ़ेक्ट */
+    .premium-back-btn:hover {
+        transform: translateX(-5px); /* हल्का सा बाईं ओर खिसकेगा */
+        box-shadow: 0 8px 20px rgba(30, 41, 59, 0.6);
+    }
+
+    .back-icon {
+        font-size: 20px;
+    }
+</style>
+
+<!-- javascript:history.back() आपको पिछले खुले हुए पेज पर ले जाता है -->
+<a href="javascript:history.back()" class="premium-back-btn">
+    <span class="back-icon">⬳ </span>
+</a>
+<!-- बैक बटन का कोड यहाँ समाप्त होता है -->
+
+    <script>
+        // --- 1. DATA STRUCTURE (THE QUESTION BANK) ---
+        const chapters = [
+            "विद्युत आवेश तथा क्षेत्र", "स्थिर वैद्युत विभव तथा धारिता", "विद्युत धारा", 
+            "गतिमान आवेश और चुंबकत्व", "चुंबकत्व एवं द्रव्य", "वैद्युत चुंबकीय प्रेरण", 
+            "प्रत्यावर्ती धारा", "वैद्युत चुंबकीय तरंगें", "किरण प्रकाशिकी एवं प्रकाशिक यंत्र", 
+            "तरंग प्रकाशिकी", "विकिरण तथा द्रव्य की द्वैत प्रकृति", "परमाणु", 
+            "नाभिक", "अर्धचालक इलेक्ट्रॉनिकी", "संचार व्यवस्था"
+        ];
+
+        // 1000 प्रश्नों का लक्ष्य: यहाँ मैंने 45 अति-महत्वपूर्ण प्रश्न दिए हैं। 
+        // आप इसी फॉर्मेट में आगे हज़ारों प्रश्न जोड़ सकते हैं।
+        const questionBank = [
+    // ---------------------------------------------------------
+    // अध्याय 1: विद्युत आवेश तथा क्षेत्र (Chapter 1) - 30 प्रश्न
+    // ---------------------------------------------------------
+    { id: 1, ch: 0, text: "हवा में &epsilon;<sub>r</sub> (आपेक्षिक परावैद्युतांक) का मान होता है:", options: ["शून्य", "अनंत", "1", "9 &times; 10<sup>9</sup>"], ans: 2, type: "PYQ", year: "2021" },
+    { id: 2, ch: 0, text: "विद्युत फ्लक्स का SI मात्रक है:", options: ["ओम-मीटर", "एम्पियर-मीटर", "वोल्ट-मीटर", "वोल्ट/मीटर"], ans: 2, type: "PYQ", year: "2019" },
+    { id: 3, ch: 0, text: "आवेश का पृष्ठ घनत्व (Surface charge density) बराबर होता है:", options: ["कुल आवेश / कुल आयतन", "कुल आवेश / कुल क्षेत्रफल", "कुल आवेश &times; कुल क्षेत्रफल", "कुल आवेश &times; कुल आयतन"], ans: 1, type: "PYQ", year: "2021" },
+    { id: 4, ch: 0, text: "1 / (4&pi;&epsilon;<sub>0</sub>) का मान होता है:", options: ["9 &times; 10<sup>9</sup> N m<sup>2</sup> C<sup>-2</sup>", "8.85 &times; 10<sup>-12</sup> N m<sup>2</sup> C<sup>-2</sup>", "9 &times; 10<sup>-9</sup> N m<sup>2</sup> C<sup>-2</sup>", "शून्य"], ans: 0, type: "PYQ", year: "2020" },
+    { id: 5, ch: 0, text: "विद्युत क्षेत्र (E) और विभव (V) के बीच सही संबंध है:", options: ["E = -dV/dx", "E = dV/dx", "V = dE/dx", "V = -dE/dx"], ans: 0, type: "PYQ", year: "2022" },
+    { id: 6, ch: 0, text: "आवेश की विमा (Dimension of charge) होती है:", options: ["AT", "AT<sup>-1</sup>", "A<sup>-1</sup>T", "AT<sup>2</sup>"], ans: 0, type: "PYQ", year: "2020" },
+    { id: 7, ch: 0, text: "एक इलेक्ट्रॉन पर आवेश का मान होता है:", options: ["1.6 &times; 10<sup>-27</sup> C", "1.6 &times; 10<sup>-19</sup> C", "-1.6 &times; 10<sup>-19</sup> C", "9.1 &times; 10<sup>-31</sup> C"], ans: 2, type: "NCERT", year: "" },
+    { id: 8, ch: 0, text: "&epsilon;<sub>0</sub> (एप्साइलन नॉट) का मात्रक है:", options: ["N m<sup>2</sup> C<sup>-2</sup>", "Fm<sup>-1</sup>", "C V<sup>-1</sup>", "Fm"], ans: 1, type: "PYQ", year: "2023" },
+    { id: 9, ch: 0, text: "विद्युत द्विध्रुव आघूर्ण (Electric dipole moment) का SI मात्रक है:", options: ["कूलॉम-मीटर (C-m)", "कूलॉम/मीटर (C/m)", "कूलॉम-मीटर<sup>2</sup>", "कूलॉम<sup>2</sup>-मीटर"], ans: 0, type: "PYQ", year: "2019" },
+    { id: 10, ch: 0, text: "विद्युत तीव्रता (Electric Intensity) का मात्रक है:", options: ["N C", "N/C", "V/m<sup>2</sup>", "C/N"], ans: 1, type: "NCERT", year: "" },
+    { id: 11, ch: 0, text: "पानी का परावैद्युतांक (Dielectric constant) लगभग होता है:", options: ["1", "60", "80", "81.5"], ans: 2, type: "PYQ", year: "2021" },
+    { id: 12, ch: 0, text: "किसी बंद पृष्ठ के अंदर कुल आवेश Q है, तो पृष्ठ से गुजरने वाला कुल फ्लक्स होगा:", options: ["Q / &epsilon;<sub>0</sub>", "Q &times; &epsilon;<sub>0</sub>", "&epsilon;<sub>0</sub> / Q", "शून्य"], ans: 0, type: "PYQ", year: "2018" },
+    { id: 13, ch: 0, text: "आवेशित खोखले गोलाकार चालक के अंदर विद्युत क्षेत्र की तीव्रता होती है:", options: ["&sigma; / &epsilon;<sub>0</sub>", "अनंत", "शून्य", "इनमें से कोई नहीं"], ans: 2, type: "PYQ", year: "2022" },
+    { id: 14, ch: 0, text: "विद्युत द्विध्रुव की निरक्षीय स्थिति में विद्युत विभव का मान होता है:", options: ["शून्य", "अनंत", "1 / (4&pi;&epsilon;<sub>0</sub>) &times; (p/r<sup>2</sup>)", "अधिकतम"], ans: 0, type: "PYQ", year: "2023" },
+    { id: 15, ch: 0, text: "जब किसी साबुन के बुलबुले को आवेशित किया जाता है, तो उसकी त्रिज्या:", options: ["बढ़ती है", "घटती है", "अपरिवर्तित रहती है", "शून्य हो जाती है"], ans: 0, type: "PYQ", year: "2020" },
+    { id: 16, ch: 0, text: "इलेक्ट्रॉन का विशिष्ट आवेश (Specific charge) होता है:", options: ["1.8 &times; 10<sup>11</sup> C/kg", "1.6 &times; 10<sup>-19</sup> C/kg", "1.9 &times; 10<sup>-19</sup> C/kg", "9.1 &times; 10<sup>-31</sup> C/kg"], ans: 0, type: "PYQ", year: "2021" },
+    { id: 17, ch: 0, text: "1 कूलॉम आवेश में कितने इलेक्ट्रॉन होते हैं?", options: ["6.25 &times; 10<sup>18</sup>", "1.6 &times; 10<sup>19</sup>", "6.25 &times; 10<sup>-18</sup>", "1.6 &times; 10<sup>-19</sup>"], ans: 0, type: "Modified PYQ", year: "" },
+    { id: 18, ch: 0, text: "अनंत लम्बाई के आवेशित बेलनाकार तार के कारण किसी बिंदु पर विद्युत क्षेत्र होता है:", options: ["&lambda; / (2&pi;&epsilon;<sub>0</sub>r)", "&lambda; / (&pi;&epsilon;<sub>0</sub>r)", "&lambda; / (4&pi;&epsilon;<sub>0</sub>r)", "&lambda; / (2&pi;&epsilon;<sub>0</sub>r<sup>2</sup>)"], ans: 0, type: "PYQ", year: "2022" },
+    { id: 19, ch: 0, text: "विद्युत बल रेखाएं (Electric field lines):", options: ["एक दूसरे को कभी नहीं काटतीं", "एक दूसरे को काट सकती हैं", "केवल धनात्मक आवेश पर समाप्त होती हैं", "हमेशा बंद लूप बनाती हैं"], ans: 0, type: "NCERT", year: "" },
+    { id: 20, ch: 0, text: "समविभवी पृष्ठ (Equipotential surface) और विद्युत बल रेखाओं के बीच का कोण होता है:", options: ["0&deg;", "45&deg;", "90&deg;", "180&deg;"], ans: 2, type: "Modified PYQ", year: "" },
+    { id: 21, ch: 0, text: "किसी धातु का परावैद्युतांक होता है:", options: ["0", "1", "-1", "अनंत"], ans: 3, type: "PYQ", year: "2020" },
+    { id: 22, ch: 0, text: "स्थिर विद्युतीय क्षेत्र होता है:", options: ["संरक्षी (Conservative)", "असंरक्षी (Non-conservative)", "दोनों", "इनमें से कोई नहीं"], ans: 0, type: "PYQ", year: "2019" },
+    { id: 23, ch: 0, text: "1 स्टेट कूलॉम (Stat-coulomb) बराबर होता है:", options: ["3 &times; 10<sup>9</sup> C", "1/3 &times; 10<sup>-9</sup> C", "3 &times; 10<sup>-9</sup> C", "1/3 &times; 10<sup>9</sup> C"], ans: 1, type: "PYQ", year: "2021" },
+    { id: 24, ch: 0, text: "प्रकृति में किसी पिंड पर सबसे छोटा स्वतंत्र आवेश कितना हो सकता है?", options: ["1 C", "1 &mu;C", "1.6 &times; 10<sup>-19</sup> C", "शून्य"], ans: 2, type: "NCERT", year: "" },
+    { id: 25, ch: 0, text: "आवेश के क्वांटमीकरण सूत्र Q = &plusmn;ne में n का मान नहीं हो सकता:", options: ["1", "2", "3", "1.5"], ans: 3, type: "Modified PYQ", year: "" },
+    { id: 26, ch: 0, text: "एकसमान विद्युत क्षेत्र E में रखे p द्विध्रुव आघूर्ण वाले द्विध्रुव पर लगने वाला बल आघूर्ण है:", options: ["p &times; E", "p . E", "E &times; p", "p / E"], ans: 0, type: "PYQ", year: "2023" },
+    { id: 27, ch: 0, text: "विद्युत फ्लक्स का विमीय सूत्र (Dimensional formula) है:", options: ["[ML<sup>3</sup>T<sup>-3</sup>A<sup>-1</sup>]", "[ML<sup>2</sup>T<sup>-2</sup>A<sup>-1</sup>]", "[ML<sup>3</sup>T<sup>-2</sup>A<sup>-1</sup>]", "[ML<sup>2</sup>T<sup>-3</sup>A<sup>-1</sup>]"], ans: 0, type: "PYQ", year: "2021" },
+    { id: 28, ch: 0, text: "दो बिंदु आवेशों के बीच की दूरी दोगुनी कर दी जाए, तो उनके बीच का बल हो जाएगा:", options: ["दोगुना", "आधा", "चौथाई (1/4)", "चार गुना"], ans: 2, type: "Modified PYQ", year: "" },
+    { id: 29, ch: 0, text: "किसी विद्युत द्विध्रुव के कारण अक्षीय और निरक्षीय स्थितियों में समान दूरी पर विद्युत क्षेत्र का अनुपात होता है:", options: ["1:2", "2:1", "1:1", "4:1"], ans: 1, type: "PYQ", year: "2019" },
+    { id: 30, ch: 0, text: "कूलॉम का नियम (Coulomb's Law) किस प्रकार के आवेशों के लिए सत्य है?", options: ["केवल बिंदु आवेशों के लिए", "केवल गतिमान आवेशों के लिए", "रैखिक आवेशों के लिए", "सभी के लिए"], ans: 0, type: "NCERT", year: "" },
+
+    // ---------------------------------------------------------
+    // अध्याय 2: स्थिर वैद्युत विभव तथा धारिता (Chapter 2) - 30 प्रश्न
+    // ---------------------------------------------------------
+    { id: 31, ch: 1, text: "इलेक्ट्रॉन वोल्ट (eV) द्वारा मापा जाता है:", options: ["आवेश", "विभवांतर", "धारा", "ऊर्जा"], ans: 3, type: "PYQ", year: "2022" },
+    { id: 32, ch: 1, text: "विद्युत धारिता (Capacitance) का मात्रक होता है:", options: ["वोल्ट", "न्यूटन", "फैराड (F)", "एम्पियर"], ans: 2, type: "PYQ", year: "2019" },
+    { id: 33, ch: 1, text: "समांतर पट्टिका संधारित्र की धारिता के लिए सही सूत्र है:", options: ["&epsilon;<sub>0</sub>A / d", "&epsilon;<sub>0</sub>d / A", "d / &epsilon;<sub>0</sub>A", "A / &epsilon;<sub>0</sub>d"], ans: 0, type: "PYQ", year: "2021" },
+    { id: 34, ch: 1, text: "एक संधारित्र में संचित स्थितिज ऊर्जा का सूत्र है:", options: ["1/2 CV", "1/2 CV<sup>2</sup>", "1/2 C<sup>2</sup>V", "CV<sup>2</sup>"], ans: 1, type: "PYQ", year: "2020" },
+    { id: 35, ch: 1, text: "64 समरूप बूंदें जिनमें प्रत्येक की धारिता 5 &mu;F है, मिलकर एक बड़ी बूंद बनाती हैं। बड़ी बूंद की धारिता होगी:", options: ["16 &mu;F", "20 &mu;F", "4 &mu;F", "25 &mu;F"], ans: 1, type: "PYQ", year: "2019, 2021" },
+    { id: 36, ch: 1, text: "समान धारिता C वाले 3 संधारित्र श्रेणीक्रम में जोड़े गए हैं। समतुल्य धारिता होगी:", options: ["3C", "C/3", "2C", "C/2"], ans: 1, type: "Modified PYQ", year: "" },
+    { id: 37, ch: 1, text: "वान डी ग्राफ (Van de Graaff) जनरेटर का उपयोग होता है:", options: ["उच्च धारा उत्पन्न करने में", "उच्च वोल्टता उत्पन्न करने में", "निम्न वोल्टता उत्पन्न करने में", "विद्युत चुम्बकीय तरंग उत्पन्न करने में"], ans: 1, type: "PYQ", year: "2022" },
+    { id: 38, ch: 1, text: "जब संधारित्र की प्लेटों के बीच कोई परावैद्युत माध्यम रखा जाता है, तो उसकी धारिता:", options: ["बढ़ती है", "घटती है", "अपरिवर्तित रहती है", "शून्य हो जाती है"], ans: 0, type: "PYQ", year: "2018" },
+    { id: 39, ch: 1, text: "विभव प्रवणता (Potential gradient) बराबर होती है:", options: ["dx/dV", "dV/dx", "V/x", "x/V"], ans: 1, type: "PYQ", year: "2023" },
+    { id: 40, ch: 1, text: "आवेशित संधारित्र की पट्टियों के बीच लगने वाला बल होता है:", options: ["Q / (2A&epsilon;<sub>0</sub>)", "Q<sup>2</sup> / (2A&epsilon;<sub>0</sub>)", "Q<sup>2</sup> / (A&epsilon;<sub>0</sub>)", "Q / (A&epsilon;<sub>0</sub>)"], ans: 1, type: "PYQ", year: "2021" },
+    { id: 41, ch: 1, text: "R त्रिज्या वाले गोलाकार चालक की धारिता होती है:", options: ["1 / (4&pi;&epsilon;<sub>0</sub>R)", "4&pi;&epsilon;<sub>0</sub>R", "4&pi;&epsilon;<sub>0</sub>/R", "4&pi;&epsilon;<sub>0</sub>R<sup>2</sup>"], ans: 1, type: "PYQ", year: "2019" },
+    { id: 42, ch: 1, text: "पृथ्वी को 6400 km त्रिज्या का एक गोलाकार चालक मानने पर उसकी धारिता लगभग होगी:", options: ["711 &mu;F", "1 F", "111 &mu;F", "900 &mu;F"], ans: 0, type: "NCERT", year: "" },
+    { id: 43, ch: 1, text: "दो बिंदु आवेशों q<sub>1</sub> और q<sub>2</sub> के बीच r दूरी पर स्थितिज ऊर्जा होगी:", options: ["1/(4&pi;&epsilon;<sub>0</sub>) . q<sub>1</sub>q<sub>2</sub>/r<sup>2</sup>", "1/(4&pi;&epsilon;<sub>0</sub>) . q<sub>1</sub>q<sub>2</sub>/r", "1/(4&pi;&epsilon;<sub>0</sub>) . (q<sub>1</sub>+q<sub>2</sub>)/r", "शून्य"], ans: 1, type: "PYQ", year: "2020" },
+    { id: 44, ch: 1, text: "जब दो आवेशित चालकों को जोड़ा जाता है, तो उनका उभयनिष्ठ विभव (Common potential) होता है:", options: ["(Q<sub>1</sub>+Q<sub>2</sub>)/(C<sub>1</sub>+C<sub>2</sub>)", "(C<sub>1</sub>V<sub>1</sub>+C<sub>2</sub>V<sub>2</sub>)/(C<sub>1</sub>+C<sub>2</sub>)", "दोनों A और B सही हैं", "केवल V<sub>1</sub>+V<sub>2</sub>"], ans: 2, type: "Modified PYQ", year: "" },
+    { id: 45, ch: 1, text: "समविभवी पृष्ठ (Equipotential surface) पर किसी आवेश को एक बिंदु से दूसरे बिंदु तक ले जाने में किया गया कार्य:", options: ["धनात्मक होता है", "ऋणात्मक होता है", "शून्य होता है", "अनंत होता है"], ans: 2, type: "PYQ", year: "2021" },
+    { id: 46, ch: 1, text: "विद्युत क्षेत्र E का ऊर्जा घनत्व (Energy density) होता है:", options: ["1/2 &epsilon;<sub>0</sub>E", "1/2 &epsilon;<sub>0</sub>E<sup>2</sup>", "&epsilon;<sub>0</sub>E<sup>2</sup>", "1/2 &epsilon;<sub>0</sub><sup>2</sup>E"], ans: 1, type: "PYQ", year: "2022" },
+    { id: 47, ch: 1, text: "1 फैराड (Farad) बराबर होता है:", options: ["1 कूलॉम/वोल्ट", "1 वोल्ट/कूलॉम", "1 जूल/कूलॉम", "1 कूलॉम/जूल"], ans: 0, type: "NCERT", year: "" },
+    { id: 48, ch: 1, text: "विद्युत विभव (Electric Potential) का मात्रक है:", options: ["जूल-कूलॉम", "जूल/कूलॉम (वोल्ट)", "न्यूटन/कूलॉम", "कूलॉम/जूल"], ans: 1, type: "PYQ", year: "2019" },
+    { id: 49, ch: 1, text: "विद्युत विभव की विमा होती है:", options: ["[ML<sup>2</sup>T<sup>-3</sup>A<sup>-1</sup>]", "[MLT<sup>-2</sup>A<sup>-1</sup>]", "[ML<sup>2</sup>T<sup>-2</sup>A<sup>-1</sup>]", "[ML<sup>2</sup>T<sup>-3</sup>A<sup>-2</sup>]"], ans: 0, type: "PYQ", year: "2023" },
+    { id: 50, ch: 1, text: "अनंत (Infinity) पर विद्युत विभव का मान माना जाता है:", options: ["अनंत", "शून्य", "अधिकतम", "न्यूनतम"], ans: 1, type: "NCERT", year: "" },
+    { id: 51, ch: 1, text: "किसी द्विध्रुव के कारण r दूरी पर विभव अनुक्रमानुपाती होता है:", options: ["r के", "1/r के", "1/r<sup>2</sup> के", "1/r<sup>3</sup> के"], ans: 2, type: "PYQ", year: "2021" },
+    { id: 52, ch: 1, text: "RC (Resistance &times; Capacitance) की विमा होती है:", options: ["समय (T)", "आवृत्ति (T<sup>-1</sup>)", "वेग (LT<sup>-1</sup>)", "शून्य"], ans: 0, type: "PYQ", year: "2022" },
+    { id: 53, ch: 1, text: "एक समान विद्युत क्षेत्र E में द्विध्रुव p को &theta; कोण से घुमाने में किया गया कार्य होता है:", options: ["pE(1 - cos&theta;)", "pE(1 - sin&theta;)", "pE cos&theta;", "pE sin&theta;"], ans: 0, type: "PYQ", year: "2020" },
+    { id: 54, ch: 1, text: "यदि किसी आवेशित समांतर पट्टिका संधारित्र की प्लेटों को दूर किया जाए, तो धारिता:", options: ["बढ़ेगी", "घटेगी", "समान रहेगी", "शून्य हो जाएगी"], ans: 1, type: "Modified PYQ", year: "" },
+    { id: 55, ch: 1, text: "हवा की परावैद्युत शक्ति (Dielectric strength) लगभग होती है:", options: ["3 &times; 10<sup>6</sup> V/m", "3 &times; 10<sup>8</sup> V/m", "9 &times; 10<sup>9</sup> V/m", "8.85 &times; 10<sup>-12</sup> V/m"], ans: 0, type: "NCERT", year: "" },
+    { id: 56, ch: 1, text: "एक अच्छा परावैद्युत (Dielectric) पदार्थ हमेशा होता है:", options: ["सुचालक", "कुचालक (Insulator)", "अर्धचालक", "अतिचालक"], ans: 1, type: "NCERT", year: "" },
+    { id: 57, ch: 1, text: "समांतर क्रम में जुड़े दो संधारित्र C<sub>1</sub> और C<sub>2</sub> की समतुल्य धारिता होगी:", options: ["C<sub>1</sub> + C<sub>2</sub>", "C<sub>1</sub>C<sub>2</sub> / (C<sub>1</sub> + C<sub>2</sub>)", "1/C<sub>1</sub> + 1/C<sub>2</sub>", "C<sub>1</sub> - C<sub>2</sub>"], ans: 0, type: "PYQ", year: "2021" },
+    { id: 58, ch: 1, text: "संधारित्रों के श्रेणीक्रम संयोजन (Series combination) में क्या नियत रहता है?", options: ["विभवांतर", "आवेश (Charge)", "धारिता", "ऊर्जा"], ans: 1, type: "PYQ", year: "2020" },
+    { id: 59, ch: 1, text: "10 cm दूरी पर स्थित दो बिंदुओं के बीच विभवांतर 2V है। उनके बीच विद्युत क्षेत्र होगा:", options: ["0.2 V/m", "20 V/m", "2 V/m", "200 V/m"], ans: 1, type: "Modified PYQ", year: "" },
+    { id: 60, ch: 1, text: "1 जूल (Joule) प्रति 1 कूलॉम (Coulomb) किसके बराबर होता है?", options: ["1 एम्पियर", "1 ओम", "1 फैराड", "1 वोल्ट"], ans: 3, type: "NCERT", year: "" },
+
+    // ---------------------------------------------------------
+    // अध्याय 3: विद्युत धारा (Chapter 3) - 30 प्रश्न
+    // ---------------------------------------------------------
+    { id: 61, ch: 2, text: "विद्युत परिपथ की शक्ति (Power) होती है:", options: ["V.R", "V<sup>2</sup>.R", "V<sup>2</sup>/R", "V<sup>2</sup>.R.I"], ans: 2, type: "PYQ", year: "2019, 2022" },
+    { id: 62, ch: 2, text: "किर्कहॉफ (Kirchhoff) का प्रथम नियम (बिंदु नियम) किस संरक्षण सिद्धांत पर आधारित है?", options: ["ऊर्जा", "आवेश", "संवेग", "द्रव्यमान"], ans: 1, type: "PYQ", year: "2020" },
+    { id: 63, ch: 2, text: "आदर्श आमीटर (Ideal Ammeter) का प्रतिरोध होता है:", options: ["शून्य", "बहुत कम", "बहुत अधिक", "अनंत"], ans: 0, type: "PYQ", year: "2021" },
+    { id: 64, ch: 2, text: "आदर्श वोल्टमीटर (Ideal Voltmeter) का प्रतिरोध होता है:", options: ["शून्य", "बहुत कम", "बहुत अधिक", "अनंत"], ans: 3, type: "PYQ", year: "2022" },
+    { id: 65, ch: 2, text: "किर्कहॉफ का द्वितीय नियम (लूप का नियम) आधारित है:", options: ["आवेश संरक्षण पर", "ऊर्जा संरक्षण पर", "संवेग संरक्षण पर", "कोणीय संवेग संरक्षण पर"], ans: 1, type: "PYQ", year: "2021" },
+    { id: 66, ch: 2, text: "चालकों में इलेक्ट्रॉन का अपवाह वेग (Drift velocity) किस कोटि का होता है?", options: ["10<sup>4</sup> m/s", "10<sup>-4</sup> m/s", "3 &times; 10<sup>8</sup> m/s", "10<sup>2</sup> m/s"], ans: 1, type: "NCERT", year: "" },
+    { id: 67, ch: 2, text: "गतिशीलता (Mobility - &mu;) का सूत्र है:", options: ["v<sub>d</sub> &times; E", "E / v<sub>d</sub>", "v<sub>d</sub> / E", "v<sub>d</sub><sup>2</sup> / E"], ans: 2, type: "PYQ", year: "2023" },
+    { id: 68, ch: 2, text: "किसी चालक तार में उत्पन्न ऊष्मा (Heat) का सूत्र (जूल का नियम) है:", options: ["V I t", "I<sup>2</sup> R t", "V<sup>2</sup> t / R", "उपरोक्त सभी"], ans: 3, type: "PYQ", year: "2020" },
+    { id: 69, ch: 2, text: "वाट-घंटा (Watt-hour) मात्रक है:", options: ["शक्ति का", "ऊर्जा का", "विभवांतर का", "धारा का"], ans: 1, type: "PYQ", year: "2019" },
+    { id: 70, ch: 2, text: "1 किलोवाट घंटा (1 kWh) बराबर होता है:", options: ["3.6 &times; 10<sup>5</sup> J", "3.6 &times; 10<sup>6</sup> J", "3.6 &times; 10<sup>7</sup> J", "शून्य"], ans: 1, type: "PYQ", year: "2021" },
+    { id: 71, ch: 2, text: "धातुओं का प्रतिरोध ताप गुणांक (Temperature coefficient of resistance) होता है:", options: ["धनात्मक", "ऋणात्मक", "शून्य", "इनमें से कोई नहीं"], ans: 0, type: "NCERT", year: "" },
+    { id: 72, ch: 2, text: "तापमान बढ़ने पर अर्धचालक (Semiconductor) का प्रतिरोध:", options: ["बढ़ता है", "घटता है", "समान रहता है", "शून्य हो जाता है"], ans: 1, type: "PYQ", year: "2022" },
+    { id: 73, ch: 2, text: "विभवमापी (Potentiometer) मुख्य रूप से मापता है:", options: ["धारा", "प्रतिरोध", "विद्युत वाहक बल (emf) / विभवांतर", "शक्ति"], ans: 2, type: "PYQ", year: "2020" },
+    { id: 74, ch: 2, text: "व्हीटस्टोन ब्रिज (Wheatstone bridge) का उपयोग मापने में होता है:", options: ["उच्च धारा", "निम्न धारा", "उच्च तथा निम्न प्रतिरोध", "केवल उच्च विभव"], ans: 2, type: "PYQ", year: "2021" },
+    { id: 75, ch: 2, text: "किसी तार का विशिष्ट प्रतिरोध (Specific resistance) निर्भर करता है:", options: ["तार की लंबाई पर", "तार के अनुप्रस्थ काट क्षेत्रफल पर", "तार के पदार्थ की प्रकृति पर", "इनमें से सभी पर"], ans: 2, type: "PYQ", year: "2019" },
+    { id: 76, ch: 2, text: "विशिष्ट प्रतिरोध (प्रतिरोधकता) का SI मात्रक है:", options: ["ओम", "ओम-मीटर", "ओम/मीटर", "महो (Mho)"], ans: 1, type: "PYQ", year: "2021" },
+    { id: 77, ch: 2, text: "चालकत्व (Conductance) का SI मात्रक है:", options: ["ओम", "ओम-मीटर", "महो (Siemens)", "वोल्ट"], ans: 2, type: "PYQ", year: "2022" },
+    { id: 78, ch: 2, text: "किसी सेल के निरावेशित (discharging) होने के दौरान टर्मिनल वोल्टता (V) और emf (E) में संबंध होता है:", options: ["V = E", "V > E", "V < E", "V = 0"], ans: 2, type: "NCERT", year: "" },
+    { id: 79, ch: 2, text: "सेल का आंतरिक प्रतिरोध (Internal resistance) निर्भर करता है:", options: ["इलेक्ट्रोडों के बीच की दूरी पर", "विद्युत अपघट्य की सांद्रता पर", "डूबे हुए इलेक्ट्रोड के क्षेत्रफल पर", "इन सभी पर"], ans: 3, type: "Modified PYQ", year: "" },
+    { id: 80, ch: 2, text: "एक सामान्य शुष्क सेल (Dry cell) का विद्युत वाहक बल (emf) लगभग होता है:", options: ["1.0 V", "1.5 V", "2.0 V", "2.5 V"], ans: 1, type: "NCERT", year: "" },
+    { id: 81, ch: 2, text: "यदि किसी तार को खींचकर उसकी लंबाई दोगुनी कर दी जाए, तो उसका नया प्रतिरोध होगा:", options: ["आधा", "दोगुना", "चार गुना", "अपरिवर्तित"], ans: 2, type: "PYQ", year: "2021" },
+    { id: 82, ch: 2, text: "कार्बन प्रतिरोधक के कलर कोड (Color Code) में लाल (Red) रंग का मान होता है:", options: ["0", "1", "2", "3"], ans: 2, type: "PYQ", year: "2020" },
+    { id: 83, ch: 2, text: "कार्बन प्रतिरोधक के कलर कोड में पीला (Yellow) रंग का मान होता है:", options: ["2", "3", "4", "5"], ans: 2, type: "PYQ", year: "2021" },
+    { id: 84, ch: 2, text: "कार्बन प्रतिरोधक के कलर कोड में हरा (Green) रंग का मान होता है:", options: ["3", "4", "5", "6"], ans: 2, type: "PYQ", year: "2022" },
+    { id: 85, ch: 2, text: "R प्रतिरोध वाले तार को दो बराबर भागों में काटकर उन्हें समांतर क्रम में जोड़ने पर समतुल्य प्रतिरोध होगा:", options: ["R/2", "R", "R/4", "2R"], ans: 2, type: "Modified PYQ", year: "" },
+    { id: 86, ch: 2, text: "अधिकतम शक्ति अंतरण प्रमेय (Maximum power transfer theorem) के अनुसार बाह्य प्रतिरोध (R) और आंतरिक प्रतिरोध (r) में संबंध होता है:", options: ["R > r", "R < r", "R = r", "R = 0"], ans: 2, type: "NCERT", year: "" },
+    { id: 87, ch: 2, text: "विद्युत वाहक बल (emf) मापा जाता है:", options: ["एम्पियर में", "वोल्ट (जूल/कूलॉम) में", "ओम में", "वाट में"], ans: 1, type: "PYQ", year: "2019" },
+    { id: 88, ch: 2, text: "अपवाह वेग (v<sub>d</sub>) और आरोपित विद्युत क्षेत्र (E) के बीच संबंध है:", options: ["v<sub>d</sub> &propto; E", "v<sub>d</sub> &propto; E<sup>2</sup>", "v<sub>d</sub> &propto; &radic;E", "v<sub>d</sub> &propto; 1/E"], ans: 0, type: "PYQ", year: "2023" },
+    { id: 89, ch: 2, text: "विद्युत हीटर में जिस तत्व का व्यवहार किया जाता है, वह है:", options: ["तांबा", "प्लैटिनम", "टंगस्टन", "नाइक्रोम (Nichrome)"], ans: 3, type: "PYQ", year: "2021" },
+    { id: 90, ch: 2, text: "1 एम्पियर (Ampere) धारा बराबर होती है:", options: ["1 कूलॉम/सेकंड", "1 वोल्ट/ओम", "दोनों A और B", "1 जूल/सेकंड"], ans: 2, type: "Modified PYQ", year: "" },
+            // Chapter 4: गतिमान आवेश और चुंबकत्व
+            { id: 10, ch: 3, text: "चुंबकीय क्षेत्र (B) का SI मात्रक है:", options: ["वेबर", "टेसला (T)", "फैराड", "हेनरी"], ans: 1, type: "NCERT", year: "" },
+            { id: 11, ch: 3, text: "लॉरेंज बल (Lorentz force) के लिए सही व्यंजक है:", options: ["F = qE", "F = q(V &times; B)", "F = q[E + (V &times; B)]", "F = q(E &times; V)"], ans: 2, type: "PYQ", year: "2019" },
+            { id: 12, ch: 3, text: "बायो-सावर्ट नियम (Biot-Savart Law) का सदिश रूप है:", options: ["dB &propto; I dl &times; r / r<sup>3</sup>", "dB &propto; I dl / r<sup>2</sup>", "dB &propto; I dl &times; r / r<sup>2</sup>", "इनमें से कोई नहीं"], ans: 0, type: "Modified PYQ", year: "" },
+            // Chapter 5: चुंबकत्व एवं द्रव्य
+            { id: 13, ch: 4, text: "पृथ्वी के चुंबकीय ध्रुव पर नमन कोण (Dip angle) का मान होता है:", options: ["0&deg;", "45&deg;", "90&deg;", "180&deg;"], ans: 2, type: "PYQ", year: "2019, 2021" },
+            { id: 14, ch: 4, text: "चुंबकशीलता (&mu;) के लिए निम्नलिखित में कौन संबंध सही है?", options: ["&mu; = B / H", "&mu; = B . H", "&mu; = H / B", "&mu; = B + H"], ans: 0, type: "PYQ", year: "2021" },
+            { id: 15, ch: 4, text: "अनुचुंबकीय (Paramagnetic) पदार्थ की चुंबकशीलता (&mu;<sub>r</sub>) होती है:", options: ["&mu;<sub>r</sub> > 1", "&mu;<sub>r</sub> < 1", "&mu;<sub>r</sub> = 1", "&mu;<sub>r</sub> = 0"], ans: 0, type: "NCERT", year: "" },
+            // Chapter 6: वैद्युत चुंबकीय प्रेरण
+            { id: 16, ch: 5, text: "लेंज का नियम (Lenz's Law) संबद्ध है:", options: ["आवेश से", "द्रव्यमान से", "ऊर्जा संरक्षण से", "संवेग संरक्षण से"], ans: 2, type: "PYQ", year: "2020" },
+            { id: 17, ch: 5, text: "स्व-प्रेरकत्व (Self-inductance) का SI मात्रक है:", options: ["वेबर", "ओम", "हेनरी (H)", "गॉस"], ans: 2, type: "PYQ", year: "2019" },
+            { id: 18, ch: 5, text: "डायनेमो के कार्य का सिद्धांत आधारित है:", options: ["धारा के ऊष्मीय प्रभाव पर", "विद्युत-चुंबकीय प्रेरण पर", "प्रेरित चुंबकत्व पर", "प्रेरित धारा पर"], ans: 1, type: "PYQ", year: "2021" },
+            // Chapter 7: प्रत्यावर्ती धारा
+            { id: 19, ch: 6, text: "प्रत्यावर्ती धारा परिपथ में यथार्थ माध्य शक्ति का व्यंजक होता है:", options: ["P = E<sub>rms</sub> I<sub>rms</sub>", "P = E<sub>rms</sub> I<sub>rms</sub> cos&phi;", "P = E<sub>rms</sub> I<sub>rms</sub> sin&phi;", "P = 0"], ans: 1, type: "PYQ", year: "2022" },
+            { id: 20, ch: 6, text: "LR परिपथ की प्रतिबाधा (Impedance) होती है:", options: ["R + &omega;L", "R<sup>2</sup> + &omega;<sup>2</sup>L<sup>2</sup>", "&radic;(R + &omega;L)", "&radic;(R<sup>2</sup> + &omega;<sup>2</sup>L<sup>2</sup>)"], ans: 3, type: "PYQ", year: "2020" },
+            { id: 21, ch: 6, text: "ट्रांसफार्मर के क्रोड को परतदार (Laminated) क्यों बनाया जाता है?", options: ["चुंबकीय क्षेत्र बढ़ाने के लिए", "भंवर धाराओं (Eddy currents) से हानि कम करने के लिए", "वजन कम करने के लिए", "सुंदरता के लिए"], ans: 1, type: "Modified PYQ", year: "" },
+            // Chapter 8: वैद्युत चुंबकीय तरंगें
+            { id: 22, ch: 7, text: "विद्युत चुम्बकीय तरंगों की प्रकृति होती है:", options: ["अनुप्रस्थ (Transverse)", "अनुदैर्ध्य (Longitudinal)", "दोनों", "कोई नहीं"], ans: 0, type: "PYQ", year: "2019" },
+            { id: 23, ch: 7, text: "निर्वात में विद्युत चुम्बकीय तरंग का वेग (c) बराबर होता है:", options: ["&radic;(&mu;<sub>0</sub>&epsilon;<sub>0</sub>)", "1 / &radic;(&mu;<sub>0</sub>&epsilon;<sub>0</sub>)", "&mu;<sub>0</sub> / &epsilon;<sub>0</sub>", "&epsilon;<sub>0</sub> / &mu;<sub>0</sub>"], ans: 1, type: "PYQ", year: "2021" },
+            { id: 24, ch: 7, text: "इनमें से किसकी वेधन क्षमता (Penetrating power) सबसे अधिक होती है?", options: ["&alpha;-किरणें", "&beta;-किरणें", "&gamma;-किरणें", "कैथोड किरणें"], ans: 2, type: "PYQ", year: "2022" },
+            // Chapter 9: किरण प्रकाशिकी
+            { id: 25, ch: 8, text: "पानी का अपवर्तनांक (Refractive Index) होता है:", options: ["1.0", "1.33", "1.5", "2.42"], ans: 1, type: "PYQ", year: "2021" },
+            { id: 26, ch: 8, text: "सरल सूक्ष्मदर्शी (Simple microscope) की आवर्धन क्षमता (M) होती है:", options: ["1 + D/f", "1 - D/f", "D/f", "f/D"], ans: 0, type: "PYQ", year: "2020" },
+            { id: 27, ch: 8, text: "हीरा (Diamond) का क्रांतिक कोण (Critical angle) होता है:", options: ["24.41&deg;", "37.14&deg;", "41.14&deg;", "48.75&deg;"], ans: 0, type: "PYQ", year: "2021" },
+            // Chapter 10: तरंग प्रकाशिकी
+            { id: 28, ch: 9, text: "प्रकाश के व्यतिकरण (Interference) में संरक्षित रहता है:", options: ["आवेश", "ऊर्जा", "संवेग", "तीव्रता"], ans: 1, type: "NCERT", year: "" },
+            { id: 29, ch: 9, text: "यंग के द्वि-स्लिट प्रयोग में फ्रिंज की चौड़ाई (&beta;) का सूत्र है:", options: ["&beta; = &lambda;d / D", "&beta; = &lambda;D / d", "&beta; = Dd / &lambda;", "&beta; = d / &lambda;D"], ans: 1, type: "PYQ", year: "2019" },
+            { id: 30, ch: 9, text: "ब्रूस्टर का नियम (Brewster's law) है:", options: ["&mu; = sin i<sub>p</sub>", "&mu; = cos i<sub>p</sub>", "&mu; = tan i<sub>p</sub>", "&mu; = cot i<sub>p</sub>"], ans: 2, type: "PYQ", year: "2020" },
+            // Chapter 11: द्वैत प्रकृति
+            { id: 31, ch: 10, text: "प्लांक नियतांक (Planck's constant) की विमा (Dimension) है:", options: ["ML<sup>2</sup>T<sup>-1</sup>", "ML<sup>2</sup>T<sup>-2</sup>", "MLT<sup>-1</sup>", "MLT<sup>-2</sup>"], ans: 0, type: "PYQ", year: "2020, 2021" },
+            { id: 32, ch: 10, text: "इलेक्ट्रॉन का विराम द्रव्यमान (Rest mass) होता है:", options: ["9.1 &times; 10<sup>-31</sup> kg", "1.6 &times; 10<sup>-27</sup> kg", "9.1 &times; 10<sup>-27</sup> kg", "1.6 &times; 10<sup>-19</sup> kg"], ans: 0, type: "NCERT", year: "" },
+            { id: 33, ch: 10, text: "डी-ब्रोग्ली तरंगदैर्ध्य (&lambda;) और संवेग (p) में संबंध है:", options: ["&lambda; = h/p", "&lambda; = p/h", "&lambda; = h.p", "&lambda; = &radic;(h/p)"], ans: 0, type: "PYQ", year: "2022" },
+            // Chapter 12: परमाणु
+            { id: 34, ch: 11, text: "हाइड्रोजन स्पेक्ट्रम की कौन सी श्रेणी दृश्य भाग (Visible region) में पड़ती है?", options: ["लाइमन श्रेणी", "बामर श्रेणी", "पाश्चन श्रेणी", "ब्रैकेट श्रेणी"], ans: 1, type: "PYQ", year: "2019, 2021" },
+            { id: 35, ch: 11, text: "बोर (Bohr) मॉडल के अनुसार, इलेक्ट्रॉन का कोणीय संवेग (Angular momentum) क्वांटित होता है:", options: ["nh / &pi;", "nh / 2&pi;", "2nh / &pi;", "n / 2&pi;h"], ans: 1, type: "PYQ", year: "2020" },
+            { id: 36, ch: 11, text: "रदरफोर्ड के &alpha;-प्रकीर्णन प्रयोग से खोज हुई:", options: ["इलेक्ट्रॉन की", "प्रोटॉन की", "नाभिक (Nucleus) की", "न्यूट्रॉन की"], ans: 2, type: "NCERT", year: "" },
+            // Chapter 13: नाभिक
+            { id: 37, ch: 12, text: "नाभिक का घनत्व लगभग होता है:", options: ["10<sup>3</sup> kg/m<sup>3</sup>", "10<sup>10</sup> kg/m<sup>3</sup>", "2.3 &times; 10<sup>17</sup> kg/m<sup>3</sup>", "10<sup>27</sup> kg/m<sup>3</sup>"], ans: 2, type: "PYQ", year: "2021" },
+            { id: 38, ch: 12, text: "सूर्य की ऊर्जा का मुख्य कारण है:", options: ["नाभिकीय विखंडन", "नाभिकीय संलयन (Fusion)", "रासायनिक प्रतिक्रिया", "इलेक्ट्रॉनिक उत्सर्जन"], ans: 1, type: "PYQ", year: "2019" },
+            { id: 39, ch: 12, text: "1 amu (Atomic Mass Unit) बराबर होता है:", options: ["1.6 &times; 10<sup>-27</sup> kg", "1.6 &times; 10<sup>-31</sup> kg", "9.1 &times; 10<sup>-27</sup> kg", "9.1 &times; 10<sup>-31</sup> kg"], ans: 0, type: "Modified PYQ", year: "" },
+            // Chapter 14: अर्धचालक
+            { id: 40, ch: 13, text: "N-प्रकार के अर्धचालक (N-type semiconductor) में मुख्य धारा वाहक होते हैं:", options: ["होल (छिद्र)", "अल्फा कण", "इलेक्ट्रॉन", "प्रोटॉन"], ans: 2, type: "PYQ", year: "2020, 2021" },
+            { id: 41, ch: 13, text: "NAND गेट का बूलियन व्यंजक (Boolean expression) है:", options: ["Y = A.B", "Y = A+B", "Y = (A.B)'", "Y = (A+B)'"], ans: 2, type: "PYQ", year: "2019, 2022" },
+            { id: 42, ch: 13, text: "जर्मेनियम (Ge) को P-type अर्धचालक बनाने के लिए इसमें मिलाई जाने वाली अशुद्धि (Doping) होती है:", options: ["पंचसंयोजी (Pentavalent)", "त्रिसंयोजी (Trivalent)", "चतुःसंयोजी", "एकसंयोजी"], ans: 1, type: "PYQ", year: "2021" },
+            // Chapter 15: संचार व्यवस्था
+            { id: 43, ch: 14, text: "आयाम मॉडुलन सूचकांक (Amplitude Modulation Index) का मान होता है:", options: ["हमेशा 0", "0 से 1 के बीच", "1 से &infin; के बीच", "इनमें से कोई नहीं"], ans: 1, type: "PYQ", year: "2020" },
+            { id: 44, ch: 14, text: "TV प्रसारण के लिए जिस आवृत्ति परास (Frequency range) का उपयोग होता है, वह है:", options: ["30 Hz - 300 Hz", "30 kHz - 300 kHz", "30 MHz - 300 MHz", "30 GHz - 300 GHz"], ans: 2, type: "PYQ", year: "2021" },
+            { id: 45, ch: 14, text: "ऑप्टिकल फाइबर (Optical fiber) किस सिद्धांत पर कार्य करता है?", options: ["प्रकीर्णन", "अपवर्तन", "पूर्ण आंतरिक परावर्तन (TIR)", "व्यतिकरण"], ans: 2, type: "PYQ", year: "2019, 2022" },
+            
+        ];
+
+        // --- 2. STATE MANAGEMENT ---
+        let currentQuestions = [];
+        let testQuestions = [];
+        let currentTestIndex = 0;
+        let score = 0;
+        let testTimer;
+        let timeLeft = 0;
+        let testAnswers = {}; // user selected answers
+        let showAnswersGlobal = false;
+
+        // Theme Initialization
+        function initTheme() {
+            const savedTheme = localStorage.getItem("physics_theme") || "dark";
+            document.body.setAttribute("data-theme", savedTheme);
+        }
+
+        function toggleTheme() {
+            const current = document.body.getAttribute("data-theme");
+            const newTheme = current === "dark" ? "light" : "dark";
+            document.body.setAttribute("data-theme", newTheme);
+            localStorage.setItem("physics_theme", newTheme);
+        }
+
+        // --- 3. UI NAVIGATION ---
+        function showSection(id) {
+            document.getElementById('dashboard').classList.add('hidden');
+            document.getElementById('qbank_view').classList.add('hidden');
+            document.getElementById('test_view').classList.add('hidden');
+            document.getElementById('result_view').classList.add('hidden');
+            document.getElementById(id).classList.remove('hidden');
+            clearInterval(testTimer);
+        }
+
+        // --- 4. DASHBOARD RENDER ---
+        function renderDashboard() {
+            const grid = document.getElementById('chapterGrid');
+            grid.innerHTML = '';
+            chapters.forEach((chName, index) => {
+                const totalQ = questionBank.filter(q => q.ch === index).length;
+                grid.innerHTML += `
+                    <div class="card" onclick="openChapter(${index})">
+                        <h3>${index + 1}. ${chName}</h3>
+                        <p>कुल प्रश्न: ${totalQ}</p>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 100%"></div></div>
+                        <button class="btn" style="margin-top:10px; width:100%;" onclick="startChapterTest(event, ${index})">Test शुरू करें</button>
+                    </div>
+                `;
+            });
+        }
+
+        // --- 5. QUESTION BANK LOGIC ---
+        function openChapter(chIndex) {
+            currentQuestions = questionBank.filter(q => q.ch === chIndex);
+            document.getElementById('qbank_title').innerText = chapters[chIndex];
+            renderQList(currentQuestions);
+            showSection('qbank_view');
+        }
+
+        function renderAllQuestions() {
+            currentQuestions = [...questionBank];
+            document.getElementById('qbank_title').innerText = "सम्पूर्ण पाठ्यक्रम (All Chapters)";
+            renderQList(currentQuestions);
+        }
+
+        function filterQuestions() {
+            const text = document.getElementById('searchInput').value.toLowerCase();
+            const type = document.getElementById('typeFilter').value;
+            let filtered = currentQuestions.filter(q => {
+                const matchText = q.text.toLowerCase().includes(text);
+                const matchType = type === "All" || q.type === type;
+                return matchText && matchType;
+            });
+            renderQList(filtered);
+        }
+
+        function toggleAllAnswers() {
+            showAnswersGlobal = !showAnswersGlobal;
+            document.querySelectorAll('.ans-box').forEach(el => {
+                el.style.display = showAnswersGlobal ? 'block' : 'none';
+            });
+        }
+
+        function toggleSingleAnswer(id) {
+            const el = document.getElementById(`ans_${id}`);
+            el.style.display = el.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function renderQList(qList) {
+            const box = document.getElementById('qList');
+            box.innerHTML = '';
+            if(qList.length === 0) { box.innerHTML = '<p>कोई प्रश्न नहीं मिला।</p>'; return; }
+            
+            qList.forEach((q, i) => {
+                let optionsHtml = '';
+                q.options.forEach((opt, idx) => {
+                    optionsHtml += `<li>(${String.fromCharCode(65 + idx)}) ${opt}</li>`;
+                });
+                
+                let tags = `<span class="badge">${q.type}</span>`;
+                if(q.year) tags += ` <span class="badge" style="background:#8e44ad;">${q.year}</span>`;
+
+                box.innerHTML += `
+                    <div class="q-box">
+                        <div class="q-header">
+                            <span>प्रश्न ${q.id} (अध्याय ${q.ch + 1})</span>
+                            <div>${tags}</div>
+                        </div>
+                        <div class="q-text">${q.text}</div>
+                        <ul class="options">${optionsHtml}</ul>
+                        <button class="btn btn-sec" onclick="toggleSingleAnswer(${q.id})">उत्तर देखें</button>
+                        <div class="ans-box" id="ans_${q.id}" style="display:${showAnswersGlobal ? 'block' : 'none'}">
+                            <strong>सही उत्तर:</strong> (${String.fromCharCode(65 + q.ans)}) ${q.options[q.ans]}
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // --- 6. TEST SYSTEM LOGIC ---
+        function startChapterTest(e, chIndex) {
+            e.stopPropagation();
+            const qList = questionBank.filter(q => q.ch === chIndex);
+            if(qList.length === 0) { alert("इस अध्याय में अभी प्रश्न नहीं हैं।"); return; }
+            startTestMode(qList);
+        }
+
+        function startFullMockTest() {
+            // Randomize and pick up to 50 questions
+            let shuffled = [...questionBank].sort(() => 0.5 - Math.random());
+            startTestMode(shuffled.slice(0, 50));
+        }
+
+        function startTestMode(qList) {
+            testQuestions = qList;
+            currentTestIndex = 0;
+            testAnswers = {};
+            score = 0;
+            timeLeft = testQuestions.length * 10; // 45 seconds per question
+            
+            document.getElementById('t_total').innerText = testQuestions.length;
+            showSection('test_view');
+            loadTestQuestion();
+            
+            testTimer = setInterval(() => {
+                timeLeft--;
+                let m = Math.floor(timeLeft / 30);
+                let s = timeLeft % 60;
+                document.getElementById('timer_display').innerText = `${m}:${s < 10 ? '0'+s : s}`;
+                if(timeLeft <= 0) submitTest();
+            }, 1000);
+        }
+
+        function loadTestQuestion() {
+            const q = testQuestions[currentTestIndex];
+            document.getElementById('t_current').innerText = currentTestIndex + 1;
+            document.getElementById('t_type').innerText = q.type;
+            document.getElementById('t_question').innerHTML = q.text;
+            
+            const optBox = document.getElementById('t_options');
+            optBox.innerHTML = '';
+            q.options.forEach((opt, idx) => {
+                let statusClass = '';
+                // If already answered, disable clicking and show colors
+                if(testAnswers[currentTestIndex] !== undefined) {
+                    if(idx === q.ans) statusClass = 'correct-reveal';
+                    else if(idx === testAnswers[currentTestIndex]) statusClass = 'wrong-reveal';
+                }
+                
+                optBox.innerHTML += `
+                    <div class="test-option ${statusClass}" onclick="selectTestOption(${idx})">
+                        (${String.fromCharCode(65 + idx)}) ${opt}
+                    </div>
+                `;
+            });
+
+            const btn = document.getElementById('t_submit_btn');
+            if(currentTestIndex === testQuestions.length - 1) {
+                btn.innerText = "Submit Test";
+                btn.classList.add("danger");
+            } else {
+                btn.innerText = "Next";
+                btn.classList.remove("danger");
+            }
+        }
+
+        function selectTestOption(idx) {
+            if(testAnswers[currentTestIndex] !== undefined) return; // Prevent double clicking
+            testAnswers[currentTestIndex] = idx;
+            if(idx === testQuestions[currentTestIndex].ans) score++;
+            loadTestQuestion(); // Reload to show colors immediately
+        }
+
+        function nextTestQuestion() {
+            if(currentTestIndex < testQuestions.length - 1) {
+                currentTestIndex++;
+                loadTestQuestion();
+            } else {
+                submitTest();
+            }
+        }
+
+        function prevTestQuestion() {
+            if(currentTestIndex > 0) {
+                currentTestIndex--;
+                loadTestQuestion();
+            }
+        }
+
+        function submitTest() {
+            clearInterval(testTimer);
+            showSection('result_view');
+            const total = testQuestions.length;
+            const perc = Math.round((score / total) * 100);
+            
+            document.getElementById('r_total').innerText = total;
+            document.getElementById('r_correct').innerText = score;
+            document.getElementById('r_wrong').innerText = total - score;
+            
+            const circle = document.getElementById('r_score');
+            circle.innerText = perc + '%';
+            circle.style.borderColor = perc >= 60 ? 'var(--secondary)' : (perc >= 33 ? '#f39c12' : 'var(--danger)');
+        }
+
+        // Initialize App
+        window.onload = () => {
+            initTheme();
+            renderDashboard();
+        };
+    </script>
+</body>
+</html>

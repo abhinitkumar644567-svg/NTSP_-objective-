@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New topper study point </title>
+    <!-- Google Fonts: Poppins (प्रीमियम लुक के लिए) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --bg-color: #ffffff;
+            --card-bg: #f8ffff;
+            --text-main: #4b47ff;
+            --text-muted: #6b7280;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+        }
+
+        /* टॉप नेविगेशन बार (Top Navbar) */
+        .navbar {
+            background-color: var(--card-bg);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(238, 61, 73, 0.5764705882352941);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        /* मुख्य डैशबोर्ड एरिया */
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .welcome-banner {
+            background: linear-gradient(135deg, #a1ff71 0%, #1c29e8bf 100%);
+            color: hwb(243 11% 0%);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.2);
+        }
+
+        .welcome-banner h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .welcome-banner p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        /* विषयों का ग्रिड (Subjects Grid) */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .subject-card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+            border: 1px solid #ff5468a7;
+            transition: all 0.3s ease;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+            border-color: #d1d5db;
+        }
+
+        .subject-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #57fff3;
+        }
+
+        .subject-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        /* अलग-अलग विषयों के आइकॉन रंग */
+        .icon-chem { background: #e0f2fe; color: #0284c7; }
+        .icon-phy { background: #fee2e2; color: #dc2626; }
+        .icon-bio { background: #dcfce7; color: #16a34a; }
+        .icon-math { background: #f3e8ff; color: #9333ea; }
+        .icon-hindi { background: #ffedd5; color: #ea580c; }
+        .icon-eng { background: #e0e7ff; color: #4f46e5; }
+
+        .subject-header h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        /* टेस्ट बटन्स की लिस्ट */
+        .test-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .test-btn {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            background-color: #f9fafb;
+            color: var(--text-main);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 500;
+            font-size: 15px;
+            border: 1px solid #52f77a;
+            transition: all 0.2s ease;
+        }
+
+        .test-btn::after {
+            content: "➔";
+            color: var(--text-muted);
+            font-size: 14px;
+            transition: transform 0.2s ease;
+        }
+
+        .test-btn:hover {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .test-btn:hover::after {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        /* मोबाइल रेस्पॉन्सिव (Mobile Responsive) */
+        @media (max-width: 768px) {
+            .navbar { padding: 15px 20px; }
+            .grid-layout { grid-template-columns: 1fr; }
+            .welcome-banner { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+  <!-- प्रीमियम बैक बटन और स्मूथ ट्रांज़िशन -->
+<style>
+    /* पेज फेड-आउट एनिमेशन */
+    .fade-out {
+        opacity: 0 !important;
+        transition: opacity 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    /* प्रीमियम ग्लास बैक बटन की स्टाइलिंग */
+    .premium-back-btn {
+        position: fixed;
+        top: 20px;
+        left: 10px;
+        background: rgba(255, 255, 255, 0.8);
+        color: var(--primary);
+        text-decoration: none;
+        padding: 5px 12px;
+        border-radius: 50px;
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        box-shadow: 0 8px 25px rgba(79, 70, 229, 0.2);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(79, 70, 229, 0.3);
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        -webkit-tap-highlight-color: transparent;
+        outline: none;
+    }
+
+    .premium-back-btn:hover, .premium-back-btn:active {
+        transform: translateX(-6px) scale(1.02);
+        background: var(--primary);
+        color: #77f9f9d0;
+        box-shadow: 0 12px 30px rgba(79, 70, 229, 0.4);
+        border-color: var(--primary);
+    }
+
+    .premium-back-btn svg {
+        width: 18px;
+        height: 18px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        transition: transform 0.3s ease;
+    }
+
+    .premium-back-btn:hover svg {
+        transform: translateX(-3px);
+    }
+</style>
+
+<button class="premium-back-btn" onclick="smoothGoBack()">
+    <svg viewBox="0 0 24 24">
+        <line x1="10" y1="5" x2="2" y2="5"></line>
+        <polyline points="5 7 3 5 5 2"></polyline>
+    </svg>
+    
+</button>
+
+<script>
+    function smoothGoBack() {
+        // 1. पहले पेज को स्मूथली गायब करें
+        document.body.classList.add('fade-out');
+        
+        // 2. एनिमेशन पूरा होने के बाद (500ms) पीछे वाले पेज पर जाएँ
+        setTimeout(() => {
+            window.history.back();
+        }, 500);
+    }
+
+    // अगर यूजर फिर से इस पेज पर फॉरवर्ड बटन से आता है, तो फेड-आउट क्लास हटा दें
+    window.addEventListener('pageshow', function (event) {
+        if (event.persisted) {
+            document.body.classList.remove('fade-out');
+        }
+    });
+</script>
+<button class="premium-back-btn" onclick="smoothGoBack()">
+    <svg viewBox="0 0 24 24">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+    </svg>
+    
+</button>
+
+<script>
+    function smoothGoBack() {
+        // 1. पहले पेज को स्मूथली गायब करें
+        document.body.classList.add('fade-out');
+        
+        // 2. एनिमेशन पूरा होने के बाद (500ms) पीछे वाले पेज पर जाएँ
+        setTimeout(() => {
+            window.history.back();
+        }, 500);
+    }
+
+    // अगर यूजर फिर से इस पेज पर फॉरवर्ड बटन से आता है, तो फेड-आउट क्लास हटा दें
+    window.addEventListener('pageshow', function (event) {
+        if (event.persisted) {
+            document.body.classList.remove('fade-out');
+        }
+    });
+</script>
+
+</style>
+
+<!-- javascript:history.back() आपको पिछले खुले हुए पेज पर ले जाता है -->
+<a href="javascript:history.back()" class="premium-back-btn">
+    <span class="back-icon">◅-</span> 
+</a>
+<!-- बैक बटन का कोड यहाँ समाप्त होता है -->
+
+
+    <!-- टॉप नेविगेशन -->
+    <nav class="navbar">
+        <div class="logo">
+            <span>🎓</span> NTSP
+        </div>
+        <div class="user-profile">
+            <span>WELCOME</span>
+            <div class="user-avatar">A</div>
+        </div>
+    </nav>
+
+    <!-- मुख्य डैशबोर्ड -->
+    <div class="dashboard-container">
+        
+        <!-- वेलकम बैनर -->
+        <div class="welcome-banner">
+            <h1>NEW TOPPER STUDY POINT</h1>
+            <p>अपनी तैयारी को परखें और हर दिन बेहतर बनें। अपना विषय चुनें और टेस्ट शुरू करें।</p>
+        </div>
+
+        <!-- विषयों का ग्रिड -->
+        <div class="grid-layout">
+            
+            <!-- 1. Chemistry -->
+            <div class="subject-card">
+                <div class="subject-header">
+                    <div class="subject-icon icon-chem">🧪</div>
+                    <h2>रसायन विज्ञान (Chemistry)</h2>
+                </div>
+                <div class="test-list">
+                    <a href="ChemistryTest1.html" class="test-btn">केमिस्ट्री टेस्ट 1</a>
+                    <a href="ChemistryTest2.html" class="test-btn">केमिस्ट्री टेस्ट 2</a>
+                    <a href="ChemistryTest3.html" class="test-btn">केमिस्ट्री टेस्ट 3</a>
+                    <a href="ChemistryTest4.html" class="test-btn">केमिस्ट्री टेस्ट 4</a>
+                    <a href="ChemistryTest5.html" class="test-btn">केमिस्ट्री टेस्ट 5</a>
+                    <a href="ChemistryTest6.html" class="test-btn">केमिस्ट्री टेस्ट 6</a>
+                    <a href="Cs.html" class="test-btn">केमिस्ट्री टेस्ट 7</a> 
+                    <a href="Cs.html" class="test-btn">केमिस्ट्री टेस्ट 8</a>
+                    <a href="Cs.html" class="test-btn">केमिस्ट्री टेस्ट 9</a>
+                    <a href="Cs.html" class="test-btn">केमिस्ट्री टेस्ट 10</a>                                                                             
+                </div>
+            </div>
+
+            <!-- 2. Physics -->
+            <div class="subject-card">
+                <div class="subject-header">
+                    <div class="subject-icon icon-phy">⚡</div>
+                    <h2>भौतिक विज्ञान (Physics)</h2>
+                </div>
+                <div class="test-list">
+                    <a href="Physics1.html" class="test-btn">फिजिक्स टेस्ट 1</a>
+                    <a href="Physics2.html" class="test-btn">फिजिक्स टेस्ट 2</a>
+                    <a href="Physics3.html" class="test-btn">फिजिक्स टेस्ट 3</a>
+                    <a href="Physics4.html" class="test-btn">फिजिक्स टेस्ट 4</a>
+                    <a href="Physics5.html" class="test-btn">फिजिक्स टेस्ट 5</a>
+                    <a href="Physics6.html" class="test-btn">फिजिक्स टेस्ट 6</a>
+                    <a href="Physics7.html" class="test-btn">फिजिक्स टेस्ट 7</a>
+                    <a href="Cs.html" class="test-btn">फिजिक्स टेस्ट 8</a>
+                    <a href="Cs.html" class="test-btn">फिजिक्स टेस्ट 9</a>
+                    <a href="Cs.html" class="test-btn">फिजिक्स टेस्ट 10</a>
+                </div>
+            </div>
+
+            <!-- 3. Biology -->
+            <div class="subject-card">
+                <div class="subject-header">
+                    <div class="subject-icon icon-bio">🧬</div>
+                    <h2>जीव विज्ञान (Biology)</h2>
+                </div>
+                <div class="test-list">
+                    <a href="biology1.html" class="test-btn">बायोलॉजी टेस्ट 1</a>
+                    <a href="biology2.html" class="test-btn">बायोलॉजी टेस्ट 2</a>
+                    <a href="biology3.html" class="test-btn">बायोलॉजी टेस्ट 3</a>
+                    <a href="biology4.html" class="test-btn">बायोलॉजी टेस्ट 4</a>
+                    <a href="biology5.html" class="test-btn">बायोलॉजी टेस्ट 5</a>
+                    <a href="biology6.html" class="test-btn">बायोलॉजी टेस्ट 6</a>
+                    <a href="Cs.html" class="test-btn">बायोलॉजी टेस्ट 7</a>
+                    <a href="Cs.html" class="test-btn">बायोलॉजी टेस्ट 8</a>
+                    <a href="Cs.html" class="test-btn">बायोलॉजी टेस्ट 9</a>
+                    <a href="Cs.html" class="test-btn">बायोलॉजी टेस्ट 10</a>
+                </div>
+            </div>
+
+            <!-- 4. Math -->
+            <div class="subject-card">
+                <div class="subject-header">
+                    <div class="subject-icon icon-math">📐</div>
+                    <h2>गणित (Math)</h2>
+                </div>
+                <div class="test-list">
+                    <a href="Math1.html" class="test-btn">मैथ टेस्ट 1</a>
+                    <a href="Math2.html" class="test-btn">मैथ टेस्ट 2</a>
+                    <a href="Math3.html" class="test-btn">मैथ टेस्ट 3</a>
+                    <a href="Math4.html" class="test-btn">मैथ टेस्ट 4</a>
+                    <a href="Math5.html" class="test-btn">मैथ टेस्ट 5</a>
+                    <a href="Cs.html" class="test-btn">मैथ टेस्ट 6</a>
+                    <a href="Cs.html" class="test-btn">मैथ टेस्ट 7</a>
+                    <a href="Cs.html" class="test-btn">मैथ टेस्ट 8</a>
+                    <a href="Cs.html" class="test-btn">मैथ टेस्ट 9</a>
+                    <a href="Cs.html" class="test-btn">मैथ टेस्ट 10</a>
+                    
+                    
+                </div>
+            </div>
+
+            <!-- 5. Hindi -->³
+            <div class="subject-card">
+                <div class="subject-header">
+                    <div class="subject-icon icon-hindi">📝</div>
+                    <h2>हिंदी (Hindi)</h2>
+                </div>
+                <div class="test-list">
+                    <a href="hindi_1.html" class="test-btn">हिंदी टेस्ट 1</a>
+                    <a href="hindi_2.html" class="test-btn">हिंदी टेस्ट 2</a>
+                    <a href="hindi_3.html" class="test-btn">हिंदी टेस्ट 3</a>
+                    <a href="hindi_4.html" class="test-btn">हिंदी टेस्ट 4</a>
+                    <a href="hindi_5.html" class="test-btn">हिंदी टेस्ट 5</a>
+                    <a href="hindi_6.html" class="test-btn">हिंदी टेस्ट 6</a>
+                    <a href="hindi_7.html" class="test-btn">हिंदी टेस्ट 7</a>
+                    <a href="hindi_8.html" class="test-btn">हिंदी टेस्ट 8</a>
+                    <a href="Cs.html" class="test-btn">हिंदी टेस्ट 9</a>
+                    <a href="Cs.html" class="test-btn">हिंदी टेस्ट10</a>
+               </div>
+            </div>
+
+            <!-- 6. English -->
+            <div class="subject-card">
+                <div class="subject-header">
+                    <div class="subject-icon icon-eng">📚</div>
+                    <h2>अंग्रेज़ी (English)</h2>
+                </div>
+                <div class="test-list">
+                    <a href="english_1.html" class="test-btn">इंग्लिश टेस्ट 1</a>
+                    <a href="english_2.html" class="test-btn">इंग्लिश टेस्ट 2</a>
+                    <a href="english_3.html" class="test-btn">इंग्लिश टेस्ट 3</a>
+                    <a href="english_4.html" class="test-btn">इंग्लिश टेस्ट 4</a>
+                    <a href="english_5.html" class="test-btn">इंग्लिश टेस्ट 5</a>
+                    <a href="english_6.html" class="test-btn">इंग्लिश टेस्ट 6</a>
+                    <a href="Cs.html" class="test-btn">इंग्लिश टेस्ट 7</a>
+                    <a href="Cs.html" class="test-btn">इंग्लिश टेस्ट 8</a>
+                    <a href="Cs.html" class="test-btn">इंग्लिश टेस्ट 9</a>
+                    <a href="Cs.html" class="test-btn">इंग्लिश टेस्ट 10</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+  <div style="text-align: center; font-size: 10px; color: gray; padding: 10px;">
+    © 2026 | Created by MrABHINIT 
+</div>
+</body>
+</html>

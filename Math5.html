@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mathematics XII 2025 (A) – Test Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+<script>window.MathJax={tex:{inlineMath:[['$','$']]}};</script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<style>
+:root{--m:#6b1733;--m2:#8e2a4a;--gold:#c9a24a;--paper:#fffdf8;--ink:#1d1d24;--mu:#6b6b76;--line:#e8dfd3;--g:#16a34a;--gb:#e9f9ef;--r:#dc2626;--rb:#fdecec;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Noto Sans Devanagari',system-ui,sans-serif;color:var(--ink);background:#2a1620}
+.top{position:sticky;top:0;z-index:20;background:linear-gradient(90deg,var(--m),var(--m2));color:#fff;box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.ti{max-width:1100px;margin:auto;padding:8px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.brand{font-weight:700;font-size:15px}.brand small{display:block;font-weight:400;opacity:.85;font-size:11px}
+.st{display:flex;gap:6px;font-size:12px}.st div{background:rgba(255,255,255,.14);padding:4px 9px;border-radius:7px}
+.tm{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);padding:4px 14px;border-radius:99px;font-size:21px;font-weight:700;font-variant-numeric:tabular-nums}
+.tm.w{background:#d4a017;color:#2b1b00}.tm.d{background:var(--r);animation:b 1s steps(2,start) infinite}
+@keyframes b{to{visibility:hidden}}
+.btn{border:0;border-radius:8px;padding:9px 16px;font-weight:700;cursor:pointer;font-family:inherit;font-size:14px}
+.gold{background:var(--gold);color:#2b1b00}.alt{background:#e7e0d6;color:var(--ink)}.main{background:var(--m);color:#fff}.btn:disabled{opacity:.5}
+.pg{height:4px;background:rgba(255,255,255,.2)}.pg div{height:100%;width:0;background:var(--gold);transition:width .3s}
+.paper{max-width:1100px;margin:16px auto 50px;background:var(--paper);border-radius:10px;overflow:hidden}
+.head{background:var(--m);color:#fff;text-align:center;padding:14px 10px;border-bottom:4px double var(--gold)}
+.head h1{margin:0;font-size:21px;font-family:Georgia,serif}.head p{margin:5px 0 0;font-size:13px;opacity:.9}
+.ins{padding:12px 18px;border-bottom:1px solid var(--line);font-size:13px;color:var(--mu);line-height:1.7}.ins b{color:var(--m)}
+.qw{padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.q{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:0}
+.q.c{background:var(--gb);border-color:#86efac}.q.x{background:var(--rb);border-color:#fca5a5}
+.qt{font-size:16px;line-height:1.75}.no{font-weight:700;color:var(--m);margin-right:4px}
+.os{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}
+.o{display:flex;gap:7px;align-items:center;border:1px solid #d9d0c4;border-radius:8px;padding:8px 9px;background:#fff;color:var(--ink);cursor:pointer;font-size:15px;min-width:0;overflow-wrap:anywhere}
+.o:not(.k):hover{border-color:var(--m2);background:#fdf6f8}
+.l{flex:none;width:23px;height:23px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;background:#f1ebe2;color:var(--m)}
+.o.k{cursor:default}
+.o.ok{background:var(--g);border-color:#15803d;color:#fff}.o.ok .l{background:#fff;color:#15803d}
+.o.bad{background:var(--r);border-color:#b91c1c;color:#fff}.o.bad .l{background:#fff;color:#b91c1c}
+.o.dim{opacity:.6}
+.al{min-height:22px;margin-top:9px;font-size:14px}
+.bd{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;margin-right:6px;color:#fff}
+.bd.ok{background:#15803d}.bd.bad{background:#b91c1c}.bd.no{background:#64748b}.at{color:#15803d;font-weight:600}
+.ft{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:16px 18px;border-top:1px solid var(--line);background:#fbf7f0}
+.ov{position:fixed;inset:0;background:rgba(15,8,12,.7);display:none;align-items:center;justify-content:center;z-index:50;padding:16px}.ov.s{display:flex}
+.rs{background:var(--paper);border-radius:14px;max-width:440px;width:100%;padding:24px;text-align:center;border-top:6px solid var(--gold)}
+.rs h2{margin:0;color:var(--m)}.sc{font-size:44px;font-weight:700;color:var(--m);margin:6px 0}.sc small{font-size:18px;color:var(--mu)}
+.gr{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}.gr div{background:#f6f1e9;border-radius:8px;padding:9px 4px;font-size:12px;color:var(--mu)}.gr b{display:block;font-size:20px;color:var(--ink)}
+.ms{font-size:14px;color:var(--mu);margin-bottom:14px}.rw{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+@media(max-width:820px){.qw{grid-template-columns:1fr;padding:12px}.os{grid-template-columns:1fr}.paper{margin:10px 6px 40px}.qt{font-size:15px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="ti">
+<div class="brand">NEW TOPPER STUDY POINT<small>bajitpur chaksturi</small></div>
+<div class="st"><div>सही <b id="sc">0</b></div><div>गलत <b id="sw">0</b></div><div>बाकी <b id="sl">0</b></div></div>
+<div class="tm" id="tm">60:00</div>
+<button class="btn gold" id="sb">सबमिट करें</button>
+</div><div class="pg"><div id="pb"></div></div></header>
+
+<main class="paper">
+<div class="head"><h1>NTSP- 2025 </h1></div>
+<div class="ins"><b>NTSP:</b> 📚 "किताबों से दोस्ती कर लो, कामयाबी खुद तुम्हारे कदम चूमेगी!" 🎯🔥।</div>
+<div class="qw" id="qw"></div>
+<div class="ft"><button class="btn alt" onclick="resetTest()">नया टेस्ट</button><button class="btn main" id="sb2">टेस्ट समाप्त करें</button></div>
+</main>
+
+<div class="ov" id="ov"><div class="rs"><h2>आपका परिणाम</h2><div class="sc" id="rs"></div>
+<div class="gr"><div>सही<b id="rc">0</b></div><div>गलत<b id="rw">0</b></div><div>छोड़े<b id="rk">0</b></div></div>
+<div class="ms" id="rm"></div>
+<div class="rw"><button class="btn alt" onclick="ov.classList.remove('s')">समीक्षा करें</button><button class="btn main" onclick="resetTest()">नया टेस्ट</button></div></div></div>
+
+<script>
+/* प्रारूप: प्रश्न § A § B § C § D § सही विकल्प का index (A=0, B=1, C=2, D=3)
+   पंक्ति क्रम = पुस्तक का प्रश्न क्रम (1 से 100) */
+const RAW=String.raw`$\dfrac{d}{dx}(\sec^2x-\tan^2x)=$§$2\sec^2x-2\tan x$§$2\sec x-2\tan x$§$1$§$0$§3
+$\dfrac{d}{dx}[e^2+2ex]=$§$2e+2x$§$4e$§$2e$§$2x$§2
+$\dfrac{d}{dx}\left[\lim_{x\to a}\dfrac{x^n+a^n}{x+a}\right]=$§$\dfrac{a^n}{a}$§$\dfrac{2a^n}{a}$§$1$§$0$§3
+$\dfrac{d}{dx}(\sin^{-1}2x)=$§$\dfrac1{\sqrt{1-4x^2}}$§$\dfrac2{\sqrt{1-x^2}}$§$\dfrac2{\sqrt{1-4x^2}}$§$\dfrac\pi2-\cos^{-1}2x$§2
+$\dfrac{d}{dx}\left[\dfrac{(x+2)(x^2-2x+4)}{x^3+8}\right]=$§$\dfrac{2x-2}{3x^2}$§$\dfrac{(x^2-2x+4)+(2x-2)}{3x^2}$§$1$§$0$§3
+$\dfrac{d}{dx}[2\sqrt x]=$§$\dfrac2{\sqrt x}$§$\dfrac1{2\sqrt x}$§$\dfrac1{\sqrt x}$§$\dfrac{-1}{\sqrt x}$§2
+$\dfrac{d}{dx}[(1-\cos2x)+2\cos^2x]=$§$-4\sin x\cos x$§$1$§$0$§$2$§2
+$\dfrac{d}{dx}[\log x^2+\log a^2]=$§$\dfrac1{x^2}+\dfrac1{a^2}$§$\dfrac2x+\dfrac2a$§$\dfrac1x$§$\dfrac2x$§3
+$\dfrac{d}{dx}[2\tan^{-1}x]=$§$\dfrac1{1+x^2}$§$\dfrac1{1+4x^2}$§$\dfrac2{1+4x^2}$§$\dfrac2{1+x^2}$§3
+$\dfrac{d}{dx}[e^{x^2}]=$§$e^{x^2}$§$e^{2x}$§$2xe^{x^2}$§$2xe^{2x}$§2
+$\int\dfrac{dx}{x^2+4}=$§$\frac14\tan^{-1}\frac x4+k$§$\frac12\tan^{-1}\frac x2+k$§$\frac12\tan^{-1}\frac2x+k$§$2\tan^{-1}\frac x2+k$§1
+$\int\dfrac{\cos2x}{\cos x+\sin x}\,dx=$§$\sin x-\cos x+k$§$-\sin x-\cos x+k$§$\sin x+\cos x+k$§$-\sin x+\cos x+k$§2
+$\dfrac{d}{dx}\{\cos(\pi x+\sin\pi)\}=$§$-\sin(\pi x+\sin\pi)$§$-\pi\sin(\pi x)$§$-\sin\pi x$§$\sin x$§1
+$\int\tan(\tan^{-1}x)\,dx=$§$\dfrac{x^2}2+k$§$\dfrac x2+k$§$x+k$§$\log\sec(\tan^{-1}x)+k$§0
+$\int\dfrac{dx}{e^{-x}}=$§$\dfrac{-1}{e^{-x}}+k$§$e^x+k$§$\dfrac1{e^{-x}}\cdot\dfrac1{x^2}+k$§$-e^{-x}+k$§1
+$\int\log x^2\,dx=$§$\dfrac1{x^2}+k$§$\dfrac2x+k$§$x\log x-x+k$§$2(x\log x-x)+k$§3
+$\int(\sin3x+4\sin^3x)\,dx=$§$3\sin x+k$§$-3\cos x+k$§$\dfrac{\cos3x}3+12\sin^2x+k$§$\dfrac{\cos3x}3+4\cos^2x+k$§1
+$\int_{-1}^{1}\sin^7x\cos^{13}x\,dx=$§$0$§$1$§$20$§$6$§0
+$\int_0^1\dfrac{4\tan^{-1}x}{1+x^2}\,dx=$§$\dfrac{\pi^2}4$§$\dfrac{\pi^2}8$§$\dfrac\pi4$§$\dfrac\pi8$§1
+$\int_0^1 3x^2\,dx=$§$3$§$\dfrac13$§$1$§$\dfrac19$§2
+$\int_0^a\dfrac{x\,dx}{2\sqrt{a^2-x^2}}=$§$\dfrac{a^2}2$§$\dfrac a2$§$\dfrac a4$§$a$§1
+$\int_0^a\dfrac{dx}{\sqrt x}=$§$2\sqrt x$§$2\sqrt a$§$\sqrt x$§$\sqrt a$§1
+$\int_0^{\pi/2}\dfrac{\sqrt{\cos x}}{\sqrt{\sin x}+\sqrt{\cos x}}\,dx=$§$\pi$§$\dfrac\pi2$§$\dfrac\pi4$§$2\pi$§2
+$\int_0^{\pi/2}\log\tan x\,dx=$§$\dfrac\pi4$§$\dfrac\pi2$§$0$§$\pi$§2
+$\int_0^1e^x\,dx=$§$e$§$1-e$§$e-1$§$0$§2
+$\int_0^{\pi/2}\sin x\cos x\,dx=$§$1$§$\dfrac12$§$-1$§$\dfrac14$§1
+$\int_0^1(x+2x+3x^2+4x^3)\,dx=$§$10$§$\dfrac52$§$\dfrac72$§$\dfrac12$§2
+$\int_{-1}^{1}\sin x\cos^3x\,dx=$§$2$§$1$§$0$§$-1$§2
+$100\int_0^1x^{99}\,dx=$§$100$§$\dfrac1{100}$§$1$§$101$§2
+$2\int_1^9\dfrac{dx}{\sqrt x}=$§$8$§$4$§$2$§$12$§0
+$\int\dfrac{dx}{x\log x}=$§$\log x+k$§$(\log x)^2+k$§$\log(\log x)+k$§$\dfrac1{\log x}+k$§2
+$\int\dfrac{x-3}{x^2-9}\,dx=$§$\log(x-3)+k$§$\log(x+3)+k$§$-\dfrac1{(x+3)^2}+k$§$\dfrac{x^2}2-3x+k$§1
+यदि $n(A)=4$ तथा $n(B)=2$, तो $n(A\times B)=$§$6$§$8$§$16$§इनमें से कोई नहीं§1
+यदि संक्रिया '$\circ$' इस प्रकार परिभाषित है कि $(a\circ b)=a^3+b^3$, तो $4\circ(1\circ2)=$§$729$§$793$§$783$§$792$§1
+$f:A\to B$ आच्छादक फलन होगा, यदि :§$f(A)\subset B$§$f(A)=B$§$f(A)\supset B$§$f(A)\ne B$§1
+यदि $f:R\to R$, जहाँ $f(x)=3x-4$, तो $f^{-1}(x)$ निम्नलिखित में कौन होगा ?§$\dfrac13(x+4)$§$\dfrac13x-4$§$3x-4$§अपरिभाषित§0
+यदि संक्रिया '$\circ$' इस प्रकार परिभाषित है कि $(a\circ b)=a^2+b^2-ab$, तो $(1\circ2)\circ3=$§$18$§$27$§$9$§$12$§2
+माना कि $A=\{1,2,3,\ldots,n\}$, तो कितने एकैकी आच्छादी फलन $f:A\to A$ परिभाषित हो सकते हैं ?§$n$§$n!$§$\dfrac12\,n!$§$(n-1)!$§1
+$\tan\left\{\dfrac12\left(\tan^{-1}x+\tan^{-1}\dfrac1x\right)\right\}=$§$1$§$\sqrt3$§$0$§$\infty$§0
+$\cos^{-1}x+\sec^{-1}\dfrac1x=$§$\dfrac\pi2$§$\cos^{-1}(2x^2-1)$§$\cos^{-1}(1-2x^2)$§$\cos^{-1}2x$§1
+$\cot^{-1}\left(\tan\dfrac\pi7\right)=$§$\dfrac\pi7$§$\dfrac{5\pi}{14}$§$\dfrac{9\pi}{14}$§$\dfrac{3\pi}{14}$§1
+$\cos^{-1}\left(\cos\dfrac{8\pi}5\right)=$§$\dfrac{8\pi}5$§$\dfrac{2\pi}5$§$\dfrac\pi5$§$\dfrac{3\pi}5$§1
+$\tan^{-1}(-\sqrt3)=$§$\dfrac\pi6$§$\dfrac\pi3$§$\dfrac{2\pi}3$§$-\dfrac\pi3$§3
+$\tan^{-1}\sqrt3-\cot^{-1}(-\sqrt3)=$§$0$§$-\dfrac\pi2$§$\pi$§$\dfrac\pi2$§1
+$\sin\left(\sin^{-1}\dfrac{2\pi}3\right)+\tan^{-1}\left(\tan\dfrac{3\pi}4\right)=$§$\dfrac{17\pi}{12}$§$\dfrac{5\pi}{12}$§$\dfrac\pi{12}$§$-\dfrac\pi{12}$§0
+$\tan^{-1}\dfrac12+\tan^{-1}\dfrac13=$§$\pi$§$\dfrac\pi4$§$\dfrac\pi2$§$\dfrac\pi3$§1
+$\sin\left\{\sin^{-1}\dfrac15+\cos^{-1}x\right\}=1\Rightarrow x=$§$1$§$0$§$\dfrac45$§$\dfrac15$§3
+$\begin{vmatrix}21&11&10\\25&15&10\\64&27&37\end{vmatrix}=$§$1190$§$841$§$0$§$1$§2
+$\begin{vmatrix}10&4\\13&5\end{vmatrix}=$§$102$§$2$§$-2$§$-102$§2
+$\begin{vmatrix}x&15\\4&4\end{vmatrix}=0\Rightarrow x=$§$15$§$-15$§$12$§$60$§0
+$\begin{vmatrix}3&\sqrt3&\sqrt3\\4&0&0\\0&0&0\end{vmatrix}=$§$0$§$12$§$4\sqrt3$§$3-4\sqrt3$§0
+$5\begin{vmatrix}1&2\\3&4\end{vmatrix}=$§$\begin{vmatrix}5&10\\15&20\end{vmatrix}$§$\begin{vmatrix}5&2\\3&20\end{vmatrix}$§$\begin{vmatrix}5&10\\3&4\end{vmatrix}$§$\begin{vmatrix}1&10\\15&20\end{vmatrix}$§2
+$\begin{bmatrix}5&-1\\6&7\end{bmatrix}\begin{bmatrix}2&1\\3&4\end{bmatrix}=$§$\begin{bmatrix}7&11\\33&34\end{bmatrix}$§$\begin{bmatrix}7&1\\33&34\end{bmatrix}$§$\begin{bmatrix}7&1\\34&33\end{bmatrix}$§$\begin{bmatrix}16&5\\39&25\end{bmatrix}$§1
+$A=\begin{bmatrix}1&2&3\end{bmatrix}\Rightarrow A'=$§$\begin{bmatrix}1&2&3\end{bmatrix}$§$\begin{bmatrix}3\\2\\1\end{bmatrix}$§$\begin{bmatrix}3&2&1\end{bmatrix}$§$\begin{bmatrix}1\\2\\3\end{bmatrix}$§3
+$\dfrac{d}{dx}(\log5x)=$§$\dfrac1{5x}$§$\dfrac1x$§$\dfrac5x$§$\log5+\dfrac1x$§1
+$\begin{bmatrix}1&2\\3&4\end{bmatrix}\begin{bmatrix}1&0\\0&1\end{bmatrix}=$§$\begin{bmatrix}1&0\\0&4\end{bmatrix}$§$\begin{bmatrix}1&2\\3&4\end{bmatrix}$§$\begin{bmatrix}1&2\\0&4\end{bmatrix}$§$\begin{bmatrix}1&2\\3&0\end{bmatrix}$§1
+यदि $A=\begin{bmatrix}1&0\\0&1\end{bmatrix}$, तो $A^{100}=$§$100A$§$101A$§$A$§$99A$§2
+$\begin{bmatrix}6&5\end{bmatrix}\begin{bmatrix}-1\\1\end{bmatrix}=$§$[-6\ \ 5]$§$\begin{bmatrix}-6\\5\end{bmatrix}$§$[-1]$§$[1]$§2
+$\begin{bmatrix}1&2\\3&4\end{bmatrix}\begin{bmatrix}4&0\\0&4\end{bmatrix}=$§$\begin{bmatrix}4&8\\0&16\end{bmatrix}$§$\begin{bmatrix}5&2\\3&8\end{bmatrix}$§$\begin{bmatrix}4&8\\12&16\end{bmatrix}$§$\begin{bmatrix}4&12\\8&16\end{bmatrix}$§2
+$\begin{bmatrix}2&3\\5&7\end{bmatrix}\begin{bmatrix}2\\5\end{bmatrix}=$§$\begin{bmatrix}4&6\\25&35\end{bmatrix}$§$\begin{bmatrix}4&15\\10&35\end{bmatrix}$§$[19\ \ 45]$§$\begin{bmatrix}19\\45\end{bmatrix}$§3
+$\begin{bmatrix}3&-2\end{bmatrix}\begin{bmatrix}1\\-1\end{bmatrix}=$§$[3\ \ 2]$§$\begin{bmatrix}3\\2\end{bmatrix}$§$[1]$§$[5]$§3
+$[4]\,[2\ \ -2]=$§$[8\ \ -8]$§$[0]$§$\begin{bmatrix}8\\-8\end{bmatrix}$§$[6\ \ 2]$§0
+आव्यूह $\begin{bmatrix}2&3\\5&4\end{bmatrix}$ का सहखंडन आव्यूह है :§$\begin{bmatrix}4&-5\\-3&2\end{bmatrix}$§$\begin{bmatrix}4&-3\\-5&2\end{bmatrix}$§$\begin{bmatrix}4&5\\3&2\end{bmatrix}$§$\begin{bmatrix}4&3\\5&2\end{bmatrix}$§0
+$\dfrac{d}{dx}(\log x^9)=$§$\dfrac1{x^9}$§$\dfrac1{9x}$§$\dfrac9x$§$\dfrac1x$§2
+सरल रेखा $\dfrac{x-19}{13}=\dfrac{y-17}{11}=\dfrac{z-15}9$ के दिक् अनुपात हैं :§$19,17,15$§$13,11,9$§$19,17,9$§इनमें से कोई नहीं§1
+रेखा $\dfrac{x-11}{12}=\dfrac{y-12}{13}=\dfrac{z+13}{14}$ निम्नलिखित में किस बिंदु से गुजरती है ?§$(11,12,13)$§$(11,12,-13)$§$(12,13,14)$§$(-11,-12,13)$§1
+यदि दो समांतर रेखाओं के दिक् अनुपात $2,7,9$ तथा $6,21,x$ हैं तो $x$ का मान है :§$9$§$18$§$27$§$3$§2
+यदि दो समांतर रेखाओं के दिक् अनुपात $a,b,c$ तथा $x,y,z$ हो तो $az=$§$cy$§$cx$§$bz$§$ax$§1
+यदि दो परस्पर लम्ब रेखाओं के दिक् अनुपात $5,2,4$ तथा $4,8,x$ है, तो $x$ का मान है :§$9$§$-9$§$8$§$-8$§1
+तल $9x-8y+7z=10$ के समांतर एक तल का समीकरण है :§$9x-8y-7z=5$§$9x-8y+7z=5$§$9x+8y+7z=5$§$9x-y+7z=5$§1
+$|\hat i-\hat j-3\hat k|=$§$11$§$\sqrt{11}$§$\sqrt7$§$\sqrt{10}$§1
+$(4\hat i+3\hat j)^2=$§$7$§$19$§$25$§$49$§2
+$(7\hat i-8\hat j+9\hat k)\cdot(\hat i-\hat j+\hat k)=$§$25$§$24$§$23$§$22$§1
+$\hat i\cdot\hat i+\hat i\cdot\hat j+\hat j\cdot\hat j+\hat j\cdot\hat k+\hat k\cdot\hat k=$§$5$§$4$§$3$§$2$§2
+$(11\hat i+\hat j+\hat k)\cdot(\hat i+\hat j+11\hat k)=$§$22$§$23$§$24$§$20$§1
+$(\hat k\times\hat j)\cdot\hat i=$§$0$§$1$§$-1$§$2\hat i$§2
+$(\hat i-2\hat j+5\hat k)\cdot(-2\hat i+4\hat j+2\hat k)=$§$20$§$18$§$0$§$4$§2
+$(\hat i\times\hat j)+(\hat i\times\hat i)=$§$2$§$1$§$\hat k$§$-\hat k$§2
+निम्नलिखित में से कौन उद्देश्य फलन है ?§$x\ge10$§$y\ge0$§$z=7x+3y$§इनमें से सभी§2
+व्यवरोधों $x+y\le35,\ x\ge0,\ y\ge0$ के अंतर्गत $z=2x+y$ का अधिकतम मान है :§$35$§$105$§$70$§$140$§2
+व्यवरोधों $x+y\le8,\ x\ge0,\ y\ge0$ के अंतर्गत $z=3x-y$ का अधिकतम मान है :§$-8$§$24$§$16$§$8$§1
+दो पासे फेंकने पर जोड़ा पाने की प्रायिकता है :§$\frac23$§$\frac16$§$\frac56$§$\frac5{36}$§1
+प्रायिकता का योग प्रमेय है :§$P(A\cup B)=P(A)+P(B)$§$P(A\cup B)=P(A)+P(B)+P(A\cap B)$§$P(A\cup B)=P(A)+P(B)-P(A\cap B)$§$P(A\cup B)=P(A)\cdot P(B)$§2
+यदि घटना $E$ का अनुकूल संयोगानुपात $a:b$ हो, तो $P(E)=$§$\dfrac a{a-b}$§$\dfrac a{a+b}$§$\dfrac b{a+b}$§$\dfrac b{a-b}$§1
+प्रायिकता का गुणन नियम है :§$P(A\cap B)=P(A)\cdot P(B)$§$P(A\cap B)=P(A)+P(B)-P(A\cup B)$§$P(A\cap B)=P(A)\cdot P(B/A)$§इनमें से कोई नहीं§2
+$\dfrac{d}{dx}(e^{3-2x})=$§$e^{3-2x}$§$2e^{3-2x}$§$-2e^{3-2x}$§$-e^{3-2x}$§2
+$\int2^{x+1}\,dx=$§$\dfrac{2^{x+1}}{\log2}+k$§$2^{x+1}\cdot\log2+k$§$(x+1)2^x+k$§$2^{x+1}+k$§0
+$\int\dfrac{(\sqrt x+1)^2}{x\sqrt x+2x+\sqrt x}\,dx=$§$\sqrt x+k$§$\frac12\sqrt x+k$§$2\sqrt x+k$§$2x+k$§2
+$\int_{-1}^{1}\sin^{13}x\cos^{12}x\,dx=$§$0$§$1$§$\dfrac12$§$2$§0
+$\int_0^2e^x\,dx=$§$e^2$§$e^2-2$§$e^2-1$§$e-1$§2
+$\int_\alpha^\beta\phi(x)\,dx+\int_\beta^\alpha\phi(x)\,dx=$§$2$§$1$§$0$§$2\int_\alpha^\beta\phi(x)\,dx$§2
+$\dfrac{d}{dx}\begin{vmatrix}x&x\\2&x\end{vmatrix}=$§$x^2-2x$§$2x-2$§$2x+2$§$x-2$§1
+$\dfrac{d}{dx}\left\{\lim_{n\to1}\dfrac{x^n-1}{n+1}\right\}=$§$0$§$\dfrac12$§$\dfrac x2$§$1$§1
+$\dfrac{d}{dx}\{\log_3x\times\log_x3\}=$§$\dfrac19$§$9$§$2\log3$§$0$§3
+$\dfrac{d}{dx}(\log x^{100})=$§$\dfrac1{x^{100}}$§$\dfrac1x$§$\dfrac{100}x$§$\dfrac1{100x}$§2
+$\dfrac{d}{dx}\left[\sin^{-1}\left(2x\sqrt{1-x^2}\right)\right]=$§$2\sin^{-1}x$§$\dfrac1{\sqrt{1-x^2}}$§$\dfrac2{\sqrt{1-x^2}}$§$\dfrac1{\sqrt{1-4x^2(1-x^2)}}$§2
+$\int e^{2\log x}\,dx=$§$e^{2\log x}+k$§$\dfrac{x^2}2+k$§$\dfrac{x^3}3+k$§$3x^3+k$§2
+$\dfrac{d}{dx}\begin{vmatrix}x&15\\4&4\end{vmatrix}=$§$4x$§$4$§$-60$§$-4$§1
+$\int x^m\cdot x^n\,dx=$§$\dfrac{x^{m+1}\cdot x^{n+1}}{m+n+2}+k$§$\dfrac{x^{m+n}}{m+n}+k$§$\dfrac{x^{m+n+1}}{m+n+1}+k$§$(m+n)x^{m+n-1}+k$§2
+$\int e^3\cdot e^x\,dx=$§$e^x+k$§$\dfrac{e^{3+x}}3+k$§$e^{x+3}+k$§$3e^{x+3}+k$§2`;
+
+/* ================= प्रश्न लोड ================= */
+const Q=RAW.trim().split('\n').map(l=>{const p=l.split('§');return{q:p[0],o:p.slice(1,5),a:+p[5]}});
+const $=id=>document.getElementById(id),L='ABCD',T=3600;
+const KEY='math-xii-2025a-record';
+let left=T,tid,fin=false,deadline=0;const ans=Q.map(()=>null);
+
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(!s)return;s.ans.forEach((v,i)=>{if(i<ans.length)ans[i]=v});fin=!!s.fin;deadline=s.deadline||0}catch(e){}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify({ans,fin,deadline}))}catch(e){}}
+function resetTest(){try{localStorage.removeItem(KEY)}catch(e){}location.reload()}
+
+function init(){
+  load();
+  const w=$('qw');
+  Q.forEach((it,i)=>{
+    const d=document.createElement('div');d.className='q';d.id='q'+i;
+    d.innerHTML=`<div class="qt"><span class="no">${i+1}.</span>${it.q}</div><div class="os">${it.o.map((t,j)=>`<div class="o" data-i="${i}" data-j="${j}"><span class="l">${L[j]}</span><span>${t}</span></div>`).join('')}</div><div class="al"></div>`;
+    w.appendChild(d);
+  });
+  w.onclick=e=>{const o=e.target.closest('.o');if(o)pick(+o.dataset.i,+o.dataset.j)};
+  $('sb').onclick=$('sb2').onclick=()=>{if(!fin&&confirm('क्या आप टेस्ट सबमिट करना चाहते हैं?'))finish()};
+  stats();
+  if(!deadline&&!fin)deadline=Date.now()+T*1000;
+  ans.forEach((_,i)=>{if(ans[i]!==null||fin)paint(i)});
+  save();
+  if(fin){fin=false;finish(false);return}
+  tick();tid=setInterval(tick,1000);
+}
+function tick(){
+  left=Math.max(0,Math.round((deadline-Date.now())/1000));
+  $('tm').textContent=String(Math.floor(left/60)).padStart(2,'0')+':'+String(left%60).padStart(2,'0');
+  $('tm').classList.toggle('w',left<=300&&left>60);$('tm').classList.toggle('d',left<=60);
+  if(left<=0){finish(true);return}
+}
+function pick(i,j){if(fin||ans[i]!==null)return;ans[i]=j;paint(i);stats();save()}
+function paint(i){
+  const b=$('q'+i),a=ans[i],c=Q[i].a,done=a!==null||fin;
+  b.classList.remove('c','x');
+  b.querySelectorAll('.o').forEach((el,j)=>{
+    el.className='o'+(done?' k':'');
+    if(done&&j===c)el.classList.add('ok');
+    if(a===j&&j!==c)el.classList.add('bad');
+    if(done&&a!==null&&j!==c&&j!==a)el.classList.add('dim');
+  });
+  const al=b.querySelector('.al');
+  if(a===null)al.innerHTML=fin?`<span class="bd no">उत्तर नहीं दिया</span><span class="at">सही उत्तर: (${L[c]})</span>`:'';
+  else if(a===c){b.classList.add('c');al.innerHTML=`<span class="bd ok">✔ सही</span><span class="at">उत्तर: (${L[c]})</span>`}
+  else{b.classList.add('x');al.innerHTML=`<span class="bd bad">✖ गलत</span><span class="at">सही उत्तर: (${L[c]})</span>`}
+}
+function stats(){
+  let c=0,t=0;ans.forEach((a,i)=>{if(a!==null){t++;if(a===Q[i].a)c++}});
+  $('sc').textContent=c;$('sw').textContent=t-c;$('sl').textContent=Q.length-t;
+  $('pb').style.width=t/Q.length*100+'%';return{c,t};
+}
+function finish(auto){
+  if(fin)return;fin=true;clearInterval(tid);save();Q.forEach((_,i)=>paint(i));
+  $('sb').disabled=$('sb2').disabled=true;
+  const{c,t}=stats(),p=Math.round(c/Q.length*100),u=T-Math.max(left,0);
+  $('rs').innerHTML=`${c}<small>/${Q.length}</small>`;$('rc').textContent=c;$('').textcontent=Q.length-t;
+    $('rm').textContent=(auto?'समय समाप्त! ':'')+`समय: ${Math.floor(u/60)} मिनट ${u%60} सेकंड · ${p}% · `+(p>=75?'उत्कृष्ट प्रदर्शन!':p>=50?'अच्छा प्रयास!':'गलत प्रश्नों की समीक्षा करें।');
+  $('ov').classList.add('s');
+}
+init();
+</script>
+</body>
+</html>

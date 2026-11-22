@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHYSICS 12th - 70 Objective Test</title>
+    <style>
+        /* शाही नीला (Royal Blue) और आकाशी (Sky Blue) का प्रीमियम कॉम्बिनेशन - No White Background */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0d47a1 0%, #42a5f5 100%);
+            margin: 0;
+            padding: 15px;
+            min-height: 100vh;
+            color: #002171;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #e3f2fd; /* Light Sky Blue */
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(13, 71, 161, 0.4);
+            border: 2px solid #1976d2;
+        }
+        h1 {
+            text-align: center;
+            font-size: 26px;
+            margin-top: 0;
+            padding-bottom: 15px;
+            border-bottom: 3px dashed #1565c0;
+            color: #0d47a1;
+            font-weight: 900;
+        }
+        .info-bar {
+            text-align: center;
+            font-size: 16px;
+            color: #e3f2fd;
+            background: linear-gradient(to right, #0d47a1, #1976d2);
+            margin-bottom: 25px;
+            font-weight: bold;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(13, 71, 161, 0.3);
+        }
+        /* --- टाइमर का डिज़ाइन --- */
+        .timer-box {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #0d47a1, #1565c0);
+            color: #bbdefb;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(13, 71, 161, 0.5);
+            z-index: 1000;
+            letter-spacing: 1px;
+            border: 2px solid #90caf9;
+        }
+        @media (max-width: 600px) {
+            .timer-box {
+                top: 10px;
+                right: 50%;
+                transform: translateX(50%);
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+            .container { margin-top: 50px; }
+        }
+        .q-box {
+            margin-bottom: 20px;
+            padding: 18px;
+            border-left: 5px solid #1565c0;
+            border-radius: 8px;
+            background: #bbdefb; /* Deeper Sky Blue */
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+            transition: transform 0.2s ease;
+        }
+        .q-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(13, 71, 161, 0.3);
+        }
+        .q-text {
+            font-size: 17px;
+            font-weight: bold;
+            color: #0d47a1;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        .opt-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 12px 18px;
+            margin-bottom: 8px;
+            font-size: 16px;
+            background-color: #e1f5fe;
+            border: 1px solid #42a5f5;
+            color: #0d47a1;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            font-weight: bold;
+        }
+        .opt-btn:hover:not(:disabled) {
+            background-color: #90caf9;
+            border-color: #0d47a1;
+            color: #000;
+            transform: translateX(4px);
+        }
+        .opt-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.95;
+        }
+        .correct {
+            background: linear-gradient(to right, #2e7d32, #43a047) !important;
+            border-color: #1b5e20 !important;
+            color: #e8f5e9 !important;
+            font-weight: bold;
+        }
+        .incorrect {
+            background: linear-gradient(to right, #c62828, #e53935) !important;
+            border-color: #b71c1c !important;
+            color: #ffebee !important;
+            font-weight: bold;
+        }
+        .feedback {
+            display: none;
+            margin-top: 12px;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="timer" class="timer-box">⏱️ 01:00:00</div>
+
+<div class="container">
+    <h1>PHYSICS (भौतिकी) - XII - 70 Objective Test</h1>
+    <div class="info-bar">कुल प्रश्न: 70 | समय: 1 घंटा | सही विकल्प चुनें</div>
+    <div id="quiz-container"></div>
+</div>
+
+<script>
+    // 1 Hour Timer
+    let timeInSeconds = 3600; 
+    const timerElement = document.getElementById('timer');
+
+    const countdown = setInterval(() => {
+        if (timeInSeconds <= 0) {
+            clearInterval(countdown);
+            timerElement.innerHTML = "⏳ Time Up!";
+            timerElement.style.background = "linear-gradient(135deg, #b71c1c, #d32f2f)";
+            document.querySelectorAll('.opt-btn').forEach(btn => btn.disabled = true);
+            alert("आपका समय समाप्त हो गया है! अब आप और उत्तर नहीं दे सकते।");
+            return;
+        }
+        timeInSeconds--;
+        let h = Math.floor(timeInSeconds / 3600), m = Math.floor((timeInSeconds % 3600) / 60), s = timeInSeconds % 60;
+        timerElement.innerHTML = `⏱️ ${h<10?'0'+h:h}:${m<10?'0'+m:m}:${s<10?'0'+s:s}`;
+    }, 1000); 
+
+    // Compressed Array of 70 Questions (From Physics Model Paper Images)
+    const q=[
+{q:"1. निम्नलिखित में किसका मात्रक वोल्ट-मीटर⁻¹ है?",o:["(A) विधुत फ्लक्स","(B) विधुत विभव","(C) विधुत क्षेत्र","(D) विधुत धारिता"],a:2},
+{q:"2. निम्नलिखित में से धारिता का मात्रक कौन-सा है?",o:["(A) वोल्ट","(B) एम्पीयर","(C) कूलॉम","(D) कूलॉम/वोल्ट"],a:3},
+{q:"3. एक चालक की वोल्टता V तथा धारा I के बीच ग्राफ एक सरल रेखा है, जो y-अक्ष (जो कि I को प्रदर्शित करता है) से &theta; कोण बनाती है। चालक का प्रतिरोध होगा :",o:["(A) tan &theta;","(B) cot &theta;","(C) sin &theta;","(D) cos &theta;"],a:1},
+{q:"4. एक परिपालिका का स्व-प्रेरकत्व निर्भर करता है :",o:["(A) इसके माध्यम से बहने वाली धारा पर","(B) प्रति इकाई लम्बाई में फेरों की संख्या पर","(C) परिपालिका की लम्बाई पर","(D) 'B' और 'C' दोनों"],a:1},
+{q:"5. निम्नलिखित में कौन-सा उपकरण विधुत चुंबकीय प्रेरण के सिद्धांत पर आधारित है?",o:["(A) वोल्टमीटर","(B) विधुत मोटर","(C) विधुत जनरेटर","(D) एमीटर"],a:2},
+{q:"6. &radic;(&mu;₀ / &epsilon;₀) का मात्रक है :",o:["(A) न्यूटन","(B) ओम","(C) कूलॉम","(D) हेनरी"],a:1},
+{q:"7. उत्तल दर्पण से प्रतिबिंब सदैव बनता है :",o:["(A) वक्ता केन्द्र तथा फोकस के बीच","(B) वक्ता केन्द्र तथा अनंत के बीच","(C) ध्रुव तथा फोकस के बीच","(D) इनमें से कोई नहीं"],a:2},
+{q:"8. ध्रुवित प्रकाश में कम्पन तल एवं ध्रुवण तल के बीच के कोण हैं :",o:["(A) 0°","(B) 45°","(C) 90°","(D) 180°"],a:2},
+{q:"9. फोटॉन के गतिज द्रव्यमान का सूत्र है :",o:["(A) h&nu; / c","(B) h&nu; / c²","(C) hc / &lambda;","(D) c² / h&nu;"],a:1},
+{q:"10. n-प्रकार के अर्द्धचालक में अल्पसंख्यक आवेश वाहक होते हैं :",o:["(A) इलेक्ट्रॉन","(B) होल","(C) इलेक्ट्रॉन तथा होल","(D) इनमें से कोई नहीं"],a:0},
+{q:"11. फाइबर ऑप्टिक संचार में किस प्रकार की तरंगों का उपयोग किया जाता है?",o:["(A) ध्वनि तरंगें","(B) विधुatchचुंबकीय तरंगें","(C) भूकीय तरंगें","(D) यांत्रिक तरंगें"],a:1},
+{q:"12. विधुत्-चुंबकीय तरंगों की प्रकृति होती है :",o:["(A) अनुप्रस्थ","(B) अनुदैर्ध्य","(C) अनुप्रस्थ और अनुदैर्ध्य दोनों","(D) यांत्रिक"],a:0},
+{q:"13. इनमें से कौन विधुत क्षेत्र में विक्षेपित होता है?",o:["(A) गामा-किरणें","(B) एक्स-किरणें","(C) पराबैंगनी किरणें","(D) कैथोड किरणें"],a:3},
+{q:"14. विधुत् चुंबकीय तरंग के संचरण की दिशा होती है :",o:["(A) B&arrow; के समानांतर","(B) E&arrow; के समानांतर","(C) (B&arrow; × E&arrow;) के समानांतर","(D) (E&arrow; × B&arrow;) के समानांतर"],a:3},
+{q:"15. &beta;-किरणें विक्षेपित होती है :",o:["(A) गुरुत्वाकर्षण क्षेत्र में","(B) केवल चुम्बकीय क्षेत्र में","(C) केवल विधुत् क्षेत्र में","(D) विद्युतीय तथा चुम्बकीय क्षेत्र में"],a:3},
+{q:"16. समतल दर्पण की वक्रता त्रिज्या होती है :",o:["(A) अनंत","(B) शून्य","(C) +5 सेमी","(D) -5 सेमी"],a:0},
+{q:"17. निम्नलिखित में किसका अपवर्तनांक सबसे अधिक होता है?",o:["(A) काँच","(B) पानी","(C) लोहा","(D) हीरा"],a:3},
+{q:"18. इलेक्ट्रॉन-वोल्ट (eV) द्वारा मापा जाता है :",o:["(A) आवेश","(B) विभवान्तर","(C) धारा","(D) ऊर्जा"],a:3},
+{q:"19. रेडियोऐक्टिव परमाणु के लिए कौन-सा सम्बन्ध सही है?",o:["(A) अर्द्ध-आयु = औसत आयु","(B) अर्द्ध-आयु = 2 × औसत आयु","(C) अर्द्ध-आयु = 1.6931 × औसत आयु","(D) अर्द्ध-आयु = 0.6931 × औसत आयु"],a:3},
+{q:"20. वायु के लिए परावैद्युत सामर्थ्य होता है :",o:["(A) 3 × 10⁶ Vm⁻¹","(B) 4 × 10⁶ Vm⁻¹","(C) 5 × 10⁶ Vm⁻¹","(D) 10⁶ Vm⁻¹"],a:0},
+{q:"21. सौर ऊर्जा का स्रोत है :",o:["(A) न्यूक्लियर विखंडन","(B) न्यूक्लियर संलयन","(C) दोनों","(D) कोई नहीं"],a:1},
+{q:"22. दशमिक संख्या 25 का द्विआधारी होती है :",o:["(A) (1100)₂","(B) (1001)₂","(C) (11001)₂","(D) (11101)₂"],a:3},
+{q:"23. 'फैक्स' का अर्थ है :",o:["(A) फूल एक्सेस ट्रान्समिशन","(B) फैक्सीमाइल टेलीग्राफ्री","(C) फेक्चुअल ऑटो एक्सेस","(D) फीड ऑटो एक्सेसेंज"],a:1},
+{q:"24. आयाम मॉडुलन सूचकांक का मान होता है :",o:["(A) हमेशा 0","(B) 1 तथा &infin; के बीच","(C) 0 तथा 1 के बीच","(D) हमेशा &infin;"],a:2},
+{q:"25. मोबिलिटी की S.I. इकाई है :",o:["(A) एम्पीयर × मीटर / न्यूटन","(B) सेकण्ड / मीटर","(C) मीटर / सेकण्ड × एम्पीयर","(D) कोई नहीं"],a:2},
+{q:"26. TV प्रसारण के लिए जिस आवृत्ति-परास का उपयोग होता है, वह है :",o:["(A) 30-300 Hz","(B) 30-300 KHz","(C) 30-300 MHz","(D) 30-300 GHz"],a:2},
+{q:"27. खगोलीय दूरदर्शियों में अंतिम प्रतिबिम्ब होता है :",o:["(A) वास्तविक व सीधा","(B) वास्तविक व उल्टा","(C) आभासी व सीधा","(D) आभासी व उल्टा"],a:3},
+{q:"28. एक दीर्घ-दृष्टि वाले व्यक्ति को आवश्यकता होगी :",o:["(A) उत्तल लेंस की","(B) अवतल लेंस की","(C) बेलनाकार लेंस की","(D) समतलावतल लेंस की"],a:0},
+{q:"29. प्रकाश के रंग का कारण है :",o:["(A) इसकी आवृत्ति","(B) इसका वेग","(C) इसकी कला","(D) इसका आयाम"],a:0},
+{q:"30. किसी बिन्द्वत स्रोत से परिमित दूरी पर तरंगग्रत्र होता है :",o:["(A) गोलाकार","(B) बेलनाकार","(C) समतल","(D) वृत्ताकार"],a:3},
+{q:"31. दशमिक संख्या (8)₁₀ की द्विआधारी संख्या होती है :",o:["(A) (1000)₂","(B) (1001)₂","(C) (111)₂","(D) (110)₂"],a:0},
+{q:"32. एक पतले फिल्म के रंग का कारण है :",o:["(A) प्रकीर्णन","(B) व्यतिकरण","(C) वर्ण-विक्षेपण","(D) विवर्त्तन"],a:1},
+{q:"33. प्रकाशिक पथ बराबर होता है :",o:["(A) अपवर्तनांक × पथ-लम्बाई","(B) अपवर्तनांक / पथ-लम्बाई","(C) पथ-लम्बाई / अपवर्तनांक","(D) अपवर्तनांक × पथ-लम्बाई²"],a:0},
+{q:"34. जिस घटना से प्रकाश-तरंगों की प्रकृति निर्विवाद रूप से अनुप्रस्थ होती है, वह है :",o:["(A) व्यतिकरण","(B) विवर्त्तन","(C) ध्रुवण","(D) अपवर्तन"],a:2},
+{q:"35. पूर्ण तरंग दिष्टकारक में उपयोग होता है :",o:["(A) दो डायोड","(B) तीन डायोड","(C) चार डायोड","(D) पाँच डायोड"],a:0},
+{q:"36. आवेश का रेखीय घनत्व का मात्रक होता है :",o:["(A) कूलॉम/मीटर","(B) कूलॉम × मीटर","(C) मीटर/कूलॉम","(D) इनमें से कोई नहीं"],a:0},
+{q:"37. पिको फैराड मात्रक है :",o:["(A) वैधुत आवेश का","(B) वैधुत-क्षेत्र की तीव्रता का","(C) वैधुत धारिता का","(D) वैधुत फ्लक्स का"],a:2},
+{q:"38. 40 W तथा 60 W के दो बल्ब 220 V स्रोत से जोड़े जाते हैं। प्रतिरोध में अनुपात होगा :",o:["(A) 4:3","(B) 3:4","(C) 2:3","(D) 3:2"],a:3},
+{q:"39. धातु के बने किसी मोलक की चुम्बकीय क्षेत्र में दोलन करने पर दोलन गति होती है :",o:["(A) त्वरित","(B) अवमंदित","(C) एकसमान","(D) इनमें से कोई नहीं"],a:1},
+{q:"40. किस रंग का तरंगदैर्ध्य सबसे कम होता है?",o:["(A) बैंगनी","(B) पीला","(C) नीला","(D) लाल"],a:0},
+{q:"41. फोटो सेल आधारित है :",o:["(A) धारा के रासायनिक प्रभाव पर","(B) प्रकाश-विद्युत प्रभाव पर","(C) धारा के चुम्बकीय प्रभाव पर","(D) विद्युत्-चुम्बकीय प्रेरण पर"],a:1},
+{q:"42. 8 कूलॉम ऋण आवेश में उपस्थित इलेक्ट्रॉनों की संख्या है :",o:["(A) 5 × 10¹⁹","(B) 2.5 × 10¹⁹","(C) 12.8 × 10¹⁹","(D) 1.6 × 10¹⁹"],a:0},
+{q:"43. P-N संधि डायोड का उपयोग करते हैं, एक :",o:["(A) प्रवर्धक की तरह","(B) दोलक की तरह","(C) मॉडulator की तरह","(D) दिष्टकारी की तरह"],a:3},
+{q:"44. चालक के अंदर इलेक्ट्रॉन की गति होती है :",o:["(A) समरूप","(B) त्वरित","(C) अपवाही","(D) अवमंदित"],a:2},
+{q:"45. दृश्य स्पेक्ट्रम के रंगों में किसका अधिक तरंगदैर्ध्य होता है?",o:["(A) लाल का","(B) पीला का","(C) नीला का","(D) बैगनी का"],a:0},
+{q:"46. परनालिका में चुम्बकीय ऊर्जा घनत्व का सूत्र है :",o:["(A) B² / (2&mu;₀)","(B) B / (2&mu;₀)","(C) 2&mu;₀ / B²","(D) B² / (4&pi;&mu;₀)"],a:0},
+{q:"47. रेडियो सक्रियता का मात्रक है :",o:["(A) MeV","(B) क्यूरी","(C) a.m.u.","(D) जूल"],a:1},
+{q:"48. ---- किसका प्रतीक है?",o:["(A) डायोड","(B) n-टाइप","(C) p-टाइप","(D) ट्रांजिस्टर"],a:0},
+{q:"49. विधुत फ्लक्स का S.I. मात्रक है :",o:["(A) ओम-मीटर","(B) एम्पीयर-मीटर","(C) वोल्ट-मीटर","(D) (वोल्ट)(मीटर)⁻¹"],a:2},
+{q:"50. &epsilon;₀ का मात्रक है :",o:["(A) Nm⁻¹","(B) Fm⁻¹","(C) CV⁻¹","(D) F.m"],a:1},
+{q:"51. जब किसी वस्तु को आवेशित किया जाता है, तो उसका द्रव्यमान :",o:["(A) बढ़ता है","(B) घटता है","(C) अचर रहता है","(D) बढ़ या घट सकता है"],a:3},
+{q:"52. एक परावैद्युत समांतर पट्टिका संधारित्र की पट्टियों के बीच डाल देने पर धारिता का मान :",o:["(A) बढ़ता है","(B) समान रहता है","(C) घटता है","(D) इनमें से कोई नहीं"],a:0},
+{q:"53. विधुत का सबसे अच्छा चालक निम्नलिखित में कौन है?",o:["(A) चाँदी","(B) ताँबा","(C) सोना","(D) जस्ता"],a:0},
+{q:"54. ऐम्मीटर का प्रतिरोध होता है :",o:["(A) कम","(B) बड़ा","(C) बहुत कम","(D) बहुत बड़ा"],a:2},
+{q:"55. किलोवाट-घंटा (kWh) मात्रक है :",o:["(A) शक्ति का","(B) ऊर्जा का","(C) बलाघूर्ण का","(D) इनमें से कोई नहीं"],a:1},
+{q:"56. स्वस्थ मनुष्य के शरीर का विधुत प्रतिरोध है :",o:["(A) 50,000 &Omega;","(B) 10,000 &Omega;","(C) 1,000 &Omega;","(D) 10 &Omega;"],a:0},
+{q:"57. विधुत परिपथ की शक्ति होती है :",o:["(A) V × R","(B) V² × R","(C) V² / R","(D) V² × R × I"],a:2},
+{q:"58. 1 फैराडे बराबर होता है :",o:["(A) 96,500 A","(B) 96,500 C","(C) 96,500 V","(D) 96,500 N"],a:1},
+{q:"59. किसी विभवमापी की संवेदनशीलता को बढ़ाने के लिए :",o:["(A) इसका अनुप्रस्थ क्षेत्र बढ़ाना चाहिए","(B) इसकी धारा को घटाना चाहिए","(C) इसकी धारा को बढ़ाना चाहिए","(D) इसकी लम्बाई को घटाना चाहिए"],a:1},
+{q:"60. 1 वोल्ट बराबर होता है :",o:["(A) 1 J","(B) 1 JC⁻¹","(C) 1 CJ⁻¹","(D) 1 JC"],a:1},
+{q:"61. कार्बन प्रतिरोध का कलर कोड में लाल रंग का मान होता है :",o:["(A) 0","(B) 1","(C) 2","(D) 3"],a:2},
+{q:"62. चुम्बकीय क्षेत्र B का ऊर्जा घनत्व होता है :",o:["(A) B² / &mu;₀","(B) B² / (2&mu;₀)","(C) B² / (3&mu;₀)","(D) B² / (4&mu;₀)"],a:1},
+{q:"63. नाभिक में न्यूट्रॉनों की संख्या होती है :",o:["(A) A + Z","(B) A - Z","(C) Z + A/2","(D) Z"],a:1},
+{q:"64. लरिन्ज बल का परिकलन करने के लिए सूत्र है :",o:["(A) F&arrow; = q(E&arrow; + v&arrow; × B&arrow;)","(B) F&arrow; = q(E&arrow; - v&arrow; × B&arrow;)","(C) F&arrow; = q(E&arrow; + v&arrow; . B&arrow;)","(D) F&arrow; = q(E&arrow; × B&arrow; - v)"],a:0},
+{q:"65. नमन कोण का मान उत्तरी ध्रुव से विषुवत रेखा की ओर जाने पर :",o:["(A) स्थिर रहता है","(B) बढ़ता है","(C) घटता है","(D) पहले घटता है फिर बढ़ता है"],a:2},
+{q:"66. ध्रुव प्रबलता का S.I. मात्रक है :",o:["(A) N","(B) N/Am","(C) Am","(D) T"],a:2},
+{q:"67. निर्वात की चुम्बकीय प्रवृत्ति का मान होता है :",o:["(A) 0.5 के बराबर","(B) अनन्त","(C) 1 के बराबर","(D) शून्य"],a:3},
+{q:"68. डायनेमो की क्रिया निम्नलिखित में से किस सिद्धांत पर आधारित है?",o:["(A) विधुत धारा का ऊष्मीय प्रभाव","(B) विधुत चुम्बकीय प्रेरण","(C) विधुत धारा का रासायनिक प्रभाव","(D) इनमें से कोई नहीं"],a:1},
+{q:"69. ट्रांसफॉर्मर में विधुत ऊर्जा का ऊष्मा का रूपांतरण को कहा जाता है :",o:["(A) ताम्र क्षय","(B) लौह क्षय","(C) शैथिल्य क्षय","(D) इनमें से कोई नहीं"],a:0},
+{q:"70. L-R परिपथ का शक्ति गुणांक होता है :",o:["(A) R² + &omega;L","(B) R / &radic;(R² + &omega;²L²)","(C) &radic;(R² + &omega;²L²)","(D) R / &omega;L"],a:1}
+    ];
+
+    const quizContainer = document.getElementById('quiz-container');
+
+    q.forEach((qObj) => {
+        const qBox = document.createElement('div');
+        qBox.className = 'q-box';
+        
+        const qText = document.createElement('div');
+        qText.className = 'q-text';
+        qText.innerHTML = qObj.q;
+        qBox.appendChild(qText);
+        
+        const feedbackBox = document.createElement('div');
+        feedbackBox.className = 'feedback';
+        
+        const btnGroup = document.createElement('div');
+        
+        qObj.o.forEach((opt, optIndex) => {
+            const btn = document.createElement('button');
+            btn.className = 'opt-btn';
+            btn.innerHTML = opt;
+            
+            btn.onclick = () => {
+                const allBtns = btnGroup.querySelectorAll('.opt-btn');
+                allBtns.forEach(b => b.disabled = true);
+                
+                if (optIndex === qObj.a) {
+                    btn.classList.add('correct');
+                    feedbackBox.innerHTML = "✅ बिल्कुल सही उत्तर!";
+                    feedbackBox.style.color = "#1b5e20";
+                    feedbackBox.style.background = "#e8f5e9";
+                    feedbackBox.style.border = "1px solid #43a047";
+                } else {
+                    btn.classList.add('incorrect');
+                    allBtns[qObj.a].classList.add('correct');
+                    
+                    const correctText = qObj.o[qObj.a].substring(0,3);
+                    feedbackBox.innerHTML = "❌ गलत उत्तर! सही विकल्प: " + correctText + ")";
+                    feedbackBox.style.color = "#b71c1c";
+                    feedbackBox.style.background = "#ffebee";
+                    feedbackBox.style.border = "1px solid #e53935";
+                }
+                feedbackBox.style.display = 'block';
+            };
+            btnGroup.appendChild(btn);
+        });
+        
+        qBox.appendChild(btnGroup);
+        qBox.appendChild(feedbackBox);
+        quizContainer.appendChild(qBox);
+    });
+</script>
+
+</body>
+</html>

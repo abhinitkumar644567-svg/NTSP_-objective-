@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Private Chat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0; padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #0b1121;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* हेडर */
+        .chat-header {
+            background: #1e293b;
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            z-index: 10;
+            flex-shrink: 0;
+        }
+        .back-btn { color: #fff; font-size: 20px; text-decoration: none; margin-right: 15px; }
+        .header-profile-img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; margin-right: 12px; border: 1px solid #444; }
+        .header-info { flex: 1; overflow: hidden; }
+        .header-name { color: #fff; font-size: 16px; font-weight: bold; margin: 0; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+        .header-status { color: #00ff88; font-size: 12px; margin: 0; }
+        .header-icons i { color: #fff; font-size: 18px; cursor: pointer; }
+
+        /* चैट एरिया */
+        .chat-box {
+            flex: 1;
+            padding: 20px 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background-image: radial-gradient(circle at center, #1e293b, #0b1121);
+            scroll-behavior: smooth;
+        }
+
+        /* मैसेज बबल */
+        .msg-bubble {
+            max-width: 75%;
+            padding: 10px 14px;
+            border-radius: 15px;
+            font-size: 14.5px;
+            line-height: 1.4;
+            position: relative;
+            word-wrap: break-word;
+        }
+        .msg-time {
+            display: block;
+            font-size: 10px;
+            margin-top: 5px;
+            text-align: right;
+            opacity: 0.7;
+        }
+        .msg-left {
+            background: #1e293b;
+            color: #fff;
+            align-self: flex-start;
+            border-top-left-radius: 3px;
+        }
+        .msg-right {
+            background: linear-gradient(135deg, #00d2fe, #007bff);
+            color: #000;
+            align-self: flex-end;
+            border-top-right-radius: 3px;
+        }
+
+        /* फुटर / इनपुट */
+        .chat-footer {
+            background: #1e293b;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+        .chat-input-wrapper {
+            background: #0f172a;
+            border-radius: 25px;
+            padding: 5px 15px;
+            display: flex;
+            align-items: center;
+            flex: 1;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa; 
+            font-size: 20px;
+        }
+        .chat-input {
+            background: transparent;
+            border: none;
+            color: #fff;
+            padding: 12px 10px;
+            font-size: 15px;
+            outline: none;
+            flex: 1;
+        }
+        .chat-input::placeholder { color: #888; }
+
+        .send-btn {
+            background: #00f2fe;
+            color: #000;
+            width: 45px; height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .send-btn:hover { transform: scale(1.1); }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="chat-header">
+        <a href="Chatlist.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+        <img src="https://ui-avatars.com/api/?name=Loading" id="receiver-photo" class="header-profile-img" alt="Profile">
+        <div class="header-info">
+            <p class="header-name" id="receiver-name">Loading...</p>
+            <p class="header-status">Online</p>
+        </div>
+        <div class="header-icons">
+            <i class="fas fa-ellipsis-v"></i>
+        </div>
+    </div>
+
+    <!-- Chat Messages -->
+    <div class="chat-box" id="chat-box">
+        <div style="text-align: center; color: #888; margin-top: 20px;">चैट लोड हो रही है...</div>
+    </div>
+
+    <!-- Footer / Input -->
+    <div class="chat-footer">
+        <div class="chat-input-wrapper">
+            <i class="far fa-smile"></i>
+            <input type="text" id="chat-input" class="chat-input" placeholder="Message...">
+            <i class="fas fa-paperclip" style="margin-left: 10px;"></i>
+        </div>
+        <button id="send-btn" class="send-btn">
+            <i class="fas fa-paper-plane"></i>
+        </button>
+    </div>
+
+    <!-- Firebase Script -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, serverTimestamp, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyTkuRjBndEGF93-rmDRkeT2Q_lVC_",
+            authDomain: "ntps-objective-test.firebaseapp.com",
+            projectId: "ntps-objective-test",
+            storageBucket: "ntps-objective-test.firebasestorage.app",
+            messagingSenderId: "720036380966",
+            appId: "1:720036380966:web:62bf33576e5ea2bc230fe1"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        
+        const chatBox = document.getElementById("chat-box");
+        const chatInput = document.getElementById("chat-input");
+        const sendBtn = document.getElementById("send-btn");
+
+        // URL से Receiver का डेटा निकालना (जिस पर क्लिक किया गया है)
+        const urlParams = new URLSearchParams(window.location.search);
+        const receiverUid = urlParams.get('uid');
+        const receiverName = urlParams.get('name') || "Unknown User";
+        const receiverPhoto = urlParams.get('photo') || `https://ui-avatars.com/api/?name=${receiverName}`;
+
+        // अगर बिना किसी को सेलेक्ट किए कोई डायरेक्ट इस पेज पर आए, तो वापस Chatlist पर भेज दें
+        if (!receiverUid) {
+            window.location.replace("chatlist.html");
+        }
+
+        // हेडर में रिसीवर का नाम और फोटो सेट करना
+        document.getElementById("receiver-name").innerText = decodeURIComponent(receiverName);
+        document.getElementById("receiver-photo").src = decodeURIComponent(receiverPhoto);
+
+        let chatId = ""; // इसे हम दोनों यूज़र्स के लॉगिन के बाद डायनामिक बनाएंगे
+
+        onAuthStateChanged(auth, (currentUser) => {
+            if (currentUser) {
+                // यूनीक Chat ID बनाना (ताकि A से B और B से A दोनों के लिए सेम ID बने)
+                const currentUid = currentUser.uid;
+                chatId = currentUid < receiverUid ? `${currentUid}_${receiverUid}` : `${receiverUid}_${currentUid}`;
+
+                // रीयल-टाइम मैसेजेस लोड करना
+                const q = query(collection(db, "chats", chatId, "messages"), orderBy("timestamp", "asc"));
+                
+                onSnapshot(q, (snapshot) => {
+                    chatBox.innerHTML = ""; // चैट बॉक्स खाली करें
+                    
+                    if(snapshot.empty) {
+                         chatBox.innerHTML = `<div style="text-align: center; color: #888; margin-top: 20px;">यहाँ से चैट शुरू करें...</div>`;
+                    }
+
+                    snapshot.forEach((doc) => {
+                        const data = doc.data();
+                        const isMe = data.senderId === currentUid;
+                        const bubbleClass = isMe ? "msg-right" : "msg-left"; // अपना मैसेज राइट, दूसरे का लेफ्ट
+                        
+                        let timeString = "";
+                        if (data.timestamp) {
+                            const date = data.timestamp.toDate();
+                            timeString = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                        }
+
+                        chatBox.innerHTML += `
+                            <div class="msg-bubble ${bubbleClass}">
+                                ${data.text}
+                                <span class="msg-time">${timeString} ${isMe ? '<i class="fas fa-check-double"></i>' : ''}</span>
+                            </div>
+                        `;
+                    });
+                    
+                    // नया मैसेज आने पर ऑटो-स्क्रॉल
+                    chatBox.scrollTop = chatBox.scrollHeight; 
+                });
+
+            } else {
+                window.location.replace("index.html"); 
+            }
+        });
+
+        // मैसेज भेजने का फंक्शन
+        async function sendMessage() {
+            const text = chatInput.value.trim();
+            if (text && auth.currentUser && chatId) {
+                try {
+                    await addDoc(collection(db, "chats", chatId, "messages"), {
+                        text: text,
+                        senderId: auth.currentUser.uid,
+                        timestamp: serverTimestamp()
+                    });
+                    chatInput.value = ""; 
+                } catch (e) {
+                    console.error("Error sending message: ", e);
+                }
+            }
+        }
+
+        // सेंड बटन और Enter कीबोर्ड इवेंट
+        sendBtn.onclick = sendMessage;
+        chatInput.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>

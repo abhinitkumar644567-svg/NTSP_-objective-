@@ -1,0 +1,292 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#10080d">
+<title>NTSP | Coming Soon</title>
+
+<style>
+*{
+ margin:0;
+ padding:0;
+ box-sizing:border-box;
+}
+
+body{
+ min-height:100svh;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ padding:20px;
+ overflow:hidden;
+ font-family:Arial,sans-serif;
+ color:white;
+ background:#10080d;
+ isolation:isolate;
+}
+
+/* LUXURY AURORA BACKGROUND */
+
+.background{
+ position:fixed;
+ inset:-15%;
+ z-index:-2;
+ background:
+ radial-gradient(ellipse at 15% 25%,
+ rgba(174,24,66,.65),transparent 38%),
+ radial-gradient(ellipse at 85% 20%,
+ rgba(107,38,150,.48),transparent 38%),
+ radial-gradient(ellipse at 75% 85%,
+ rgba(210,83,35,.48),transparent 38%),
+ radial-gradient(ellipse at 25% 85%,
+ rgba(111,30,75,.55),transparent 40%),
+ linear-gradient(135deg,#10070e,#21101c,#0c0b13);
+ filter:saturate(125%);
+}
+
+/* Soft ambient glow */
+
+.glow{
+ position:fixed;
+ inset:0;
+ z-index:-1;
+ pointer-events:none;
+ background:
+ radial-gradient(ellipse at 50% 50%,
+ transparent 25%,
+ rgba(0,0,0,.35) 100%);
+}
+
+/* MAIN LIQUID GLASS FRAME */
+
+.container{
+ position:relative;
+ isolation:isolate;
+ width:100%;
+ max-width:480px;
+ padding:54px 25px 42px;
+ text-align:center;
+ overflow:hidden;
+
+ border-radius:34px;
+ border:1px solid rgba(255,255,255,.28);
+
+ background:
+ linear-gradient(145deg,
+ rgba(255,255,255,.19),
+ rgba(255,255,255,.055) 35%,
+ rgba(255,255,255,.095) 70%,
+ rgba(255,255,255,.035));
+
+ backdrop-filter:blur(32px) saturate(165%);
+ -webkit-backdrop-filter:blur(32px) saturate(165%);
+
+ box-shadow:
+ 0 30px 100px rgba(0,0,0,.55),
+ 0 0 45px rgba(187,52,100,.14),
+ inset 0 1px 2px rgba(255,255,255,.35),
+ inset 0 -1px 2px rgba(255,255,255,.1);
+}
+
+/* Top glass reflection */
+
+.container::before{
+ content:"";
+ position:absolute;
+ inset:0;
+ border-radius:inherit;
+ pointer-events:none;
+ background:
+ linear-gradient(125deg,
+ rgba(255,255,255,.24),
+ transparent 20%,
+ transparent 65%,
+ rgba(255,255,255,.10));
+ z-index:-1;
+}
+
+/* Upper highlight frame */
+
+.container::after{
+ content:"";
+ position:absolute;
+ top:0;
+ left:12%;
+ width:76%;
+ height:1px;
+ background:linear-gradient(
+ 90deg,
+ transparent,
+ rgba(255,255,255,.9),
+ transparent);
+ box-shadow:0 0 15px rgba(255,255,255,.4);
+ pointer-events:none;
+}
+
+/* BRAND */
+
+.logo{
+ font-size:15px;
+ font-weight:800;
+ letter-spacing:10px;
+ color:#fff;
+ margin-bottom:48px;
+ text-shadow:0 0 20px rgba(255,255,255,.35);
+}
+
+/* DIVIDER */
+
+.line{
+ width:65px;
+ height:2px;
+ margin:0 auto 30px;
+ border-radius:10px;
+ background:linear-gradient(
+ 90deg,
+ #ffb18a,
+ #ffffff,
+ #e5a8ff);
+ box-shadow:0 0 15px rgba(255,185,170,.5);
+}
+
+/* HEADING */
+
+h1{
+ font-size:clamp(40px,10vw,61px);
+ font-weight:900;
+ line-height:1.08;
+ letter-spacing:3px;
+
+ background:linear-gradient(
+ 120deg,
+ #ffffff 5%,
+ #ffe1d5 35%,
+ #f5c9ed 65%,
+ #ffffff 95%);
+
+ -webkit-background-clip:text;
+ background-clip:text;
+ color:transparent;
+
+ filter:drop-shadow(0 5px 15px rgba(255,170,190,.16));
+}
+
+/* DESCRIPTION */
+
+.subtitle{
+ margin-top:23px;
+ color:rgba(255,255,255,.82);
+ font-size:14px;
+ line-height:2;
+}
+
+/* STATUS GLASS */
+
+.status{
+ display:inline-flex;
+ align-items:center;
+ gap:10px;
+ margin-top:38px;
+ padding:13px 21px;
+ border-radius:50px;
+
+ background:linear-gradient(
+ 135deg,
+ rgba(255,255,255,.17),
+ rgba(255,255,255,.045));
+
+ border:1px solid rgba(255,255,255,.25);
+
+ box-shadow:
+ inset 0 1px 1px rgba(255,255,255,.2),
+ 0 5px 25px rgba(0,0,0,.12);
+
+ color:#fff;
+ font-size:10px;
+ font-weight:700;
+ letter-spacing:2.5px;
+}
+
+.dot{
+ width:7px;
+ height:7px;
+ border-radius:50%;
+ background:#ffd9c8;
+ box-shadow:0 0 12px #ffb99c;
+}
+
+/* FOOTER */
+
+.bottom{
+ margin-top:52px;
+ color:rgba(255,255,255,.56);
+ font-size:10px;
+ line-height:2.3;
+ letter-spacing:2px;
+}
+
+.bottom span{
+ color:#fff;
+ text-shadow:0 0 12px rgba(255,255,255,.25);
+}
+
+/* SMALL DEVICES */
+
+@media(max-width:400px){
+ .container{
+  padding:45px 18px 35px;
+  border-radius:28px;
+ }
+
+ .logo{
+  margin-bottom:40px;
+ }
+}
+
+/* FALLBACK */
+
+@supports not (backdrop-filter:blur(1px)){
+ .container{
+  background:rgba(55,20,38,.96);
+ }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background"></div>
+<div class="glow"></div>
+
+<main class="container">
+
+ <div class="logo">N T S P</div>
+
+ <div class="line"></div>
+
+ <h1>
+  COMING<br>
+  SOON
+ </h1>
+
+ <p class="subtitle">
+  कुछ नया, कुछ शानदार और कुछ बिल्कुल अलग...<br>
+  हम आपके लिए एक बेहतरीन अनुभव तैयार कर रहे हैं।
+ </p>
+
+ <div class="status">
+  <span class="dot"></span>
+  कार्य प्रगति पर है।
+ </div>
+
+ <div class="bottom">
+  WELCOME BACK <br>
+  <span> • N T S P •</span>
+ </div>
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHYSICS 12th (2023) - 70 Objective Test with Timer</title>
+    <style>
+        /* प्रीमियम कलर ग्रेडिंग और कॉम्पैक्ट डिजाइन */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 0;
+            padding: 15px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            border-bottom: 3px solid #e74c3c;
+            padding-bottom: 10px;
+            font-size: 24px;
+            margin-top: 0;
+            background: -webkit-linear-gradient(#c0392b, #e74c3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .info-bar {
+            text-align: center;
+            font-size: 15px;
+            color: #fff;
+            background: linear-gradient(to right, #2980b9, #3498db);
+            margin-bottom: 20px;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 6px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* --- टाइमर का डिज़ाइन --- */
+        .timer-box {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(255, 65, 108, 0.4);
+            z-index: 1000;
+            letter-spacing: 1px;
+            border: 2px solid #fff;
+        }
+
+        /* मोबाइल स्क्रीन पर टाइमर को बीच में सेट करने के लिए */
+        @media (max-width: 600px) {
+            .timer-box {
+                top: 10px;
+                right: 50%;
+                transform: translateX(50%);
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+            .container { margin-top: 50px; }
+        }
+
+        .q-box {
+            margin-bottom: 15px;
+            padding: 15px;
+            border-left: 5px solid #3498db;
+            border-radius: 8px;
+            background: linear-gradient(to right, #fdfbfb 0%, #ebedee 100%);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .q-text {
+            font-size: 16px;
+            font-weight: bold;
+            color: #34495e;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        .opt-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            font-size: 15px;
+            background-color: #fff;
+            border: 1px solid #bdc3c7;
+            color: #2c3e50;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .opt-btn:hover:not(:disabled) {
+            background-color: #ecf0f1;
+            border-color: #95a5a6;
+            transform: translateX(5px);
+        }
+        .opt-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.9;
+        }
+        .correct {
+            background: linear-gradient(to right, #11998e, #38ef7d) !important;
+            border-color: #2ecc71 !important;
+            color: #fff !important;
+            font-weight: bold;
+        }
+        .incorrect {
+            background: linear-gradient(to right, #ed213a, #93291e) !important;
+            border-color: #e74c3c !important;
+            color: #fff !important;
+            font-weight: bold;
+        }
+        .feedback {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<!-- टाइमर का बॉक्स -->
+<div id="timer" class="timer-box">⏱️ 01:00:00</div>
+
+<div class="container">
+    <h1>PHYSICS (भौतिकी) - XII, 2023 (A)</h1>
+    <div class="info-bar">कुल प्रश्न: 70 | समय: 1 घंटा | भाषा: किताबी | सही विकल्प चुनें</div>
+    <div id="quiz-container"></div>
+</div>
+
+<script>
+    // --- टाइमर का JavaScript कोड ---
+    let timeInSeconds = 3600; // 1 घंटा (60 मिनट * 60 सेकंड)
+    const timerElement = document.getElementById('timer');
+
+    const countdown = setInterval(() => {
+        if (timeInSeconds <= 0) {
+            clearInterval(countdown);
+            timerElement.innerHTML = "⏳ समय समाप्त!";
+            timerElement.style.background = "linear-gradient(135deg, #333, #000)";
+            
+            // समय खत्म होने पर सभी बटन डिसेबल कर दें
+            const allButtons = document.querySelectorAll('.opt-btn');
+            allButtons.forEach(btn => btn.disabled = true);
+            alert("आपका समय समाप्त हो गया है! अब आप उत्तर नहीं दे सकते।");
+            return;
+        }
+
+        timeInSeconds--;
+        
+        let hours = Math.floor(timeInSeconds / 3600);
+        let minutes = Math.floor((timeInSeconds % 3600) / 60);
+        let seconds = timeInSeconds % 60;
+
+        // सिंगल डिजिट को डबल डिजिट (01, 02) बनाने के लिए
+        hours = hours < 10 ? "0" + hours : hours;
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        timerElement.innerHTML = `⏱️ ${hours}:${minutes}:${seconds}`;
+    }, 1000); // हर 1000 मिलीसेकंड (1 सेकंड) में अपडेट होगा
+
+
+    // --- 70 प्रश्न बिल्कुल किताबी भाषा में ---
+    const questions = [
+        { q: "1. एक रेडियो समस्थानिक (²¹⁰Bi) की अर्द्ध आयु 5 दिन है। 20 दिनों के बाद लिए गए नाभिकों का अविघटित अंश होगा :", options: ["(A) 1/2", "(B) 1/4", "(C) 1/8", "(D) 1/16"], ans: 3 },
+        { q: "2. दो आवेशों के बीच विद्युतीय बल एवं गुरुत्वीय बलों के अनुपात निम्न में से किस रूप (क्रम) में होता है?", options: ["(A) 10⁴²", "(B) 10³⁹", "(C) 10³⁶", "(D) 1"], ans: 1 },
+        { q: "3. दो आवेश 'Q' को मिलानेवाली रेखा के बीच में एक आवेश 'q' रखा जाए, तो आवेशों के इस व्यवस्था में संतुलन के लिए 'q' का मान होगा :", options: ["(A) Q/2", "(B) -Q/2", "(C) -Q/4", "(D) +Q/4"], ans: 2 },
+        { q: "4. विद्युतीय द्विध्रुव आघूर्ण p⃗ एवं विद्युत् क्षेत्र की तीव्रता E⃗ के बीच कोण का मान कितना होगा कि द्विध्रुव स्थिर साम्यावस्था स्थिति में रहें?", options: ["(A) π/2", "(B) π", "(C) π/4", "(D) 0"], ans: 3 },
+        { q: "5. निम्नलिखित में से कौन भौतिक राशि सदिश है?", options: ["(A) विद्युत् फ्लक्स", "(B) विद्युत् विभव", "(C) विद्युत् स्थितिज ऊर्जा", "(D) विद्युत् तीव्रता"], ans: 3 },
+        { q: "6. दो तरंगों y₁ = 4 sin ωt एवं y₂ = 3 cos ωt से उत्पन्न व्यतिकरण के आयाम का महत्तम मान होता है :", options: ["(A) 7", "(B) 5", "(C) 1", "(D) 25"], ans: 1 },
+        { q: "7. परिनालिका में चुम्बकीय ऊर्जा घनत्व का सूत्र है :", options: ["(A) B²/2μ₀", "(B) B/2μ₀", "(C) B²/2μ₀ (Note: Options A and C in image appear to be duplicates/typos of the correct formula, choosing the closest representation)", "(D) B/4πμ₀"], ans: 0 },
+        { q: "8. निकेल है :", options: ["(A) अनुचुम्बकीय", "(B) प्रतिचुम्बकीय", "(C) लौह चुम्बकीय", "(D) इनमें से कोई नहीं"], ans: 2 },
+        { q: "9. चुम्बकीय याम्योत्तर एवं भौगोलिक याम्योत्तर के बीच का कोण कहलाता है :", options: ["(A) नमन कोण", "(B) दिक्पात", "(C) चुम्बकीय क्षेत्र का क्षैतिज घटक", "(D) आभासी नमन कोण"], ans: 1 },
+        { q: "10. एक उभयोत्तल लेंस के प्रत्येक तल की वक्रता त्रिज्या 20 सेमी तथा लेंस के पदार्थ का अपवर्तनांक 1.5 है। लेंस की फोकस दूरी है :", options: ["(A) 20 m", "(B) 1/20 m", "(C) 20 cm", "(D) 1/20 cm"], ans: 2 },
+        { q: "11. एक ही तरंगदैर्ध्य के इलेक्ट्रॉन तथा फोटॉन की कौन-सी भौतिक राशि समान होती है?", options: ["(A) वेग", "(B) ऊर्जा", "(C) संवेग", "(D) कोणीय संवेग"], ans: 2 },
+        { q: "12. नाभिकीय रिएक्टर में मंदक का क्या कार्य है?", options: ["(A) इलेक्ट्रॉनों की गति मन्द करना", "(B) न्यूट्रॉनों की गति तीव्र करना", "(C) इलेक्ट्रॉनों की गति तीव्र करना", "(D) न्यूट्रॉनों की गति मन्द करना"], ans: 3 },
+        { q: "13. p-प्रकार के अर्द्धचालकों के लिए अशुद्ध तत्व के रूप में प्रयोग किया जाता है :", options: ["(A) बोरॉन", "(B) बिस्मथ", "(C) आर्सेनिक", "(D) फॉस्फोरस"], ans: 0 },
+        { q: "14. डायोड का उपयोग किया जाता है :", options: ["(A) प्रवर्धक की तरह", "(B) दोलक की तरह", "(C) मॉडुलेटर की तरह", "(D) दिष्टकारी की तरह"], ans: 3 },
+        { q: "15. दो विद्युत् आवेशों के बीच लगनेवाले बल को नियंत्रित करनेवाले नियम कहा जाता है :", options: ["(A) एम्पीयर का नियम", "(B) ओम का नियम", "(C) फैराडे का नियम", "(D) कूलॉम का नियम"], ans: 3 },
+        { q: "16. बिन्दु आवेश के कारण r दूरी पर विद्युत् विभव का मान :", options: ["(A) r के अनुक्रमानुपाती होता है", "(B) r के व्युत्क्रमानुपाती होता है", "(C) r² के अनुक्रमानुपाती होता है", "(D) r² के व्युत्क्रमानुपाती होता है"], ans: 1 },
+        { q: "17. किसी चालक के संवहन वेग (v_d) तथा आरोपित विद्युत् क्षेत्र (E) के बीच संबंध है :", options: ["(A) v_d ∝ E", "(B) v_d ∝ √E", "(C) v_d ∝ E²", "(D) v_d ∝ E³"], ans: 0 },
+        { q: "18. 64 समरूप बूँदें जिनमें प्रत्येक की धारिता 5 μF है, मिलकर एक बड़ा बूँद बनाते हैं। बड़े बूँद की धारिता क्या होगी?", options: ["(A) 25 μF", "(B) 4 μF", "(C) 164 μF", "(D) 20 μF"], ans: 3 },
+        { q: "19. विभवमापी से मुख्यतः क्या मापा जाता है?", options: ["(A) धारा", "(B) प्रतिरोध", "(C) विभवान्तर", "(D) इनमें से सभी"], ans: 2 },
+        { q: "20. अगर दो आवेशों के बीच की दूरी बढ़ाई जाती है, तो उनकी विद्युत् स्थितिज ऊर्जा :", options: ["(A) घटती है", "(B) बढ़ती है", "(C) घट सकती है या बढ़ सकती है", "(D) समान रहती है"], ans: 2 },
+        { q: "21. दो प्रतिरोध R और 2R को एक विद्युत् परिपथ में श्रेणीक्रम में जोड़ा जाता है। R तथा 2R में उत्पन्न ऊष्मीय ऊर्जा का अनुपात होगा :", options: ["(A) 1:2", "(B) 1:4", "(C) 2:1", "(D) 4:1"], ans: 0 },
+        { q: "22. 40 सेमी फोकस दूरी का उत्तल लेंस एवं 20 सेमी फोकस दूरी का अवतल लेंस संपर्क में हैं। इनके संयोजन की क्षमता डायोप्टर में है :", options: ["(A) 2.5", "(B) -2.5", "(C) 7.5", "(D) -7.5"], ans: 1 },
+        { q: "23. व्यतिकरण की घटना का कारण है :", options: ["(A) कलान्तर", "(B) आयाम परिवर्तन", "(C) वेग परिवर्तन", "(D) तीव्रता परिवर्तन"], ans: 0 },
+        { q: "24. ध्रुवित प्रकाश उत्पन्न करने के लिए किसको प्रयुक्त किया जाता है?", options: ["(A) फ्लिन्ट काँच का प्रिज्म", "(B) NaCl का प्रिज्म", "(C) निकॉल प्रिज्म", "(D) बाइप्रिज्म"], ans: 2 },
+        { q: "25. ⟶| प्रतीक है?", options: ["(A) डायोड", "(B) n-टाइप", "(C) p-टाइप", "(D) ट्रांजिस्टर"], ans: 0 },
+        { q: "26. ट्रांजिस्टर के प्रवर्धन गुणांक की इकाई होती है :", options: ["(A) वोल्ट", "(B) ऐम्पियर", "(C) ओम", "(D) कोई इकाई नहीं"], ans: 3 },
+        { q: "27. निम्न में से कौन-सा तर्क द्वार सार्वजनिक तर्क द्वार है?", options: ["(A) OR", "(B) AND", "(C) NOT", "(D) NAND"], ans: 3 },
+        { q: "28. UHF आवृत्ति की तरंगें प्रायः कैसे संचारित होती हैं?", options: ["(A) भू-तरंगें", "(B) आकाश तरंगें", "(C) सतह तरंगें", "(D) अन्तरिक्ष तरंगें"], ans: 3 },
+        { q: "29. 25 का द्वि-आधारी समतुल्य है :", options: ["(A) (1100)₂", "(B) (1001)₂", "(C) (11001)₂", "(D) (11101)₂"], ans: 2 },
+        { q: "30. विवर्तन-फ्रिन्जों की चौड़ाई व्यतिकरण फ्रिन्जों :", options: ["(A) के समान होती है", "(B) के समान नहीं होती है", "(C) वैसी होती है", "(D) इनमें से कोई नहीं"], ans: 1 },
+        { q: "31. प्रकाश वर्ष का मान बराबर होता है :", options: ["(A) 9.46 × 10¹⁵ m", "(B) 9.46 × 10¹² m", "(C) 9.46 × 10¹⁰ m", "(D) 9.46 × 10⁸ m"], ans: 0 },
+        { q: "32. जब किसी ऐमीटर को शंट किया जाता है, तब परिपथ का कुल प्रतिरोध :", options: ["(A) स्थिर रहता है", "(B) बढ़ता है", "(C) घटता है", "(D) इनमें से कोई नहीं"], ans: 2 },
+        { q: "33. किसी अर्द्धचालक का तापमान गुणांक का मान होता है :", options: ["(A) धनात्मक", "(B) ऋणात्मक", "(C) शून्य", "(D) अनन्त"], ans: 1 },
+        { q: "34. यदि साइक्लोट्रॉन में आवेशित कण का आवर्तकाल T तथा महत्तम चाल V हो तो :", options: ["(A) T ∝ V", "(B) T ∝ V²", "(C) T ∝ 1/V", "(D) T ∝ 1/V²"], ans: 0 },
+        { q: "35. वान डी ग्राफ जनित्र एक ऐसी विद्युत् स्थैतिक युक्ति है, जिससे उत्पन्न होता है :", options: ["(A) केवल उच्च धारा", "(B) केवल उच्च वोल्टेज", "(C) उच्च धारा एवं उच्च वोल्टेज दोनों", "(D) निम्न धारा एवं निम्न वोल्टेज"], ans: 1 },
+        { q: "36. एक गोलीय दर्पण को पानी में डूबा दिया जाता है, इसकी फोकस दूरी :", options: ["(A) समान रहेगी", "(B) बढ़ जायेगी", "(C) घट जायेगी", "(D) इनमें से कोई नहीं"], ans: 0 },
+        { q: "37. पूर्ण आन्तरिक परावर्तन की स्थिति में परावर्तन गुणांक का मान होगा :", options: ["(A) 0.5", "(B) 1", "(C) 0", "(D) ∞"], ans: 1 },
+        { q: "38. पार्थिव दूरदर्शी द्वारा बना अंतिम प्रतिबिम्ब होता है :", options: ["(A) काल्पनिक एवं वस्तु की अपेक्षा सीधा", "(B) काल्पनिक एवं वस्तु की अपेक्षा उलटा", "(C) वास्तविक एवं वस्तु की अपेक्षा सीधा", "(D) इनमें से कोई नहीं"], ans: 0 },
+        { q: "39. किसी L-C-R परिपथ में अनुनाद की स्थिति में आरोपित वोल्टेज तथा धारा के बीच कलान्तर होता है :", options: ["(A) π", "(B) π/2", "(C) π/4", "(D) शून्य"], ans: 3 },
+        { q: "40. एक उच्चायी ट्रान्सफॉर्मर की द्वितीय कुण्डली में धारा का मान प्राथमिक कुण्डली की तुलना में होता है :", options: ["(A) बराबर", "(B) कम", "(C) अधिक", "(D) इनमें से कोई नहीं"], ans: 1 },
+        { q: "41. X-किरणें हैं :", options: ["(A) गतिमान इलेक्ट्रॉन", "(B) गतिमान धनात्मक आयन", "(C) गतिमान ऋणात्मक आयन", "(D) विद्युत् चुम्बकीय तरंगें"], ans: 3 },
+        { q: "42. यदि किसी माध्यम से निर्वात में संपूर्ण आन्तरिक परावर्तन के लिए क्रांतिक कोण 30° हो, तो माध्यम में प्रकाश का वेग है :", options: ["(A) 3 × 10⁸ मी/से", "(B) 1.5 × 10⁸ मी/से", "(C) 6 × 10⁸ मी/से", "(D) 4.5 × 10⁸ मी/से"], ans: 1 },
+        { q: "43. जब किसी कुण्डली में धारा 0.1 s में 5A से 2A में परिवर्तित होती है तो 50 V का औसत वोल्टेज उत्पन्न होता है। कुण्डली का स्वप्रेरकत्व है :", options: ["(A) 1.67 हेनरी", "(B) 6 हेनरी", "(C) 3 हेनरी", "(D) 0.67 हेनरी"], ans: 0 },
+        { q: "44. द्वितीयक तरंगिकाओं की अवधारणा किसके द्वारा दी गई थी?", options: ["(A) फ्रेनेल", "(B) मैक्सवेल", "(C) हाइगेन्स", "(D) न्यूटन"], ans: 2 },
+        { q: "45. फोटोइलेक्ट्रिक प्रभाव में प्रकाश विद्युत् धारा स्वतंत्र है :", options: ["(A) आपतित प्रकाश की तीव्रता से", "(B) दो इलेक्ट्रोडों के बीच लगाये गये विभवान्तर से", "(C) उत्सर्जक पदार्थ की प्रकृति से", "(D) आपतित प्रकाश की आवृत्ति से"], ans: 3 },
+        { q: "46. दृश्य स्पेक्ट्रम के रंगों में किसका अधिक तरंगदैर्ध्य होता है?", options: ["(A) लाल का", "(B) पीला का", "(C) नीला का", "(D) बैंगनी का"], ans: 0 },
+        { q: "47. किसी परमाणु का नाभिक बना होता है :", options: ["(A) प्रोटॉन से", "(B) प्रोटॉन एवं इलेक्ट्रॉन से", "(C) अल्फा कण से", "(D) प्रोटॉन और न्यूट्रॉन से"], ans: 3 },
+        { q: "48. केवल धारिता युक्त प्रत्यावर्ती धारा परिपथ में धारा एवं वोल्टता के बीच कलान्तर होता है :", options: ["(A) 0°", "(B) 90°", "(C) 180°", "(D) 45°"], ans: 1 },
+        { q: "49. निम्नलिखित में से किस विद्युत्-चुम्बकीय विकिरण का तरंगदैर्ध्य न्यूनतम है?", options: ["(A) पराबैंगनी", "(B) एक्स-किरणें", "(C) सूक्ष्म तरंगें", "(D) गामा किरणें"], ans: 3 },
+        { q: "50. जब प्रकाश स्रोत और परदे के बीच की दूरी बढ़ा दिया जाए तो फ्रिन्ज की चौड़ाई :", options: ["(A) बढ़ती है", "(B) घटती है", "(C) अपरिवर्तित रहती है", "(D) इनमें से कोई नहीं"], ans: 0 },
+        { q: "51. रेडियो सक्रियता का मात्रक है :", options: ["(A) MeV", "(B) क्यूरी", "(C) a.m.u.", "(D) जूल"], ans: 1 },
+        { q: "52. निम्नलिखित में से किसकी बेधन क्षमता सबसे ज्यादा होती है?", options: ["(A) α-किरणें", "(B) β-किरणें", "(C) γ-किरणें", "(D) कैथोड किरणें"], ans: 2 },
+        { q: "53. TV प्रसारण के लिए किस आवृत्ति परास का उपयोग होता है?", options: ["(A) 30 Hz - 300 Hz", "(B) 30 kHz - 300 kHz", "(C) 30 MHz - 300 MHz", "(D) 30 GHz - 300 GHz"], ans: 2 },
+        { q: "54. किसी भी प्रिज्म की वर्ण विक्षेपण क्षमता निर्भर करती है :", options: ["(A) आपतन कोण पर", "(B) प्रिज्म के पदार्थ की प्रकृति पर", "(C) प्रिज्म के अपवर्तन कोण पर", "(D) प्रिज्म कोण पर"], ans: 1 },
+        { q: "55. लेजर क्रिया के लिए आवश्यक है :", options: ["(A) उच्च ताप", "(B) अर्द्धचालक", "(C) उच्च दाब", "(D) संख्या परिवर्तन"], ans: 3 },
+        { q: "56. प्रकाश अनुप्रस्थ तरंग है, क्योंकि यह प्रदर्शित करता है :", options: ["(A) परावर्तन", "(B) ध्रुवण", "(C) व्यतिकरण", "(D) विवर्तन"], ans: 1 },
+        { q: "57. 6 μF धारिता के तीन संधारित्र उपलब्ध हैं। उनके द्वारा प्राप्त न्यूनतम एवं अधिकतम धारिता होती है :", options: ["(A) 3 μF, 12 μF", "(B) 2 μF, 12 μF", "(C) 2 μF, 18 μF", "(D) 4 μF, 18 μF"], ans: 2 },
+        { q: "58. एक प्रत्यावर्ती धारा का समीकरण I = 60 sin 100 πt; में धारा के मूल माध्य वर्ग का मान होगा :", options: ["(A) 60/√2", "(B) 30/√2", "(C) 100", "(D) शून्य"], ans: 0 },
+        { q: "59. L - R परिपथ की प्रतिबाधा होती है :", options: ["(A) R² + ω²L²", "(B) R + ωL", "(C) √(R + ωL)", "(D) √(R² + ω²L²)"], ans: 3 },
+        { q: "60. एक वृत्तीय धारावाही लूप की त्रिज्या दुगुनी तथा धारा आधी कर दी जाती है। इसका चुम्बकीय आघूर्ण हो जाएगा :", options: ["(A) आधा", "(B) दुगुना", "(C) चौगुना", "(D) इनमें से कोई नहीं"], ans: 1 },
+        { q: "61. एक चोक-कुण्डली का स्वप्रेरकत्व 5 हेनरी है। इससे बहती धारा 2 As⁻¹ की दर से बढ़ रही है। चोक-कुण्डली का प्रेरित विद्युत् वाहक बल होगा :", options: ["(A) 2.5 V", "(B) 5 V", "(C) -10 V", "(D) 10 V"], ans: 2 },
+        { q: "62. पृथ्वी का चुम्बकीय आघूर्ण है :", options: ["(A) 8.0 JT⁻¹", "(B) 11.5 JT⁻¹", "(C) 8.0 × 10²² JT⁻¹", "(D) इनमें से कोई नहीं"], ans: 2 },
+        { q: "63. विद्युत् चुम्बकीय तरंग में विद्युतीय तरंग तथा चुम्बकीय तरंग के बीच कलान्तर होता है :", options: ["(A) π", "(B) π/2", "(C) π/3", "(D) शून्य"], ans: 3 },
+        { q: "64. परावैद्युतांक का S.I. मात्रक होता है :", options: ["(A) N⁻¹ C⁻¹ m²", "(B) N C⁻² m²", "(C) N C⁻² m⁻²", "(D) C² N⁻¹ m⁻²"], ans: 3 },
+        { q: "65. आवेशित संधारित्र पर कुल आवेश होता है :", options: ["(A) शून्य", "(B) 1 μC", "(C) 1 C", "(D) अनंत"], ans: 0 },
+        { q: "66. चालक के अंदर इलेक्ट्रॉन की गति होती है :", options: ["(A) समरूप", "(B) त्वरित", "(C) अपसरित", "(D) अवमंदित"], ans: 2 },
+        { q: "67. वायु में स्थित स्थिर इकाई धन आवेश से निकलने वाले सम्पूर्ण विद्युत् फ्लक्स का मान होता है :", options: ["(A) ε₀", "(B) (ε₀)⁻¹", "(C) 4πε₀", "(D) (4πε₀)⁻¹"], ans: 1 },
+        { q: "68. प्रति इकाई आवेश पर लगनेवाले बल को कहते हैं :", options: ["(A) विद्युत् प्रवाह", "(B) विद्युत् विभव", "(C) विद्युत् क्षेत्र", "(D) विद्युत् स्पेस"], ans: 2 },
+        { q: "69. आवेश का परिमाणीकरण दर्शाता है कि :", options: ["(A) आवेश, जो एक इलेक्ट्रॉन पर आवेश का एक अंश है, संभव नहीं है", "(B) एक आवेश को नष्ट नहीं किया जा सकता है", "(C) कणों पर आवेश होता है", "(D) एक कण पर न्यूनतम अनुमेय आवेश होता है"], ans: 0 },
+        { q: "70. विद्युत् क्षेत्र रेखाओं से जानकारी प्राप्त होती है :", options: ["(A) क्षेत्र की शक्ति", "(B) दिशा", "(C) आवेश की प्रकृति", "(D) इनमें से सभी"], ans: 3 }
+    ];
+
+    const quizContainer = document.getElementById('quiz-container');
+
+    questions.forEach((qObj, index) => {
+        const qBox = document.createElement('div');
+        qBox.className = 'q-box';
+        
+        const qText = document.createElement('div');
+        qText.className = 'q-text';
+        qText.innerHTML = qObj.q;
+        qBox.appendChild(qText);
+        
+        const feedbackBox = document.createElement('div');
+        feedbackBox.className = 'feedback';
+        
+        const btnGroup = document.createElement('div');
+        
+        qObj.options.forEach((opt, optIndex) => {
+            const btn = document.createElement('button');
+            btn.className = 'opt-btn';
+            btn.innerHTML = opt;
+            
+            btn.onclick = () => {
+                const allBtns = btnGroup.querySelectorAll('.opt-btn');
+                allBtns.forEach(b => b.disabled = true);
+                
+                if (optIndex === qObj.ans) {
+                    btn.classList.add('correct');
+                    feedbackBox.innerHTML = "✅ बिल्कुल सही!";
+                    feedbackBox.style.color = "#145a32";
+                    feedbackBox.style.background = "#d4efdf";
+                    feedbackBox.style.border = "1px solid #2ecc71";
+                } else {
+                    btn.classList.add('incorrect');
+                    allBtns[qObj.ans].classList.add('correct');
+                    feedbackBox.innerHTML = "❌ गलत उत्तर। सही: " + qObj.options[qObj.ans].substring(0,3) + ")";
+                    feedbackBox.style.color = "#93291e";
+                    feedbackBox.style.background = "#fdebd0";
+                    feedbackBox.style.border = "1px solid #e74c3c";
+                }
+                feedbackBox.style.display = 'block';
+            };
+            btnGroup.appendChild(btn);
+        });
+        
+        qBox.appendChild(btnGroup);
+        qBox.appendChild(feedbackBox);
+        quizContainer.appendChild(qBox);
+    });
+</script>
+
+</body>
+</html>

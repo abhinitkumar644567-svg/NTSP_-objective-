@@ -1,0 +1,1608 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Class 12 Maths 50 Objective Mock Test (Bihar & UP Board) — By Sumit Sir</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', 'Noto Sans Devanagari', sans-serif;
+      background-color: #f4f6f9;
+      color: #1e293b;
+      user-select: none;
+    }
+    .math-text {
+      font-family: 'Cambria Math', 'Times New Roman', 'Inter', 'Noto Sans Devanagari', serif;
+      letter-spacing: 0.01em;
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    /* Palette Button Status Colors (Testbook Authentic) */
+    .status-not-visited {
+      background-color: #f8fafc;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+    }
+    .status-not-answered {
+      background-color: #ef4444;
+      color: #ffffff;
+      border: 1px solid #dc2626;
+      border-radius: 6px 6px 14px 14px;
+    }
+    .status-answered {
+      background-color: #22c55e;
+      color: #ffffff;
+      border: 1px solid #16a34a;
+      border-radius: 14px 14px 6px 6px;
+    }
+    .status-marked {
+      background-color: #8b5cf6;
+      color: #ffffff;
+      border: 1px solid #7c3aed;
+      border-radius: 9999px;
+    }
+    .status-marked-answered {
+      background-color: #8b5cf6;
+      color: #ffffff;
+      border: 1px solid #7c3aed;
+      border-radius: 9999px;
+      position: relative;
+    }
+    .status-marked-answered::after {
+      content: '✓';
+      position: absolute;
+      bottom: -3px;
+      right: -3px;
+      background: #22c55e;
+      color: #fff;
+      font-size: 9px;
+      font-weight: 800;
+      width: 14px;
+      height: 14px;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px solid #fff;
+    }
+    .palette-active {
+      ring: 2px;
+      box-shadow: 0 0 0 2.5px #0284c7;
+      transform: scale(1.06);
+    }
+    .fraction {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      vertical-align: middle;
+      margin: 0 2px;
+      font-size: 0.9em;
+      line-height: 1.1;
+    }
+    .fraction > span:first-child {
+      border-bottom: 1px solid currentColor;
+      padding: 0 3px;
+    }
+    .fraction > span:last-child {
+      padding: 0 3px;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- ==================== 1. START SCREEN / INSTRUCTIONS ==================== -->
+  <div id="startScreen" class="flex-1 flex items-center justify-center p-4 bg-gradient-to-br from-sky-50 via-white to-indigo-50">
+    <div class="max-w-3xl w-full bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
+      <!-- Top Banner -->
+      <div class="bg-gradient-to-r from-sky-600 to-blue-700 p-6 sm:p-8 text-white">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+          <span class="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase">
+            <span class="w-2 h-2 rounded-full bg-emerald-300 animate-pulse"></span>
+            Bihar & UP Board Special CBT
+          </span>
+          <span class="bg-amber-400 text-slate-900 px-3.5 py-1 rounded-full text-xs font-extrabold shadow-sm">
+            👨‍🏫 By Sumit Sir
+          </span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight leading-snug">
+          Class 12 Maths — 50 Objective Mock Test
+        </h1>
+        <p class="text-sky-100 text-sm sm:text-base mt-1.5">
+          बिहार एवं यूपी बोर्ड इंटरमीडिएट परीक्षा के लिए 50 अति-महत्वपूर्ण वस्तुनिष्ठ प्रश्नों का लाइव टेस्ट
+        </p>
+      </div>
+
+      <!-- Exam Highlights -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 p-5 sm:p-6 bg-slate-50 border-b border-slate-200">
+        <div class="bg-white p-3.5 rounded-xl border border-slate-200 text-center">
+          <div class="text-xs text-slate-500 font-medium">कुल प्रश्न (Questions)</div>
+          <div class="text-xl font-extrabold text-slate-800 mt-0.5">50 MCQs</div>
+        </div>
+        <div class="bg-white p-3.5 rounded-xl border border-slate-200 text-center">
+          <div class="text-xs text-slate-500 font-medium">अधिकतम अंक (Marks)</div>
+          <div class="text-xl font-extrabold text-sky-600 mt-0.5">50 Marks</div>
+        </div>
+        <div class="bg-white p-3.5 rounded-xl border border-slate-200 text-center">
+          <div class="text-xs text-slate-500 font-medium">समय अवधि (Duration)</div>
+          <div class="text-xl font-extrabold text-slate-800 mt-0.5">60 Mins</div>
+        </div>
+        <div class="bg-white p-3.5 rounded-xl border border-slate-200 text-center">
+          <div class="text-xs text-slate-500 font-medium">नेगेटिव मार्किंग</div>
+          <div class="text-xl font-extrabold text-emerald-600 mt-0.5">No (0.0)</div>
+        </div>
+      </div>
+
+      <!-- Instructions & Form -->
+      <div class="p-6 sm:p-8 space-y-6">
+        <div>
+          <h2 class="text-base font-bold text-slate-800 mb-3 flex items-center gap-2">
+            <svg class="w-5 h-5 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            सामान्य निर्देश (General Instructions):
+          </h2>
+          <ul class="space-y-2 text-sm text-slate-600 list-disc pl-5">
+            <li>इस टेस्ट में कक्षा 12 गणित के सभी अध्यायों (Matrices, Determinants, Calculus, Vectors, 3D, Probability आदि) से <strong>50 चुनिंदा बोर्ड प्रश्न</strong> शामिल हैं।</li>
+            <li>प्रत्येक सही उत्तर के लिए <strong>+1 अंक</strong> मिलेगा और गलत उत्तर के लिए <strong>कोई अंक नहीं काटा जाएगा</strong> (UP & Bihar Board पैटर्न)।</li>
+            <li>आप ऊपर दिए गए <strong>Language Toggle (हिन्दी / English)</strong> से किसी भी समय भाषा बदल सकते हैं।</li>
+            <li>टेस्ट सबमिट करने के तुरंत बाद आपको आपका <strong>Scorecard, Accuracy</strong> और <strong>Sumit Sir की विस्तृत व्याख्या (Step-by-Step Solution)</strong> मिलेगी।</li>
+          </ul>
+        </div>
+
+        <!-- Legend Preview -->
+        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+          <div class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2.5">Question Palette Symbols:</div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs font-medium text-slate-700">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 inline-flex items-center justify-center status-answered text-xs font-bold">1</span>
+              <span>Answered</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 inline-flex items-center justify-center status-not-answered text-xs font-bold">2</span>
+              <span>Not Answered</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 inline-flex items-center justify-center status-marked text-xs font-bold">3</span>
+              <span>Marked Review</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 inline-flex items-center justify-center status-not-visited text-xs font-bold">4</span>
+              <span>Not Visited</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Student Name & Start Button -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-end gap-4 pt-2">
+          <div class="flex-1">
+            <label for="studentNameInput" class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1.5">
+              छात्र का नाम (Enter Your Name)
+            </label>
+            <input
+              type="text"
+              id="studentNameInput"
+              placeholder="उदा. अंकित कुमार / Priya Sharma"
+              class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-sky-600 focus:ring-2 focus:ring-sky-200 outline-none text-sm font-medium transition"
+            />
+          </div>
+          <div class="w-full sm:w-44">
+            <label for="startLangSelect" class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1.5">
+              Default Language
+            </label>
+            <select id="startLangSelect" class="w-full px-3.5 py-3 rounded-xl border border-slate-300 bg-white focus:border-sky-600 outline-none text-sm font-semibold text-slate-700">
+              <option value="hi">हिन्दी (Hindi)</option>
+              <option value="en">English</option>
+            </select>
+          </div>
+          <button
+            onclick="startTest()"
+            class="px-7 py-3.5 rounded-xl bg-sky-600 hover:bg-sky-700 active:scale-[0.99] text-white font-bold text-sm shadow-lg shadow-sky-600/25 transition flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <span>Start Test Now</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 2. CBT EXAM INTERFACE ==================== -->
+  <div id="examScreen" class="hidden flex-col h-screen overflow-hidden">
+    <!-- Top Header Bar -->
+    <header class="bg-white border-b border-slate-200 px-3 sm:px-6 py-2.5 flex items-center justify-between gap-2 shrink-0 z-20 shadow-xs">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <div class="w-9 h-9 rounded-xl bg-sky-600 text-white font-extrabold flex items-center justify-center text-base shrink-0 shadow-xs">
+          ∑
+        </div>
+        <div class="min-w-0">
+          <div class="flex items-center gap-2">
+            <h1 class="text-sm sm:text-base font-extrabold text-slate-800 truncate">
+              Class 12 Maths 50 Objective Mock Test
+            </h1>
+            <span class="hidden md:inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-800 border border-amber-200 shrink-0">
+              By Sumit Sir
+            </span>
+          </div>
+          <p class="text-[11px] text-slate-500 truncate">Bihar & UP Board Exam Pattern • 50 Questions • 50 Marks</p>
+        </div>
+      </div>
+
+      <!-- Right Controls: Language, Timer, Palette Toggle (Mobile), Submit -->
+      <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+        <!-- Language Toggle -->
+        <button
+          onclick="toggleLanguage()"
+          id="langToggleBtn"
+          title="Switch Language"
+          class="px-2.5 py-1.5 rounded-lg border border-slate-300 bg-slate-50 hover:bg-slate-100 text-xs font-bold text-slate-700 flex items-center gap-1 transition cursor-pointer"
+        >
+          <span>🌐</span>
+          <span id="langBadgeText">हिन्दी</span>
+        </button>
+
+        <!-- Countdown Timer -->
+        <div id="timerBox" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 text-white font-mono text-xs sm:text-sm font-bold shadow-xs">
+          <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <span id="timerDisplay">60:00</span>
+        </div>
+
+        <!-- Mobile Palette Drawer Button -->
+        <button
+          onclick="toggleMobilePalette()"
+          class="lg:hidden p-2 rounded-lg border border-slate-300 bg-white text-slate-700 hover:bg-slate-50"
+          aria-label="Question Palette"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Sub-bar: Section Tag & Student Info -->
+    <div class="bg-sky-50/80 border-b border-sky-100 px-3 sm:px-6 py-1.5 flex items-center justify-between text-xs shrink-0">
+      <div class="flex items-center gap-2">
+        <span class="px-2.5 py-0.5 rounded bg-sky-600 text-white font-bold">Mathematics (12th)</span>
+        <span id="chapterTag" class="text-slate-600 font-semibold hidden sm:inline">Chapter: Relations & Functions</span>
+      </div>
+      <div class="flex items-center gap-3 text-slate-600 font-medium">
+        <span class="sm:hidden font-bold text-amber-700">By Sumit Sir</span>
+        <span>Marks: <strong class="text-emerald-600">+1.0</strong> | <strong class="text-slate-500">-0.0</strong></span>
+      </div>
+    </div>
+
+    <!-- Main Workspace (Left 70% Question Area + Right 30% Palette) -->
+    <div class="flex-1 flex overflow-hidden relative">
+      <!-- Left Panel: Question & Options -->
+      <main class="flex-1 lg:w-[70%] flex flex-col bg-white overflow-hidden">
+        <!-- Question Header -->
+        <div class="px-4 sm:px-6 py-3 border-b border-slate-200 flex items-center justify-between bg-slate-50/60 shrink-0">
+          <div class="flex items-center gap-2.5">
+            <span class="text-sm sm:text-base font-extrabold text-slate-800" id="questionNumberLabel">Question 1 of 50</span>
+            <span id="boardTag" class="text-[11px] font-semibold px-2 py-0.5 rounded bg-indigo-50 text-indigo-700 border border-indigo-200">UP / Bihar PYQ</span>
+          </div>
+          <label class="inline-flex items-center gap-1.5 text-xs font-semibold text-purple-700 cursor-pointer select-none">
+            <input type="checkbox" id="markReviewCheckbox" onchange="toggleMarkForReview()" class="w-4 h-4 accent-purple-600 rounded cursor-pointer" />
+            <span>Mark for Review</span>
+          </label>
+        </div>
+
+        <!-- Question Body Scrollable Area -->
+        <div class="flex-1 overflow-y-auto p-4 sm:p-7 space-y-6">
+          <!-- Question Statement -->
+          <div id="questionTextContainer" class="text-base sm:text-lg font-semibold text-slate-900 leading-relaxed math-text">
+            <!-- Injected via JS -->
+          </div>
+
+          <!-- 4 Options -->
+          <div id="optionsContainer" class="space-y-3 max-w-3xl">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+
+        <!-- Bottom Action Bar -->
+        <footer class="border-t border-slate-200 bg-slate-50 px-3 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-2 shrink-0">
+          <div class="flex items-center gap-2">
+            <button
+              onclick="markForReviewAndNext()"
+              class="px-3 sm:px-4 py-2 rounded-lg border border-purple-300 bg-purple-50 hover:bg-purple-100 text-purple-800 text-xs sm:text-sm font-bold transition cursor-pointer"
+            >
+              Mark for Review & Next
+            </button>
+            <button
+              onclick="clearResponse()"
+              class="px-3 sm:px-4 py-2 rounded-lg border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 text-xs sm:text-sm font-semibold transition cursor-pointer"
+            >
+              Clear Response
+            </button>
+          </div>
+
+          <div class="flex items-center gap-2 ml-auto">
+            <button
+              onclick="prevQuestion()"
+              id="prevBtn"
+              class="px-3.5 sm:px-4 py-2 rounded-lg border border-slate-300 bg-white hover:bg-slate-100 disabled:opacity-40 text-slate-700 text-xs sm:text-sm font-bold transition cursor-pointer"
+            >
+              ← Previous
+            </button>
+            <button
+              onclick="saveAndNext()"
+              class="px-4 sm:px-6 py-2 rounded-lg bg-sky-600 hover:bg-sky-700 text-white text-xs sm:text-sm font-bold shadow-sm transition cursor-pointer"
+            >
+              Save & Next →
+            </button>
+          </div>
+        </footer>
+      </main>
+
+      <!-- Mobile Overlay Backdrop -->
+      <div id="mobileBackdrop" onclick="toggleMobilePalette()" class="fixed inset-0 bg-slate-900/50 z-30 hidden lg:hidden"></div>
+
+      <!-- Right Sidebar: Question Palette (30% on Desktop, Slide-over on Mobile) -->
+      <aside
+        id="paletteSidebar"
+        class="fixed lg:static inset-y-0 right-0 w-80 sm:w-96 lg:w-[30%] bg-slate-50 border-l border-slate-200 flex flex-col z-40 transform translate-x-full lg:translate-x-0 transition-transform duration-200 ease-in-out"
+      >
+        <!-- Student Profile Header -->
+        <div class="p-3.5 bg-white border-b border-slate-200 flex items-center justify-between shrink-0">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-sky-600 to-indigo-600 text-white font-bold flex items-center justify-center text-sm">
+              <span id="studentInitial">S</span>
+            </div>
+            <div>
+              <div id="displayStudentName" class="text-sm font-bold text-slate-800 leading-tight">Student</div>
+              <div class="text-[11px] font-semibold text-amber-700">Mentor: Sumit Sir</div>
+            </div>
+          </div>
+          <button onclick="toggleMobilePalette()" class="lg:hidden p-1.5 rounded-lg text-slate-500 hover:bg-slate-100">
+            ✕
+          </button>
+        </div>
+
+        <!-- Legend Counters -->
+        <div class="p-3 bg-white border-b border-slate-200 grid grid-cols-2 gap-2 text-xs shrink-0">
+          <div class="flex items-center gap-2">
+            <span id="countAnswered" class="w-6 h-6 inline-flex items-center justify-center status-answered font-bold text-[11px]">0</span>
+            <span class="text-slate-600 font-medium">Answered</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="countNotAnswered" class="w-6 h-6 inline-flex items-center justify-center status-not-answered font-bold text-[11px]">0</span>
+            <span class="text-slate-600 font-medium">Not Answered</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="countNotVisited" class="w-6 h-6 inline-flex items-center justify-center status-not-visited font-bold text-[11px]">50</span>
+            <span class="text-slate-600 font-medium">Not Visited</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="countMarked" class="w-6 h-6 inline-flex items-center justify-center status-marked font-bold text-[11px]">0</span>
+            <span class="text-slate-600 font-medium">Marked Review</span>
+          </div>
+        </div>
+
+        <!-- Palette Header -->
+        <div class="px-3.5 py-2 bg-sky-100/70 border-b border-sky-200 text-xs font-extrabold text-sky-900 flex items-center justify-between shrink-0">
+          <span>Question Palette (1 – 50)</span>
+          <span class="text-[11px] font-semibold text-sky-700">Click to Jump</span>
+        </div>
+
+        <!-- 1-50 Grid -->
+        <div id="questionPaletteGrid" class="flex-1 overflow-y-auto p-3.5 grid grid-cols-5 gap-2 content-start">
+          <!-- Buttons 1..50 generated by JS -->
+        </div>
+
+        <!-- Submit Test Button -->
+        <div class="p-3.5 bg-white border-t border-slate-200 shrink-0">
+          <button
+            onclick="openSubmitModal()"
+            class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:scale-[0.99] text-white font-extrabold text-sm shadow-md shadow-emerald-600/20 transition cursor-pointer"
+          >
+            Submit Test
+          </button>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- ==================== 3. SUBMIT CONFIRMATION MODAL ==================== -->
+  <div id="submitModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl border border-slate-200 overflow-hidden">
+      <div class="p-5 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+        <h3 class="text-lg font-extrabold text-slate-800">Submit Mock Test?</h3>
+        <button onclick="closeSubmitModal()" class="text-slate-400 hover:text-slate-600 font-bold text-lg">✕</button>
+      </div>
+      <div class="p-6 space-y-4">
+        <p class="text-sm text-slate-600">
+          क्या आप वाकई टेस्ट सबमिट करना चाहते हैं? सबमिट करने के बाद आप उत्तर नहीं बदल पाएंगे।
+        </p>
+        <div class="grid grid-cols-2 gap-3 text-xs">
+          <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 flex justify-between items-center">
+            <span class="font-semibold text-emerald-800">Answered:</span>
+            <span id="modalAnswered" class="text-base font-extrabold text-emerald-700">0</span>
+          </div>
+          <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 flex justify-between items-center">
+            <span class="font-semibold text-rose-800">Not Answered:</span>
+            <span id="modalNotAnswered" class="text-base font-extrabold text-rose-700">0</span>
+          </div>
+          <div class="p-3 rounded-xl bg-purple-50 border border-purple-200 flex justify-between items-center">
+            <span class="font-semibold text-purple-800">Marked Review:</span>
+            <span id="modalMarked" class="text-base font-extrabold text-purple-700">0</span>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-100 border border-slate-200 flex justify-between items-center">
+            <span class="font-semibold text-slate-700">Not Visited:</span>
+            <span id="modalNotVisited" class="text-base font-extrabold text-slate-800">0</span>
+          </div>
+        </div>
+      </div>
+      <div class="p-4 bg-slate-50 border-t border-slate-200 flex items-center justify-end gap-3">
+        <button onclick="closeSubmitModal()" class="px-4 py-2 rounded-xl border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 text-sm font-bold cursor-pointer">
+          Resume Test
+        </button>
+        <button onclick="finishTest()" class="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-extrabold shadow-sm cursor-pointer">
+          Yes, Submit Now
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 4. RESULT & SOLUTION SCORECARD SCREEN ==================== -->
+  <div id="resultScreen" class="hidden flex-1 flex-col bg-slate-100 min-h-screen">
+    <!-- Top Result Header -->
+    <header class="bg-white border-b border-slate-200 px-4 sm:px-8 py-4 sticky top-0 z-20 shadow-xs">
+      <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-amber-100 text-amber-800 border border-amber-300">
+              By Sumit Sir
+            </span>
+            <span class="text-xs font-bold text-sky-600 uppercase tracking-wider">Testbook Style Scorecard</span>
+          </div>
+          <h1 class="text-lg sm:text-xl font-extrabold text-slate-900 mt-1">
+            Class 12 Maths 50 Objective Mock Test — Performance Report
+          </h1>
+        </div>
+        <div class="flex items-center gap-2.5">
+          <button
+            onclick="toggleLanguageResult()"
+            class="px-3 py-2 rounded-xl border border-slate-300 bg-slate-50 hover:bg-slate-100 text-xs font-bold text-slate-700 cursor-pointer"
+          >
+            🌐 <span id="resultLangText">हिन्दी / English</span>
+          </button>
+          <button
+            onclick="reattemptTest()"
+            class="px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-xs sm:text-sm font-bold shadow-sm cursor-pointer"
+          >
+            ↻ Re-attempt Test
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-6xl w-full mx-auto p-4 sm:p-6 space-y-6">
+      <!-- Score Overview Cards -->
+      <div class="grid grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
+        <div class="col-span-2 lg:col-span-1 bg-gradient-to-br from-sky-600 to-blue-700 text-white p-5 rounded-2xl shadow-md">
+          <div class="text-xs font-bold uppercase tracking-wider text-sky-100">Total Score</div>
+          <div class="text-3xl sm:text-4xl font-extrabold mt-1"><span id="resScore">0</span> <span class="text-lg font-semibold text-sky-200">/ 50</span></div>
+          <div id="resStudentBadge" class="text-xs text-sky-100 mt-2 font-medium truncate">Candidate: Student</div>
+        </div>
+
+        <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs">
+          <div class="text-xs font-bold text-slate-400 uppercase">Correct</div>
+          <div id="resCorrect" class="text-2xl sm:text-3xl font-extrabold text-emerald-600 mt-1">0</div>
+          <div class="text-xs text-slate-500 mt-1">+1 mark each</div>
+        </div>
+
+        <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs">
+          <div class="text-xs font-bold text-slate-400 uppercase">Incorrect</div>
+          <div id="resIncorrect" class="text-2xl sm:text-3xl font-extrabold text-rose-600 mt-1">0</div>
+          <div class="text-xs text-slate-500 mt-1">0 negative marking</div>
+        </div>
+
+        <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs">
+          <div class="text-xs font-bold text-slate-400 uppercase">Accuracy</div>
+          <div id="resAccuracy" class="text-2xl sm:text-3xl font-extrabold text-indigo-600 mt-1">0%</div>
+          <div id="resUnattempted" class="text-xs text-slate-500 mt-1">Unattempted: 0</div>
+        </div>
+
+        <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs">
+          <div class="text-xs font-bold text-slate-400 uppercase">Time Taken</div>
+          <div id="resTimeTaken" class="text-2xl sm:text-3xl font-extrabold text-slate-800 mt-1">00:00</div>
+          <div class="text-xs text-slate-500 mt-1">Out of 60:00 mins</div>
+        </div>
+      </div>
+
+      <!-- Sumit Sir's Mentor Feedback Banner -->
+      <div id="mentorRemarkCard" class="bg-white border-l-4 border-amber-500 rounded-2xl p-5 shadow-xs border border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div class="space-y-1">
+          <div class="inline-flex items-center gap-2 text-xs font-extrabold text-amber-700 uppercase tracking-wide">
+            <span>🏆 Sumit Sir's Performance Analysis & Rank Prediction</span>
+          </div>
+          <p id="mentorRemarkText" class="text-sm sm:text-base font-semibold text-slate-800">
+            शानदार प्रयास! नीचे सभी 50 प्रश्नों की व्याख्या (Solutions) जरूर देखें।
+          </p>
+        </div>
+        <div id="rankBadgeBox" class="px-4 py-2 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 font-extrabold text-sm shrink-0">
+          State Topper Zone
+        </div>
+      </div>
+
+      <!-- Filter Tabs for Solutions -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-xs">
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-200">
+          <h2 class="text-base sm:text-lg font-extrabold text-slate-800">
+            Detailed Solutions & Explanations (By Sumit Sir)
+          </h2>
+          <div class="flex flex-wrap gap-2" id="filterButtons">
+            <button onclick="filterSolutions('all')" data-filter="all" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-sky-600 text-white cursor-pointer">
+              All (50)
+            </button>
+            <button onclick="filterSolutions('correct')" data-filter="correct" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer">
+              Correct (<span id="tabCorrectCount">0</span>)
+            </button>
+            <button onclick="filterSolutions('incorrect')" data-filter="incorrect" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer">
+              Incorrect (<span id="tabIncorrectCount">0</span>)
+            </button>
+            <button onclick="filterSolutions('unattempted')" data-filter="unattempted" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer">
+              Unattempted (<span id="tabUnattemptedCount">0</span>)
+            </button>
+          </div>
+        </div>
+
+        <!-- Solutions List -->
+        <div id="solutionsListContainer" class="divide-y divide-slate-200 mt-2">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ==================== JAVASCRIPT: 50 AUTHENTIC QUESTIONS + CBT ENGINE ==================== -->
+  <script>
+    // 50 High-Yield Bihar & UP Board Class 12 Maths Objective Questions
+    const QUESTIONS = [
+      {
+        id: 1,
+        chapter: "Relations & Functions (संबंध एवं फलन)",
+        q_hi: "यदि समुच्चय A = {1, 2, 3} पर एक संबंध R = {(1, 1), (2, 2), (3, 3)} परिभाषित है, तो R किस प्रकार का संबंध है?",
+        q_en: "If a relation R = {(1, 1), (2, 2), (3, 3)} is defined on set A = {1, 2, 3}, then R is:",
+        options_hi: ["केवल स्वतुल्य (Reflexive only)", "केवल सममित (Symmetric only)", "तुल्यता संबंध (Equivalence Relation)", "केवल संक्रामक (Transitive only)"],
+        options_en: ["Reflexive only", "Symmetric only", "Equivalence Relation", "Transitive only"],
+        ans: 2,
+        exp_hi: "चूँकि (1,1), (2,2), (3,3) ∈ R है, इसलिए यह स्वतुल्य (Reflexive) है। साथ ही यह सममित (Symmetric) और संक्रामक (Transitive) की शर्तों को भी संतुष्ट करता है। अतः यह एक तुल्यता संबंध (Equivalence Relation) है।",
+        exp_en: "Since (1,1), (2,2), (3,3) ∈ R, it is reflexive. It also vacuously satisfies symmetric and transitive properties. Hence, it is an Equivalence Relation."
+      },
+      {
+        id: 2,
+        chapter: "Relations & Functions (संबंध एवं फलन)",
+        q_hi: "यदि f : R → R, f(x) = 3x - 4 द्वारा परिभाषित है, तो f⁻¹(x) का मान क्या होगा?",
+        q_en: "If f : R → R is defined by f(x) = 3x - 4, then what is the value of f⁻¹(x)?",
+        options_hi: ["(x + 4) / 3", "(x - 4) / 3", "3x + 4", "(4 - x) / 3"],
+        options_en: ["(x + 4) / 3", "(x - 4) / 3", "3x + 4", "(4 - x) / 3"],
+        ans: 0,
+        exp_hi: "माना y = f(x) = 3x - 4 ⇒ 3x = y + 4 ⇒ x = (y + 4)/3। अतः f⁻¹(x) = (x + 4)/3 होगा।",
+        exp_en: "Let y = f(x) = 3x - 4 ⇒ 3x = y + 4 ⇒ x = (y + 4)/3. Therefore, f⁻¹(x) = (x + 4)/3."
+      },
+      {
+        id: 3,
+        chapter: "Relations & Functions (संबंध एवं फलन)",
+        q_hi: "यदि समुच्चय A में 3 अवयव हैं तथा समुच्चय B में 4 अवयव हैं, तो A से B में कुल एकैकी फलनों (One-One Functions) की संख्या कितनी होगी?",
+        q_en: "If set A has 3 elements and set B has 4 elements, then the total number of one-one functions from A to B is:",
+        options_hi: ["12", "24", "64", "81"],
+        options_en: ["12", "24", "64", "81"],
+        ans: 1,
+        exp_hi: "सूत्र: यदि n(A) = m और n(B) = n (जहाँ n ≥ m), तो कुल एकैकी फलन = ⁿPₘ = ⁴P₃ = 4 × 3 × 2 = 24।",
+        exp_en: "Formula: If n(A) = m and n(B) = n (n ≥ m), total one-one functions = ⁿPₘ = ⁴P₃ = 4 × 3 × 2 = 24."
+      },
+      {
+        id: 4,
+        chapter: "Inverse Trigonometric Functions (प्रतिलोम त्रिकोणमितीय फलन)",
+        q_hi: "cos⁻¹(cos 7π/6) का मुख्य मान बराबर है:",
+        q_en: "The principal value of cos⁻¹(cos 7π/6) is equal to:",
+        options_hi: ["7π / 6", "5π / 6", "π / 3", "π / 6"],
+        options_en: ["7π / 6", "5π / 6", "π / 3", "π / 6"],
+        ans: 1,
+        exp_hi: "cos⁻¹ का मुख्य मान परिसर [0, π] होता है। cos(7π/6) = cos(2π - 5π/6) = cos(5π/6)। चूँकि 5π/6 ∈ [0, π], अतः उत्तर 5π/6 है।",
+        exp_en: "Principal value branch of cos⁻¹ is [0, π]. cos(7π/6) = cos(2π - 5π/6) = cos(5π/6). Since 5π/6 ∈ [0, π], the answer is 5π/6."
+      },
+      {
+        id: 5,
+        chapter: "Inverse Trigonometric Functions (प्रतिलोम त्रिकोणमितीय फलन)",
+        q_hi: "tan⁻¹(√3) - sec⁻¹(-2) का मान किसके बराबर है?",
+        q_en: "The value of tan⁻¹(√3) - sec⁻¹(-2) is equal to:",
+        options_hi: ["π", "-π / 3", "π / 3", "2π / 3"],
+        options_en: ["π", "-π / 3", "π / 3", "2π / 3"],
+        ans: 1,
+        exp_hi: "tan⁻¹(√3) = π/3 तथा sec⁻¹(-2) = π - sec⁻¹(2) = π - π/3 = 2π/3। अतः π/3 - 2π/3 = -π/3।",
+        exp_en: "tan⁻¹(√3) = π/3 and sec⁻¹(-2) = π - sec⁻¹(2) = π - π/3 = 2π/3. Thus, π/3 - 2π/3 = -π/3."
+      },
+      {
+        id: 6,
+        chapter: "Inverse Trigonometric Functions (प्रतिलोम त्रिकोणमितीय फलन)",
+        q_hi: "sin(sec⁻¹ x + cosec⁻¹ x) का मान (जहाँ |x| ≥ 1) क्या होगा?",
+        q_en: "What is the value of sin(sec⁻¹ x + cosec⁻¹ x) for |x| ≥ 1?",
+        options_hi: ["0", "-1", "1", "1 / 2"],
+        options_en: ["0", "-1", "1", "1 / 2"],
+        ans: 2,
+        exp_hi: "हम जानते हैं कि sec⁻¹ x + cosec⁻¹ x = π/2। इसलिए sin(π/2) = 1।",
+        exp_en: "We know that sec⁻¹ x + cosec⁻¹ x = π/2. Therefore, sin(π/2) = 1."
+      },
+      {
+        id: 7,
+        chapter: "Inverse Trigonometric Functions (प्रतिलोम त्रिकोणमितीय फलन)",
+        q_hi: "2 tan⁻¹(1/3) + tan⁻¹(1/7) का मान है:",
+        q_en: "The value of 2 tan⁻¹(1/3) + tan⁻¹(1/7) is:",
+        options_hi: ["π / 2", "π / 4", "π / 3", "π"],
+        options_en: ["π / 2", "π / 4", "π / 3", "π"],
+        ans: 1,
+        exp_hi: "2 tan⁻¹(1/3) = tan⁻¹[(2/3)/(1 - 1/9)] = tan⁻¹(3/4)। अब tan⁻¹(3/4) + tan⁻¹(1/7) = tan⁻¹[(3/4 + 1/7)/(1 - 3/28)] = tan⁻¹(25/25) = tan⁻¹(1) = π/4।",
+        exp_en: "2 tan⁻¹(1/3) = tan⁻¹(3/4). Now tan⁻¹(3/4) + tan⁻¹(1/7) = tan⁻¹[(3/4 + 1/7)/(1 - 3/28)] = tan⁻¹(1) = π/4."
+      },
+      {
+        id: 8,
+        chapter: "Matrices (आव्यूह)",
+        q_hi: "3 × 3 कोटि के ऐसे आव्यूहों की कुल कितनी संख्या होगी जिनकी प्रत्येक प्रविष्टि 0 या 1 है?",
+        q_en: "The number of all possible matrices of order 3 × 3 with each entry 0 or 1 is:",
+        options_hi: ["27", "18", "81", "512"],
+        options_en: ["27", "18", "81", "512"],
+        ans: 3,
+        exp_hi: "3 × 3 आव्यूह में कुल अवयव = 9। प्रत्येक अवयव को 2 तरीकों (0 या 1) से भरा जा सकता है। अतः कुल आव्यूह = 2⁹ = 512।",
+        exp_en: "Total elements in a 3 × 3 matrix = 9. Each entry has 2 choices (0 or 1). Total matrices = 2⁹ = 512."
+      },
+      {
+        id: 9,
+        chapter: "Matrices (आव्यूह)",
+        q_hi: "यदि आव्यूह A = [[cos α, -sin α], [sin α, cos α]] तथा A + A' = I, तो α का मान है:",
+        q_en: "If A = [[cos α, -sin α], [sin α, cos α]] and A + A' = I, then the value of α is:",
+        options_hi: ["π / 6", "π / 3", "π", "3π / 2"],
+        options_en: ["π / 6", "π / 3", "π", "3π / 2"],
+        ans: 1,
+        exp_hi: "A + A' = [[2 cos α, 0], [0, 2 cos α]] = [[1, 0], [0, 1]] ⇒ 2 cos α = 1 ⇒ cos α = 1/2 ⇒ α = π/3।",
+        exp_en: "A + A' = [[2 cos α, 0], [0, 2 cos α]] = I ⇒ 2 cos α = 1 ⇒ cos α = 1/2 ⇒ α = π/3."
+      },
+      {
+        id: 10,
+        chapter: "Matrices (आव्यूह)",
+        q_hi: "यदि A तथा B समान कोटि के सममित आव्यूह (Symmetric Matrices) हैं, तो AB - BA एक है:",
+        q_en: "If A and B are symmetric matrices of the same order, then AB - BA is a:",
+        options_hi: ["विषम सममित आव्यूह (Skew-symmetric)", "सममित आव्यूह (Symmetric)", "शून्य आव्यूह (Zero matrix)", "तत्समक आव्यूह (Identity matrix)"],
+        options_en: ["Skew-symmetric matrix", "Symmetric matrix", "Zero matrix", "Identity matrix"],
+        ans: 0,
+        exp_hi: "(AB - BA)' = (AB)' - (BA)' = B'A' - A'B' = BA - AB = -(AB - BA)। अतः यह एक विषम सममित आव्यूह है।",
+        exp_en: "(AB - BA)' = B'A' - A'B' = BA - AB = -(AB - BA). Hence, it is a skew-symmetric matrix."
+      },
+      {
+        id: 11,
+        chapter: "Matrices (आव्यूह)",
+        q_hi: "यदि A = [[1, 0], [0, 1]] हो, तो A⁴ का मान क्या होगा?",
+        q_en: "If A = [[1, 0], [0, 1]], then what is the value of A⁴?",
+        options_hi: ["[[4, 0], [0, 4]]", "[[1, 0], [0, 1]]", "[[0, 1], [1, 0]]", "[[0, 0], [0, 0]]"],
+        options_en: ["[[4, 0], [0, 4]]", "[[1, 0], [0, 1]]", "[[0, 1], [1, 0]]", "[[0, 0], [0, 0]]"],
+        ans: 1,
+        exp_hi: "चूँकि A एक तत्समक आव्यूह (I) है, और Iⁿ = I होता है, इसलिए A⁴ = I = [[1, 0], [0, 1]]।",
+        exp_en: "Since A is an identity matrix (I), and Iⁿ = I for any positive integer n, A⁴ = [[1, 0], [0, 1]]."
+      },
+      {
+        id: 12,
+        chapter: "Determinants (सारणिक)",
+        q_hi: "यदि |x, 2; 18, x| = |6, 2; 18, 6| हो, तो x बराबर है:",
+        q_en: "If |x, 2; 18, x| = |6, 2; 18, 6|, then x is equal to:",
+        options_hi: ["6", "± 6", "-6", "0"],
+        options_en: ["6", "± 6", "-6", "0"],
+        ans: 1,
+        exp_hi: "बायाँ पक्ष: x² - 36। दायाँ पक्ष: 36 - 36 = 0। अतः x² - 36 = 0 ⇒ x² = 36 ⇒ x = ±6।",
+        exp_en: "LHS: x² - 36. RHS: 36 - 36 = 0. Thus, x² - 36 = 0 ⇒ x² = 36 ⇒ x = ±6."
+      },
+      {
+        id: 13,
+        chapter: "Determinants (सारणिक)",
+        q_hi: "यदि A कोटि 3 का एक व्युत्क्रमणीय वर्ग आव्यूह है, तो |adj A| का मान क्या होगा?",
+        q_en: "Let A be a non-singular square matrix of order 3 × 3. Then |adj A| is equal to:",
+        options_hi: ["|A|", "|A|²", "|A|³", "3|A|"],
+        options_en: ["|A|", "|A|²", "|A|³", "3|A|"],
+        ans: 1,
+        exp_hi: "प्रमेय के अनुसार, n कोटि के वर्ग आव्यूह के लिए |adj A| = |A|ⁿ⁻¹। यहाँ n = 3 है, अतः |adj A| = |A|³⁻¹ = |A|²।",
+        exp_en: "By theorem, for a square matrix of order n, |adj A| = |A|ⁿ⁻¹. Here n = 3, so |adj A| = |A|²."
+      },
+      {
+        id: 14,
+        chapter: "Determinants (सारणिक)",
+        q_hi: "यदि A एक 3 × 3 कोटि का वर्ग आव्यूह है, तो |kA| का मान होगा:",
+        q_en: "If A is a square matrix of order 3 × 3, then |kA| is equal to:",
+        options_hi: ["k|A|", "k²|A|", "k³|A|", "3k|A|"],
+        options_en: ["k|A|", "k²|A|", "k³|A|", "3k|A|"],
+        ans: 2,
+        exp_hi: "सारणिक के गुणधर्म से, n कोटि के आव्यूह के लिए |kA| = kⁿ|A|। यहाँ n = 3 है, इसलिए |kA| = k³|A|।",
+        exp_en: "By property of determinants, for order n, |kA| = kⁿ|A|. Here n = 3, so |kA| = k³|A|."
+      },
+      {
+        id: 15,
+        chapter: "Determinants (सारणिक)",
+        q_hi: "सारणिक Δ = |1, a, b+c; 1, b, c+a; 1, c, a+b| का मान क्या है?",
+        q_en: "What is the value of the determinant Δ = |1, a, b+c; 1, b, c+a; 1, c, a+b|?",
+        options_hi: ["a + b + c", "1", "0", "abc"],
+        options_en: ["a + b + c", "1", "0", "abc"],
+        ans: 2,
+        exp_hi: "संक्रिया C₃ → C₃ + C₂ लगाने पर तीसरे स्तंभ के सभी अवयव (a+b+c) हो जाएंगे। (a+b+c) उभयनिष्ठ लेने पर C₁ और C₃ समान (1,1,1) हो जाते हैं, जिससे सारणिक का मान 0 हो जाता है।",
+        exp_en: "Applying C₃ → C₃ + C₂ makes all elements of C₃ equal to (a+b+c). Taking it common leaves C₁ and C₃ identical, so Δ = 0."
+      },
+      {
+        id: 16,
+        chapter: "Continuity & Differentiability (सांतत्य तथा अवकलनीयता)",
+        q_hi: "d/dx [sin(cos x²)] का मान क्या होगा?",
+        q_en: "What is the derivative d/dx [sin(cos x²)]?",
+        options_hi: ["cos(cos x²)", "-2x sin x² · cos(cos x²)", "2x sin x² · cos(cos x²)", "-cos(cos x²) · sin x²"],
+        options_en: ["cos(cos x²)", "-2x sin x² · cos(cos x²)", "2x sin x² · cos(cos x²)", "-cos(cos x²) · sin x²"],
+        ans: 1,
+        exp_hi: "शृंखला नियम (Chain Rule) से: cos(cos x²) × d/dx(cos x²) = cos(cos x²) × (-sin x²) × 2x = -2x sin x² · cos(cos x²)।",
+        exp_en: "By Chain Rule: cos(cos x²) × (-sin x²) × (2x) = -2x sin x² · cos(cos x²)."
+      },
+      {
+        id: 17,
+        chapter: "Continuity & Differentiability (सांतत्य तथा अवकलनीयता)",
+        q_hi: "यदि y = sin⁻¹ x + cos⁻¹ x हो, तो dy/dx का मान ज्ञात कीजिए:",
+        q_en: "If y = sin⁻¹ x + cos⁻¹ x, then find dy/dx:",
+        options_hi: ["1", "-1", "0", "2 / √(1 - x²)"],
+        options_en: ["1", "-1", "0", "2 / √(1 - x²)"],
+        ans: 2,
+        exp_hi: "चूँकि sin⁻¹ x + cos⁻¹ x = π/2 (एक अचर राशि), और अचर का अवकलन 0 होता है, अतः dy/dx = 0।",
+        exp_en: "Since sin⁻¹ x + cos⁻¹ x = π/2 (a constant), its derivative dy/dx = 0."
+      },
+      {
+        id: 18,
+        chapter: "Continuity & Differentiability (सांतत्य तथा अवकलनीयता)",
+        q_hi: "d/dx (aˣ) का मान क्या होता है?",
+        q_en: "What is the value of d/dx (aˣ)?",
+        options_hi: ["aˣ", "x · aˣ⁻¹", "aˣ logₑ a", "aˣ / logₑ a"],
+        options_en: ["aˣ", "x · aˣ⁻¹", "aˣ logₑ a", "aˣ / logₑ a"],
+        ans: 2,
+        exp_hi: "मानक अवकलन सूत्र: d/dx (aˣ) = aˣ logₑ a।",
+        exp_en: "Standard differentiation formula: d/dx (aˣ) = aˣ logₑ a."
+      },
+      {
+        id: 19,
+        chapter: "Continuity & Differentiability (सांतत्य तथा अवकलनीयता)",
+        q_hi: "यदि y = √(sin x + √(sin x + √(sin x + ... ∞))) हो, तो dy/dx बराबर है:",
+        q_en: "If y = √(sin x + √(sin x + √(sin x + ... ∞))), then dy/dx is equal to:",
+        options_hi: ["cos x / (2y - 1)", "cos x / (1 - 2y)", "sin x / (2y - 1)", "cos x / (2y + 1)"],
+        options_en: ["cos x / (2y - 1)", "cos x / (1 - 2y)", "sin x / (2y - 1)", "cos x / (2y + 1)"],
+        ans: 0,
+        exp_hi: "y = √(sin x + y) ⇒ दोनों ओर वर्ग करने पर y² = sin x + y। अवकलन करने पर: 2y (dy/dx) = cos x + dy/dx ⇒ dy/dx = cos x / (2y - 1)।",
+        exp_en: "y² = sin x + y. Differentiating wrt x: 2y(dy/dx) = cos x + dy/dx ⇒ dy/dx = cos x / (2y - 1)."
+      },
+      {
+        id: 20,
+        chapter: "Continuity & Differentiability (सांतत्य तथा अवकलनीयता)",
+        q_hi: "यदि x = a cos θ तथा y = a sin θ हो, तो dy/dx का मान क्या होगा?",
+        q_en: "If x = a cos θ and y = a sin θ, then what is dy/dx?",
+        options_hi: ["tan θ", "-tan θ", "cot θ", "-cot θ"],
+        options_en: ["tan θ", "-tan θ", "cot θ", "-cot θ"],
+        ans: 3,
+        exp_hi: "dx/dθ = -a sin θ तथा dy/dθ = a cos θ। अतः dy/dx = (a cos θ) / (-a sin θ) = -cot θ।",
+        exp_en: "dx/dθ = -a sin θ and dy/dθ = a cos θ. Thus dy/dx = (a cos θ)/(-a sin θ) = -cot θ."
+      },
+      {
+        id: 21,
+        chapter: "Continuity & Differentiability (सांतत्य तथा अवकलनीयता)",
+        q_hi: "यदि y = e³ˣ हो, तो d²y/dx² का मान है:",
+        q_en: "If y = e³ˣ, then the value of d²y/dx² is:",
+        options_hi: ["3e³ˣ", "9e³ˣ", "e³ˣ", "6e³ˣ"],
+        options_en: ["3e³ˣ", "9e³ˣ", "e³ˣ", "6e³ˣ"],
+        ans: 1,
+        exp_hi: "प्रथम अवकलज dy/dx = 3e³ˣ। द्वितीय अवकलज d²y/dx² = 3 × 3e³ˣ = 9e³ˣ।",
+        exp_en: "First derivative dy/dx = 3e³ˣ. Second derivative d²y/dx² = 9e³ˣ."
+      },
+      {
+        id: 22,
+        chapter: "Applications of Derivatives (अवकलज के अनुप्रयोग)",
+        q_hi: "एक वृत्त की त्रिज्या r = 6 cm पर r के सापेक्ष क्षेत्रफल में परिवर्तन की दर क्या है?",
+        q_en: "The rate of change of the area of a circle with respect to its radius r at r = 6 cm is:",
+        options_hi: ["10π", "12π", "8π", "11π"],
+        options_en: ["10π", "12π", "8π", "11π"],
+        ans: 1,
+        exp_hi: "वृत्त का क्षेत्रफल A = πr² ⇒ dA/dr = 2πr। r = 6 रखने पर dA/dr = 2π(6) = 12π।",
+        exp_en: "Area A = πr² ⇒ dA/dr = 2πr. At r = 6, dA/dr = 2π(6) = 12π."
+      },
+      {
+        id: 23,
+        chapter: "Applications of Derivatives (अवकलज के अनुप्रयोग)",
+        q_hi: "फलन f(x) = x² - 4x + 6 किस अंतराल में निरंतर वर्धमान (Strictly Increasing) है?",
+        q_en: "The function f(x) = x² - 4x + 6 is strictly increasing in the interval:",
+        options_hi: ["(-∞, 2)", "(2, ∞)", "(-∞, ∞)", "(-2, 2)"],
+        options_en: ["(-∞, 2)", "(2, ∞)", "(-∞, ∞)", "(-2, 2)"],
+        ans: 1,
+        exp_hi: "f'(x) = 2x - 4। निरंतर वर्धमान के लिए f'(x) > 0 ⇒ 2x - 4 > 0 ⇒ x > 2, अर्थात् (2, ∞)।",
+        exp_en: "f'(x) = 2x - 4. For strictly increasing, f'(x) > 0 ⇒ 2x - 4 > 0 ⇒ x > 2, i.e., (2, ∞)."
+      },
+      {
+        id: 24,
+        chapter: "Applications of Derivatives (अवकलज के अनुप्रयोग)",
+        q_hi: "वक्र y = 2x² + 3 sin x के x = 0 पर अभिलंब (Normal) की प्रवणता है:",
+        q_en: "The slope of the normal to the curve y = 2x² + 3 sin x at x = 0 is:",
+        options_hi: ["3", "1 / 3", "-3", "-1 / 3"],
+        options_en: ["3", "1 / 3", "-3", "-1 / 3"],
+        ans: 3,
+        exp_hi: "स्पर्श रेखा की प्रवणता m = dy/dx = 4x + 3 cos x। x = 0 पर m = 0 + 3(1) = 3। अभिलंब की प्रवणता = -1/m = -1/3।",
+        exp_en: "Slope of tangent m = dy/dx = 4x + 3 cos x. At x = 0, m = 3. Slope of normal = -1/m = -1/3."
+      },
+      {
+        id: 25,
+        chapter: "Applications of Derivatives (अवकलज के अनुप्रयोग)",
+        q_hi: "फलन f(x) = sin x + cos x का उच्चतम मान (Maximum Value) क्या होगा?",
+        q_en: "What is the maximum value of the function f(x) = sin x + cos x?",
+        options_hi: ["1", "2", "√2", "1 / √2"],
+        options_en: ["1", "2", "√2", "1 / √2"],
+        ans: 2,
+        exp_hi: "a sin x + b cos x का अधिकतम मान √(a² + b²) होता है। यहाँ √(1² + 1²) = √2।",
+        exp_en: "Maximum value of a sin x + b cos x is √(a² + b²) = √(1² + 1²) = √2."
+      },
+      {
+        id: 26,
+        chapter: "Integrals (समाकलन)",
+        q_hi: "∫ sec²(7 - 4x) dx का मान क्या है?",
+        q_en: "What is the value of ∫ sec²(7 - 4x) dx?",
+        options_hi: ["tan(7 - 4x) + C", "-¼ tan(7 - 4x) + C", "¼ tan(7 - 4x) + C", "-4 tan(7 - 4x) + C"],
+        options_en: ["tan(7 - 4x) + C", "-¼ tan(7 - 4x) + C", "¼ tan(7 - 4x) + C", "-4 tan(7 - 4x) + C"],
+        ans: 1,
+        exp_hi: "∫ sec²(ax + b) dx = (1/a) tan(ax + b) + C। यहाँ a = -4 है, अतः -¼ tan(7 - 4x) + C।",
+        exp_en: "∫ sec²(ax + b) dx = (1/a) tan(ax + b) + C. Here a = -4, so -¼ tan(7 - 4x) + C."
+      },
+      {
+        id: 27,
+        chapter: "Integrals (समाकलन)",
+        q_hi: "∫ eˣ (sin x + cos x) dx बराबर है:",
+        q_en: "∫ eˣ (sin x + cos x) dx is equal to:",
+        options_hi: ["eˣ cos x + C", "eˣ sin x + C", "-eˣ sin x + C", "eˣ (sin x - cos x) + C"],
+        options_en: ["eˣ cos x + C", "eˣ sin x + C", "-eˣ sin x + C", "eˣ (sin x - cos x) + C"],
+        ans: 1,
+        exp_hi: "मानक सूत्र: ∫ eˣ [f(x) + f'(x)] dx = eˣ f(x) + C। यहाँ f(x) = sin x तथा f'(x) = cos x है, अतः उत्तर eˣ sin x + C।",
+        exp_en: "Using ∫ eˣ [f(x) + f'(x)] dx = eˣ f(x) + C, with f(x) = sin x and f'(x) = cos x, we get eˣ sin x + C."
+      },
+      {
+        id: 28,
+        chapter: "Integrals (समाकलन)",
+        q_hi: "∫ dx / (1 + x²) का मान बराबर है:",
+        q_en: "∫ dx / (1 + x²) is equal to:",
+        options_hi: ["sin⁻¹ x + C", "tan⁻¹ x + C", "log(1 + x²) + C", "sec⁻¹ x + C"],
+        options_en: ["sin⁻¹ x + C", "tan⁻¹ x + C", "log(1 + x²) + C", "sec⁻¹ x + C"],
+        ans: 1,
+        exp_hi: "यह एक प्रत्यक्ष मानक समाकलन सूत्र है: ∫ dx / (1 + x²) = tan⁻¹ x + C।",
+        exp_en: "Direct standard integration formula: ∫ dx / (1 + x²) = tan⁻¹ x + C."
+      },
+      {
+        id: 29,
+        chapter: "Integrals (समाकलन)",
+        q_hi: "∫ (cos 2x) / (sin x + cos x)² dx बराबर है:",
+        q_en: "∫ (cos 2x) / (sin x + cos x)² dx is equal to:",
+        options_hi: ["-1 / (sin x + cos x) + C", "log |sin x + cos x| + C", "log |sin x - cos x| + C", "1 / (sin x + cos x)² + C"],
+        options_en: ["-1 / (sin x + cos x) + C", "log |sin x + cos x| + C", "log |sin x - cos x| + C", "1 / (sin x + cos x)² + C"],
+        ans: 1,
+        exp_hi: "cos 2x = cos²x - sin²x = (cos x - sin x)(cos x + sin x)। एक (sin x + cos x) कटने के बाद ∫ (cos x - sin x)/(sin x + cos x) dx = log |sin x + cos x| + C।",
+        exp_en: "cos 2x = (cos x - sin x)(cos x + sin x). Simplifying gives ∫ (cos x - sin x)/(sin x + cos x) dx = log |sin x + cos x| + C."
+      },
+      {
+        id: 30,
+        chapter: "Definite Integrals (निश्चित समाकलन)",
+        q_hi: "निश्चित समाकलन ∫₀^(π/2) [sin³ x / (sin³ x + cos³ x)] dx का मान क्या है?",
+        q_en: "What is the value of definite integral ∫₀^(π/2) [sin³ x / (sin³ x + cos³ x)] dx?",
+        options_hi: ["π / 2", "π / 4", "π / 3", "0"],
+        options_en: ["π / 2", "π / 4", "π / 3", "0"],
+        ans: 1,
+        exp_hi: "King's Property ∫₀ᵃ f(x)dx = ∫₀ᵃ f(a-x)dx लगाने पर 2I = ∫₀^(π/2) 1 dx = π/2 ⇒ I = π/4।",
+        exp_en: "Applying ∫₀ᵃ f(x)dx = ∫₀ᵃ f(a-x)dx gives 2I = ∫₀^(π/2) 1 dx = π/2 ⇒ I = π/4."
+      },
+      {
+        id: 31,
+        chapter: "Definite Integrals (निश्चित समाकलन)",
+        q_hi: "∫₋₁¹ x³ · cos⁴ x dx का मान क्या होगा?",
+        q_en: "What is the value of ∫₋₁¹ x³ · cos⁴ x dx?",
+        options_hi: ["1", "2", "0", "-1"],
+        options_en: ["1", "2", "0", "-1"],
+        ans: 2,
+        exp_hi: "यहाँ f(x) = x³ cos⁴ x एक विषम फलन (Odd Function) है क्योंकि f(-x) = -f(x)। प्रगुण ∫₋ₐᵃ f(x)dx = 0 से इसका मान 0 होगा।",
+        exp_en: "Here f(x) = x³ cos⁴ x is an odd function since f(-x) = -f(x). Hence ∫₋₁¹ f(x)dx = 0."
+      },
+      {
+        id: 32,
+        chapter: "Definite Integrals (निश्चित समाकलन)",
+        q_hi: "∫₁^√3 dx / (1 + x²) का मान किसके बराबर है?",
+        q_en: "The value of ∫₁^√3 dx / (1 + x²) is equal to:",
+        options_hi: ["π / 3", "2π / 3", "π / 6", "π / 12"],
+        options_en: ["π / 3", "2π / 3", "π / 6", "π / 12"],
+        ans: 3,
+        exp_hi: "[tan⁻¹ x]₁^√3 = tan⁻¹(√3) - tan⁻¹(1) = π/3 - π/4 = π/12।",
+        exp_en: "[tan⁻¹ x]₁^√3 = tan⁻¹(√3) - tan⁻¹(1) = π/3 - π/4 = π/12."
+      },
+      {
+        id: 33,
+        chapter: "Differential Equations (अवकल समीकरण)",
+        q_hi: "अवकल समीकरण 2x² (d²y/dx²) - 3 (dy/dx) + y = 0 की कोटि (Order) क्या है?",
+        q_en: "What is the order of the differential equation 2x² (d²y/dx²) - 3 (dy/dx) + y = 0?",
+        options_hi: ["2", "1", "0", "परिभाषित नहीं"],
+        options_en: ["2", "1", "0", "Not defined"],
+        ans: 0,
+        exp_hi: "अवकल समीकरण में उपस्थित उच्चतम अवकलज d²y/dx² है, इसलिए इसकी कोटि (Order) 2 है।",
+        exp_en: "The highest order derivative present in the equation is d²y/dx², so its order is 2."
+      },
+      {
+        id: 34,
+        chapter: "Differential Equations (अवकल समीकरण)",
+        q_hi: "अवकल समीकरण (d³y/dx³)² + (d²y/dx²)³ + sin(dy/dx) = 0 की घात (Degree) क्या है?",
+        q_en: "What is the degree of the differential equation (d³y/dx³)² + (d²y/dx²)³ + sin(dy/dx) = 0?",
+        options_hi: ["2", "3", "1", "परिभाषित नहीं (Not defined)"],
+        options_en: ["2", "3", "1", "Not defined"],
+        ans: 3,
+        exp_hi: "चूँकि समीकरण में sin(dy/dx) उपस्थित है, यह अवकलजों में एक बहुपद समीकरण (Polynomial equation) नहीं है। अतः इसकी घात परिभाषित नहीं है।",
+        exp_en: "Because of the term sin(dy/dx), it is not a polynomial equation in derivatives. Hence, its degree is not defined."
+      },
+      {
+        id: 35,
+        chapter: "Differential Equations (अवकल समीकरण)",
+        q_hi: "अवकल समीकरण dy/dx + y tan x = sec x का समाकलन गुणक (Integrating Factor) है:",
+        q_en: "The Integrating Factor (I.F.) of the differential equation dy/dx + y tan x = sec x is:",
+        options_hi: ["cos x", "sec x", "log sec x", "e^(tan x)"],
+        options_en: ["cos x", "sec x", "log sec x", "e^(tan x)"],
+        ans: 1,
+        exp_hi: "यहाँ P = tan x। समाकलन गुणक I.F. = e^(∫ P dx) = e^(∫ tan x dx) = e^(log sec x) = sec x।",
+        exp_en: "Here P = tan x. Integrating Factor I.F. = e^(∫ tan x dx) = e^(log sec x) = sec x."
+      },
+      {
+        id: 36,
+        chapter: "Differential Equations (अवकल समीकरण)",
+        q_hi: "अवकल समीकरण dy/dx = e^(x + y) का व्यापक हल (General Solution) है:",
+        q_en: "The general solution of the differential equation dy/dx = e^(x + y) is:",
+        options_hi: ["eˣ + e⁻ʸ = C", "eˣ + eʸ = C", "e⁻ˣ + eʸ = C", "e⁻ˣ + e⁻ʸ = C"],
+        options_en: ["eˣ + e⁻ʸ = C", "eˣ + eʸ = C", "e⁻ˣ + eʸ = C", "e⁻ˣ + e⁻ʸ = C"],
+        ans: 0,
+        exp_hi: "चर पृथक्करण से: e⁻ʸ dy = eˣ dx। समाकलन करने पर -e⁻ʸ = eˣ + C₁ ⇒ eˣ + e⁻ʸ = C।",
+        exp_en: "Separating variables: e⁻ʸ dy = eˣ dx. Integrating gives -e⁻ʸ = eˣ + C₁ ⇒ eˣ + e⁻ʸ = C."
+      },
+      {
+        id: 37,
+        chapter: "Vector Algebra (सदिश बीजगणित)",
+        q_hi: "सदिश a⃗ = î + ĵ + 2k̂ के अनुदिश एक मात्रक सदिश (Unit Vector) है:",
+        q_en: "The unit vector in the direction of the vector a⃗ = î + ĵ + 2k̂ is:",
+        options_hi: ["(î + ĵ + 2k̂) / √6", "(î + ĵ + 2k̂) / 6", "(î + ĵ + 2k̂) / √4", "(î + ĵ + 2k̂) / 4"],
+        options_en: ["(î + ĵ + 2k̂) / √6", "(î + ĵ + 2k̂) / 6", "(î + ĵ + 2k̂) / √4", "(î + ĵ + 2k̂) / 4"],
+        ans: 0,
+        exp_hi: "|a⃗| = √(1² + 1² + 2²) = √6। मात्रक सदिश â = a⃗ / |a⃗| = (î + ĵ + 2k̂) / √6।",
+        exp_en: "|a⃗| = √(1² + 1² + 2²) = √6. Unit vector â = a⃗ / |a⃗| = (î + ĵ + 2k̂) / √6."
+      },
+      {
+        id: 38,
+        chapter: "Vector Algebra (सदिश बीजगणित)",
+        q_hi: "î · (ĵ × k̂) + ĵ · (î × k̂) + k̂ · (î × ĵ) का मान है:",
+        q_en: "The value of î · (ĵ × k̂) + ĵ · (î × k̂) + k̂ · (î × ĵ) is:",
+        options_hi: ["0", "-1", "1", "3"],
+        options_en: ["0", "-1", "1", "3"],
+        ans: 2,
+        exp_hi: "î · î + ĵ · (-ĵ) + k̂ · k̂ = 1 - 1 + 1 = 1।",
+        exp_en: "î · î + ĵ · (-ĵ) + k̂ · k̂ = 1 - 1 + 1 = 1."
+      },
+      {
+        id: 39,
+        chapter: "Vector Algebra (सदिश बीजगणित)",
+        q_hi: "यदि दो सदिशों a⃗ तथा b⃗ के बीच का कोण θ हो, तो |a⃗ · b⃗| = |a⃗ × b⃗| जब θ बराबर है:",
+        q_en: "If θ is the angle between two vectors a⃗ and b⃗, then |a⃗ · b⃗| = |a⃗ × b⃗| when θ is equal to:",
+        options_hi: ["0", "π / 4", "π / 2", "π"],
+        options_en: ["0", "π / 4", "π / 2", "π"],
+        ans: 1,
+        exp_hi: "|a⃗||b⃗| cos θ = |a⃗||b⃗| sin θ ⇒ tan θ = 1 ⇒ θ = π/4।",
+        exp_en: "|a⃗||b⃗| cos θ = |a⃗||b⃗| sin θ ⇒ tan θ = 1 ⇒ θ = π/4."
+      },
+      {
+        id: 40,
+        chapter: "Vector Algebra (सदिश बीजगणित)",
+        q_hi: "यदि सदिश 2î + λĵ + k̂ तथा î - 2ĵ + 3k̂ परस्पर लंबवत (Perpendicular) हैं, तो λ का मान है:",
+        q_en: "If the vectors 2î + λĵ + k̂ and î - 2ĵ + 3k̂ are perpendicular, then the value of λ is:",
+        options_hi: ["5 / 2", "-5 / 2", "2 / 5", "5"],
+        options_en: ["5 / 2", "-5 / 2", "2 / 5", "5"],
+        ans: 0,
+        exp_hi: "लंबवत सदिशों के लिए a⃗ · b⃗ = 0 ⇒ (2)(1) + (λ)(-2) + (1)(3) = 0 ⇒ 2 - 2λ + 3 = 0 ⇒ 2λ = 5 ⇒ λ = 5/2।",
+        exp_en: "For perpendicular vectors, a⃗ · b⃗ = 0 ⇒ 2 - 2λ + 3 = 0 ⇒ 2λ = 5 ⇒ λ = 5/2."
+      },
+      {
+        id: 41,
+        chapter: "3D Geometry (त्रिविमीय ज्यामिति)",
+        q_hi: "x-अक्ष की दिक्-कोज्याएं (Direction Cosines) क्या होती हैं?",
+        q_en: "What are the direction cosines of the x-axis?",
+        options_hi: ["(0, 0, 1)", "(1, 0, 0)", "(0, 1, 0)", "(1, 1, 1)"],
+        options_en: ["(0, 0, 1)", "(1, 0, 0)", "(0, 1, 0)", "(1, 1, 1)"],
+        ans: 1,
+        exp_hi: "x-अक्ष स्वयं से 0° तथा y व z अक्षों से 90° का कोण बनाती है। अतः (cos 0°, cos 90°, cos 90°) = (1, 0, 0)।",
+        exp_en: "The x-axis makes 0° with itself and 90° with y and z axes. Hence (cos 0°, cos 90°, cos 90°) = (1, 0, 0)."
+      },
+      {
+        id: 42,
+        chapter: "3D Geometry (त्रिविमीय ज्यामिति)",
+        q_hi: "यदि किसी रेखा की दिक्-कोज्याएं l, m, n हैं, तो निम्नलिखित में से कौन सा संबंध सत्य है?",
+        q_en: "If l, m, n are the direction cosines of a line, which of the following relations is true?",
+        options_hi: ["l + m + n = 1", "l² + m² + n² = 1", "l² + m² + n² = 0", "lmn = 1"],
+        options_en: ["l + m + n = 1", "l² + m² + n² = 1", "l² + m² + n² = 0", "lmn = 1"],
+        ans: 1,
+        exp_hi: "त्रिविमीय ज्यामिति का मूलभूत सर्वसमिका नियम: l² + m² + n² = 1।",
+        exp_en: "Fundamental identity in 3D geometry: l² + m² + n² = 1."
+      },
+      {
+        id: 43,
+        chapter: "3D Geometry (त्रिविमीय ज्यामिति)",
+        q_hi: "दो बिंदुओं (1, 2, 3) तथा (4, 5, 6) को मिलाने वाली रेखा के दिक्-अनुपात (Direction Ratios) हैं:",
+        q_en: "The direction ratios of the line joining the points (1, 2, 3) and (4, 5, 6) are:",
+        options_hi: ["(3, 3, 3)", "(5, 7, 9)", "(1, 1, 1)", "विकल्प A और C दोनों सही हैं"],
+        options_en: ["(3, 3, 3)", "(5, 7, 9)", "(1, 1, 1)", "Both A and C are correct"],
+        ans: 3,
+        exp_hi: "दिक्-अनुपात = (x₂ - x₁, y₂ - y₁, z₂ - z₁) = (4-1, 5-2, 6-3) = (3, 3, 3), जो (1, 1, 1) के समानुपाती है। अतः दोनों सही हैं।",
+        exp_en: "Direction ratios = (4-1, 5-2, 6-3) = (3, 3, 3), which is proportional to (1, 1, 1). Thus both A and C are valid."
+      },
+      {
+        id: 44,
+        chapter: "3D Geometry (त्रिविमीय ज्यामिति)",
+        q_hi: "समतल 2x + 3y + 4z = 12 द्वारा अक्षों पर काटे गए अंतःखंड (Intercepts) हैं:",
+        q_en: "The intercepts cut off by the plane 2x + 3y + 4z = 12 on the coordinate axes are:",
+        options_hi: ["2, 3, 4", "6, 4, 3", "1/2, 1/3, 1/4", "12, 12, 12"],
+        options_en: ["2, 3, 4", "6, 4, 3", "1/2, 1/3, 1/4", "12, 12, 12"],
+        ans: 1,
+        exp_hi: "समीकरण को 12 से भाग देने पर: x/6 + y/4 + z/3 = 1। अतः अंतःखंड 6, 4, 3 हैं।",
+        exp_en: "Dividing the equation by 12 gives: x/6 + y/4 + z/3 = 1. Hence intercepts are 6, 4, 3."
+      },
+      {
+        id: 45,
+        chapter: "Linear Programming (रैखिक प्रोग्रामन)",
+        q_hi: "व्यवरोध x ≥ 0, y ≥ 0 के अंतर्गत उद्देश्य फलन Z = 3x + 4y का न्यूनतम मान क्या होगा?",
+        q_en: "What is the minimum value of the objective function Z = 3x + 4y subject to x ≥ 0, y ≥ 0?",
+        options_hi: ["0", "3", "4", "7"],
+        options_en: ["0", "3", "4", "7"],
+        ans: 0,
+        exp_hi: "कोणीय बिंदु (0, 0) पर Z = 3(0) + 4(0) = 0, जो कि न्यूनतम मान है।",
+        exp_en: "At the corner point (0, 0), Z = 3(0) + 4(0) = 0, which is the minimum value."
+      },
+      {
+        id: 46,
+        chapter: "Linear Programming (रैखिक प्रोग्रामन)",
+        q_hi: "एक रैखिक प्रोग्रामन समस्या (LPP) का इष्टतम मान (Optimal Value) सुसंगत क्षेत्र के किस बिंदु पर प्राप्त होता है?",
+        q_en: "The optimal value of the objective function in an LPP is attained at which points of the feasible region?",
+        options_hi: ["केवल कोणीय बिंदुओं पर (Corner points)", "क्षेत्र के केंद्र पर", "अक्षों के मध्य बिंदु पर", "इनमें से कोई नहीं"],
+        options_en: ["Corner points of feasible region", "Center of the region", "Midpoint of axes", "None of these"],
+        ans: 0,
+        exp_hi: "कोणीय बिंदु प्रमेय (Corner Point Theorem) के अनुसार, LPP का इष्टतम मान सदैव सुसंगत क्षेत्र के कोणीय बिंदुओं पर प्राप्त होता है।",
+        exp_en: "By the Corner Point Theorem, the optimal value always occurs at a corner point (vertex) of the feasible region."
+      },
+      {
+        id: 47,
+        chapter: "Probability (प्रायिकता)",
+        q_hi: "यदि P(A) = 1/2, P(B) = 0, तब P(A | B) क्या है?",
+        q_en: "If P(A) = 1/2 and P(B) = 0, then P(A | B) is:",
+        options_hi: ["0", "1 / 2", "परिभाषित नहीं (Not defined)", "1"],
+        options_en: ["0", "1 / 2", "Not defined", "1"],
+        ans: 2,
+        exp_hi: "सप्रतिबंध प्रायिकता P(A | B) = P(A ∩ B) / P(B)। चूँकि हर P(B) = 0 है, इसलिए यह परिभाषित नहीं है।",
+        exp_en: "Conditional probability P(A | B) = P(A ∩ B) / P(B). Since denominator P(B) = 0, it is not defined."
+      },
+      {
+        id: 48,
+        chapter: "Probability (प्रायिकता)",
+        q_hi: "यदि A और B दो स्वतंत्र घटनाएं (Independent Events) हैं तथा P(A) = 0.3 और P(B) = 0.4, तो P(A ∩ B) ज्ञात कीजिए:",
+        q_en: "If A and B are two independent events with P(A) = 0.3 and P(B) = 0.4, then find P(A ∩ B):",
+        options_hi: ["0.7", "0.12", "0.1", "0.75"],
+        options_en: ["0.7", "0.12", "0.1", "0.75"],
+        ans: 1,
+        exp_hi: "स्वतंत्र घटनाओं के लिए P(A ∩ B) = P(A) · P(B) = 0.3 × 0.4 = 0.12।",
+        exp_en: "For independent events, P(A ∩ B) = P(A) · P(B) = 0.3 × 0.4 = 0.12."
+      },
+      {
+        id: 49,
+        chapter: "Probability (प्रायिकता)",
+        q_hi: "एक पासे को एक बार उछालने पर सम अभाज्य संख्या (Even Prime Number) प्राप्त होने की प्रायिकता क्या है?",
+        q_en: "What is the probability of obtaining an even prime number on a single throw of a die?",
+        options_hi: ["0", "1 / 3", "1 / 2", "1 / 6"],
+        options_en: ["0", "1 / 3", "1 / 2", "1 / 6"],
+        ans: 3,
+        exp_hi: "पासे पर अंक {1, 2, 3, 4, 5, 6} होते हैं। इनमें केवल '2' ही एक सम अभाज्य संख्या है। अतः प्रायिकता = 1/6।",
+        exp_en: "Sample space = {1, 2, 3, 4, 5, 6}. Only '2' is an even prime number. Thus probability = 1/6."
+      },
+      {
+        id: 50,
+        chapter: "Probability (प्रायिकता)",
+        q_hi: "यदि P(A) = 3/5 तथा P(B) = 1/5 और A व B स्वतंत्र घटनाएं हैं, तो P(A ∪ B) का मान होगा:",
+        q_en: "If P(A) = 3/5 and P(B) = 1/5 and A, B are independent events, then P(A ∪ B) is:",
+        options_hi: ["4 / 5", "17 / 25", "3 / 25", "19 / 25"],
+        options_en: ["4 / 5", "17 / 25", "3 / 25", "19 / 25"],
+        ans: 1,
+        exp_hi: "P(A ∩ B) = (3/5)(1/5) = 3/25। अब P(A ∪ B) = P(A) + P(B) - P(A ∩ B) = 3/5 + 1/5 - 3/25 = 20/25 - 3/25 = 17/25।",
+        exp_en: "P(A ∩ B) = (3/5)(1/5) = 3/25. Now P(A ∪ B) = 3/5 + 1/5 - 3/25 = 17/25."
+      }
+    ];
+
+    // App State
+    let currentLang = 'hi';
+    let studentName = 'Student';
+    let currentIndex = 0;
+    let totalSeconds = 60 * 60; // 60 Minutes
+    let timerInterval = null;
+    let isTestSubmitted = false;
+
+    // Track state for all 50 questions
+    // status: 'not-visited' | 'not-answered' | 'answered' | 'marked' | 'marked-answered'
+    let userStates = QUESTIONS.map(() => ({
+      selectedOption: null,
+      markedForReview: false,
+      visited: false
+    }));
+
+    // Start Test Function
+    function startTest() {
+      const nameVal = document.getElementById('studentNameInput').value.trim();
+      studentName = nameVal || 'Board Aspirant';
+      currentLang = document.getElementById('startLangSelect').value;
+
+      document.getElementById('displayStudentName').textContent = studentName;
+      document.getElementById('studentInitial').textContent = studentName.charAt(0).toUpperCase();
+      updateLangButtonUI();
+
+      // Switch screens
+      document.getElementById('startScreen').classList.add('hidden');
+      document.getElementById('examScreen').classList.remove('hidden');
+      document.getElementById('examScreen').classList.add('flex');
+
+      // Build Palette & Load First Question
+      buildQuestionPalette();
+      goToQuestion(0);
+      startTimer();
+    }
+
+    // Timer Logic
+    function startTimer() {
+      clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        if (totalSeconds <= 0) {
+          clearInterval(timerInterval);
+          finishTest();
+          return;
+        }
+        totalSeconds--;
+        const mins = Math.floor(totalSeconds / 60);
+        const secs = totalSeconds % 60;
+        const display = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        document.getElementById('timerDisplay').textContent = display;
+
+        // Warning color under 5 mins
+        if (totalSeconds <= 300) {
+          document.getElementById('timerBox').classList.remove('bg-slate-900');
+          document.getElementById('timerBox').classList.add('bg-rose-600', 'animate-pulse');
+        }
+      }, 1000);
+    }
+
+    // Language Toggle
+    function toggleLanguage() {
+      currentLang = currentLang === 'hi' ? 'en' : 'hi';
+      updateLangButtonUI();
+      renderCurrentQuestion();
+    }
+
+    function updateLangButtonUI() {
+      document.getElementById('langBadgeText').textContent = currentLang === 'hi' ? 'हिन्दी' : 'English';
+    }
+
+    // Build 1-50 Palette Grid
+    function buildQuestionPalette() {
+      const grid = document.getElementById('questionPaletteGrid');
+      grid.innerHTML = '';
+      QUESTIONS.forEach((q, idx) => {
+        const btn = document.createElement('button');
+        btn.id = `palette-btn-${idx}`;
+        btn.textContent = q.id;
+        btn.className = 'h-10 w-full font-bold text-xs flex items-center justify-center transition cursor-pointer status-not-visited';
+        btn.onclick = () => {
+          goToQuestion(idx);
+          // Close mobile drawer if open
+          if (window.innerWidth < 1024) {
+            closeMobilePalette();
+          }
+        };
+        grid.appendChild(btn);
+      });
+    }
+
+    // Compute Status Class for a question index
+    function getQuestionStatusClass(idx) {
+      const st = userStates[idx];
+      if (!st.visited) return 'status-not-visited';
+      if (st.markedForReview && st.selectedOption !== null) return 'status-marked-answered';
+      if (st.markedForReview) return 'status-marked';
+      if (st.selectedOption !== null) return 'status-answered';
+      return 'status-not-answered';
+    }
+
+    // Update Palette Visuals & Counters
+    function updatePaletteAndCounters() {
+      let answered = 0;
+      let notAnswered = 0;
+      let notVisited = 0;
+      let marked = 0;
+
+      userStates.forEach((st, idx) => {
+        const btn = document.getElementById(`palette-btn-${idx}`);
+        if (!btn) return;
+
+        const statusClass = getQuestionStatusClass(idx);
+        btn.className = `h-10 w-full font-bold text-xs flex items-center justify-center transition cursor-pointer ${statusClass} ${idx === currentIndex ? 'palette-active' : ''}`;
+
+        if (!st.visited) {
+          notVisited++;
+        } else if (st.markedForReview) {
+          marked++;
+        } else if (st.selectedOption !== null) {
+          answered++;
+        } else {
+          notAnswered++;
+        }
+      });
+
+      document.getElementById('countAnswered').textContent = answered;
+      document.getElementById('countNotAnswered').textContent = notAnswered;
+      document.getElementById('countNotVisited').textContent = notVisited;
+      document.getElementById('countMarked').textContent = marked;
+    }
+
+    // Navigate to Question
+    function goToQuestion(idx) {
+      if (idx < 0 || idx >= QUESTIONS.length) return;
+      currentIndex = idx;
+      userStates[idx].visited = true;
+      renderCurrentQuestion();
+      updatePaletteAndCounters();
+    }
+
+    // Render Current Question & Options
+    function renderCurrentQuestion() {
+      const q = QUESTIONS[currentIndex];
+      const st = userStates[currentIndex];
+
+      document.getElementById('questionNumberLabel').textContent = `Question ${q.id} of ${QUESTIONS.length}`;
+      document.getElementById('chapterTag').textContent = q.chapter;
+      document.getElementById('markReviewCheckbox').checked = st.markedForReview;
+      document.getElementById('prevBtn').disabled = currentIndex === 0;
+
+      // Question text
+      const qText = currentLang === 'hi' ? q.q_hi : q.q_en;
+      document.getElementById('questionTextContainer').innerHTML = `
+        <div class="text-xs font-bold text-sky-600 uppercase tracking-wider mb-1.5 sm:hidden">${q.chapter}</div>
+        <div><span class="font-extrabold text-sky-700 mr-1.5">Q.${q.id}</span> ${qText}</div>
+      `;
+
+      // Options
+      const opts = currentLang === 'hi' ? q.options_hi : q.options_en;
+      const letters = ['A', 'B', 'C', 'D'];
+      const optionsContainer = document.getElementById('optionsContainer');
+      optionsContainer.innerHTML = '';
+
+      opts.forEach((optText, optIdx) => {
+        const isSelected = st.selectedOption === optIdx;
+        const card = document.createElement('div');
+        card.onclick = () => selectOption(optIdx);
+        card.className = `p-3.5 sm:p-4 rounded-xl border-2 transition cursor-pointer flex items-center gap-3.5 ${
+          isSelected
+            ? 'border-sky-600 bg-sky-50/80 shadow-xs'
+            : 'border-slate-200 bg-white hover:border-sky-300 hover:bg-slate-50'
+        }`;
+
+        card.innerHTML = `
+          <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-extrabold shrink-0 transition ${
+            isSelected
+              ? 'bg-sky-600 text-white'
+              : 'bg-slate-100 text-slate-700 border border-slate-300'
+          }">
+            ${letters[optIdx]}
+          </div>
+          <div class="text-sm sm:text-base font-medium text-slate-800 math-text flex-1">
+            ${optText}
+          </div>
+          <div class="w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 ${
+            isSelected ? 'border-sky-600' : 'border-slate-300'
+          }">
+            ${isSelected ? '<div class="w-2.5 h-2.5 rounded-full bg-sky-600"></div>' : ''}
+          </div>
+        `;
+        optionsContainer.appendChild(card);
+      });
+    }
+
+    // Select an Option
+    function selectOption(optIdx) {
+      userStates[currentIndex].selectedOption = optIdx;
+      renderCurrentQuestion();
+      updatePaletteAndCounters();
+    }
+
+    // Clear Response
+    function clearResponse() {
+      userStates[currentIndex].selectedOption = null;
+      renderCurrentQuestion();
+      updatePaletteAndCounters();
+    }
+
+    // Toggle Mark for Review Checkbox
+    function toggleMarkForReview() {
+      userStates[currentIndex].markedForReview = document.getElementById('markReviewCheckbox').checked;
+      updatePaletteAndCounters();
+    }
+
+    // Mark for Review & Next
+    function markForReviewAndNext() {
+      userStates[currentIndex].markedForReview = true;
+      updatePaletteAndCounters();
+      if (currentIndex < QUESTIONS.length - 1) {
+        goToQuestion(currentIndex + 1);
+      } else {
+        renderCurrentQuestion();
+      }
+    }
+
+    // Save & Next
+    function saveAndNext() {
+      updatePaletteAndCounters();
+      if (currentIndex < QUESTIONS.length - 1) {
+        goToQuestion(currentIndex + 1);
+      } else {
+        openSubmitModal();
+      }
+    }
+
+    // Previous Question
+    function prevQuestion() {
+      if (currentIndex > 0) {
+        goToQuestion(currentIndex - 1);
+      }
+    }
+
+    // Mobile Palette Drawer Controls
+    function toggleMobilePalette() {
+      const sidebar = document.getElementById('paletteSidebar');
+      const backdrop = document.getElementById('mobileBackdrop');
+      const isClosed = sidebar.classList.contains('translate-x-full');
+      if (isClosed) {
+        sidebar.classList.remove('translate-x-full');
+        backdrop.classList.remove('hidden');
+      } else {
+        closeMobilePalette();
+      }
+    }
+
+    function closeMobilePalette() {
+      document.getElementById('paletteSidebar').classList.add('translate-x-full');
+      document.getElementById('mobileBackdrop').classList.add('hidden');
+    }
+
+    // Submit Modal
+    function openSubmitModal() {
+      let answered = 0, notAnswered = 0, marked = 0, notVisited = 0;
+      userStates.forEach(st => {
+        if (!st.visited) notVisited++;
+        else if (st.markedForReview) marked++;
+        else if (st.selectedOption !== null) answered++;
+        else notAnswered++;
+      });
+
+      document.getElementById('modalAnswered').textContent = answered;
+      document.getElementById('modalNotAnswered').textContent = notAnswered;
+      document.getElementById('modalMarked').textContent = marked;
+      document.getElementById('modalNotVisited').textContent = notVisited;
+
+      const modal = document.getElementById('submitModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeSubmitModal() {
+      const modal = document.getElementById('submitModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    // Finish Test & Show Scorecard
+    function finishTest() {
+      if (isTestSubmitted) return;
+      isTestSubmitted = true;
+      clearInterval(timerInterval);
+      closeSubmitModal();
+
+      // Calculate Results
+      let correct = 0;
+      let incorrect = 0;
+      let unattempted = 0;
+
+      QUESTIONS.forEach((q, idx) => {
+        const sel = userStates[idx].selectedOption;
+        if (sel === null) {
+          unattempted++;
+        } else if (sel === q.ans) {
+          correct++;
+        } else {
+          incorrect++;
+        }
+      });
+
+      const attempted = correct + incorrect;
+      const accuracy = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
+      const elapsedSeconds = (60 * 60) - totalSeconds;
+      const eMins = Math.floor(elapsedSeconds / 60);
+      const eSecs = elapsedSeconds % 60;
+      const timeStr = `${String(eMins).padStart(2, '0')}:${String(eSecs).padStart(2, '0')}`;
+
+      // Populate Scorecard
+      document.getElementById('resScore').textContent = correct;
+      document.getElementById('resStudentBadge').textContent = `Candidate: ${studentName}`;
+      document.getElementById('resCorrect').textContent = correct;
+      document.getElementById('resIncorrect').textContent = incorrect;
+      document.getElementById('resAccuracy').textContent = `${accuracy}%`;
+      document.getElementById('resUnattempted').textContent = `Unattempted: ${unattempted}`;
+      document.getElementById('resTimeTaken').textContent = timeStr;
+
+      document.getElementById('tabCorrectCount').textContent = correct;
+      document.getElementById('tabIncorrectCount').textContent = incorrect;
+      document.getElementById('tabUnattemptedCount').textContent = unattempted;
+
+      // Sumit Sir's Dynamic Remark
+      const remarkEl = document.getElementById('mentorRemarkText');
+      const rankBadge = document.getElementById('rankBadgeBox');
+      if (correct >= 45) {
+        remarkEl.textContent = `अद्भुत ${studentName}! आपकी तैयारी स्टेट टॉपर (Top-10 Rank) लेवल की है। बोर्ड परीक्षा में आप 95+ अंक आसानी से ला सकते हैं।`;
+        rankBadge.textContent = "🥇 State Topper Level";
+      } else if (correct >= 35) {
+        remarkEl.textContent = `बहुत बढ़िया ${studentName}! आपका स्कोर मजबूत है। जो प्रश्न गलत हुए हैं, नीचे Sumit Sir की व्याख्या से उन्हें तुरंत रिवाइज करें।`;
+        rankBadge.textContent = "🥈 90%+ Scorer Zone";
+      } else if (correct >= 25) {
+        remarkEl.textContent = `अच्छा प्रयास ${studentName}! कैलकुलस और वेक्टर के सूत्रों का रोज़ अभ्यास करें, आपका स्कोर बहुत तेजी से बढ़ेगा।`;
+        rankBadge.textContent = "🥉 First Division Zone";
+      } else {
+        remarkEl.textContent = `हिम्मत मत हारिए ${studentName}! नीचे दिए गए सभी 50 प्रश्नों के हल (Solutions) ध्यान से पढ़ें और दोबारा टेस्ट दें।`;
+        rankBadge.textContent = "📚 Keep Practicing";
+      }
+
+      // Switch Screen
+      document.getElementById('examScreen').classList.add('hidden');
+      document.getElementById('examScreen').classList.remove('flex');
+      document.getElementById('resultScreen').classList.remove('hidden');
+      document.getElementById('resultScreen').classList.add('flex');
+
+      renderSolutions('all');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    let currentFilter = 'all';
+
+    function toggleLanguageResult() {
+      currentLang = currentLang === 'hi' ? 'en' : 'hi';
+      renderSolutions(currentFilter);
+    }
+
+    function filterSolutions(type) {
+      currentFilter = type;
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        if (btn.dataset.filter === type) {
+          btn.className = 'filter-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-sky-600 text-white cursor-pointer';
+        } else {
+          btn.className = 'filter-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer';
+        }
+      });
+      renderSolutions(type);
+    }
+
+    function renderSolutions(filterType) {
+      const container = document.getElementById('solutionsListContainer');
+      container.innerHTML = '';
+      const letters = ['A', 'B', 'C', 'D'];
+
+      QUESTIONS.forEach((q, idx) => {
+        const sel = userStates[idx].selectedOption;
+        const isCorrect = sel === q.ans;
+        const isUnattempted = sel === null;
+
+        if (filterType === 'correct' && !isCorrect) return;
+        if (filterType === 'incorrect' && (isCorrect || isUnattempted)) return;
+        if (filterType === 'unattempted' && !isUnattempted) return;
+
+        const qText = currentLang === 'hi' ? q.q_hi : q.q_en;
+        const opts = currentLang === 'hi' ? q.options_hi : q.options_en;
+        const exp = currentLang === 'hi' ? q.exp_hi : q.exp_en;
+
+        let badgeHtml = '';
+        if (isUnattempted) {
+          badgeHtml = '<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-600 border border-slate-300">Unattempted (0)</span>';
+        } else if (isCorrect) {
+          badgeHtml = '<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-300">✓ Correct (+1)</span>';
+        } else {
+          badgeHtml = '<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-100 text-rose-800 border border-rose-300">✕ Incorrect (0)</span>';
+        }
+
+        const item = document.createElement('div');
+        item.className = 'py-5 space-y-3';
+        item.innerHTML = `
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+              <span class="font-extrabold text-sm text-sky-700">Q.${q.id}</span>
+              <span class="text-xs font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">${q.chapter}</span>
+            </div>
+            ${badgeHtml}
+          </div>
+
+          <div class="text-sm sm:text-base font-bold text-slate-900 math-text leading-relaxed">
+            ${qText}
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            ${opts.map((opt, oIdx) => {
+              let style = 'border-slate-200 bg-white text-slate-700';
+              let tag = '';
+              if (oIdx === q.ans) {
+                style = 'border-emerald-500 bg-emerald-50 text-emerald-900 font-bold';
+                tag = '<span class="text-[11px] font-extrabold text-emerald-700 ml-auto">✓ Correct Answer</span>';
+              } else if (oIdx === sel && sel !== q.ans) {
+                style = 'border-rose-500 bg-rose-50 text-rose-900 font-semibold';
+                tag = '<span class="text-[11px] font-extrabold text-rose-700 ml-auto">✕ Your Choice</span>';
+              }
+              return `
+                <div class="p-3 rounded-xl border ${style} text-xs sm:text-sm flex items-center gap-2.5 math-text">
+                  <span class="w-6 h-6 rounded-full bg-white/80 border border-current flex items-center justify-center text-xs font-extrabold shrink-0">${letters[oIdx]}</span>
+                  <span>${opt}</span>
+                  ${tag}
+                </div>
+              `;
+            }).join('')}
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-amber-50/80 border border-amber-200 text-xs sm:text-sm text-slate-800 leading-relaxed">
+            <div class="font-extrabold text-amber-800 mb-1 flex items-center gap-1.5">
+              <span>💡 Sumit Sir's Solution / व्याख्या:</span>
+            </div>
+            <div class="math-text">${exp}</div>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+
+      if (container.innerHTML === '') {
+        container.innerHTML = `<div class="py-10 text-center text-sm font-semibold text-slate-500">इस श्रेणी में कोई प्रश्न नहीं है।</div>`;
+      }
+    }
+
+    // Re-attempt Test
+    function reattemptTest() {
+      isTestSubmitted = false;
+      totalSeconds = 60 * 60;
+      currentIndex = 0;
+      userStates = QUESTIONS.map(() => ({
+        selectedOption: null,
+        markedForReview: false,
+        visited: false
+      }));
+
+      document.getElementById('timerDisplay').textContent = '60:00';
+      document.getElementById('timerBox').classList.remove('bg-rose-600', 'animate-pulse');
+      document.getElementById('timerBox').classList.add('bg-slate-900');
+
+      document.getElementById('resultScreen').classList.add('hidden');
+      document.getElementById('resultScreen').classList.remove('flex');
+      document.getElementById('examScreen').classList.remove('hidden');
+      document.getElementById('examScreen').classList.add('flex');
+
+      buildQuestionPalette();
+      goToQuestion(0);
+      startTimer();
+    }
+  </script>
+</body>
+</html>

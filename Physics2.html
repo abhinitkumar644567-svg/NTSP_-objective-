@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>फिजिक्स 12th (2022) - 70 प्रश्नों की महा टेस्ट सीरीज</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 15px;
+        }
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #1f2937;
+            border-bottom: 3px solid #8b5cf6;
+            padding-bottom: 15px;
+            font-size: 26px;
+        }
+        .info-bar {
+            text-align: center;
+            font-size: 16px;
+            color: #ffffff;
+            background: #6d28d9;
+            margin-bottom: 25px;
+            font-weight: bold;
+            padding: 12px;
+            border-radius: 8px;
+            letter-spacing: 0.5px;
+        }
+        .question-box {
+            margin-bottom: 25px;
+            padding: 20px;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            background-color: #f9fafb;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .question-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: #111827;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        .options-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .option-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 12px 18px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            background-color: #ffffff;
+            border: 2px solid #d1d5db;
+            color: #374151;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .option-btn:hover:not(:disabled) {
+            background-color: #ede9fe;
+            border-color: #a78bfa;
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+        }
+        .correct {
+            background-color: #d1fae5 !important;
+            border-color: #10b981 !important;
+            color: #065f46 !important;
+            font-weight: bold;
+        }
+        .incorrect {
+            background-color: #fee2e2 !important;
+            border-color: #ef4444 !important;
+            color: #991b1b !important;
+        }
+        .feedback {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        .feedback-correct {
+            background-color: #d1fae5;
+            color: #065f46;
+            border: 1px solid #6ee7b7;
+        }
+        .feedback-wrong {
+            background-color: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fcd34d;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>फिजिक्स बोर्ड परीक्षा (2022) - ऑब्जेक्टिव टेस्ट सीरीज</h1>
+    <div class="info-bar">कुल प्रश्न: 70 | सही उत्तर चुनें और अपना स्कोर चेक करें</div>
+    <div id="quiz-container"></div>
+</div>
+
+<script>
+    // फिजिक्स 2022 पेपर के सभी 70 प्रश्न
+    const questions = [
+        { q: "1. किसी बिंदु पर विद्युत-क्षेत्र की तीव्रता होती है :", options: ["(A) E = Fq", "(B) E = F/q", "(C) E = 1/2 Fq", "(D) E = q/F"], ans: 1 },
+        { q: "2. आवेश का पृष्ठ-घनत्व होता है :", options: ["(A) σ = Q/A", "(B) σ = Q/l", "(C) σ = Q/V", "(D) σ = Q·A"], ans: 0 },
+        { q: "3. गोलीय संधारित्र की धारिता होती है :", options: ["(A) C = 4πε₀ [rR/(R-r)]", "(B) C = 4πε₀ [rR/(r+R)]", "(C) C = 4πε₀ [R/(r-R)]", "(D) C = 4πε₀ [R/(R+r)]"], ans: 0 },
+        { q: "4. 1μ2 के बराबर होता है :", options: ["(A) μ₂/μ₁", "(B) μ₁/μ₂", "(C) μ₂·μ₁", "(D) 1/(μ₁μ₂)"], ans: 0 },
+        { q: "5. रेटिना पर बनने वाला प्रतिबिंब होता है :", options: ["(A) वास्तविक एवं सीधा", "(B) वास्तविक एवं उलटा", "(C) काल्पनिक एवं सीधा", "(D) काल्पनिक एवं उलटा"], ans: 1 },
+        { q: "6. खगोलीय दूरबीन की आवर्धन क्षमता होती है :", options: ["(A) f₀/fₑ", "(B) -f₀/fₑ", "(C) -fₑ/f₀", "(D) fₑ/f₀"], ans: 1 },
+        { q: "7. निम्नलिखित में कौन इंद्रधनुष के निर्माण का कारण होता है?", options: ["(A) प्रकीर्णन", "(B) विवर्तन", "(C) वर्ण-विक्षेपण", "(D) अपवर्तन"], ans: 2 },
+        { q: "8. निम्नलिखित में छोटे चुंबक के लिए कौन सही है?", options: ["(A) B_अक्षीय = B_निरक्षीय", "(B) B_अक्षीय = 2(B_निरक्षीय)", "(C) B_निरक्षीय = 2(B_अक्षीय)", "(D) B_अक्षीय = 3(B_निरक्षीय)"], ans: 1 },
+        { q: "9. एकसमान चुम्बकीय क्षेत्र में दोलनशील चुम्बक के आवर्तकाल का व्यंजक होता है :", options: ["(A) T = 2π√(I/MB_H)", "(B) T = 2π√(MB_H/I)", "(C) T = 2π√(I/M)", "(D) T = 2π√(MB_H)"], ans: 0 },
+        { q: "10. निम्नलिखित में कौन संबंध पृथ्वी के चुम्बकीय क्षेत्र (B_H) और चुम्बकीय सूई की आवृत्ति (n) के लिए सही है?", options: ["(A) n² ∝ B_H", "(B) n ∝ B_H", "(C) n ∝ B_H²", "(D) n² ∝ 1/B_H"], ans: 0 },
+        { q: "11. निम्नलिखित में कौन टेंजेंट नियम के लिए सही है?", options: ["(A) B = B_H tan θ", "(B) B = B_H² tan θ", "(C) B = √B_H tan θ", "(D) B = B_H tan² θ"], ans: 0 },
+        { q: "12. आपेक्षिक चुंबकशीलता बराबर होता है :", options: ["(A) μ/μ₀", "(B) μ₀/μ", "(C) μ = μ₀", "(D) √(μ/μ₀)"], ans: 0 },
+        { q: "13. निम्नलिखित में कौन संबंध सही है?", options: ["(A) B² = B_H² + B_V²", "(B) B² = B_H² - B_V²", "(C) B² = B_V² - B_H²", "(D) B = B_V/B_H"], ans: 0 },
+        { q: "14. निम्नलिखित में कौन निर्वात में विद्युत-चुम्बकीय तरंग की चाल के लिए सही है?", options: ["(A) c = √(μ₀ε₀)", "(B) c = 1/√(μ₀ε₀)", "(C) c = √(μ₀/ε₀)", "(D) c = √(ε₀/μ₀)"], ans: 1 },
+        { q: "15. 4 डायोप्टर क्षमता वाले लेंस की फोकस दूरी होती है :", options: ["(A) 0.25 m", "(B) 0.25 cm", "(C) 0.35 m", "(D) 0.35 cm"], ans: 0 },
+        { q: "16. निम्नलिखित में कौन वर्ण-विक्षेपण क्षमता के लिए सही है?", options: ["(A) ω = (μ_v - μ_r)/(μ_y - 1)", "(B) ω = (μ_v - μ_r)/(μ_y + 1)", "(C) ω = (μ_v - 1)/(μ_v - μ_r)", "(D) ω = (μ_v - μ_y)/(μ_v - μ_r)"], ans: 0 },
+        { q: "17. यदि काँच के एक लेंस (μ = 3/2) की हवा में फोकस दूरी f_a हो और पानी (μ = 4/3) में f_w हो, तो :", options: ["(A) f_w = f_a", "(B) f_w = 2f_a", "(C) f_w = 3f_a", "(D) f_w = 4f_a"], ans: 3 },
+        { q: "18. निम्नलिखित में कौन संबंध प्रकीर्णित प्रकाश की तीव्रता (I) और प्रकाश के तरंगदैर्ध्य (λ) के लिए सही है?", options: ["(A) I ∝ 1/λ", "(B) I ∝ 1/λ²", "(C) I ∝ 1/λ³", "(D) I ∝ 1/λ⁴"], ans: 3 },
+        { q: "19. निम्नलिखित में कौन इलेक्ट्रॉन पर आवेश के लिए सही है?", options: ["(A) e = 1.602 × 10⁻¹⁶ C", "(B) e = 1.602 × 10⁻¹⁷ C", "(C) e = 1.602 × 10⁻¹⁸ C", "(D) e = 1.602 × 10⁻¹⁹ C"], ans: 3 },
+        { q: "20. निम्नलिखित में कौन सोडियम का कार्य-फलन होता है?", options: ["(A) φ₀ = 2.55 eV", "(B) φ₀ = 2.65 eV", "(C) φ₀ = 2.75 eV", "(D) φ₀ = 2.85 eV"], ans: 2 },
+        { q: "21. नाभिक में न्यूट्रॉनों की संख्या होती है :", options: ["(A) A + Z", "(B) A - Z", "(C) Z - A", "(D) Z"], ans: 1 },
+        { q: "22. प्रत्यावर्ती धारा परिपथ में यथार्थ माध्य शक्ति का व्यंजक होता है :", options: ["(A) P_av = E_rms cos φ", "(B) P_av = I_rms cos φ", "(C) P_av = E_rms I_rms sin φ", "(D) P_av = E_rms I_rms cos φ"], ans: 3 },
+        { q: "23. शक्ति गुणांक के बराबर होता है :", options: ["(A) R/Z", "(B) Z/R", "(C) R·Z", "(D) W·L"], ans: 0 },
+        { q: "24. (L-R) परिपथ में कलांतर होता है :", options: ["(A) sin⁻¹(ωL/R)", "(B) cos⁻¹(ωL/R)", "(C) tan⁻¹(ωL/R)", "(D) tan⁻¹(R/ωL)"], ans: 2 },
+        { q: "25. ट्रांसफॉर्मर में परिणमन अनुपात होता है :", options: ["(A) V_s/V_p", "(B) V_p/V_s", "(C) 1/(V_s V_p)", "(D) 1/(I_s I_p)"], ans: 0 },
+        { q: "26. R.C. का विमीय सूत्र होता है :", options: ["(A) M⁰L⁰T⁻¹", "(B) M⁰L⁰T⁻²", "(C) M⁰L⁰T⁰", "(D) M⁰L⁰T"], ans: 3 },
+        { q: "27. ध्रुव प्राबल्य का S.I. मात्रक होता है :", options: ["(A) Am⁻¹", "(B) Am⁻²", "(C) Am", "(D) Fm"], ans: 2 },
+        { q: "28. एकसमान चुम्बकीय क्षेत्र में चुम्बक के विक्षेपण में किया गया कार्य होता है :", options: ["(A) W = MB(1 - sin θ)", "(B) W = MB sin θ", "(C) W = MB(1 - cos θ)", "(D) W = MB cos θ"], ans: 2 },
+        { q: "29. पृथ्वी के पृष्ठ पर B_H का मान होता है :", options: ["(A) 10⁻¹ टेसला", "(B) 10⁻² टेसला", "(C) 10⁻³ टेसला", "(D) 10⁻⁵ टेसला"], ans: 3 },
+        { q: "30. धारावाही कुंडली का विद्युत-चुम्बकीय आघूर्ण होता है :", options: ["(A) m = N/A", "(B) m = A/NI", "(C) m = NIA", "(D) m = I/NA"], ans: 2 },
+        { q: "31. निम्नलिखित में कौन गैल्वेनोमीटर नियतांक के लिए सही है?", options: ["(A) C/NAB", "(B) C(B)/NA", "(C) C(A)/NB", "(D) C(N)/AB"], ans: 0 },
+        { q: "32. आदर्श ऐमीटर का प्रतिरोध होता है :", options: ["(A) अनन्त", "(B) शून्य", "(C) 100 ओम", "(D) 50 ओम"], ans: 1 },
+        { q: "33. चुम्बकीय फ्लक्स का S.I. मात्रक होता है :", options: ["(A) वेबर", "(B) वाट", "(C) टेसला", "(D) जूल"], ans: 0 },
+        { q: "34. लेंज का नियम किसके संरक्षण के सिद्धांत का परिणाम है?", options: ["(A) धारा", "(B) संवेग", "(C) ऊर्जा", "(D) आवेश"], ans: 2 },
+        { q: "35. प्रेरणिक प्रतिघात होता है :", options: ["(A) X_L = 2πfL", "(B) X_L = 2πf²L", "(C) X_L = 2πfL²", "(D) X_L = 2πf²L²"], ans: 0 },
+        { q: "36. सरल सूक्ष्मदर्शी की आवर्धन क्षमता होती है :", options: ["(A) M = 1 - D/f", "(B) M = 1 + D/f", "(C) M = 1 - f/D", "(D) M = 1 + f/D"], ans: 1 },
+        { q: "37. संपर्कित दो लेंसों की शक्ति होती है :", options: ["(A) P = P₁ + P₂", "(B) P = P₁ × P₂", "(C) P = P₁/P₂", "(D) P = P₁(P₂ + P₁)"], ans: 0 },
+        { q: "38. यदि μ_g = 3/2 और μ_w = 4/3 तब (w)μ(g) होता है :", options: ["(A) 2", "(B) 1/2", "(C) 9/8", "(D) 8/9"], ans: 2 },
+        { q: "39. काँच के लिए क्रांतिक कोण होता है :", options: ["(A) 20°", "(B) 30°", "(C) 48°", "(D) 42°"], ans: 3 },
+        { q: "40. विद्युत-चुम्बकीय तरंगों की प्रकृति होती है :", options: ["(A) अनुप्रस्थ", "(B) अनुदैर्ध्य", "(C) (A) और (B) दोनों", "(D) विद्युतीय"], ans: 0 },
+        { q: "41. त्रिपार्श्व के पदार्थ का अपवर्तनांक होता है :", options: ["(A) μ = sin(A+δ_m)/sin(A/2)", "(B) μ = sin(A/2)/sin(A+δ_m)", "(C) μ = sin((A+δ_m)/2)/sin(A/2)", "(D) μ = sin(A/2)/sin((A+δ_m)/2)"], ans: 2 },
+        { q: "42. प्रकाशीय पथ के बराबर होता है :", options: ["(A) अपवर्तनांक × पथ की लम्बाई", "(B) अपवर्तनांक / पथ की लम्बाई", "(C) पथ की लम्बाई / अपवर्तनांक", "(D) अपवर्तनांक × पथ की लम्बाई / 2"], ans: 0 },
+        { q: "43. निम्नलिखित में कौन विद्युत-चुम्बकीय तरंग नहीं है?", options: ["(A) प्रकाश तरंगें", "(B) X-किरणें", "(C) ध्वनि तरंगें", "(D) अवरक्त किरणें"], ans: 2 },
+        { q: "44. पारदर्शी माध्यम हीरा के लिए क्रांतिक कोण होता है :", options: ["(A) 48.75°", "(B) 41.14°", "(C) 37.31°", "(D) 24.41°"], ans: 3 },
+        { q: "45. फोटॉन की ऊर्जा बराबर होता है :", options: ["(A) hν", "(B) h/ν", "(C) √(hν)", "(D) h/ν²"], ans: 0 },
+        { q: "46. चुम्बकन क्षेत्र की तीव्रता (H) के बराबर होता है :", options: ["(A) B₀/μ₀", "(B) μ₀/B₀", "(C) B₀μ₀", "(D) √(B₀μ₀)"], ans: 0 },
+        { q: "47. निम्नलिखित में कौन उच्चायी ट्रांसफॉर्मर के लिए सही है?", options: ["(A) V_s < V_p", "(B) V_s > V_p", "(C) V_s = V_p", "(D) V_s << V_p"], ans: 1 },
+        { q: "48. दिष्ट धारा के लिए प्रेरणिक प्रतिघात होता है :", options: ["(A) शून्य", "(B) अनन्त", "(C) ωL", "(D) 1/ωL"], ans: 0 },
+        { q: "49. धारावाही कुंडली का विद्युत-चुम्बकीय आघूर्ण होता है :", options: ["(A) m = NIA", "(B) m = N/IA", "(C) m = I/NA", "(D) m = IA/N"], ans: 0 },
+        { q: "50. विद्युत तीव्रता का S.I. मात्रक है :", options: ["(A) N C", "(B) N/C", "(C) N C²", "(D) N/C²"], ans: 1 },
+        { q: "51. निम्नलिखित में धारा-घनत्व के लिए कौन सही है?", options: ["(A) J = I A", "(B) J = I/A", "(C) J = A/I", "(D) J = I²A"], ans: 1 },
+        { q: "52. निम्नलिखित में गतिशीलता के लिए कौन सही है?", options: ["(A) μ = v_d/E", "(B) μ = E/v_d", "(C) μ = v_d E", "(D) μ = E² v_d"], ans: 0 },
+        { q: "53. निम्नलिखित में कौन सही है?", options: ["(A) 1 watt = 1 J s⁻¹", "(B) 1 watt = 1 V s⁻¹", "(C) 1 watt = 1 s V⁻¹", "(D) 1 watt = 1 F s⁻¹"], ans: 0 },
+        { q: "54. नीला रंग के लिए कार्बन प्रतिरोध का कलर कोड होता है :", options: ["(A) 3", "(B) 4", "(C) 5", "(D) 6"], ans: 3 },
+        { q: "55. एम्पियर-घंटा मात्रक होता है :", options: ["(A) शक्ति का", "(B) आवेश का", "(C) ऊर्जा का", "(D) विभवान्तर का"], ans: 1 },
+        { q: "56. निम्नलिखित में लॉरेंट्ज बल के लिए कौन सही है?", options: ["(A) F = q(E + v × B)", "(B) F = q(E + v)", "(C) F = (E + v × B)", "(D) F = q(E + B × v)"], ans: 0 },
+        { q: "57. निर्वात का परावैद्युतांक होता है :", options: ["(A) 8.85 × 10⁻¹² F/m", "(B) 8.85 × 10⁻¹¹ F/m", "(C) 8.85 × 10¹² F/m", "(D) 8.85 × 10¹¹ F/m"], ans: 0 },
+        { q: "58. वैद्युत-द्विध्रुव का S.I. मात्रक होता है :", options: ["(A) C N", "(B) C m", "(C) C / m", "(D) C m²"], ans: 1 },
+        { q: "59. कूलम्ब नियम का सदिश रूप होता है :", options: ["(A) F = 1/(4πε₀) · (q₁q₂/r³) r⃗", "(B) F = 1/(4πε₀) · (q₁q₂/r²) r⃗", "(C) F = 1/(4πε₀) · (q₁q₂/r³) r̂", "(D) F = 1/(4πε₀) · (q₁q₂/r) r⃗"], ans: 0 },
+        { q: "60. किसी चालक की धारिता होती है :", options: ["(A) C = q v", "(B) C = v/q", "(C) C = 1/2 q v", "(D) C = q/v"], ans: 3 },
+        { q: "61. आवेशित चालक की ऊर्जा होती है :", options: ["(A) E = 1/2 C V", "(B) E = 1/2 C V²", "(C) E = 1/2 C² V", "(D) E = C V"], ans: 1 },
+        { q: "62. यदि समान धारिता C₁ के n संधारित्र समान्तर क्रम में जोड़े जाएँ तो तुल्य धारिता होगी :", options: ["(A) C = n/C₁", "(B) C = C₁/n", "(C) C = nC₁", "(D) C = n²C₁"], ans: 2 },
+        { q: "63. वायु के लिए परावैद्युत सामर्थ्य होता है :", options: ["(A) 3 × 10⁶ V m⁻¹", "(B) 4 × 10⁶ V m⁻¹", "(C) 5 × 10⁶ V m⁻¹", "(D) 10⁶ V m⁻¹"], ans: 0 },
+        { q: "64. निम्नलिखित में कौन संबंध द्रव्यमान और ऊर्जा के लिए सही है?", options: ["(A) m = E", "(B) m² = E", "(C) mc² = E", "(D) m = √(E/2)"], ans: 2 },
+        { q: "65. दशमिक संख्या (8)₁₀ की द्विआधारी संख्या होती है :", options: ["(A) (1000)₂", "(B) (1001)₂", "(C) (111)₂", "(D) (110)₂"], ans: 0 },
+        { q: "66. NAND गेट का संकेत होता है :", options: ["(A) AND", "(B) OR", "(C) NOT", "(D) NAND (D-आकार + बबल)"], ans: 3 },
+        { q: "67. अर्द्ध-आयु काल T_1/2 एवं क्षय नियतांक (λ) में संबंध होता है :", options: ["(A) T_1/2 = 0.693 / λ", "(B) T_1/2 = λ / 0.693", "(C) T_1/2 = 0.693 λ", "(D) T_1/2 = 0.693 λ²"], ans: 0 },
+        { q: "68. निम्नलिखित में कौन α-कण के लिए सही है?", options: ["(A) इलेक्ट्रॉन", "(B) विद्युत-चुम्बकीय विकिरण", "(C) हीलियम नाभिक", "(D) हाइड्रोजन नाभिक"], ans: 2 },
+        { q: "69. निम्नलिखित में कौन समीकरण सही है?", options: ["(A) ²³⁸U → ²³⁴U + ⁴He", "(B) ²³⁸₉₂U → ²³⁴₉₀Th + ⁴₂He", "(C) ²³⁸U → ²³⁴Th + ⁴He", "(D) ²³⁸U → ²³²Th + ⁴He"], ans: 1 },
+        { q: "70. निम्न में कौन बायो-सावर्ट नियम के सदिश समीकरण का सही रूप है?", options: ["(A) dB = (μ₀/4π) · I(dl × r̂)/r²", "(B) dB = (μ₀/4π) · I(dl)/r²", "(C) dB = (μ₀/4π) · I(dl × r⃗)/r³", "(D) dB = (μ₀/4π) · I r⃗/r²"], ans: 2 }
+    ];
+
+    const quizContainer = document.getElementById('quiz-container');
+
+    questions.forEach((qObj, qIndex) => {
+        const qBox = document.createElement('div');
+        qBox.className = 'question-box';
+        
+        const qText = document.createElement('div');
+        qText.className = 'question-text';
+        qText.innerHTML = qObj.q;
+        qBox.appendChild(qText);
+        
+        const optionsList = document.createElement('ul');
+        optionsList.className = 'options-list';
+        
+        const feedbackBox = document.createElement('div');
+        feedbackBox.className = 'feedback';
+        
+        qObj.options.forEach((opt, optIndex) => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerHTML = opt;
+            
+            btn.onclick = () => {
+                const allBtns = optionsList.querySelectorAll('.option-btn');
+                allBtns.forEach(b => b.disabled = true);
+                
+                if (optIndex === qObj.ans) {
+                    btn.classList.add('correct');
+                    feedbackBox.innerHTML = "✅ बिल्कुल सही जवाब!";
+                    feedbackBox.className = 'feedback feedback-correct';
+                } else {
+                    btn.classList.add('incorrect');
+                    allBtns[qObj.ans].classList.add('correct');
+                    feedbackBox.innerHTML = "❌ गलत जवाब। सही उत्तर: " + qObj.options[qObj.ans] + " है।";
+                    feedbackBox.className = 'feedback feedback-wrong';
+                }
+                feedbackBox.style.display = 'block';
+            };
+            
+            const li = document.createElement('li');
+            li.appendChild(btn);
+            optionsList.appendChild(li);
+        });
+        
+        qBox.appendChild(optionsList);
+        qBox.appendChild(feedbackBox);
+        quizContainer.appendChild(qBox);
+    });
+</script>
+
+</body>
+</html>

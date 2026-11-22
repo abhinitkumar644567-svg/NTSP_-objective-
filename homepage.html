@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New topper study point</title>
+    
+    <!-- Premium Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Outfit:wght@200;300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* ==========================================================================
+           1. ZERO-GLITCH PRELOADER & BASE SETUP
+           ========================================================================== */
+        html {
+            background-color: #05080D; 
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overscroll-behavior: none;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; 
+            position: fixed;
+            top: 0;
+            left: 0;
+            overscroll-behavior: none;
+            opacity: 0; 
+            transition: opacity 1.5s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.8s ease, color 0.8s ease;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body.loaded {
+            opacity: 1; 
+        }
+
+        /* ==========================================================================
+           2. DYNAMIC DESIGN SYSTEM (CSS VARIABLES)
+           ========================================================================== */
+        :root {
+            --bg-base: #05080D;
+            --text-main: #FFFFFF;
+            --text-subtitle: #DCE7EF;
+            --text-muted: rgba(220, 231, 239, 0.5);
+            
+            --aurora-1: #00D6C9; 
+            --aurora-2: #35E9FF; 
+            --aurora-3: #7656E8; 
+            
+            --glass-bg: rgba(7, 21, 34, 0.3);
+            --glass-border: rgba(42, 252, 228, 0.867);
+            --glass-glow: rgba(53, 233, 255, 0.15);
+            --glass-hover-bg: rgba(7, 21, 34, 0.6);
+            --glass-hover-border: rgba(53, 233, 255, 0.4);
+        }
+
+        :root.light-theme {
+            --bg-base: #e2fcff;
+            --text-main: #05080D;
+            --text-subtitle: #2D3748;
+            --text-muted: rgba(45, 55, 72, 0.6);
+            
+            --aurora-1: #319795; 
+            --aurora-2: #3182CE; 
+            --aurora-3: #805AD5; 
+            
+            --glass-bg: rgba(255, 255, 255, 0.6);
+            --glass-border: rgba(49, 151, 149, 0.2);
+            --glass-glow: rgba(49, 151, 149, 0.15);
+            --glass-hover-bg: rgba(255, 255, 255, 0.9);
+            --glass-hover-border: rgba(49, 151, 149, 0.5);
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+        }
+
+        /* ==========================================================================
+           3. ADVANCED MATH CANVAS ENVIRONMENT
+           ========================================================================== */
+        #mathCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none; 
+            transition: opacity 0.8s ease;
+        }
+
+        .ambient-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120%;
+            height: 120%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle at center, transparent 0%, var(--bg-base) 100%);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* ==========================================================================
+           4. LAYOUT & UI COMPOSITION
+           ========================================================================== */
+        .ui-layer {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            padding: 2.5rem 4rem;
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 768px) {
+            .ui-layer { padding: 1.5rem; }
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            animation: fade-in-down 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            font-size: 1.2rem;
+            letter-spacing: 0.4em;
+            color: var(--text-main);
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-mark {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, var(--aurora-1), var(--aurora-2));
+            border-radius: 50%;
+            box-shadow: 0 0 15px var(--glass-glow);
+        }
+        
+        /* Header Actions (Profile + Theme Toggle) in top right corner */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* User Profile Badge (Corner) */
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--glass-border);
+            padding: 5px 15px 5px 5px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: none; /* JS will reveal this if logged in */
+            animation: fade-in 0.5s ease;
+        }
+
+        .user-profile img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid var(--aurora-2);
+        }
+
+        .user-profile span {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-main);
+            white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+            .user-profile span { display: none; } /* Mobile पर सिर्फ फोटो दिखेगी ताकि स्पेस बचे */
+            .user-profile { padding: 5px; }
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            cursor: pointer;
+            transition: all 0.4s ease;
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
+        .theme-toggle:hover {
+            background: var(--glass-hover-bg);
+            transform: translateY(-2px);
+        }
+
+        .theme-toggle svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            transition: transform 0.5s ease;
+        }
+
+        .light-theme .theme-toggle svg.moon { display: none; }
+        .light-theme .theme-toggle svg.sun { display: block; }
+        .theme-toggle svg.sun { display: none; }
+
+        /* Main Center Content */
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; 
+            padding-top: 8vh; 
+            text-align: center;
+            flex-grow: 1;
+            width: 100%;
+        }
+
+        /* Glassmorphism Heading Container */
+        .glass-heading-container {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 3.5rem 4rem;
+            margin-bottom: 2.5rem;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3), inset 0 0 20px var(--glass-glow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 850px;
+            opacity: 0;
+            animation: fade-in-up 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s forwards;
+        }
+        
+        :root.light-theme .glass-heading-container {
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05), inset 0 0 20px var(--glass-glow);
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 200;
+            font-size: clamp(2.5rem, 6vw, 6.5rem);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: var(--text-main);
+            margin-bottom: 1.2rem;
+            text-shadow: 0 10px 40px rgba(0,0,0,0.4);
+        }
+
+        :root.light-theme h1 { text-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+
+        h1 strong {
+            font-weight: 400;
+            background: linear-gradient(to right, var(--aurora-1), var(--aurora-2), var(--aurora-3));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            font-size: clamp(1rem, 1.5vw, 1.25rem);
+            color: var(--text-subtitle);
+            max-width: 650px;
+            margin-bottom: 0; 
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .glass-heading-container {
+                padding: 2rem 1.5rem;
+                border-radius: 16px;
+            }
+        }
+
+        /* Interactive Elements Container */
+        .actions-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2.5rem; 
+            opacity: 0;
+            animation: fade-in-up 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.6s forwards;
+        }
+
+        /* Primary Gateway Button (ORIGINAL RESTORED) */
+        .gateway-btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            padding: 1.25rem 3.5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2), inset 0 0 0 transparent;
+            -webkit-tap-highlight-color: transparent; 
+            outline: none; 
+        }
+
+        .gateway-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, var(--aurora-1), var(--aurora-2), var(--aurora-3));
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.5s ease;
+        }
+
+        .gateway-btn:hover {
+            transform: scale(1.02) translateY(-2px); 
+            border-color: var(--glass-hover-border);
+            box-shadow: 0 15px 40px var(--glass-glow), inset 0 0 20px var(--glass-glow);
+            color: #ffffff;
+        }
+        
+        :root.light-theme .gateway-btn:hover { color: #05080D; }
+        .gateway-btn:hover::before { opacity: 0.2; }
+        
+        .gateway-btn:active { 
+            transform: scale(0.96); 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2), inset 0 0 10px transparent; 
+        }
+
+        /* SVG Arrow styles for Gateway button (This fixes the strange behavior) */
+        .gateway-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: transform 0.4s ease;
+        }
+        
+        .gateway-btn:hover svg { transform: translateX(5px); }
+
+        /* Secondary Icon Buttons */
+        .secondary-actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.25rem;
+        }
+
+        .icon-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 55px;
+            height: 55px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%; /* Perfect Circle */
+            color: var(--text-subtitle);
+            font-size: 1.3rem; /* Icon size */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent; 
+            outline: none; 
+        }
+
+        .icon-btn:hover {
+            background: var(--glass-hover-bg);
+            border-color: var(--aurora-2);
+            color: var(--text-main);
+            box-shadow: 0 5px 20px var(--glass-glow);
+            transform: scale(1.1) translateY(-3px); 
+        }
+
+        .icon-btn:active {
+            transform: scale(0.95); 
+            box-shadow: 0 2px 10px var(--glass-glow);
+        }
+
+        /* Footer */
+        footer {
+            width: 100%;
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            animation: fade-in 1.5s ease 1s forwards;
+            opacity: 0;
+            padding-top: 2rem;
+        }
+
+        /* Keyframes */
+        @keyframes fade-in-up {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fade-in-down {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fade-in {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <canvas id="mathCanvas" aria-hidden="true"></canvas>
+    <div class="ambient-glow"></div>
+
+    <div class="ui-layer">
+        
+        <header>
+            <div class="logo">
+                <div class="logo-mark"></div>
+                N T P S
+            </div>
+            
+            <div class="header-actions">
+                <!-- User Profile Container (Top Right Corner) -->
+                <div id="user-profile-container" class="user-profile">
+                    <img id="user-photo" src="" alt="Profile">
+                    <span id="user-name">Loading...</span>
+                </div>
+
+                <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle Dark/Light Mode">
+                    <svg class="moon" viewBox="0 0 24 24">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <main>
+            <div class="glass-heading-container">
+                <h1><strong>NEW TOPPER STUDY POINT</strong></h1>
+                <p class="subtitle">📚 आज की मेहनत ही कल की पहचान बनेगी, 📚</p>                   
+                <p class="subtitle">🏆 आपकी सफलता ही हमारी सबसे बड़ी शान बनेगी! ❤️</p>
+            </div>
+            
+            <div class="actions-container">
+                <!-- Restored "Enter The Test" Gateway Button -->
+                <button class="gateway-btn" onclick="navigate('Ntps.html')" aria-label="Enter The Test">
+                    <span>Enter The Test</span>
+                    <svg viewBox="0 0 24 24">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+
+                <!-- Icon Buttons -->
+                <div class="secondary-actions">
+                    <!-- Hindi (Book Icon) -->
+                    <button class="icon-btn" onclick="navigate('Hindi.html')" title="Hindi">
+                        <i class="fas fa-book-open"></i>
+                    </button>
+                    <!-- Chemistry (Flask Icon) -->
+                    <button class="icon-btn" onclick="navigate('chemistry_view.html')" title="Chemistry">
+                        <i class="fas fa-flask"></i>
+                    </button>
+                    <!-- Physics (Atom Icon) -->
+                    <button class="icon-btn" onclick="navigate('Physicsnotes.html')" title="Physics">
+                        <i class="fas fa-atom"></i>
+                    </button>
+                    <!-- Chat List (Comments Icon) -->
+                    <button class="icon-btn" onclick="navigate('eng.html')" title="Chat">
+                        <i class="fas fa-comments"></i>
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            &copy; Abhinit prajapati
+        </footer>
+        
+    </div>
+
+    <!-- Firebase Script for User Profile -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyTkuRjBndEGF93-rmDRkeT2Q_lVC_",
+            authDomain: "ntps-objective-test.firebaseapp.com",
+            projectId: "ntps-objective-test",
+            storageBucket: "ntps-objective-test.firebasestorage.app",
+            messagingSenderId: "720036380966",
+            appId: "1:720036380966:web:62bf33576e5ea2bc230fe1"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Listen for Google Auth changes and update profile UI
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById('user-profile-container').style.display = 'flex';
+                document.getElementById('user-photo').src = user.photoURL || 'https://ui-avatars.com/api/?name=User';
+                // First name fetch
+                const firstName = user.displayName ? user.displayName.split(' ')[0] : 'User';
+                document.getElementById('user-name').innerText = firstName;
+            }
+        });
+    </script>
+
+    <!-- Normal Script for Layout and Math Canvas -->
+    <script>
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+        });
+
+        function navigate(destination) {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                window.location.href = destination;
+            }, 600); 
+        }
+
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        const rootElement = document.documentElement;
+        let isLightMode = false;
+
+        if (localStorage.getItem('aurora-theme') === 'light') {
+            rootElement.classList.add('light-theme');
+            isLightMode = true;
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            rootElement.classList.toggle('light-theme');
+            isLightMode = rootElement.classList.contains('light-theme');
+            localStorage.setItem('aurora-theme', isLightMode ? 'light' : 'dark');
+            updateCanvasColors(); 
+        });
+
+        const canvas = document.getElementById('mathCanvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let time = 0;
+        let animationFrameId;
+        
+        let ribbons = [];
+        
+        function updateCanvasColors() {
+            const palette = isLightMode ? [
+                'rgba(49, 151, 149, 0.05)',  
+                'rgba(49, 130, 206, 0.05)',  
+                'rgba(128, 90, 213, 0.03)'   
+            ] : [
+                'rgba(0, 214, 201, 0.03)',   
+                'rgba(53, 233, 255, 0.03)',  
+                'rgba(118, 86, 232, 0.02)'   
+            ];
+
+            ribbons = [
+                { color: palette[0], yOffset: 0.3, amp: 150, freq: 0.0015, speed: 0.0008, lines: 25 },
+                { color: palette[1], yOffset: 0.5, amp: 200, freq: 0.0010, speed: 0.0012, lines: 20 },
+                { color: palette[2], yOffset: 0.7, amp: 180, freq: 0.0020, speed: 0.0010, lines: 15 }
+            ];
+        }
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+        updateCanvasColors(); 
+
+        function drawMathAurora() {
+            ctx.clearRect(0, 0, width, height);
+            
+            ctx.globalCompositeOperation = isLightMode ? 'source-over' : 'screen';
+
+            ribbons.forEach((ribbon, index) => {
+                ctx.strokeStyle = ribbon.color;
+                ctx.lineWidth = 1.5;
+                
+                for (let i = 0; i < ribbon.lines; i++) {
+                    ctx.beginPath();
+                    
+                    let startY = (height * ribbon.yOffset) + (i * 6);
+                    ctx.moveTo(0, startY);
+
+                    for (let x = 0; x <= width; x += 40) {
+                        let wave1 = Math.sin(x * ribbon.freq + time * ribbon.speed) * ribbon.amp;
+                        let wave2 = Math.cos(x * (ribbon.freq * 1.5) - (time * ribbon.speed * 1.2) + (i * 0.1)) * (ribbon.amp * 0.4);
+                        let drift = Math.sin(time * 0.0005 + index) * 100;
+                        ctx.lineTo(x, startY + wave1 + wave2 + drift);
+                    }
+                    ctx.stroke();
+                }
+            });
+
+            time += 9; 
+            animationFrameId = requestAnimationFrame(drawMathAurora);
+        }
+
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            drawMathAurora();
+        }
+
+        window.addEventListener('pageshow', function (event) {
+            if (event.persisted) {
+                document.body.style.opacity = '1'; 
+                document.body.classList.add('loaded');
+            }
+        });
+    </script>
+</body>
+</html>

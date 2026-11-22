@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>केमिस्ट्री 12th (2026) - 70 प्रश्नों की महा टेस्ट सीरीज</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 15px;
+        }
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            border-bottom: 3px solid #e74c3c;
+            padding-bottom: 15px;
+            font-size: 26px;
+        }
+        .info-bar {
+            text-align: center;
+            font-size: 16px;
+            color: #fff;
+            background: #34495e;
+            margin-bottom: 25px;
+            font-weight: bold;
+            padding: 12px;
+            border-radius: 8px;
+        }
+        .question-box {
+            margin-bottom: 25px;
+            padding: 20px;
+            border: 1px solid #e0e6ed;
+            border-radius: 10px;
+            background-color: #fdfefe;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .question-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1a252f;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        .options-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .option-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 12px 18px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            background-color: #fff;
+            border: 2px solid #bdc3c7;
+            color: #34495e;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .option-btn:hover:not(:disabled) {
+            background-color: #fdf2e9;
+            border-color: #e67e22;
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+        }
+        .correct {
+            background-color: #d5f5e3 !important;
+            border-color: #2ecc71 !important;
+            color: #1d8348 !important;
+            font-weight: bold;
+        }
+        .incorrect {
+            background-color: #fadbd8 !important;
+            border-color: #e74c3c !important;
+            color: #943126 !important;
+        }
+        .feedback {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        .feedback-correct {
+            background-color: #d5f5e3;
+            color: #1d8348;
+            border: 1px solid #abebc6;
+        }
+        .feedback-wrong {
+            background-color: #fcf3cf;
+            color: #9c640c;
+            border: 1px solid #f9e79f;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>केमिस्ट्री बोर्ड परीक्षा (2026) - ऑब्जेक्टिव टेस्ट सीरीज</h1>
+    <div class="info-bar">कुल प्रश्न: 70 | सही उत्तर चुनें और अपनी तैयारी जांचें</div>
+    <div id="quiz-container"></div>
+</div>
+
+<script>
+    // 2026 पेपर के सभी 70 प्रश्न
+    const questions = [
+        { q: "1. वुर्ट्ज अभिक्रिया में ऐल्किल हेलाइड का अवकरण निम्नलिखित में किसके द्वारा होता है?", options: ["(A) Zn/HCl", "(B) HI", "(C) Zn/Cu युग्म", "(D) शुष्क ईथर की उपस्थिति में Na"], ans: 3 },
+        { q: "2. एथिल ब्रोमाइड को ऐल्कोहॉलीय कास्टिक पोटाश के साथ उबालने पर बनता है :", options: ["(A) एथिल ऐल्कोहॉल", "(B) एथिलीन", "(C) ऐसीटिलीन", "(D) एथेन"], ans: 1 },
+        { q: "3. Ph-X + 2Na + RX → (शुष्क ईथर) Ph-R + 2NaX अभिक्रिया को कहते हैं :", options: ["(A) वुर्ट्ज अभिक्रिया", "(B) वुर्ट्ज-फिटिंग अभिक्रिया", "(C) फिटिंग अभिक्रिया", "(D) फ्रैंकलैण्ड अभिक्रिया"], ans: 1 },
+        { q: "4. निम्नलिखित में कौन-सा अभिकर्मक एथिल एमीन से अभिक्रिया कर एथिल ऐल्कोहॉल बनाता है?", options: ["(A) Br₂/KOH", "(B) अम्लीकृत KMnO₄", "(C) HNO₂", "(D) HNO₃"], ans: 2 },
+        { q: "5. निम्नलिखित में किसे काष्ठ स्पिरिट (Wood Spirit) कहा जाता है?", options: ["(A) मेथिल ऐल्कोहॉल", "(B) एथिल ऐल्कोहॉल", "(C) ग्लिसरॉल", "(D) ग्लायकॉल"], ans: 0 },
+        { q: "6. एक ऐल्कोहॉल के वाष्प को जब तप्त अवकृत ताँबा के ऊपर से गुजारा जाता है, तो एक ऐल्कीन बनता है। यह ऐल्कोहॉल है :", options: ["(A) प्राइमरी", "(B) सेकेण्डरी", "(C) टर्शियरी", "(D) इनमें से कोई नहीं"], ans: 2 },
+        { q: "7. फिनॉल निम्नलिखित में किसके साथ एक विशेष रंग का यौगिक बनाता है?", options: ["(A) आयोडीन घोल", "(B) ब्रोमीन जल", "(C) FeCl₃ का जलीय विलयन", "(D) अमोनियम हाइड्रोक्साइड"], ans: 2 },
+        { q: "8. P₄O₁₀ का व्यापक उपयोग होता है :", options: ["(A) अवकारक के रूप में", "(B) प्रतिरक्षक के रूप में", "(C) ऑक्सीकारक के रूप में", "(D) निर्जलीकारक के रूप में"], ans: 3 },
+        { q: "9. निम्नलिखित में कौन ऑक्साइड सबसे अधिक अम्लीय होता है?", options: ["(A) P₂O₅", "(B) N₂O₅", "(C) Sb₂O₅", "(D) As₂O₅"], ans: 1 },
+        { q: "10. निम्नलिखित में किसका बन्धन ऊर्जा सबसे अधिक है?", options: ["(A) O-O", "(B) S-S", "(C) Se-Se", "(D) Te-Te"], ans: 1 },
+        { q: "11. सल्फर अणु होते हैं :", options: ["(A) द्विपरमाण्विक", "(B) चतुष्परमाण्विक", "(C) त्रिपरमाण्विक", "(D) अष्टपरमाण्विक"], ans: 3 },
+        { q: "12. निम्नलिखित में कौन सबसे सबल भस्म है?", options: ["(A) ClO₄⁻", "(B) ClO₃⁻", "(C) ClO₂⁻", "(D) ClO⁻"], ans: 3 },
+        { q: "13. निम्नलिखित में कौन शून्य के अतिरिक्त सिर्फ एक ऑक्सीकरण अवस्था प्रदर्शित करता है :", options: ["(A) Cl₂", "(B) F₂", "(C) I₂", "(D) Br₂"], ans: 1 },
+        { q: "14. निम्नलिखित में कौन अवकारक का कार्य नहीं कर सकता है?", options: ["(A) NO₂", "(B) SO₂", "(C) ClO₂", "(D) CO₂"], ans: 3 },
+        { q: "15. 234.2 ग्राम चीनी के जलीय घोल में 34.2 ग्राम चीनी है, तो घोल का मोलल सांद्रण है :", options: ["(A) 0.1", "(B) 0.5", "(C) 5.5", "(D) 55.0"], ans: 1 },
+        { q: "16. निम्नलिखित में कौन समीकरण फैराडे के विद्युत-अपघटन संबंधी प्रथम नियम को व्यक्त करता है?", options: ["(A) m = c · t", "(B) m = c · z · t", "(C) mc = z · t", "(D) c = m · z · t"], ans: 1 },
+        { q: "17. तनुता बढ़ाने पर किसी विद्युत-अपघट्य का विशिष्ट चालकत्व :", options: ["(A) बढ़ता है", "(B) घटता है", "(C) स्थिर रहता है", "(D) इनमें से कोई नहीं"], ans: 1 },
+        { q: "18. A, B, C और D धातुओं के मानक अवकरण विभव क्रमशः -3.05, -1.66, -0.40 और +0.80 वोल्ट हैं। इनमें किस धातु की अवकरण क्षमता सबसे अधिक होगी?", options: ["(A) A", "(B) B", "(C) C", "(D) D"], ans: 0 },
+        { q: "19. निम्नलिखित में कौन द्वितीयक सेल है?", options: ["(A) लेक्लांशे सेल", "(B) लेड-स्टोरेज बैटरी", "(C) सांद्रण सेल", "(D) इनमें से सभी"], ans: 1 },
+        { q: "20. निम्नलिखित में कौन अभिक्रिया के वेग पर ताप के प्रभाव को व्यक्त करता है?", options: ["(A) नर्न्स्ट समीकरण", "(B) गिब्स-हेल्महोल्ट्ज समीकरण", "(C) आर्हेनियस समीकरण", "(D) वाण्ट हॉफ समीकरण"], ans: 2 },
+        { q: "21. निम्नलिखित में कौन प्रथम कोटि की अभिक्रिया नहीं है?", options: ["(A) CH₃COOC₂H₅ + H₂O(excess) → CH₃COOH + C₂H₅OH", "(B) CH₃COOC₂H₅ + NaOH → CH₃COONa + C₂H₅OH", "(C) 2H₂O₂ → 2H₂O + O₂", "(D) 2N₂O₅ → 4NO₂ + O₂"], ans: 1 },
+        { q: "22. निम्नलिखित में किस विधि से मेथिल ऐमीन बनाया जाता है?", options: ["(A) वुर्ट्ज अभिक्रिया", "(B) हॉफमान ब्रोमामाइड अभिक्रिया", "(C) फ्रिडल-क्राफ्ट्स अभिक्रिया", "(D) कोल्बे अभिक्रिया"], ans: 1 },
+        { q: "23. माल्टोस के जल अपघटन से प्राप्त होता है :", options: ["(A) ग्लूकोस + फ्रक्टोस", "(B) गैलेक्टोस + ग्लूकोस + फ्रक्टोस", "(C) स्टार्च + सुक्रोस", "(D) ग्लूकोस के दो अणु"], ans: 3 },
+        { q: "24. निम्नलिखित में कौन एक वृहत् अणु (Macromolecule) नहीं है?", options: ["(A) DNA", "(B) स्टार्च", "(C) पामिटेट", "(D) इन्सुलिन"], ans: 2 },
+        { q: "25. निम्नलिखित में कौन ज्विटर आयन बनाने में समर्थ है?", options: ["(A) H₂N-CH₂COOH", "(B) CH₃COOH", "(C) CH₃CH₂NH₂", "(D) CH₃NO₂"], ans: 0 },
+        { q: "26. निम्नलिखित में किसका उपयोग प्रति-ऑक्सीकारक के रूप में होता है?", options: ["(A) साइट्रिक अम्ल", "(B) EDTA", "(C) सोडियम नाइट्राइट", "(D) सोडियम ग्लूकोनेट"], ans: 0 },
+        { q: "27. राइबोफ्लेविन निम्नलिखित में किसका रासायनिक नाम है?", options: ["(A) विटामिन B₁", "(B) विटामिन B₂", "(C) विटामिन B₆", "(D) विटामिन B कॉम्प्लेक्स"], ans: 1 },
+        { q: "28. निम्नलिखित में किसका उपयोग उपशामक के रूप में होता है?", options: ["(A) ल्यूमिनल", "(B) टोफ्रानिल", "(C) मेसकालिन", "(D) सल्फाइडाइजीन"], ans: 0 },
+        { q: "29. निम्नलिखित में कौन उत्कृष्ट गैस आसानी से द्रवीकृत हो सकता है?", options: ["(A) Ar", "(B) Ne", "(C) Xe", "(D) Kr"], ans: 2 },
+        { q: "30. सल्फर का परॉक्सी अम्ल है :", options: ["(A) H₂S₂O₇", "(B) H₂S₂O₈", "(C) H₂SO₄", "(D) H₂SO₃"], ans: 1 },
+        { q: "31. निम्नलिखित में किस विधि के द्वारा नाइट्रिक अम्ल का निर्माण अमोनिया से होता है?", options: ["(A) ओस्टवाल्ड विधि", "(B) बर्कलैंड-आइड विधि", "(C) प्रयोगशाला विधि", "(D) इनमें से सभी"], ans: 0 },
+        { q: "32. निम्नलिखित में कौन गैस जल के ऊपर संग्रहीत नहीं की जा सकती है?", options: ["(A) H₂", "(B) O₂", "(C) CH₄", "(D) SO₂"], ans: 3 },
+        { q: "33. पारा (Hg) और ओजोन की अभिक्रिया से निम्नलिखित में कौन बनता है?", options: ["(A) HgO", "(B) HgO₂", "(C) Hg₂O", "(D) इनमें से कोई नहीं"], ans: 2 },
+        { q: "34. क्लोरीन का विरंजक गुण का कारण है :", options: ["(A) अम्लीय गुण", "(B) ऑक्सीकारक गुण", "(C) अवकारक गुण", "(D) वायु प्रदूषक गुण"], ans: 1 },
+        { q: "35. उत्कृष्ट गैसों का बाह्यतम इलेक्ट्रॉनिक विन्यास होता है :", options: ["(A) ns²np²", "(B) ns²np⁴", "(C) ns²np³", "(D) ns²np⁶"], ans: 3 },
+        { q: "36. निम्नलिखित में कौन पदार्थ पायसीकारक का कार्य करता है?", options: ["(A) साधारण लवण", "(B) यूरिया", "(C) साबुन", "(D) तेल"], ans: 2 },
+        { q: "37. निम्नलिखित में कौन जैव उत्प्रेरक है?", options: ["(A) कार्बोहाइड्रेट", "(B) एंजाइम", "(C) ऐमीनो अम्ल", "(D) नाइट्रोजन युक्त भस्म"], ans: 1 },
+        { q: "38. निम्नलिखित में कौन आकार चयनात्मक उत्प्रेरक है?", options: ["(A) V₂O₅", "(B) Cr₂O₃", "(C) MnO₂", "(D) ZSM-5"], ans: 3 },
+        { q: "39. थर्माइट विधि में अवकारक है :", options: ["(A) C", "(B) Zn", "(C) Na", "(D) Al"], ans: 3 },
+        { q: "40. निम्नलिखित में किस धातु का निष्कर्षण तनु सायनाइड विलयन से उसके अयस्क के निक्षालन से प्राप्त किया जाता है?", options: ["(A) सिल्वर", "(B) टाइटेनियम", "(C) वैनेडियम", "(D) जिंक"], ans: 0 },
+        { q: "41. हड्डियों का मुख्य संघटक है :", options: ["(A) CaCO₃", "(B) Ca₃(PO₄)₂", "(C) CaSO₄", "(D) CaF₂"], ans: 1 },
+        { q: "42. निम्नलिखित में किस धातु का निष्कर्षण उसके अयस्क के विद्युत-अपघटन से नहीं होता है?", options: ["(A) Na", "(B) Mg", "(C) Al", "(D) Fe"], ans: 3 },
+        { q: "43. ईथर का सामान्य सूत्र होता है :", options: ["(A) CnH₂nO", "(B) CnH₂n+₁O", "(C) CnH₂n+₂O", "(D) CnH₂nO₂"], ans: 2 },
+        { q: "44. निम्नलिखित में कौन अभिकर्मक ऐसीटल्डिहाइड एवं ऐसीटोन दोनों से आसानी से अभिक्रिया करता है?", options: ["(A) फेलिंग घोल", "(B) ग्रिगनार्ड अभिकर्मक", "(C) शिफ का अभिकर्मक", "(D) टॉलेन का अभिकर्मक"], ans: 1 },
+        { q: "45. CH₃CH₂COCH₂CH₃ का IUPAC नाम है :", options: ["(A) डाइएथिल कीटोन", "(B) 3-पेन्टेनोन", "(C) 2-पेन्टेनोन", "(D) मेथिल प्रोपिल कीटोन"], ans: 1 },
+        { q: "46. निम्नलिखित में किसके साथ कैनिजारो अभिक्रिया होती है?", options: ["(A) CH₃CHO", "(B) HCHO", "(C) HCOOH", "(D) CH₃COCH₃"], ans: 1 },
+        { q: "47. निम्नलिखित में कौन टार्टरिक अम्ल है?", options: ["(A) लैक्टिक अम्ल सूत्र", "(B) सक्सिनिक अम्ल सूत्र", "(C) HO-CH(COOH)-HO-CH(COOH)", "(D) अन्य"], ans: 2 },
+        { q: "48. एक कार्बनिक यौगिक की अभिक्रिया NaHCO₃ के संतृप्त विलयन से कराने पर बुदबुदाहट होती है। तब वह यौगिक है :", options: ["(A) ऐल्केन", "(B) ऐल्कीन", "(C) ऐसीटिक अम्ल", "(D) एथिल ऐल्कोहॉल"], ans: 2 },
+        { q: "49. निम्नलिखित में कौन आइसोप्रोपिल एमीन है?", options: ["(A) CH₃-CH₂-CH₂-NH₂", "(B) CH₃-NH-C₂H₅", "(C) CH₃-CH(NH₂)-CH₃", "(D) CH₃-CH-CH₂-NH₂"], ans: 2 },
+        { q: "50. यदि एक संक्रमण तत्व का इलेक्ट्रॉनिक विन्यास +3 ऑक्सीकरण अवस्था में [Ar] 3d⁴ है, तो इसकी परमाणु संख्या होगी :", options: ["(A) 25", "(B) 26", "(C) 22", "(D) 19"], ans: 0 },
+        { q: "51. लैंथेनाइड तत्त्वों की सबसे सामान्य ऑक्सीकरण अवस्था होती है :", options: ["(A) +2", "(B) +3", "(C) +4", "(D) 0"], ans: 1 },
+        { q: "52. Ni(CO)₄ में Ni की ऑक्सीकरण अवस्था है :", options: ["(A) +4", "(B) +3", "(C) +2", "(D) 0"], ans: 3 },
+        { q: "53. जटिल यौगिक [Co(NH₃)₄Cl₂]Cl के जलीय विलयन में आयनों की संख्या होती है :", options: ["(A) 3", "(B) 4", "(C) 2", "(D) 6"], ans: 2 },
+        { q: "54. [Co(NH₃)₅Br]SO₄ एवं [Co(NH₃)₅SO₄]Br एक-दूसरे के हैं :", options: ["(A) आयनन समावयव", "(B) लिंकेज समावयव", "(C) समन्वय समावयव", "(D) ज्यामितिक समावयव"], ans: 0 },
+        { q: "55. विटामिन B₁₂ में उपस्थित रहता है :", options: ["(A) कोबाल्ट", "(B) मैग्नीशियम", "(C) लोहा", "(D) निकेल"], ans: 0 },
+        { q: "56. जब क्लोरोफॉर्म ऐसीटोन से अभिक्रिया करता है, तब निम्नलिखित में कौन बनता है?", options: ["(A) एथिलीन डाइक्लोराइड", "(B) मेसिटिलीन", "(C) क्लोरेटोन", "(D) क्लोरल"], ans: 2 },
+        { q: "57. अभिक्रिया aA + bB → उत्पाद के लिए -d[A]/dt बराबर होता है :", options: ["(A) -d[B]/dt", "(B) -b/d[B]/dt", "(C) -a/b (d[B]/dt)", "(D) -b/a (d[B]/dt)"], ans: 2 },
+        { q: "58. रेडियोसक्रिय क्षय है एक :", options: ["(A) शून्य कोटि की अभिक्रिया", "(B) प्रथम कोटि की अभिक्रिया", "(C) द्वितीय कोटि की अभिक्रिया", "(D) तृतीय कोटि की अभिक्रिया"], ans: 1 },
+        { q: "59. 288 K पर 1 ग्राम चारकोल के द्वारा H₂, CH₄, CO₂ एवं NH₃ गैसों के अधिशोषित आयतन का क्रम है :", options: ["(A) H₂ > CH₄ > CO₂ > NH₃", "(B) CH₄ > CO₂ > NH₃ > H₂", "(C) CO₂ > NH₃ > H₂ > CH₄", "(D) NH₃ > CO₂ > CH₄ > H₂"], ans: 3 },
+        { q: "60. लैंगमूर के अधिशोषण समताप का सही व्यंजक है :", options: ["(A) x/m = (1+aP)/b", "(B) x/m = aP/(1+bP)", "(C) x/m = (1+aP)/(1+bP)", "(D) x/m = 1/a + bP/a"], ans: 1 },
+        { q: "61. कोलाइडी कणों का आकार होता है :", options: ["(A) 1 nm - 10 nm", "(B) 10 nm - 100 nm", "(C) 1 nm - 100 nm", "(D) 10 nm - 1000 nm"], ans: 2 },
+        { q: "62. धुआँ एक कोलाइडी अवस्था है जिसमें :", options: ["(A) एक गैस ठोस में परिक्षिप्त रहता है", "(B) एक ठोस गैस में परिक्षिप्त रहता है", "(C) एक गैस गैस में परिक्षिप्त रहता है", "(D) एक द्रव गैस में परिक्षिप्त रहता है"], ans: 1 },
+        { q: "63. मक्खन एक उदाहरण है :", options: ["(A) जेल का", "(B) पायस का", "(C) सॉल का", "(D) फोम का"], ans: 0 },
+        { q: "64. एक फलक केन्द्रित घनाकार इकाई सेल में परमाणुओं की संख्या होती है :", options: ["(A) 2", "(B) 3", "(C) 4", "(D) 12"], ans: 2 },
+        { q: "65. पिंड-केन्द्रित घनाकार सेल में पैकिंग का संकुलन गुणांक होता है :", options: ["(A) 0.42", "(B) 0.53", "(C) 0.68", "(D) 0.82"], ans: 2 },
+        { q: "66. निम्नलिखित में कौन लौहचुंबकीय पदार्थ है?", options: ["(A) Fe", "(B) Cu", "(C) NaCl", "(D) MnO"], ans: 0 },
+        { q: "67. निम्नलिखित में किसमें फ्रेंकेल दोष है?", options: ["(A) सोडियम क्लोराइड", "(B) ग्रेफाइट", "(C) सिल्वर क्लोराइड", "(D) हीरा"], ans: 2 },
+        { q: "68. निम्नलिखित में किस यौगिक का जलीय घोल असामान्य परासरणी दाब प्रदर्शित करता है?", options: ["(A) यूरिया", "(B) सामान्य नमक", "(C) ग्लूकोस", "(D) सुक्रोज"], ans: 1 },
+        { q: "69. किसी विलेय के विलायक में एक मोलल घोल के क्वथनांक उन्नयन को कहा जाता है :", options: ["(A) क्वथनांकमापी स्थिरांक", "(B) वाष्प-दाब स्थिरांक", "(C) हिमांकमितीय स्थिरांक", "(D) इनमें से कोई नहीं"], ans: 0 },
+        { q: "70. निम्नलिखित में किसके जलीय घोल का वाष्प-दाब सबसे कम होगा?", options: ["(A) 0.1 M BaCl₂", "(B) 0.1 M यूरिया", "(C) 0.1 M Na₂SO₄", "(D) 0.1 M Na₃PO₄"], ans: 3 }
+    ];
+
+    const quizContainer = document.getElementById('quiz-container');
+
+    questions.forEach((qObj, qIndex) => {
+        const qBox = document.createElement('div');
+        qBox.className = 'question-box';
+        
+        const qText = document.createElement('div');
+        qText.className = 'question-text';
+        qText.innerHTML = qObj.q;
+        qBox.appendChild(qText);
+        
+        const optionsList = document.createElement('ul');
+        optionsList.className = 'options-list';
+        
+        const feedbackBox = document.createElement('div');
+        feedbackBox.className = 'feedback';
+        
+        qObj.options.forEach((opt, optIndex) => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerHTML = opt;
+            
+            btn.onclick = () => {
+                const allBtns = optionsList.querySelectorAll('.option-btn');
+                allBtns.forEach(b => b.disabled = true);
+                
+                if (optIndex === qObj.ans) {
+                    btn.classList.add('correct');
+                    feedbackBox.innerHTML = "✅ बिल्कुल सही जवाब!";
+                    feedbackBox.className = 'feedback feedback-correct';
+                } else {
+                    btn.classList.add('incorrect');
+                    allBtns[qObj.ans].classList.add('correct');
+                    feedbackBox.innerHTML = "❌ गलत जवाब। सही उत्तर: " + qObj.options[qObj.ans] + " है।";
+                    feedbackBox.className = 'feedback feedback-wrong';
+                }
+                feedbackBox.style.display = 'block';
+            };
+            
+            const li = document.createElement('li');
+            li.appendChild(btn);
+            optionsList.appendChild(li);
+        });
+        
+        qBox.appendChild(optionsList);
+        qBox.appendChild(feedbackBox);
+        quizContainer.appendChild(qBox);
+    });
+</script>
+
+</body>
+</html>

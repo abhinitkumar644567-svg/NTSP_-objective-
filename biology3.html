@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIOLOGY 12th (2023) - 70 Objective Test with Timer</title>
+    <style>
+        /* शानदार कलर ग्रेडिंग और कॉम्पैक्ट डिजाइन */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f4fbf4 0%, #e8f5e9 100%);
+            margin: 0;
+            padding: 15px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #27ae60;
+            border-bottom: 3px solid #2ecc71;
+            padding-bottom: 10px;
+            font-size: 24px;
+            margin-top: 0;
+            background: -webkit-linear-gradient(#27ae60, #2ecc71);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+        }
+        .info-bar {
+            text-align: center;
+            font-size: 15px;
+            color: #fff;
+            background: linear-gradient(to right, #27ae60, #2ecc71);
+            margin-bottom: 20px;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 6px;
+            box-shadow: 0 4px 6px rgba(46, 204, 113, 0.3);
+        }
+
+        /* --- टाइमर का डिज़ाइन --- */
+        .timer-box {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(230, 126, 34, 0.4);
+            z-index: 1000;
+            letter-spacing: 1px;
+            border: 2px solid #fff;
+        }
+
+        @media (max-width: 600px) {
+            .timer-box {
+                top: 10px;
+                right: 50%;
+                transform: translateX(50%);
+                font-size: 16px;
+                padding: 8px 16px;
+            }
+            .container { margin-top: 50px; }
+        }
+
+        .q-box {
+            margin-bottom: 15px;
+            padding: 15px;
+            border-left: 5px solid #2ecc71;
+            border-radius: 8px;
+            background: linear-gradient(to right, #f9fff9 0%, #f4fbf4 100%);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+            transition: transform 0.2s ease;
+        }
+        .q-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        .q-text {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        .opt-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            font-size: 15px;
+            background-color: #fff;
+            border: 1px solid #bdc3c7;
+            color: #34495e;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .opt-btn:hover:not(:disabled) {
+            background-color: #e8f8f5;
+            border-color: #1abc9c;
+            transform: translateX(3px);
+        }
+        .opt-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.9;
+        }
+        .correct {
+            background: linear-gradient(to right, #11998e, #38ef7d) !important;
+            border-color: #2ecc71 !important;
+            color: #fff !important;
+            font-weight: bold;
+        }
+        .incorrect {
+            background: linear-gradient(to right, #ed213a, #93291e) !important;
+            border-color: #e74c3c !important;
+            color: #fff !important;
+            font-weight: bold;
+        }
+        .feedback {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<!-- टाइमर का बॉक्स -->
+<div id="timer" class="timer-box">⏱️ 01:00:00</div>
+
+<div class="container">
+    <h1>BIOLOGY (जीवविज्ञान) - XII, 2023 (A)</h1>
+    <div class="info-bar">कुल प्रश्न: 70 | समय: 1 घंटा | भाषा: किताबी | सही विकल्प चुनें</div>
+    <div id="quiz-container"></div>
+</div>
+
+<script>
+    // --- 1 घंटे के टाइमर का कोड ---
+    let timeInSeconds = 3600; // 1 घंटा
+    const timerElement = document.getElementById('timer');
+
+    const countdown = setInterval(() => {
+        if (timeInSeconds <= 0) {
+            clearInterval(countdown);
+            timerElement.innerHTML = "⏳ समय समाप्त!";
+            timerElement.style.background = "linear-gradient(135deg, #333, #000)";
+            
+            // समय खत्म होने पर सभी बटन डिसेबल हो जाएंगे
+            const allButtons = document.querySelectorAll('.opt-btn');
+            allButtons.forEach(btn => btn.disabled = true);
+            alert("आपका समय समाप्त हो गया है! अब आप और उत्तर नहीं दे सकते।");
+            return;
+        }
+
+        timeInSeconds--;
+        
+        let hours = Math.floor(timeInSeconds / 3600);
+        let minutes = Math.floor((timeInSeconds % 3600) / 60);
+        let seconds = timeInSeconds % 60;
+
+        hours = hours < 10 ? "0" + hours : hours;
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        timerElement.innerHTML = `⏱️ ${hours}:${minutes}:${seconds}`;
+    }, 1000); 
+
+    // --- 70 प्रश्न बिल्कुल किताबी भाषा में ---
+    const questions = [
+        { q: "1. आवृतबीजी पौधों के भ्रूणपोष में गुणसूत्रों की सूत्रगुणता क्या होती है ?", options: ["(A) n", "(B) 3n", "(C) 2n", "(D) (A) और (B) दोनों"], ans: 1 },
+        { q: "2. मानव युग्मकों में गुणसूत्रों की संख्या कितनी होती है ?", options: ["(A) 21", "(B) 44", "(C) 23", "(D) 46"], ans: 2 },
+        { q: "3. नील हरित शैवाल किस खेत के लिए उपयोगी जैव उर्वरक है ?", options: ["(A) गेहूँ", "(B) मकई", "(C) चावल", "(D) ईख"], ans: 2 },
+        { q: "4. कॉपर-टी किसे रोकता है ?", options: ["(A) अंडे की परिपक्वता", "(B) निषेचन", "(C) अंडोत्सर्ग", "(D) (A) और (C) दोनों"], ans: 1 },
+        { q: "5. रेट्रो विषाणु निम्न में से किस बीमारी का रोगजनक है ?", options: ["(A) फाइलेरिया", "(B) सिफिलिस", "(C) एड्स", "(D) (B) और (C) दोनों"], ans: 2 },
+        { q: "6. बाह्यस्थाने संरक्षण का उदाहरण है :", options: ["(A) बीज बैंक", "(B) राष्ट्रीय उद्यान", "(C) पवित्र उपवन", "(D) जंतु उद्यान"], ans: 0 },
+        { q: "7. ग्राफीयन पुटक पाया जाता है :", options: ["(A) नर मानव के वृषण में", "(B) पौधों के अण्डाशय में", "(C) मानव यकृत में", "(D) मादा मानव के अण्डाशय में"], ans: 3 },
+        { q: "8. निम्नलिखित में से कौन-सा समस्यात्मक जलीय जंगली घास है ?", options: ["(A) जलकुंभी", "(B) ट्रापा", "(C) एजोला", "(D) वोल्फिया"], ans: 0 },
+        { q: "9. बूँद संक्रमण क्या है ?", options: ["(A) सिफिलिस", "(B) टेटनस", "(C) टायफाइड", "(D) निमोनिया"], ans: 3 },
+        { q: "10. Eco RI प्रतिबंधन एंजाइम डीएनए के किस अनुक्रम को काटता है ?", options: ["(A) —GTATATC", "(B) —AAGCTT—", "(C) —AAGTTC—", "(D) —GAATTC—"], ans: 3 },
+        { q: "11. ऑर्थोट्रॉपस बीजाण्ड निम्नांकित में से किसमें पाया जाता है ?", options: ["(A) पॉलीगोनम", "(B) पाइसम सटाइवम", "(C) सोलेनम निग्रम", "(D) हिलीएंथस अनुअस"], ans: 0 },
+        { q: "12. शुक्राणु का संचलन किनके द्वारा होता है ?", options: ["(A) एक्रोसोम", "(B) मध्यभाग", "(C) शीर्ष", "(D) पूँछ"], ans: 3 },
+        { q: "13. निम्नांकित में से किसमें रंध्र तथा जड़ों का अभाव रहता है ?", options: ["(A) ड्रेसीना", "(B) मार्सीलिया", "(C) हाइड्रिला", "(D) जलकुंभी"], ans: 2 },
+        { q: "14. मृदुजलीय तालाब में उर्वरक डाले जाने से क्या होता है ?", options: ["(A) जलीय जंतुओं में वृद्धि", "(B) मछलियों की आबादी में कमी", "(C) जलीय पौधों की मृत्यु", "(D) सुपोषण"], ans: 3 },
+        { q: "15. सैटेलाइट डीएनए एक उपयोगी साधन है :", options: ["(A) लिंग निर्धारण का", "(B) अंग संवर्धन का", "(C) फोरेंसिक विज्ञान का", "(D) ऊतक संवर्धन का"], ans: 2 },
+        { q: "16. विभिन्नताएँ अर्द्धसूत्री विभाजन के दौरान उजागर होती हैं :", options: ["(A) विनिमय के कारण", "(B) स्वतंत्र संकलन के कारण", "(C) सहलग्नता के कारण", "(D) (A) और (B) दोनों"], ans: 3 },
+        { q: "17. मानस अभयारण्य अवस्थित है :", options: ["(A) असम में", "(B) बिहार में", "(C) गुजरात में", "(D) राजस्थान में"], ans: 0 },
+        { q: "18. निम्नांकित में से कौन-सा प्रतिबंधन एंजाइम नहीं है ?", options: ["(A) Eco RI", "(B) Bam HI", "(C) Hind III", "(D) पेक्टिनेज"], ans: 3 },
+        { q: "19. आनुवंशिकतः संशोधित फसलों का उत्पादन किया जा सकता है :", options: ["(A) सूक्ष्म प्रजनन द्वारा", "(B) पार प्रजनन द्वारा", "(C) पुनर्योगज डीएनए प्रौद्योगिकी द्वारा", "(D) कायिक संकरण द्वारा"], ans: 2 },
+        { q: "20. प्याज में प्रवर्धन होता है :", options: ["(A) पत्तियों द्वारा", "(B) प्रकंद द्वारा", "(C) बीज द्वारा", "(D) बल्ब द्वारा"], ans: 3 },
+        { q: "21. हीमोकोरियल अपरा निम्नांकित में से किसमें पाया जाता है ?", options: ["(A) बिल्ली में", "(B) कुत्तों में", "(C) मानव में", "(D) घोड़ों में"], ans: 2 },
+        { q: "22. टी-लिम्फोसाईट किसमें उत्पन्न होता है ?", options: ["(A) यकृत", "(B) थाइमस", "(C) अस्थि-मज्जा", "(D) (B) और (C) दोनों"], ans: 2 },
+        { q: "23. विनिमय किस अवस्था की विशेषता है ?", options: ["(A) लेप्टोटीन", "(B) जाइगोटीन", "(C) पैकीटीन", "(D) डायाकाइनेसिस"], ans: 2 },
+        { q: "24. निम्न में से कौन-सी अगुणित संरचना है ?", options: ["(A) युग्मनज", "(B) अण्डाणु", "(C) युग्मक", "(D) (B) और (C) दोनों"], ans: 3 },
+        { q: "25. निम्नांकित में से कौन-सी विलुप्तप्राय प्रजाति है ?", options: ["(A) निपेंथिस", "(B) टिकोमा", "(C) इक्जोरा", "(D) (B) और (C) दोनों"], ans: 0 },
+        { q: "26. समकार्य संरचनाएँ किसके परिणामस्वरूप हैं ?", options: ["(A) साझा वंश", "(B) अभिसारी विकास", "(C) स्थिर चयन", "(D) अपसारी विकास"], ans: 1 },
+        { q: "27. जावा कपि मानव की कपाल क्षमता थी :", options: ["(A) 900 c.c.", "(B) 1075 c.c.", "(C) 1450 c.c.", "(D) 1660 c.c."], ans: 0 },
+        { q: "28. एलेलोपैथी किसके स्राव के कारण होता है ?", options: ["(A) नेक्टर", "(B) विटामिन्स", "(C) आविष", "(D) फेरोमोन"], ans: 2 },
+        { q: "29. जलमग्न पौधों में रंध्र रहते हैं :", options: ["(A) दोनों सतहों पर बराबर", "(B) ऊपरी सतह पर", "(C) किसी भी सतह पर नहीं होते है", "(D) निचली सतह पर"], ans: 2 },
+        { q: "30. सोमाक्लोन विविधता किनके द्वारा प्राप्त की जाती है ?", options: ["(A) ऊतक संवर्धन", "(B) गामा किरणें", "(C) उभय मिश्रण", "(D) रासायनिक उत्परिवर्तन"], ans: 0 },
+        { q: "31. रानी मधुमक्खी निषेचित अंडे से उत्पन्न होती है तथा इसका लार्वा खाता है :", options: ["(A) शहद", "(B) पराग", "(C) रॉयल जेली", "(D) सूक्ष्मजीव"], ans: 2 },
+        { q: "32. कुक्कुट चेचक का कारण है :", options: ["(A) जीवाणु", "(B) बाह्य परजीवी", "(C) विषाणु", "(D) अंतः परजीवी"], ans: 2 },
+        { q: "33. स्वबहुगुणिता कृत्रिम रूप से प्रेरित की जा सकती है :", options: ["(A) कॉल्चिसीन द्वारा", "(B) क्लोरोफॉर्म द्वारा", "(C) कॉल्चीसीन द्वारा", "(D) क्लोरोक्विन द्वारा"], ans: 0 },
+        { q: "34. भोजन की विषाक्तता किनके कारण होती है ?", options: ["(A) राइजोबियम", "(B) एजोटोबैक्टर", "(C) लैक्टोबैसिलस", "(D) क्लोस्ट्रीडीयम"], ans: 3 },
+        { q: "35. रक्त में प्रतिरक्षी किनके द्वारा स्रावित होते हैं ?", options: ["(A) मोनोसाइट्स", "(B) न्यूट्रोफिल्स", "(C) लिम्फोसाइट्स", "(D) बेसोफिल्स"], ans: 2 },
+        { q: "36. भू-जैवरासायनिक चक्र का अर्थ है :", options: ["(A) जल का चक्रण", "(B) किसी पारितंत्र में ऊर्जा का चक्रण", "(C) पारितंत्र में पोषक तत्त्वों का चक्रण", "(D) पौधों में तथा वातावरण के बीच गैसों का चक्रण"], ans: 2 },
+        { q: "37. निम्नलिखित में से कौन-सा अकार्बनिक पदार्थ का उपयोग करता है ?", options: ["(A) स्वपोषी", "(B) मृतोपजीवी/मृतजीवी", "(C) विषमपोषी", "(D) अपघटक"], ans: 0 },
+        { q: "38. लाइकेन किनके क्रम में अग्रणी है ?", options: ["(A) जल क्रमक", "(B) शैल क्रमक", "(C) मरु क्रमक", "(D) (B) और (C) दोनों"], ans: 1 },
+        { q: "39. निम्नलिखित में से कौन-सा उत्पादक नहीं है ?", options: ["(A) एगैरिकस", "(B) नॉस्टॉक", "(C) वॉलवॉक्स", "(D) स्पाइरोगाइरा"], ans: 0 },
+        { q: "40. आनुवंशिक अभियांत्रिकी में प्रतिजैविकों को प्रयुक्त किया जाता है ?", options: ["(A) स्वस्थ संवाहकों के चयन में", "(B) चयन योग्य वर्णक के रूप में", "(C) संवर्धन को संक्रमण से मुक्त रखने के लिए", "(D) (A) और (C) दोनों"], ans: 1 },
+        { q: "41. एगारोज जेल पर अलग किए गए DNA के टुकड़ों को किससे रंगने के बाद देखा जा सकता है ?", options: ["(A) एनिलीन ब्लू", "(B) इथीरियम ब्रोमाइड", "(C) ब्रोमोफिनॉल ब्लू", "(D) एसीटोकारमीन"], ans: 1 },
+        { q: "42. समयुग्मक पाए जाते हैं :", options: ["(A) मेंढक में", "(B) फ्यूकस में", "(C) पक्षी में", "(D) क्लैडोफोरा में"], ans: 3 },
+        { q: "43. 'पार्थेनोजिनेसिस' शब्द किसके द्वारा निर्माण किया गया ?", options: ["(A) बावेरी", "(B) ओवेन", "(C) सटन", "(D) जोहैनसन"], ans: 1 },
+        { q: "44. पैरामीशियम में किस प्रकार का द्वि-विखण्डन होता है ?", options: ["(A) सरल द्विखण्डन", "(B) अनुप्रस्थ द्विखण्डन", "(C) अनुदैर्ध्य द्विखण्डन", "(D) ओबलीक द्विखण्डन"], ans: 1 },
+        { q: "45. जब नर आकृति में मादा से भिन्न होता है तब कहलाता है :", options: ["(A) समलिंगता", "(B) यौन द्विरूपता", "(C) विषमलिंगता", "(D) उभयलिंगता"], ans: 1 },
+        { q: "46. गर्भ निरोधक गोली में मौजूद प्रोजेस्टेरॉन किस कार्य के लिए होता है ?", options: ["(A) विदलन रोकने के लिए", "(B) अण्डोत्सर्ग रोकने के लिए", "(C) निषेचन को रोकने के लिए", "(D) (A) और (C) दोनों"], ans: 1 },
+        { q: "47. एक शुक्राणु को सीधा अण्डाणु में प्रवेश कराने की विधि है :", options: ["(A) ET", "(B) ICSI", "(C) GIFT", "(D) ZIFT"], ans: 1 },
+        { q: "48. एम्नियोसेंटेसिस एक प्रक्रिया है :", options: ["(A) मस्तिष्क की बीमारी को जानने की", "(B) भ्रूण में किसी आनुवंशिक रोग के निर्धारण की", "(C) हृदय में किसी बीमारी के निर्धारण की", "(D) (A) और (C) दोनों"], ans: 1 },
+        { q: "49. जननांग समस्या किनके द्वारा फैलनेवाला STD है ?", options: ["(A) हेपेटाइटिस A", "(B) हर्पिस विषाणु", "(C) पैपीलोमा विषाणु", "(D) ट्राइकोमोनास"], ans: 2 },
+        { q: "50. ऑटोसोमल प्राथमिक नॉन-डिसजंक्शन के कारण होनेवाला रोग है :", options: ["(A) दात्र कोशिका अरक्तता", "(B) क्लाइनफेल्टर सिण्ड्रोम", "(C) टर्नर सिण्ड्रोम", "(D) डाउन सिण्ड्रोम"], ans: 3 },
+        { q: "51. द्विसंकर परीक्षार्थ संकरण अनुपात क्या है ?", options: ["(A) 1:1", "(B) 7:1:1:7", "(C) 1:1:1:1", "(D) 1:7:7:1"], ans: 2 },
+        { q: "52. पानी में ई. कोलाई की उच्च मात्रा संकेतक है :", options: ["(A) वाहित मलजल प्रदूषण का", "(B) पानी की कठोरता का", "(C) औद्योगिक प्रदूषण का", "(D) जल में क्लोरीन का होना"], ans: 0 },
+        { q: "53. फोटोकेमिकल स्मॉग में कौन हमेशा उपस्थित रहता है ?", options: ["(A) CO₂", "(B) O₃", "(C) SO₂", "(D) CH₄"], ans: 1 },
+        { q: "54. सैनिटरी लैंडफिल को किनके विकल्प के रूप में अपनाया गया था ?", options: ["(A) खुला जलता हुआ ढेर", "(B) सुपोषण", "(C) वाहित मल-जल", "(D) जैव-आवर्धन"], ans: 0 },
+        { q: "55. अभिकर्मक जो ELISA परीक्षण में उपयुक्त होता है, है :", options: ["(A) पॉलीमरेज", "(B) पेरोक्सीडेज", "(C) लाइगेज", "(D) एंडोन्यूक्लिएज"], ans: 1 },
+        { q: "56. एक ट्यूमर उत्प्रेरक प्लाज्मिड जिसका व्यापक रूप से परजीवी पौधों के उत्पादन में उपयुक्त किया जाता है, वह है :", options: ["(A) बैसीलस थुरिंजिएंसिस", "(B) एग्रोबैक्टीरियम ट्यूमीफेसियंस", "(C) स्टैफाइलोकोक्कस ऑरियस", "(D) ई. कोलाई"], ans: 1 },
+        { q: "57. निम्नलिखित में से कौन-सा व्यवस्थित कीटनाशक है ?", options: ["(A) एल्ड्रिन", "(B) फ्युराडैन", "(C) मैलाथियॉन", "(D) पैराथियॉन"], ans: 1 },
+        { q: "58. ग्लूकोज को एल्कोहल में बदलने वाला एंजाइम है :", options: ["(A) इनवर्टेज", "(B) लाइपेज", "(C) जाइमेज", "(D) डायस्टेज"], ans: 2 },
+        { q: "59. अपशिष्ट जल में BOD का अनुमान किनकी मात्रा को मापकर लगाया जाता है ?", options: ["(A) ऑक्सीजन की खपत", "(B) ऑक्सीजन निकास", "(C) जैव निम्नीकरणीय कार्बनिक पदार्थ", "(D) कुल जैविक (कार्बनिक) पदार्थ"], ans: 0 },
+        { q: "60. मेमोरी कोशिका का निर्माण किनसे होता है ?", options: ["(A) मोनोसाइट्स", "(B) लिम्फोसाइट्स", "(C) इयोसिनोफिल्स", "(D) न्यूट्रोफिल्स"], ans: 1 },
+        { q: "61. निम्नलिखित में से कौन-सी आनुवंशिक बीमारी नहीं है ?", options: ["(A) सिस्टिक फाइब्रोसिस", "(B) हीमोफीलिया", "(C) क्रेटीनिज्म", "(D) थैलासीमिया"], ans: 2 },
+        { q: "62. निम्नलिखित में से किस समूह में अगुणित पादप शरीर होता है ?", options: ["(A) आवृत्तबीजी", "(B) अनावृत्तबीजी", "(C) टेरिडोफाइट्स", "(D) ब्रायोफाइट्स"], ans: 3 },
+        { q: "63. 'पिस्टिलेट' शब्द का प्रयोग किया जाता है :", options: ["(A) द्विलिंगी पुष्प के लिए", "(B) एकलिंगी स्त्री-पुष्प के लिए", "(C) एकलिंगी नर-पुष्प के लिए", "(D) स्टैमीनेट पुष्प के लिए"], ans: 1 },
+        { q: "64. पौधों में शाकनाशी प्रतिरोधी जीन है :", options: ["(A) Bt", "(B) Ct", "(C) Mt", "(D) Gst"], ans: 3 },
+        { q: "65. 'सुनहरा धान' ऐसा चावल है जो समृद्ध है :", options: ["(A) आयरन में", "(B) β-कैरोटीन में", "(C) लाइसिन में", "(D) विटामिन सी में"], ans: 1 },
+        { q: "66. जीन-अभिव्यक्ति का नियंत्रण किनके स्तर पर होता है ?", options: ["(A) प्रतिलेखन", "(B) अनुवाद", "(C) डीएनए प्रतिकृति", "(D) (A) और (B) दोनों"], ans: 3 },
+        { q: "67. RNA के किस रूप की संरचना त्रिपर्णी जैसी होती है ?", options: ["(A) mRNA", "(B) rRNA", "(C) hnRNA", "(D) tRNA"], ans: 3 },
+        { q: "68. केन्द्रक प्रतिरोपण तकनीक की खोज किनके द्वारा की गई थी ?", options: ["(A) ग्रिफिथ", "(B) गुर्डोन", "(C) इयान विल्मट", "(D) ब्रिग्स"], ans: 3 },
+        { q: "69. DNA तथा RNA समान हैं :", options: ["(A) द्विगुणन में सक्षम होने के नाते", "(B) समान शर्करा होने के कारण", "(C) न्यूक्लियोटाइड के बहुलक होने के नाते", "(D) समान पाइरीमिडीन क्षार होने के कारण"], ans: 2 },
+        { q: "70. प्रथम स्तनपायी किस युग में दिखाई दिया ?", options: ["(A) परमियन", "(B) ट्रिएसिक", "(C) तृतीयक", "(D) इनमें से कोई नहीं"], ans: 1 }
+    ];
+
+    const quizContainer = document.getElementById('quiz-container');
+
+    questions.forEach((qObj, index) => {
+        const qBox = document.createElement('div');
+        qBox.className = 'q-box';
+        
+        const qText = document.createElement('div');
+        qText.className = 'q-text';
+        qText.innerHTML = qObj.q;
+        qBox.appendChild(qText);
+        
+        const feedbackBox = document.createElement('div');
+        feedbackBox.className = 'feedback';
+        
+        const btnGroup = document.createElement('div');
+        
+        qObj.options.forEach((opt, optIndex) => {
+            const btn = document.createElement('button');
+            btn.className = 'opt-btn';
+            btn.innerHTML = opt;
+            
+            btn.onclick = () => {
+                const allBtns = btnGroup.querySelectorAll('.opt-btn');
+                allBtns.forEach(b => b.disabled = true);
+                
+                if (optIndex === qObj.ans) {
+                    btn.classList.add('correct');
+                    feedbackBox.innerHTML = "✅ बिल्कुल सही!";
+                    feedbackBox.style.color = "#145a32";
+                    feedbackBox.style.background = "#d4efdf";
+                    feedbackBox.style.border = "1px solid #2ecc71";
+                } else {
+                    btn.classList.add('incorrect');
+                    allBtns[qObj.ans].classList.add('correct');
+                    
+                    const correctText = qObj.options[qObj.ans].substring(0,3);
+                    feedbackBox.innerHTML = "❌ गलत उत्तर! सही: " + correctText + ")";
+                    feedbackBox.style.color = "#93291e";
+                    feedbackBox.style.background = "#fdebd0";
+                    feedbackBox.style.border = "1px solid #e74c3c";
+                }
+                feedbackBox.style.display = 'block';
+            };
+            btnGroup.appendChild(btn);
+        });
+        
+        qBox.appendChild(btnGroup);
+        qBox.appendChild(feedbackBox);
+        quizContainer.appendChild(qBox);
+    });
+</script>
+
+</body>
+</html>

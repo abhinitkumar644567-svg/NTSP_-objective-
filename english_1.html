@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENGLISH 12th (2021) - 100 Objective Test</title>
+    <style>
+        /* प्रीमियम और आधुनिक कलर ग्रेडिंग */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+            margin: 0;
+            padding: 15px;
+            min-height: 100vh;
+            color: #1e293b;
+        }
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            font-size: 26px;
+            margin-top: 0;
+            padding-bottom: 15px;
+            border-bottom: 3px dashed #4f46e5;
+            background: linear-gradient(45deg, #312e81, #4f46e5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+        }
+        .info-bar {
+            text-align: center;
+            font-size: 16px;
+            color: #fff;
+            background: linear-gradient(to right, #4f46e5, #0ea5e9);
+            margin-bottom: 25px;
+            font-weight: bold;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+        }
+
+        /* --- टाइमर का डिज़ाइन --- */
+        .timer-box {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #f43f5e, #fb923c);
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(244, 63, 94, 0.4);
+            z-index: 1000;
+            letter-spacing: 1px;
+            border: 2px solid #fff;
+        }
+
+        @media (max-width: 600px) {
+            .timer-box {
+                top: 10px;
+                right: 50%;
+                transform: translateX(50%);
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+            .container { margin-top: 50px; }
+        }
+
+        .q-box {
+            margin-bottom: 20px;
+            padding: 18px;
+            border-left: 5px solid #6366f1;
+            border-radius: 8px;
+            background: #f8fafc;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+            transition: transform 0.2s ease;
+        }
+        .q-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+        }
+        .q-text {
+            font-size: 17px;
+            font-weight: bold;
+            color: #1e293b;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        .opt-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 12px 18px;
+            margin-bottom: 8px;
+            font-size: 16px;
+            background-color: #fff;
+            border: 1px solid #cbd5e1;
+            color: #334155;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            font-family: inherit;
+        }
+        .opt-btn:hover:not(:disabled) {
+            background-color: #e0e7ff;
+            border-color: #818cf8;
+            transform: translateX(4px);
+        }
+        .opt-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.9;
+        }
+        .correct {
+            background: linear-gradient(to right, #10b981, #34d399) !important;
+            border-color: #059669 !important;
+            color: #fff !important;
+            font-weight: bold;
+        }
+        .incorrect {
+            background: linear-gradient(to right, #ef4444, #f87171) !important;
+            border-color: #dc2626 !important;
+            color: #fff !important;
+            font-weight: bold;
+        }
+        .feedback {
+            display: none;
+            margin-top: 12px;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 15px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+<!-- टाइमर का बॉक्स -->
+<div id="timer" class="timer-box">⏱️ 01:00:00</div>
+
+<div class="container">
+    <h1>ENGLISH (अंग्रेजी) - XII (100 Marks) - 2021(A)</h1>
+    <div class="info-bar">Total Questions: 100 | Time: 1 Hour | Choose the correct option</div>
+    <div id="quiz-container"></div>
+</div>
+
+<script>
+    // --- 1 घंटे का टाइमर कोड ---
+    let timeInSeconds = 3600; // 1 Hour
+    const timerElement = document.getElementById('timer');
+
+    const countdown = setInterval(() => {
+        if (timeInSeconds <= 0) {
+            clearInterval(countdown);
+            timerElement.innerHTML = "⏳ Time Up!";
+            timerElement.style.background = "linear-gradient(135deg, #333, #000)";
+            
+            // समय खत्म होने पर सभी बटन डिसेबल हो जाएंगे
+            const allButtons = document.querySelectorAll('.opt-btn');
+            allButtons.forEach(btn => btn.disabled = true);
+            alert("Time is up! You can no longer answer the questions.");
+            return;
+        }
+        timeInSeconds--;
+        let hours = Math.floor(timeInSeconds / 3600);
+        let minutes = Math.floor((timeInSeconds % 3600) / 60);
+        let seconds = timeInSeconds % 60;
+
+        hours = hours < 10 ? "0" + hours : hours;
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+        timerElement.innerHTML = `⏱️ ${hours}:${minutes}:${seconds}`;
+    }, 1000); 
+
+    // --- 100 प्रश्न (बिल्कुल किताब की तरह) ---
+    const q = [
+        {q:"1. Choose the correct sentence-",o:["(A) Which came first, chicken or egg?","(B) Which came first,, a chicken or an egg?","(C) Which came first, the chicken or the egg?","(D) Which came first, an chicken or an egg?"],a:2},
+        {q:"2. The flat caught fire. All the things were burnt.<br>(Choose the correct combination)",o:["(A) The flat caught fire and all the things was burnt.","(B) The flat having caught fire, all the things were burnt.","(C) All the things was burnt when the flat caught fire.","(D) As all things burnt, the flat caught fire."],a:1},
+        {q:"3. He is a man of-<br>(Choose the correct option)",o:["(A) script","(B) letters","(C) words","(D) text"],a:1},
+        {q:"4. We met a lot of people ............. our holidays.<br>(Choose the correct preposition)",o:["(A) on","(B) in","(C) during","(D) at"],a:2},
+        {q:"5. Choose the correctly spelt word-",o:["(A) Acquatance","(B) Acquaintance","(C) Acqueintence","(D) Acquantance"],a:1},
+        {q:"6. Choose the correct synonym of 'Change'-",o:["(A) Alter","(B) Renew","(C) Review","(D) Repeat"],a:0},
+        {q:"7. The synonym of 'show' is-<br>(Choose the correct option)",o:["(A) Abrupt","(B) Forbid","(C) Silent","(D) Exhibit"],a:3},
+        {q:"8. By whom was the bird killed?<br>(Choose the correct active voice)",o:["(A) Who killing the bird?","(B) Who has killed the bird?","(C) Who killed the bird?","(D) Bird killing by whom?"],a:2},
+        {q:"9. The antonym of 'Natural' is-<br>(Choose the correct option)",o:["(A) Golden","(B) Beautiful","(C) Bright","(D) Artificial"],a:3},
+        {q:"10. Our path is beset ............. difficulties.<br>(Choose the correct proposition)",o:["(A) to","(B) from","(C) with","(D) in"],a:2},
+        {q:"11. I ............. you to read the book carefully.<br>(Choose the correct option)",o:["(A) advise","(B) tell","(C) advice","(D) had advise"],a:0},
+        {q:"12. ............. I could sing, I would have sung.<br>(Choose the correct option)",o:["(A) If","(B) Until","(C) Because","(D) Till"],a:0},
+        {q:"13. He has ............. the prize.<br>(Choose the correct option)",o:["(A) wins","(B) win","(C) will win","(D) won"],a:3},
+        {q:"14. Choose the correct sentence-",o:["(A) You can vote only when you are eighteen","(B) You vote simply when eighteen","(C) You can vote till you are eighteen","(D) You vote as you are eighteen"],a:0},
+        {q:"15. ............. he went for a walk.<br>(Choose the correct phrase)",o:["(A) Along with","(B) All in all","(C) As usual","(D) After all"],a:2},
+        {q:"16. I cannot give you money, ............. I have none.<br>(Choose the correct option)",o:["(A) for","(B) and","(C) if","(D) by"],a:0},
+        {q:"17. Rules ............. be observed at all costs.<br>(Choose the correct auxiliary verb)",o:["(A) should","(B) can","(C) might","(D) may"],a:0},
+        {q:"18. She has learned her lessons.<br>(Choose the correct passive voice)",o:["(A) Her lessons has learned by her","(B) Her lessons has been learned by her","(C) Her lessons learnt by her","(D) Her lessons have been learned by her"],a:3},
+        {q:"19. Choose the correct sentence-",o:["(A) She will return to India tomorrow","(B) She returned to India tomorrow","(C) She has already returned to India tomorrow","(D) She had returned to India tomorrow"],a:0},
+        {q:"20. ............. is bad for health.<br>(Choose the correct option)",o:["(A) Smoke","(B) To smoking","(C) Smoked","(D) Smoking"],a:3},
+        {q:"21. Holi is ............. important festival.<br>(Choose the correct article)",o:["(A) a","(B) an","(C) the","(D) no article"],a:1},
+        {q:"22. Choose the correctly spelt word-",o:["(A) Acteul","(B) Actuel","(C) Actual","(D) Akchual"],a:2},
+        {q:"23. I will never forget this experience.<br>(Choose the correct passive voice)",o:["(A) This experience cannot be forgotten by me","(B) This experience would never be forgotten by me","(C) The experience will never be forgotten by me","(D) This experience had never been forgotten by me"],a:2},
+        {q:"24. One who dies for a noble cause is a.<br>(Choose the correct option)",o:["(A) Martyr","(B) Patriot","(C) Mercenary","(D) Robber"],a:0},
+        {q:"25. He introduced me ............. his relatives.<br>(Choose the correct preposition)",o:["(A) with","(B) on","(C) to","(D) by"],a:2},
+        {q:"26. She met her mother, She was glad.<br>(Choose the correct combination)",o:["(A) She was glad to meet her mother","(B) She met her mother and was glad","(C) She was glad and met her mother","(D) She and her mother were glad"],a:0},
+        {q:"27. He told me, \"Are you hungry?\"<br>(Choose the correct indirect speech)",o:["(A) He was asking me if I am hungry","(B) He asked me if I was hungry","(C) He said to me if I was hungry","(D) He questioned me about my hunger"],a:1},
+        {q:"28. You ............. give up smoking.<br>(Choose the correct option)",o:["(A) must","(B) used","(C) had","(D) have"],a:0},
+        {q:"29. Success depends ............. hard labour.<br>(Choose the correct preposition)",o:["(A) by","(B) of","(C) in","(D) on"],a:3},
+        {q:"30. He ............. a thief last night.<br>(Choose the correct option)",o:["(A) have seen","(B) seeing","(C) saw","(D) seen"],a:2},
+        {q:"31. Give one word substitution for-<br>'A person who presents a radio/television programme'",o:["(A) Astronaut","(B) Anthropologist","(C) Anchor","(D) Archer"],a:2},
+        {q:"32. His honesty and faithfulness ............. unquestionable.<br>(Choose the correct option)",o:["(A) is","(B) has","(C) are","(D) have"],a:0},
+        {q:"33. He is happy of being here.<br>(Choose the correct antonym of the underlined word)",o:["(A) First","(B) Sad","(C) Jolly","(D) Excited"],a:1},
+        {q:"34. Ram said to Shyam, \"What are you reading?\"<br>(Choose the correct indirect narration)",o:["(A) Ram asked Shyam what he was reading","(B) Ram told Shyam what he is reading","(C) Ram is asking Shyam about his reading book","(D) Ram said to Shyam as what he was reading"],a:0},
+        {q:"35. Choose the correctly spelt word-",o:["(A) Exhebition","(B) Exibition","(C) Exhibition","(D) Exabition"],a:2},
+        {q:"36. You need to buy ............. dictionary.<br>(Choose the correct option)",o:["(A) a","(B) an","(C) the","(D) no article"],a:0},
+        {q:"37. Is there ............. money in your pocket?<br>(Choose the correct option)",o:["(A) much","(B) more","(C) any","(D) many"],a:2},
+        {q:"38. Choose the odd one-",o:["(A) Fox","(B) Leopard","(C) Pigeon","(D) Lion"],a:2},
+        {q:"39. Bring ............. inkpot for me.<br>(Choose the correct article)",o:["(A) a","(B) an","(C) the","(D) no article"],a:1},
+        {q:"40. He lives in a two ............. house.<br>(Choose the correct option)",o:["(A) story","(B) building","(C) storeyed","(D) block"],a:2},
+        {q:"41. John or Mary ............. gone to Kolkata.<br>(Choose the correct option)",o:["(A) is","(B) has","(C) have","(D) were"],a:1},
+        {q:"42. Pravin rode straight ............. the arena.<br>(Choose the correct preposition)",o:["(A) into","(B) in","(C) with","(D) at"],a:0},
+        {q:"43. I would have bought a new car for her, but it ............. too expensive.<br>(Choose the correct option)",o:["(A) were","(B) are","(C) was","(D) can"],a:2},
+        {q:"44. The aeroplane flies faster than birds.<br>(Choose the correct negative sentence)",o:["(A) The aeroplane does not fly faster than birds","(B) The aeroplane flies not faster than birds","(C) The aeroplane may not fly faster than birds","(D) The aeroplane cannot fly faster than birds"],a:0},
+        {q:"45. He was brought ............. by his aunt after his mother's death.<br>(Choose the correct preposition)",o:["(A) in","(B) off","(C) up","(D) by"],a:2},
+        {q:"46. Choose the incorrect sentence",o:["(A) Holi falls in March","(B) Do you like cricket?","(C) He speaks English","(D) We saw deers in the zoo"],a:3},
+        {q:"47. Keep quiet, we ............. to the radio.<br>(Choose the correct option)",o:["(A) are listening","(B) listen","(C) will listen","(D) listened"],a:0},
+        {q:"48. Choose the correctly spelt word-",o:["(A) Futher","(B) Ferther","(C) Further","(D) Fruther"],a:2},
+        {q:"49. This nonsense will not be tolerated by me.<br>(Choose the correct active voice)",o:["(A) Will I never tolerate this nonsense","(B) I will not tolerate this nonsense","(C) I had not tolerated this nonsense","(D) Nonsense will not be tolerated by I"],a:1},
+        {q:"50. We ............. keep our country free from racial prejudices.<br>(Choose the best auxiliary verb)",o:["(A) have","(B) could","(C) are","(D) should"],a:3},
+        {q:"51. Have you ............. him?<br>(Choose the correct tense form)",o:["(A) saw","(B) see","(C) had seen","(D) seen"],a:3},
+        {q:"52. He told the boy not to sit there.<br>(Choose the correct direct narration)",o:["(A) \"Doesn't sit there,\" he said to the boy","(B) \"Didn't sit there,\" he said to the boy","(C) \"Didn't sit here, he said to the boy","(D) \"Don't sit here,\" he said to the boy"],a:3},
+        {q:"53. Do you ............. your first teacher?<br>(Choose the correct tense form)",o:["(A) remembered","(B) remembering","(C) remember","(D) will remember"],a:2},
+        {q:"54. After his death, the seat remained vacant.<br>(Choose the correct meaning of the underlined word)",o:["(A) empty","(B) real","(C) abusive","(D) spirit"],a:0},
+        {q:"55. He is attentive ............. his duty.<br>(Choose the correct preposition)",o:["(A) to","(B) by","(C) for","(D) of"],a:0},
+        {q:"56. When I finished my work, I asked ............. teacher to check it.<br>(Choose the best option)",o:["(A) I","(B) her","(C) my","(D) their"],a:2},
+        {q:"57. Those are probably the ............. furniture in the showroom.<br>(Choose the correct option)",o:["(A) fancyest","(B) fanciest","(C) fancy","(D) most fancyest"],a:1},
+        {q:"58. They made her ............. a new contract.<br>(Choose the correct option)",o:["(A) sign","(B) to sign","(C) signing","(D) signed"],a:0},
+        {q:"59. Catching the earlier train will give us the ............. to do some work.<br>(Choose the correct option)",o:["(A) chance","(B) luck","(C) possibility","(D) occasion"],a:0},
+        {q:"60. Reshma bought what she wanted, .............?<br>(Choose the correct question tag)",o:["(A) won't she","(B) can't she","(C) can she","(D) didn't she"],a:3},
+        {q:"61. When we speak of 'the freedom of the press', we usually mean freedom in a ............. sense.",o:["(A) broad","(B) legal","(C) technical","(D) social"],a:2},
+        {q:"62. 'A Marriage Proposal' is a-",o:["(A) tragedy","(B) satire","(C) tragi-comedy","(D) comedy"],a:3},
+        {q:"63. Donne studied law and read-",o:["(A) theology","(B) drama","(C) philosophy","(D) novels"],a:0},
+        {q:"64. I celebrate myself, and sing myself, .....' is from-",o:["(A) Snake","(B) Ode to Autumn","(C) Song of Myself","(D) Now the Leaves are Falling Fast"],a:2},
+        {q:"65. The Gujarati equivalent for civilization means-<br>(Choose the correct option)",o:["(A) bad conduct","(B) intelligent conduct","(C) good conduct","(D) delightful conduct"],a:2},
+        {q:"66. Nanukaka was coming to Delhi to-<br>(Choose the correct option)",o:["(A) see some people","(B) see some minister","(C) see his sister","(D) see some relatives"],a:1},
+        {q:"67. ............. works include 'Leaves of Grass' and 'Drum Taps'-<br>(Choose the correct option)",o:["(A) Walt Whitman's","(B) D.H. Lawrence's","(C) T. S. Eliot's","(D) Walter de la Mare's"],a:0},
+        {q:"68. Who 'run scolding for their food :' in 'Now the Leaves are Falling Fast'?<br>(Choose the correct option)",o:["(A) Trolls","(B) Lions","(C) Animals","(D) Birds"],a:0},
+        {q:"69. 'Macavity : The Mystery Cat' has been taken from-",o:["(A) Old Alan's Book of Cats","(B) Old Possum's Book of Practical Cats","(C) Young Arthur's Cats","(D) Young Mathew's Dogs and Cats"],a:1},
+        {q:"70. 'Crossing of Rivers' is an important volume of verse written by-",o:["(A) Jayanta Mahapatra","(B) Kamala Das","(C) Keki N. Daruwala","(D) Nissim Ezekiel"],a:2},
+        {q:"71. 'He lifted his head from his drinking' is from-",o:["(A) Snake","(B) Song of Myself","(C) Ode to Autumn","(D) An Epitaph"],a:0},
+        {q:"72. Who wrote 'Huckleberry Finn'?",o:["(A) Herman Melville","(B) Henry James","(C) Earnest Hemingway","(D) Mark Twain"],a:3},
+        {q:"73. In which poem does the poet express his sad feeling for a beautiful lady?<br>(Choose the correct option)",o:["(A) To Autumn","(B) The Soldier","(C) An Epitaph","(D) Fire-Hymn"],a:2},
+        {q:"74. ............. is remembered as a war poet.<br>(Choose the correct option)",o:["(A) Rupert Brooke","(B) T. S. Eliot","(C) D. H. Lawrence","(D) Walter de la Mare"],a:0},
+        {q:"75. Who finds Macavity lazy and half asleep?<br>(Choose the correct option)",o:["(A) Kamala Das","(B) D. H. Lawrence","(C) T. S. Eliot","(D) William Blake"],a:2},
+        {q:"76. D. H. Lawrence exalts the values of primitive life in-<br>(Choose the correct option)",o:["(A) Snake","(B) Fire-Hymn","(C) Song of Myself","(D) My Grandmother's House"],a:0},
+        {q:"77. Who wrote the piece, 'Why I am Not a Christian?'",o:["(A) Bertrand Russell","(B) Shiga Naoya","(C) Dorothy L. Sayers","(D) Pearl S. Buck"],a:0},
+        {q:"78. Seibi was passionately interested in-",o:["(A) baskets","(B) carrots","(C) gourds","(D) potatoes"],a:2},
+        {q:"79. All technological changes cause ............. problems.",o:["(A) social","(B) behavioural","(C) industrial","(D) personal"],a:0},
+        {q:"80. Benjy understood about the business of-",o:["(A) education","(B) hens","(C) homes","(D) fruits"],a:1},
+        {q:"81. English language is ............. than Sanskrit and Persian.<br>(Choose the correct option)",o:["(A) older","(B) younger","(C) elder","(D) oldest"],a:1},
+        {q:"82. The word 'drama' comes from ............. word.<br>(Choose the correct option)",o:["(A) Latin","(B) Greek","(C) Scandinavian","(D) Pali"],a:1},
+        {q:"83. Who wrote, 'The Scholar Gypsy'?<br>(Choose the correct option)",o:["(A) Matthew Arnold","(B) W. B. Yeats","(C) Robert Bridges","(D) Thomas Hardy"],a:0},
+        {q:"84. ............. is called the father of modern novel.<br>(Choose the correct option)",o:["(A) Richardson","(B) Fielding","(C) Johnson","(D) Dryden"],a:1},
+        {q:"85. Goldsmith and Sheridan made contributions to the-",o:["(A) Novel","(B) Non-fiction writing","(C) Poetry","(D) English stage"],a:3},
+        {q:"86. Wole Soyinka is a ............. poet.",o:["(A) Nigerian","(B) American","(C) Indian","(D) British"],a:0},
+        {q:"87. The Old English Period is characterised by-",o:["(A) vocabulary","(B) mood","(C) inflections","(D) gender"],a:2},
+        {q:"88. A major linguistic change in English is-",o:["(A) The Great Vowel Shift","(B) Received Pronunciation","(C) Language Change","(D) Vocabulary Shift"],a:0},
+        {q:"89. \"Civilization is that mode of conduct which points out to man the path of duty.\" is from-",o:["(A) Indian Civilization and Culture","(B) A Child is Born","(C) A Marriage Proposal","(D) Bharat is My Home"],a:0},
+        {q:"90. 'The people have chosen to make me the head of this family for a certain time' Who says this?",o:["(A) Dr. Zakir Hussain","(B) Kamala Das","(C) Pearl S. Buck","(D) Manohar Malgaonkar"],a:0},
+        {q:"91. Who travelled free with Nanukaka?",o:["(A) Dog","(B) Rabbit","(C) Hen","(D) Kitten"],a:3},
+        {q:"92. Martin Luther King, Jr. asks the black people to continue working with-",o:["(A) love","(B) hatred","(C) faith","(D) jealousy"],a:2},
+        {q:"93. 'Now the Leaves are Falling Fast' talks about the ............. of human life.",o:["(A) frustrations","(B) happiness","(C) confusions","(D) knowledge"],a:0},
+        {q:"94. 'Thou watchest the last oozings hours by hours.' is from-",o:["(A) Song of Myself","(B) An Epitaph","(C) Ode to Autumn","(D) Snake"],a:2},
+        {q:"95. 'And when I crumble, who will remember.' Who is 'I' in the line?",o:["(A) Poet","(B) Lady","(C) Child","(D) Mother"],a:0},
+        {q:"96. 'In hearts at peace, under an English heaven' is from-",o:["(A) Ode to Autumn","(B) Snake","(C) An Epitaph","(D) The Soldier"],a:3},
+        {q:"97. 'Some of the immediate and brilliant results of modern inventions are too maddening to resists.' is from-<br>(Choose the correct option)",o:["(A) Bharat is My Home","(B) A Pinch of Snuff","(C) Indian Civilization and Culture","(D) Ideas That Have Helped Mankind"],a:2},
+        {q:"98. India was a part of the background of-<br>(Choose the correct option)",o:["(A) the doctor's life","(B) the wife's life","(C) the Kashmiri man's life","(D) Pearl S. Buck's life"],a:3},
+        {q:"99. Emancipation Proclamation gave the Negro-<br>(Choose the correct option)",o:["(A) slavery","(B) freedom from slavery","(C) captivity","(D) despair"],a:1},
+        {q:"100. Bertrand Russell was also a-<br>(Choose the correct option)",o:["(A) painter","(B) dramatist","(C) mathematician","(D) geologist"],a:2}
+    ];
+
+    const quizContainer = document.getElementById('quiz-container');
+
+    q.forEach((qObj) => {
+        const qBox = document.createElement('div');
+        qBox.className = 'q-box';
+        
+        const qText = document.createElement('div');
+        qText.className = 'q-text';
+        qText.innerHTML = qObj.q;
+        qBox.appendChild(qText);
+        
+        const feedbackBox = document.createElement('div');
+        feedbackBox.className = 'feedback';
+        
+        const btnGroup = document.createElement('div');
+        
+        qObj.o.forEach((opt, optIndex) => {
+            const btn = document.createElement('button');
+            btn.className = 'opt-btn';
+            btn.innerHTML = opt;
+            
+            btn.onclick = () => {
+                const allBtns = btnGroup.querySelectorAll('.opt-btn');
+                allBtns.forEach(b => b.disabled = true);
+                
+                if (optIndex === qObj.a) {
+                    btn.classList.add('correct');
+                    feedbackBox.innerHTML = "✅ Correct Answer!";
+                    feedbackBox.style.color = "#059669";
+                    feedbackBox.style.background = "#d1fae5";
+                    feedbackBox.style.border = "1px solid #34d399";
+                } else {
+                    btn.classList.add('incorrect');
+                    allBtns[qObj.a].classList.add('correct');
+                    
+                    const correctText = qObj.o[qObj.a].substring(0,3);
+                    feedbackBox.innerHTML = "❌ Wrong Answer! Correct: " + correctText + ")";
+                    feedbackBox.style.color = "#dc2626";
+                    feedbackBox.style.background = "#fee2e2";
+                    feedbackBox.style.border = "1px solid #f87171";
+                }
+                feedbackBox.style.display = 'block';
+            };
+            btnGroup.appendChild(btn);
+        });
+        
+        qBox.appendChild(btnGroup);
+        qBox.appendChild(feedbackBox);
+        quizContainer.appendChild(qBox);
+    });
+</script>
+
+</body>
+</html>

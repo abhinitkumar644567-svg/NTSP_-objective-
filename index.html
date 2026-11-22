@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080d1b">
+<title>NTSP | New Topper Study Point</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#080d1b;
+  --panel:rgba(18,27,49,.78);
+  --white:#f5f7ff;
+  --muted:#a0acc5;
+  --cyan:#58e7e2;
+  --blue:#748aff;
+  --purple:#a47bff;
+  --border:rgba(157,180,255,.16);
+  --success:#50e6ad;
+  --danger:#ff7185;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html{
+  min-height:100%;
+  background:var(--bg);
+}
+
+body{
+  min-height:100vh;
+  min-height:100dvh;
+  overflow-x:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:45px 20px 75px;
+  color:var(--white);
+  font-family:"Noto Sans Devanagari",sans-serif;
+  background:
+    radial-gradient(ellipse at 15% 15%,rgba(67,105,255,.15),transparent 40%),
+    radial-gradient(ellipse at 85% 85%,rgba(127,73,255,.15),transparent 40%),
+    linear-gradient(145deg,#080d1b,#10162b 55%,#080d1b);
+}
+
+/* BACKGROUND */
+
+.background{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+  z-index:0;
+}
+
+.orb{
+  position:absolute;
+  width:320px;
+  height:320px;
+  border-radius:50%;
+  filter:blur(85px);
+  opacity:.23;
+  animation:float 13s ease-in-out infinite alternate;
+}
+
+.orb.one{
+  top:-120px;
+  left:-100px;
+  background:#526cff;
+}
+
+.orb.two{
+  bottom:-130px;
+  right:-100px;
+  background:#a34dff;
+  animation-delay:-5s;
+}
+
+.orb.three{
+  top:40%;
+  right:5%;
+  width:180px;
+  height:180px;
+  background:#26d8cf;
+  opacity:.12;
+  animation-delay:-8s;
+}
+
+@keyframes float{
+  from{transform:translate3d(0,0,0) scale(1)}
+  to{transform:translate3d(30px,-35px,0) scale(1.12)}
+}
+
+.grid{
+  position:absolute;
+  inset:0;
+  opacity:.12;
+  background-image:
+    linear-gradient(rgba(147,171,255,.12) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(147,171,255,.12) 1px,transparent 1px);
+  background-size:48px 48px;
+  mask-image:radial-gradient(ellipse at center,#000,transparent 78%);
+}
+
+/* TOP BAR */
+
+.topbar{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:5;
+  height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 22px;
+  border-bottom:1px solid rgba(255,255,255,.06);
+  background:rgba(8,13,27,.55);
+  backdrop-filter:blur(15px);
+  -webkit-backdrop-filter:blur(15px);
+}
+
+.top-brand{
+  font:700 13px "Orbitron",sans-serif;
+  letter-spacing:2px;
+}
+
+.top-brand span{
+  color:var(--cyan);
+}
+
+.status{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:#a9b9d2;
+  font:10px "JetBrains Mono",monospace;
+  letter-spacing:1px;
+}
+
+.status-dot{
+  width:7px;
+  height:7px;
+  background:var(--success);
+  border-radius:50%;
+  box-shadow:0 0 12px var(--success);
+}
+
+/* MAIN CARD */
+
+.wrapper{
+  width:100%;
+  max-width:440px;
+  position:relative;
+  z-index:2;
+  animation:appear .9s cubic-bezier(.2,.8,.2,1) both;
+}
+
+@keyframes appear{
+  from{opacity:0;transform:translateY(25px) scale(.97)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+.card{
+  position:relative;
+  overflow:hidden;
+  padding:38px 29px 29px;
+  border:1px solid var(--border);
+  border-radius:27px;
+  background:linear-gradient(145deg,rgba(26,38,66,.88),rgba(12,19,37,.91));
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.38),
+    inset 0 1px 0 rgba(255,255,255,.09);
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:15%;
+  width:70%;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--cyan),var(--purple),transparent);
+}
+
+.card::after{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  top:-130px;
+  right:-90px;
+  border-radius:50%;
+  background:rgba(105,135,255,.15);
+  filter:blur(40px);
+  pointer-events:none;
+}
+
+/* LOGO */
+
+.logo-area{
+  text-align:center;
+  margin-bottom:28px;
+}
+
+.logo-icon{
+  width:82px;
+  height:82px;
+  margin:0 auto 19px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border-radius:25px;
+  background:linear-gradient(145deg,rgba(91,231,226,.15),rgba(116,138,255,.15));
+  border:1px solid rgba(113,224,240,.25);
+  box-shadow:0 0 35px rgba(88,231,226,.10);
+  position:relative;
+}
+
+.logo-icon::before{
+  content:"";
+  position:absolute;
+  inset:-5px;
+  border:1px solid rgba(116,138,255,.18);
+  border-radius:29px;
+}
+
+.logo-icon span{
+  font:900 29px "Orbitron",sans-serif;
+  letter-spacing:-2px;
+  background:linear-gradient(120deg,#ffffff,var(--cyan),#9e9cff);
+  background-clip:text;
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.brand{
+  font:900 clamp(34px,10vw,48px)/1.3 "Orbitron",sans-serif;
+  letter-spacing:3px;
+  background:linear-gradient(100deg,#fff 15%,#73e8e4 50%,#a59aff 90%);
+  background-clip:text;
+  -webkit-background-clip:text;
+  color:transparent;
+  filter:drop-shadow(0 4px 15px rgba(88,231,226,.13));
+}
+
+.brand-sub{
+  margin-top:9px;
+  font:700 10px "JetBrains Mono",monospace;
+  letter-spacing:3px;
+  color:#91a6c7;
+}
+
+.divider{
+  width:55px;
+  height:3px;
+  border-radius:5px;
+  margin:20px auto;
+  background:linear-gradient(90deg,var(--cyan),var(--purple));
+}
+
+/* CONTENT */
+
+.heading{
+  text-align:center;
+  font-size:23px;
+  font-weight:800;
+  margin-bottom:9px;
+}
+
+.description{
+  color:var(--muted);
+  text-align:center;
+  font-size:13px;
+  line-height:1.9;
+  margin-bottom:25px;
+}
+
+.login-label{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  color:#aab9d2;
+  font:11px "JetBrains Mono",monospace;
+  letter-spacing:1px;
+  margin-bottom:12px;
+}
+
+.login-label::before{
+  content:"";
+  width:19px;
+  height:1px;
+  background:var(--cyan);
+}
+
+/* GOOGLE BUTTON */
+
+.gbtn{
+  width:100%;
+  min-height:59px;
+  border:1px solid rgba(255,255,255,.17);
+  border-radius:15px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:13px;
+  background:linear-gradient(110deg,#ffffff,#edf2ff);
+  color:#202a3e;
+  font:700 14px "Noto Sans Devanagari",sans-serif;
+  cursor:pointer;
+  transition:transform .25s,box-shadow .25s,opacity .25s;
+  box-shadow:0 8px 24px rgba(0,0,0,.18);
+  touch-action:manipulation;
+}
+
+.gbtn:active{
+  transform:scale(.97);
+}
+
+.gbtn:hover:not(:disabled){
+  transform:translateY(-3px);
+  box-shadow:0 12px 30px rgba(88,231,226,.16);
+}
+
+.gbtn:disabled{
+  opacity:.65;
+  cursor:not-allowed;
+}
+
+.gbtn svg{
+  width:23px;
+  height:23px;
+  flex:none;
+}
+
+.btn-loading{
+  width:19px;
+  height:19px;
+  border:2px solid rgba(30,40,60,.2);
+  border-top-color:#293e72;
+  border-radius:50%;
+  animation:spin .7s linear infinite;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+
+/* MESSAGE */
+
+.msg{
+  min-height:42px;
+  padding:9px 10px;
+  margin-top:13px;
+  border-radius:10px;
+  text-align:center;
+  font-size:12px;
+  line-height:1.7;
+  color:#a9bbd6;
+  overflow-wrap:anywhere;
+}
+
+.msg.error{
+  color:#ff9ba9;
+  background:rgba(255,91,115,.08);
+  border:1px solid rgba(255,91,115,.15);
+}
+
+.msg.success{
+  color:var(--success);
+}
+
+.secure{
+  margin-top:14px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:7px;
+  color:#91a2bd;
+  font-size:11px;
+}
+
+.secure svg{
+  width:15px;
+  height:15px;
+  color:var(--success);
+}
+
+/* BOTTOM INFO */
+
+.card-footer{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-top:1px solid rgba(255,255,255,.08);
+  margin-top:25px;
+  padding-top:17px;
+  color:#7e8da8;
+  font:9px "JetBrains Mono",monospace;
+  letter-spacing:1px;
+}
+
+.card-footer span:last-child{
+  color:var(--cyan);
+}
+
+/* TICKER */
+
+.ticker{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  z-index:5;
+  height:37px;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  border-top:1px solid rgba(115,143,255,.16);
+  background:rgba(10,17,34,.85);
+  backdrop-filter:blur(12px);
+  padding-bottom:env(safe-area-inset-bottom);
+}
+
+.track{
+  white-space:nowrap;
+  display:inline-block;
+  padding-left:100%;
+  color:#a9b9dc;
+  font:700 10px "Noto Sans Devanagari",sans-serif;
+  letter-spacing:1px;
+  animation:marquee 30s linear infinite;
+}
+
+@keyframes marquee{
+  to{transform:translateX(-100%)}
+}
+
+/* COMPLETE PROFILE SECTION (SAME THEME) */
+
+.hidden{
+  display:none!important;
+}
+
+.user-pill{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:10px 13px;
+  margin-bottom:18px;
+  border-radius:14px;
+  background:rgba(88,231,226,.06);
+  border:1px solid rgba(88,231,226,.22);
+}
+
+.user-pill img{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid var(--cyan);
+  flex:none;
+}
+
+.user-pill-info{
+  min-width:0;
+}
+
+.user-pill-name{
+  font-size:13px;
+  font-weight:700;
+  color:var(--white);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.user-pill-email{
+  font:11px "JetBrains Mono",monospace;
+  color:var(--muted);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.profile-form{
+  display:flex;
+  flex-direction:column;
+  gap:13px;
+}
+
+.field-group{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+
+.field-group label{
+  font-size:12px;
+  font-weight:600;
+  color:#c8d5ec;
+}
+
+.field-group input{
+  width:100%;
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:rgba(8,13,27,.68);
+  color:var(--white);
+  font:500 13px "Noto Sans Devanagari",sans-serif;
+  outline:none;
+  transition:border-color .2s,box-shadow .2s;
+}
+
+.field-group input::placeholder{
+  color:#6c7b96;
+}
+
+.field-group input:focus{
+  border-color:var(--cyan);
+  box-shadow:0 0 0 3px rgba(88,231,226,.14);
+}
+
+.save-btn{
+  margin-top:5px;
+  background:linear-gradient(110deg,var(--cyan),var(--blue));
+  color:#080d1b;
+  border:none;
+}
+
+.save-btn .btn-loading{
+  border-color:rgba(8,13,27,.22);
+  border-top-color:#080d1b;
+}
+
+.switch-btn{
+  width:100%;
+  margin-top:8px;
+  padding:8px;
+  background:transparent;
+  border:none;
+  color:var(--muted);
+  font:600 12px "Noto Sans Devanagari",sans-serif;
+  cursor:pointer;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+
+.switch-btn:hover{
+  color:var(--cyan);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:380px){
+  .card{padding:30px 20px 24px;border-radius:22px}
+  .logo-icon{width:72px;height:72px}
+  .heading{font-size:21px}
+  .description{font-size:12px}
+}
+
+@media(min-width:700px){
+  .card{padding:45px 38px 32px}
+  .wrapper{max-width:460px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    scroll-behavior:auto!important;
+    transition-duration:.01ms!important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND -->
+<div class="background">
+  <div class="grid"></div>
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+  <div class="orb three"></div>
+</div>
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <div class="top-brand">NT<span>SP</span></div>
+  <div class="status">
+    <span class="status-dot"></span>
+    SYSTEM ONLINE
+  </div>
+</header>
+
+<!-- MAIN LOGIN -->
+<main class="wrapper">
+<section class="card">
+
+  <div class="logo-area">
+
+    <div class="logo-icon">
+      <span>NT</span>
+    </div>
+
+    <h1 class="brand">N T S P</h1>
+
+    <p class="brand-sub">NEW TOPPER STUDY POINT</p>
+
+    <div class="divider"></div>
+
+  </div>
+
+  <!-- STEP 1: GOOGLE LOGIN SECTION -->
+  <div id="loginSection">
+    <h2 class="heading">आपका स्वागत है!</h2>
+
+    <p class="description">
+      <br>
+      Google अकाउंट से सुरक्षित प्रवेश करें।
+    </p>
+
+    <div class="login-label">
+      AUTHENTICATION PORTAL
+    </div>
+
+    <button class="gbtn" id="loginBtn" type="button">
+
+      <svg id="googleIcon" viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="#4285F4" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.4c-.2 1.2-.9 2.3-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.3z"/>
+        <path fill="#34A853" d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.8-5.6-4.1H3.1v2.6C4.8 19.8 8.2 22 12 22z"/>
+        <path fill="#FBBC05" d="M6.4 13.9c-.2-.6-.3-1.2-.3-1.9s.1-1.3.3-1.9V7.5H3.1C2.4 8.9 2 10.4 2 12s.4 3.1 1.1 4.5l3.3-2.6z"/>
+        <path fill="#EA4335" d="M12 6c1.5 0 2.8.5 3.8 1.5l2.9-2.9C17 2.9 14.7 2 12 2 8.2 2 4.8 4.2 3.1 7.5l3.3 2.6C7.2 7.8 9.4 6 12 6z"/>
+      </svg>
+
+      <span id="btnTxt">GOOGLE से लॉगिन करें</span>
+
+    </button>
+  </div>
+
+  <!-- STEP 2: COMPLETE PROFILE SECTION (पहली बार लॉगिन पर दिखेगा) -->
+  <div id="profileSection" class="hidden">
+    <h2 class="heading">प्रोफ़ाइल पूरी करें</h2>
+    <p class="description" style="margin-bottom:16px;">
+      प्लेटफ़ॉर्म पर आगे बढ़ने के लिए अपनी जानकारी दर्ज करें।
+    </p>
+
+    <div class="login-label">
+      STUDENT PROFILE SETUP
+    </div>
+
+    <div class="user-pill">
+      <img id="previewPhoto" src="" alt="User Photo">
+      <div class="user-pill-info">
+        <div class="user-pill-name" id="previewName">NTSP Student</div>
+        <div class="user-pill-email" id="previewEmail"></div>
+      </div>
+    </div>
+
+    <form id="profileForm" class="profile-form" novalidate>
+      <div class="field-group">
+        <label for="fullName">पूरा नाम *</label>
+        <input type="text" id="fullName" placeholder="अपना पूरा नाम लिखें" required maxlength="60">
+      </div>
+
+      <div class="field-group">
+        <label for="phoneNumber">मोबाइल नंबर *</label>
+        <input type="tel" id="phoneNumber" placeholder="10 अंकों का मोबाइल नंबर" required maxlength="15" inputmode="numeric">
+      </div>
+
+      <div class="field-group">
+        <label for="userAddress">शहर / पूरा पता *</label>
+        <input type="text" id="userAddress" placeholder="जैसे: पटना, बिहार" required maxlength="140">
+      </div>
+
+      <div class="field-group">
+        <label for="studentClass">कक्षा / परीक्षा की तैयारी</label>
+        <input type="text" id="studentClass" placeholder="जैसे: Class 10th / 12th / Competitive" maxlength="60">
+      </div>
+
+      <button class="gbtn save-btn" id="saveProfileBtn" type="submit">
+        <span id="saveBtnTxt">प्रोफ़ाइल सेव करें और आगे बढ़ें</span>
+      </button>
+    </form>
+
+    <button type="button" class="switch-btn" id="switchAccountBtn">
+      दूसरे Google अकाउंट से लॉगिन करें
+    </button>
+  </div>
+
+  <p class="msg" id="msg" role="status" aria-live="polite"></p>
+
+  <div class="secure">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="4" y="10" width="16" height="11" rx="2"/>
+      <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+      <path d="m9 15 2 2 4-4"/>
+    </svg>
+    Secure Google Authentication
+  </div>
+
+  <div class="card-footer">
+    <span>NTSP • LOGIN</span>
+    <span>WELCOME BACK ✦</span>
+  </div>
+
+</section>
+</main>
+
+<!-- FOOTER TICKER -->
+<div class="ticker">
+  <div class="track">
+    स्वागत है ✦ WELCOME ✦ आपका स्वागत है ✦ WELCOME BACK ✦ स्वागत है ✦ WELCOME ✦ आपका स्वागत है ✦ WELCOME BACK ✦
+</div>
+  </div>
+  <!-- FIREBASE AUTH + DUAL-ENGINE FAST FIRESTORE SYNC -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+  import {
+    getAuth,
+    GoogleAuthProvider,
+    signInWithPopup,
+    onAuthStateChanged,
+    signOut
+  } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+  import {
+    initializeFirestore,
+    doc,
+    getDoc,
+    setDoc,
+    serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCTmJRjnBGnDEgRfz3-rmDr8keT2DQ_1Vc",
+    authDomain: "ntps-objective-test.firebaseapp.com",
+    databaseURL: "https://ntps-objective-test-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "ntps-objective-test",
+    storageBucket: "ntps-objective-test.firebasestorage.app",
+    messagingSenderId: "720036380966",
+    appId: "1:720036380966:web:62bf335765e6a2bc2301e7"
+  };
+
+  // Agar tumhare Firestore database ka naam "(default)" ke alawa kuch aur hai to yahan badal dena
+  const FIRESTORE_DB_ID = "(default)";
+  const HOME_PAGE = "homepage.html";
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = initializeFirestore(app, {
+    experimentalForceLongPolling: true,
+    useFetchStreams: false
+  });
+
+  const provider = new GoogleAuthProvider();
+  provider.addScope("profile");
+  provider.addScope("email");
+
+  // ELEMENTS
+  const $ = id => document.getElementById(id);
+  const loginSection = $("loginSection");
+  const profileSection = $("profileSection");
+  const btn = $("loginBtn");
+  const btnTxt = $("btnTxt");
+  const msg = $("msg");
+  const googleIcon = $("googleIcon");
+
+  const profileForm = $("profileForm");
+  const previewPhoto = $("previewPhoto");
+  const previewName = $("previewName");
+  const previewEmail = $("previewEmail");
+  const fullNameInput = $("fullName");
+  const phoneInput = $("phoneNumber");
+  const addressInput = $("userAddress");
+  const studentClassInput = $("studentClass");
+  const saveProfileBtn = $("saveProfileBtn");
+  const saveBtnTxt = $("saveBtnTxt");
+  const switchAccountBtn = $("switchAccountBtn");
+
+  let activeUser = null;
+  let isHandlingLogin = false;
+
+  const ERRORS = {
+    "auth/popup-closed-by-user": "Login popup band kar diya gaya.",
+    "auth/network-request-failed": "Internet connection check karein.",
+    "auth/popup-blocked": "Popup block hai, kripya allow karein.",
+    "permission-denied": "Firestore Rules ne permission rok di (PERMISSION_DENIED).",
+    "PERMISSION_DENIED": "Firestore Rules ne permission rok di (PERMISSION_DENIED).",
+    "NOT_FOUND": "Firestore database '(default)' nahi mila. Console mein database ID check karein."
+  };
+
+  function showMessage(text, type = "") {
+    msg.textContent = text;
+    msg.className = type ? `msg ${type}` : "msg";
+    if (type === "error") {
+      msg.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }
+
+  function withTimeout(promise, ms = 4500) {
+    return Promise.race([
+      promise,
+      new Promise((_, reject) =>
+        setTimeout(() => reject({ code: "timeout", message: "SDK timeout" }), ms)
+      )
+    ]);
+  }
+
+  function setLoading(loading) {
+    btn.disabled = loading;
+    if (loading) {
+      btnTxt.textContent = "Login ho raha hai...";
+      googleIcon.style.display = "none";
+      if (!$("loadingSpinner")) {
+        const spinner = document.createElement("span");
+        spinner.className = "btn-loading";
+        spinner.id = "loadingSpinner";
+        btn.insertBefore(spinner, btnTxt);
+      }
+    } else {
+      btnTxt.textContent = "GOOGLE SE LOGIN KAREIN";
+      googleIcon.style.display = "block";
+      const spinner = $("loadingSpinner");
+      if (spinner) spinner.remove();
+    }
+  }
+
+  function setSaveLoading(loading) {
+    saveProfileBtn.disabled = loading;
+    if (loading) {
+      saveBtnTxt.textContent = "Data save ho raha hai...";
+      if (!$("saveSpinner")) {
+        const spinner = document.createElement("span");
+        spinner.className = "btn-loading";
+        spinner.id = "saveSpinner";
+        saveProfileBtn.insertBefore(spinner, saveBtnTxt);
+      }
+    } else {
+      saveBtnTxt.textContent = "Profile save karein aur aage badhein";
+      const spinner = $("saveSpinner");
+      if (spinner) spinner.remove();
+    }
+  }
+
+  // --- REST API HELPERS (Automatic Fast Fallback) ---
+  function toFirestoreValue(val) {
+    if (val === null || val === undefined) return { nullValue: null };
+    if (typeof val === "boolean") return { booleanValue: val };
+    if (typeof val === "number") {
+      return Number.isInteger(val) ? { integerValue: String(val) } : { doubleValue: val };
+    }
+    if (typeof val === "string") return { stringValue: val };
+    if (val instanceof Date) return { timestampValue: val.toISOString() };
+    if (Array.isArray(val)) return { arrayValue: { values: val.map(toFirestoreValue) } };
+    if (typeof val === "object") {
+      const fields = {};
+      for (const [k, v] of Object.entries(val)) {
+        if (v !== undefined) fields[k] = toFirestoreValue(v);
+      }
+      return { mapValue: { fields } };
+    }
+    return { stringValue: String(val) };
+  }
+
+  function fromFirestoreValue(v) {
+    if (!v) return null;
+    if ("stringValue" in v) return v.stringValue;
+    if ("booleanValue" in v) return v.booleanValue;
+    if ("integerValue" in v) return Number(v.integerValue);
+    if ("doubleValue" in v) return Number(v.doubleValue);
+    if ("timestampValue" in v) return v.timestampValue;
+    if ("nullValue" in v) return null;
+    if ("arrayValue" in v) return (v.arrayValue.values || []).map(fromFirestoreValue);
+    if ("mapValue" in v) return fromFirestoreFields(v.mapValue.fields || {});
+    return null;
+  }
+
+  function fromFirestoreFields(fields) {
+    const out = {};
+    for (const [k, v] of Object.entries(fields)) {
+      out[k] = fromFirestoreValue(v);
+    }
+    return out;
+  }
+
+  async function readUserSmart(user) {
+    try {
+      const snap = await withTimeout(getDoc(doc(db, "users", user.uid)), 4000);
+      return snap.exists() ? snap.data() : null;
+    } catch (sdkErr) {
+      // Agar SDK slow/hang ho to direct REST API se read karein
+      const token = await user.getIdToken();
+      const url = `https://firestore.googleapis.com/v1/projects/${firebaseConfig.projectId}/databases/${encodeURIComponent(FIRESTORE_DB_ID)}/documents/users/${user.uid}`;
+      const res = await fetch(url, {
+        headers: { "Authorization": `Bearer ${token}` }
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) {
+        const errJson = await res.json().catch(() => ({}));
+        throw {
+          code: errJson?.error?.status || `HTTP_${res.status}`,
+          message: errJson?.error?.message || res.statusText
+        };
+      }
+      const docJson = await res.json();
+      return fromFirestoreFields(docJson.fields || {});
+    }
+  }
+
+  async function saveUserSmart(user, plainData) {
+    try {
+      // 1. Pehle normal SDK se try karein (4.5 sec limit)
+      await withTimeout(
+        setDoc(doc(db, "users", user.uid), {
+          ...plainData,
+          lastLogin: serverTimestamp()
+        }, { merge: true }),
+        4500
+      );
+      return "SDK";
+    } catch (sdkErr) {
+      // Agar Rules ka error hai to seedha wahi dikhayein
+      if (sdkErr?.code === "permission-denied") throw sdkErr;
+
+      // 2. Warna direct HTTPS REST API se turant save karein
+      const token = await user.getIdToken(true);
+      const restPayload = { ...plainData, lastLogin: new Date() };
+      const fields = {};
+      const params = new URLSearchParams();
+
+      for (const [k, v] of Object.entries(restPayload)) {
+        if (v !== undefined) {
+          fields[k] = toFirestoreValue(v);
+          params.append("updateMask.fieldPaths", k);
+        }
+      }
+
+      const url = `https://firestore.googleapis.com/v1/projects/${firebaseConfig.projectId}/databases/${encodeURIComponent(FIRESTORE_DB_ID)}/documents/users/${user.uid}?${params.toString()}`;
+      const res = await fetch(url, {
+        method: "PATCH",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ fields })
+      });
+
+      if (!res.ok) {
+        const errJson = await res.json().catch(() => ({}));
+        throw {
+          code: errJson?.error?.status || `HTTP_${res.status}`,
+          message: errJson?.error?.message || res.statusText
+        };
+      }
+      return "REST";
+    }
+  }
+
+  function getDeviceDetails() {
+    const ua = navigator.userAgent || "";
+    const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(ua);
+    return {
+      deviceType: isMobile ? "Mobile" : "Desktop",
+      language: navigator.language || "hi",
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "Asia/Kolkata",
+      screen: `${window.screen.width}x${window.screen.height}`
+    };
+  }
+
+  function buildBaseData(user) {
+    return {
+      uid: user.uid,
+      googleDisplayName: user.displayName || "",
+      email: user.email || "",
+      emailVerified: Boolean(user.emailVerified),
+      photoURL: user.photoURL || "",
+      providerId: user.providerData?.[0]?.providerId || "google.com",
+      accountCreatedAt: user.metadata?.creationTime || "",
+      lastSignInTime: user.metadata?.lastSignInTime || "",
+      device: getDeviceDetails(),
+      status: "online"
+    };
+  }
+
+  function openProfileForm(user, existingData = {}) {
+    setLoading(false);
+    loginSection.classList.add("hidden");
+    profileSection.classList.remove("hidden");
+
+    previewPhoto.src = user.photoURL || "https://www.gstatic.com/images/branding/product/1x/avatar_circle_blue_512dp.png";
+    previewName.textContent = user.displayName || "NTSP Student";
+    previewEmail.textContent = user.email || "";
+
+    fullNameInput.value = existingData?.name || user.displayName || "";
+    phoneInput.value = existingData?.phone || user.phoneNumber || "";
+    addressInput.value = existingData?.address || "";
+    studentClassInput.value = existingData?.studentClass || "";
+
+    showMessage("Swagat hai! Ek baar apni profile details save karein.", "success");
+  }
+
+  async function syncUserAndRoute(user) {
+    activeUser = user;
+    const cacheKey = `ntsp_profile_done_${user.uid}`;
+
+    if (localStorage.getItem(cacheKey) === "1") {
+      showMessage("Login safal! Homepage khul raha hai...", "success");
+      saveUserSmart(user, buildBaseData(user)).catch(() => {});
+      setTimeout(() => location.replace(HOME_PAGE), 350);
+      return;
+    }
+
+    try {
+      const existingData = await readUserSmart(user);
+
+      if (existingData && existingData.profileCompleted && existingData.phone && existingData.address) {
+        localStorage.setItem(cacheKey, "1");
+        showMessage("Login safal! Homepage par le jaya ja raha hai...", "success");
+        await saveUserSmart(user, buildBaseData(user)).catch(() => {});
+        location.replace(HOME_PAGE);
+        return;
+      }
+
+      openProfileForm(user, existingData || {});
+      saveUserSmart(user, {
+        ...buildBaseData(user),
+        name: existingData?.name || user.displayName || "NTSP Student",
+        profileCompleted: false
+      }).catch(err => console.warn("Initial sync warning:", err));
+
+    } catch (err) {
+      console.error("Sync Error:", err);
+      // Agar read fail bhi ho to user ko form dikha kar save karne ka mauka dein
+      openProfileForm(user, {});
+      showMessage(ERRORS[err.code] || `Sync warning (${err.code || "err"}): ${err.message}`, "error");
+    }
+  }
+
+  onAuthStateChanged(auth, (user) => {
+    if (user && !isHandlingLogin) {
+      isHandlingLogin = true;
+      showMessage("Session verify ho raha hai...");
+      syncUserAndRoute(user).finally(() => {
+        isHandlingLogin = false;
+      });
+    }
+  });
+
+  /* GOOGLE LOGIN */
+  btn.onclick = async () => {
+    isHandlingLogin = true;
+    setLoading(true);
+    showMessage("Secure connection banaya ja raha hai...");
+
+    try {
+      const result = await signInWithPopup(auth, provider);
+      showMessage("Login safal! Profile check ho rahi hai...", "success");
+      await syncUserAndRoute(result.user);
+    } catch (e) {
+      console.error("Login Error:", e);
+      showMessage(ERRORS[e.code] || "Login fail: " + e.message, "error");
+      setLoading(false);
+    } finally {
+      isHandlingLogin = false;
+    }
+  };
+
+  /* PROFILE SUBMIT */
+  profileForm.onsubmit = async (e) => {
+    e.preventDefault();
+
+    const user = auth.currentUser || activeUser;
+    if (!user) {
+      showMessage("Session khatam ho gaya, kripya dobara login karein.", "error");
+      profileSection.classList.add("hidden");
+      loginSection.classList.remove("hidden");
+      return;
+    }
+
+    const name = fullNameInput.value.trim();
+    const phone = phoneInput.value.replace(/\D/g, "");
+    const address = addressInput.value.trim();
+    const studentClass = studentClassInput.value.trim();
+
+    if (name.length < 2) {
+      showMessage("Kripya apna sahi poora naam dalein.", "error");
+      fullNameInput.focus();
+      return;
+    }
+    if (phone.length < 10) {
+      showMessage("Kripya sahi 10 ankon ka mobile number dalein.", "error");
+      phoneInput.focus();
+      return;
+    }
+    if (address.length < 3) {
+      showMessage("Kripya apna shahar ya poora pata dalein.", "error");
+      addressInput.focus();
+      return;
+    }
+
+    setSaveLoading(true);
+    showMessage("Profile save ho rahi hai...");
+
+    try {
+      const payload = {
+        ...buildBaseData(user),
+        name,
+        phone,
+        address,
+        studentClass: studentClass || "Not Specified",
+        profileCompleted: true,
+        profileUpdatedAt: new Date().toISOString()
+      };
+
+      const mode = await saveUserSmart(user, payload);
+      localStorage.setItem(`ntsp_profile_done_${user.uid}`, "1");
+      showMessage(`Profile save ho gayi (${mode})! Homepage khul raha hai...`, "success");
+      location.replace(HOME_PAGE);
+    } catch (err) {
+      console.error("Profile Save Error:", err);
+      showMessage(ERRORS[err.code] || `Save error (${err.code || "unknown"}): ${err.message}`, "error");
+      setSaveLoading(false);
+    }
+  };
+
+  /* SWITCH ACCOUNT */
+  switchAccountBtn.onclick = async () => {
+    try {
+      await signOut(auth);
+      activeUser = null;
+      profileSection.classList.add("hidden");
+      loginSection.classList.remove("hidden");
+      showMessage("Aap doosra Google account chun sakte hain.");
+    } catch (err) {
+      console.error("SignOut Error:", err);
+    }
+  };
+</script>
+</body>
+</html>

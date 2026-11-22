@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Subject Info</title>
+    <style>
+        /* बैकग्राउंड और इमेज को स्क्रीन पर फिट करने का डिज़ाइन */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000000; /* डार्क बैकग्राउंड */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* पूरी स्क्रीन की हाइट */
+            overflow: hidden; /* इधर-उधर खिसकने (Scroll) से रोकेगा */
+        }
+
+        .poster-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; /* यह इमेज को बिना काटे पूरी स्क्रीन पर फिट कर देगा */
+        }
+
+        /* पीछे जाने का ग्लिच-फ्री बटन */
+        .glitch-free-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(30, 41, 59, 0.8);
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-family: sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            z-index: 10000;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- होमपेज पर वापस जाने का बटन (बिना ग्लिच के) -->
+    <button onclick="window.location.replace('index.html')" class="glitch-free-btn">
+        ⬅ वापस जाएं
+    </button>
+
+    <!-- आपकी इमेज यहाँ है -->
+    <img src="new.jpg" alt="Coming Soon" class="poster-image">
+
+</body>
+</html>

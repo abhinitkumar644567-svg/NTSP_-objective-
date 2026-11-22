@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat List - BSEB Elite</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0; padding: 0;
+            background: #0f172a; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+        }
+
+        /* ऐप बार (Header) */
+        .app-header {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .app-header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .app-header h2 { margin: 0; font-size: 22px; color: #fff; }
+        .back-btn { color: #fff; font-size: 20px; text-decoration: none; }
+        
+        /* आपका खुद का प्रोफाइल (हेडर में) */
+        .my-profile-pic {
+            width: 35px; 
+            height: 35px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            border: 2px solid #00f2fe;
+            display: none; /* लॉगिन होने के बाद JS इसे दिखाएगा */
+        }
+
+        /* चैट लिस्ट कंटेनर */
+        .chat-list { padding: 10px; }
+
+        /* चैट आइटम */
+        .chat-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            transition: 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: #fff;
+        }
+        .chat-item:hover { background: rgba(255, 255, 255, 0.08); }
+
+        /* प्रोफाइल फोटो */
+        .avatar {
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        /* डिटेल्स (नाम और मैसेज) */
+        .chat-details { flex: 1; overflow: hidden; }
+        .chat-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .chat-name { font-size: 16px; font-weight: bold; color: #fff; }
+        .chat-time { font-size: 12px; color: #888; }
+        .chat-message {
+            font-size: 13px; color: #94a3b8;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-header">
+        <div class="app-header-left">
+            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+            <h2>Messages</h2>
+        </div>
+        <!-- यह आपका प्रोफाइल है जो कोने में दिखेगा -->
+        <img src="" id="my-profile-img" class="my-profile-pic" alt="My Profile">
+    </div>
+
+    <!-- जहाँ सभी यूज़र्स लोड होंगे -->
+    <div class="chat-list">
+        <div style="text-align: center; color: #888; margin-top: 20px;">यूज़र्स लोड हो रहे हैं...</div>
+    </div>
+
+    <!-- Firebase Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+        import { getFirestore, collection, onSnapshot, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyTkuRjBndEGF93-rmDRkeT2Q_lVC_",
+            authDomain: "ntps-objective-test.firebaseapp.com",
+            projectId: "ntps-objective-test",
+            storageBucket: "ntps-objective-test.firebasestorage.app",
+            messagingSenderId: "720036380966",
+            appId: "1:720036380966:web:62bf33576e5ea2bc230fe1"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        const chatListContainer = document.querySelector(".chat-list");
+        const myProfileImg = document.getElementById("my-profile-img");
+
+        onAuthStateChanged(auth, async (currentUser) => {
+            if (currentUser) {
+                
+                // 1. आपका अपना प्रोफाइल फोटो हेडर के कोने में सेट करना
+                myProfileImg.src = currentUser.photoURL || `https://ui-avatars.com/api/?name=${currentUser.displayName}`;
+                myProfileImg.style.display = "block";
+
+                // 2. आपका डेटा Firestore में सेव/अपडेट करना ताकि आप दूसरों को ऑनलाइन दिखें
+                try {
+                    await setDoc(doc(db, "users", currentUser.uid), {
+                        uid: currentUser.uid,
+                        name: currentUser.displayName || "Unknown User",
+                        photoURL: currentUser.photoURL || "",
+                        status: "Online",
+                        lastActive: serverTimestamp()
+                    }, { merge: true });
+                } catch (error) {
+                    console.error("Error saving user data:", error);
+                }
+
+                // 3. डेटाबेस से बाकी सभी यूज़र्स को चैट लिस्ट में रीयल-टाइम में दिखाना
+                onSnapshot(collection(db, "users"), (snapshot) => {
+                    chatListContainer.innerHTML = ""; // लोडिंग टेक्स्ट हटा दें
+
+                    snapshot.forEach((docSnap) => {
+                        const userData = docSnap.data();
+
+                        // खुद का नाम चैट लिस्ट में न दिखाएँ (सिर्फ दूसरों को दिखाएँ)
+                        if (userData.uid !== currentUser.uid) {
+                            
+                            const photo = userData.photoURL ? encodeURIComponent(userData.photoURL) : "";
+                            const name = encodeURIComponent(userData.name);
+                            
+                            // प्राइवेट चैट का लिंक
+                            const chatUrl = `private-chat.html?uid=${userData.uid}&name=${name}&photo=${photo}`;
+
+                            chatListContainer.innerHTML += `
+                                <a href="${chatUrl}" class="chat-item">
+                                    <img src="${userData.photoURL || 'https://ui-avatars.com/api/?name=User'}" class="avatar" alt="Avatar">
+                                    <div class="chat-details">
+                                        <div class="chat-header-row">
+                                            <span class="chat-name">${userData.name}</span>
+                                            <span class="chat-time" style="color: #00ff88;"><i class="fas fa-circle" style="font-size: 8px;"></i> Online</span>
+                                        </div>
+                                        <div class="chat-message">टैप करके प्राइवेट चैट शुरू करें...</div>
+                                    </div>
+                                </a>
+                            `;
+                        }
+                    });
+                });
+            } else {
+                // अगर यूज़र लॉगिन नहीं है तो उसे वापस इंडेक्स पेज पर भेज दें
+                window.location.replace("index.html"); 
+            }
+        });
+    </script>
+</body>
+</html>
